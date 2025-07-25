@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 @Service
@@ -49,5 +50,33 @@ public class EnderecoService {
         return enderecoRepository.save(endereco);
     }
 
+    // Atualização de endereços parcial
+
+    public Endereco atualizarEnderecoParcial(Long id, Map<String, Object> updates) {
+        Endereco endereco = enderecoRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Endereco com ID " + id + " não encontrado"));
+
+        if (updates.containsKey("nome")) {
+            endereco.setNome((String) updates.get("nome"));
+        }
+        if (updates.containsKey("estado")) {
+            endereco.setEstado((String) updates.get("estado"));
+        }
+        if (updates.containsKey("rua")) {
+            endereco.setRua((String) updates.get("rua"));
+        }
+        if (updates.containsKey("cep")) {
+            endereco.setCep((String) updates.get("cep"));
+        }
+        if (updates.containsKey("bairro")) {
+            endereco.setBairro((String) updates.get("bairro"));
+        }
+        if (updates.containsKey("complemento")) {
+            endereco.setComplemento((String) updates.get("complemento"));
+        }
+
+        return enderecoRepository.save(endereco);
+    }
 
 }
+
