@@ -59,6 +59,9 @@ public class EnderecoService {
         if (updates.containsKey("nome")) {
             endereco.setNome((String) updates.get("nome"));
         }
+        if (updates.containsKey("cidade")) {
+            endereco.setCidade((String) updates.get("cidade"));
+        }
         if (updates.containsKey("estado")) {
             endereco.setEstado((String) updates.get("estado"));
         }
