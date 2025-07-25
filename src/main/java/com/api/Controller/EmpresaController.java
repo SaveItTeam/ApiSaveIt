@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/endereco")
+@RequestMapping("/api/empresa")
 public class EmpresaController {
 
 
