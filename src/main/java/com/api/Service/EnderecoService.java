@@ -28,7 +28,7 @@ public class EnderecoService {
     }
 
     // Deleção de endereços
-    public void excluirProduto(Long id) {
+    public void excluirEndereco(Long id) {
         // Se o produto não for encontrado, pode ser lançado um erro posteriormente.
         // Dependendo da implementação do repository, pode ser necessário buscar primeiro o produto.
         //        Endereco existe = buscarProdutoPorId(id);

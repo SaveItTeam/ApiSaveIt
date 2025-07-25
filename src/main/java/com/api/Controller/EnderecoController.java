@@ -45,7 +45,7 @@ public class EnderecoController {
 
     @DeleteMapping("/excluir/{id}")
     public ResponseEntity<?> excluirEndereco(@PathVariable Long id) {
-        enderecoService.excluirProduto(id);
+        enderecoService.excluirEndereco(id);
         return ResponseEntity.ok("Endereco excluído com sucesso!");
     }
 
