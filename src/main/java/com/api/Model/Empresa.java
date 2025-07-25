@@ -18,19 +18,20 @@ public class Empresa {
     private String codigo;
     @Column(length = 100)
     private String email;
+    //ajustar campo tipoUsuario para que fique tudo minusculo
     @Column(length = 50)
-    private String tipoUsuario;
+    private String tipo_usuario;
     @Column(length = 20)
     private String telefone;
 
     public Empresa() {
     }
 
-    public Empresa(long id, String telefone, String email, String tipoUsuario, String codigo, String nome, String cnpj) {
+    public Empresa(long id, String telefone, String email, String tipo_usuario, String codigo, String nome, String cnpj) {
         this.id = id;
         this.telefone = telefone;
         this.email = email;
-        this.tipoUsuario = tipoUsuario;
+        this.tipo_usuario = tipo_usuario;
         this.codigo = codigo;
         this.nome = nome;
         this.cnpj = cnpj;
@@ -53,11 +54,11 @@ public class Empresa {
     }
 
     public String getTipoUsuario() {
-        return tipoUsuario;
+        return tipo_usuario;
     }
 
     public void setTipoUsuario(String tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
+        this.tipo_usuario = tipoUsuario;
     }
 
     public String getEmail() {
@@ -101,7 +102,7 @@ public class Empresa {
                 ", nome='" + nome + '\'' +
                 ", codigo='" + codigo + '\'' +
                 ", email='" + email + '\'' +
-                ", tipoUsuario='" + tipoUsuario + '\'' +
+                ", tipoUsuario='" + tipo_usuario + '\'' +
                 ", telefone='" + telefone + '\'' +
                 '}';
     }
