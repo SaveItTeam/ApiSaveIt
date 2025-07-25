@@ -1,4 +1,7 @@
 package com.api.Repository;
 
-public class EnderecoRepository {
+import com.api.Model.Endereco;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
 }
