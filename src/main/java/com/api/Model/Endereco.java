@@ -16,6 +16,8 @@ public class Endereco {
     @Column(length = 50)
     private String estado;
     @Column(length = 100)
+    private String cidade;
+    @Column(length = 100)
     private String rua;
     @Column(length = 20)
     private String cep;
@@ -93,12 +95,21 @@ public class Endereco {
         this.complemento = complemento;
     }
 
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
     @Override
     public String toString() {
         return "Endereco{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", estado='" + estado + '\'' +
+                ", cidade='" + cidade + '\'' +
                 ", rua='" + rua + '\'' +
                 ", cep='" + cep + '\'' +
                 ", bairro='" + bairro + '\'' +
