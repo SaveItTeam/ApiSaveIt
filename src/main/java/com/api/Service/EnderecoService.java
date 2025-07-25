@@ -50,7 +50,7 @@ public class EnderecoService {
         return enderecoRepository.save(endereco);
     }
 
-    // Atualização de endereços parcial
+    // Atualização de endereço parcial
 
     public Endereco atualizarEnderecoParcial(Long id, Map<String, Object> updates) {
         Endereco endereco = enderecoRepository.findById(id)
