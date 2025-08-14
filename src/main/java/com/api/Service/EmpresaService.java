@@ -51,6 +51,10 @@ public class EmpresaService {
         empresa.setEmail(empresaAtualizada.getEmail());
         empresa.setTipoUsuario(empresaAtualizada.getTipoUsuario());
         empresa.setTelefone(empresaAtualizada.getTelefone());
+        empresa.setEndereco_id(empresaAtualizada.getEndereco_id());
+        empresa.setSenha(empresaAtualizada.getSenha());
+        empresa.setCategoria(empresaAtualizada.getCategoria());
+        empresa.setIs_buyer(empresaAtualizada.isIs_buyer());
 
         return empresaRepository.save(empresa);
     }
@@ -78,7 +82,18 @@ public class EmpresaService {
         if (updates.containsKey("telefone")) {
             empresa.setTelefone((String) updates.get("telefone"));
         }
-
+        if (updates.containsKey("endereco_id")) {
+            empresa.setEndereco_id((long) updates.get("endereco_id"));
+        }
+        if (updates.containsKey("senha")) {
+            empresa.setSenha((String) updates.get("senha"));
+        }
+        if (updates.containsKey("categoria")) {
+            empresa.setCategoria((String) updates.get("categoria"));
+        }
+        if (updates.containsKey("is_buyer")) {
+            empresa.setIs_buyer((boolean) updates.get("is_buyer"));
+        }
 
         return empresaRepository.save(empresa);
     }
