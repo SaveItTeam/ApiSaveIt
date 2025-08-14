@@ -45,9 +45,7 @@ public class ProdutoService {
         produto.setNome(produtoAtualizado.getNome());
         produto.setMarca(produtoAtualizado.getMarca());
         produto.setDescricao(produtoAtualizado.getDescricao());
-        produto.setDt_validade(produtoAtualizado.getDt_validade());
-        produto.setDt_fabricacao(produtoAtualizado.getDt_fabricacao());
-        produto.setCategoria(produtoAtualizado.getCategoria());
+        produto.setEmpresa_id(produtoAtualizado.getEmpresa_id());
 
         return produtoRepository.save(produto);
     }
@@ -70,17 +68,8 @@ public class ProdutoService {
         if (updates.containsKey("descricao")) {
             produto.setDescricao((String) updates.get("descricao"));
         }
-        if (updates.containsKey("dt_validade")) {
-            String dataStr = updates.get("dt_validade").toString();
-            Date data = java.sql.Date.valueOf(dataStr); // se estiver no formato yyyy-MM-dd
-            produto.setDt_validade(data);
-        }
-        if (updates.containsKey("dt_fabricacao")) {
-            String dataStr = updates.get("dt_fabricacao").toString();
-            Date data = java.sql.Date.valueOf(dataStr); // se estiver no formato yyyy-MM-dd
-            produto.setDt_fabricacao(data);        }
-        if (updates.containsKey("categoria")) {
-            produto.setCategoria((String) updates.get("categoria"));
+        if (updates.containsKey("empresa_id")) {
+            produto.setEmpresa_id((long) updates.get("empresa_id"));
         }
 
         return produtoRepository.save(produto);
