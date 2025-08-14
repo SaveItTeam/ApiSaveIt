@@ -19,28 +19,21 @@ public class Produto {
     @NotNull(message = "Marca vazio")
     @Column(length = 50)
     private String marca;
-    @Column(length = 500)//PErguntar pro povo de dados o tamanho da descricao
+    @Column(length = 500)
     private String descricao;
-    @NotNull(message = "Data de validade nao pode ser nula")
-    private Date dt_validade;
-    @NotNull(message = "Data de fabricação nao pode ser nula")
-    private Date dt_fabricacao;
-    @NotNull(message = "Categoria vazio")
-    @Column(length = 50)
-    private String categoria;
+    @NotNull(message = "Id da empresa vazia")
+    private long empresa_id;
 
     public Produto() {
     }
 
-    public Produto(long id, String sku, String nome, String marca, String descricao, Date dt_validade, Date dt_fabricacao, String categoria) {
+    public Produto(long id, String sku, String nome, String marca, String descricao, long empresa_id) {
         this.id = id;
         this.sku = sku;
         this.nome = nome;
         this.marca = marca;
         this.descricao = descricao;
-        this.dt_validade = dt_validade;
-        this.dt_fabricacao = dt_fabricacao;
-        this.categoria = categoria;
+        this.empresa_id = empresa_id;
     }
 
     public long getId() {
@@ -83,28 +76,12 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    public Date getDt_validade() {
-        return dt_validade;
+    public long getEmpresa_id() {
+        return empresa_id;
     }
 
-    public void setDt_validade(Date dt_validade) {
-        this.dt_validade = dt_validade;
-    }
-
-    public Date getDt_fabricacao() {
-        return dt_fabricacao;
-    }
-
-    public void setDt_fabricacao(Date dt_fabricacao) {
-        this.dt_fabricacao = dt_fabricacao;
-    }
-
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setEmpresa_id(long empresa_id) {
+        this.empresa_id = empresa_id;
     }
 
     @Override
@@ -115,9 +92,7 @@ public class Produto {
                 ", nome='" + nome + '\'' +
                 ", marca='" + marca + '\'' +
                 ", descricao='" + descricao + '\'' +
-                ", dt_validade=" + dt_validade +
-                ", dt_fabricacao=" + dt_fabricacao +
-                ", categoria='" + categoria + '\'' +
+                ", empresa_id=" + empresa_id +
                 '}';
     }
 
