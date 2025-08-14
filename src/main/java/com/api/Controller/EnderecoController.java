@@ -35,7 +35,7 @@ public class EnderecoController {
 
 
     @PostMapping("/inserir")
-    public ResponseEntity<?> inserirEndereco(@RequestParam Endereco endereco) {
+    public ResponseEntity<?> inserirEndereco(@RequestBody Endereco endereco) {
         Endereco enderecoSalvo = enderecoService.inserirEndereco(endereco);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Endereco inserido com sucesso! ID: " + enderecoSalvo.getId());
@@ -52,7 +52,7 @@ public class EnderecoController {
 
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<?> atualizarEndereco(@PathVariable Long id, @Valid @RequestParam Endereco enderecoAtualizado) {
+    public ResponseEntity<?> atualizarEndereco(@PathVariable Long id, @Valid @RequestBody Endereco enderecoAtualizado) {
         enderecoService.atualizarEndereco(id, enderecoAtualizado);
         return ResponseEntity.ok("Endereco atualizado com sucesso!");
     }
