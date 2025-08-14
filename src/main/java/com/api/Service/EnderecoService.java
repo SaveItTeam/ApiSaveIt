@@ -46,6 +46,8 @@ public class EnderecoService {
         endereco.setCep(enderecoAtualizado.getCep());
         endereco.setBairro(enderecoAtualizado.getBairro());
         endereco.setComplemento(enderecoAtualizado.getComplemento());
+        endereco.setLogradouro(enderecoAtualizado.getLogradouro());
+        endereco.setNumero(enderecoAtualizado.getNumero());
 
         return enderecoRepository.save(endereco);
     }
@@ -76,6 +78,12 @@ public class EnderecoService {
         }
         if (updates.containsKey("complemento")) {
             endereco.setComplemento((String) updates.get("complemento"));
+        }
+        if (updates.containsKey("logradouro")) {
+            endereco.setLogradouro((String) updates.get("logradouro"));
+        }
+        if (updates.containsKey("numero")) {
+            endereco.setNumero((String) updates.get("numero"));
         }
 
         return enderecoRepository.save(endereco);
