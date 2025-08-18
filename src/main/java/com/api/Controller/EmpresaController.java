@@ -1,8 +1,7 @@
 package com.api.Controller;
 
 import com.api.Exception.GlobalException;
-import com.api.Model.Empresa;
-import com.api.Model.Endereco;
+import com.api.Model.Enterprise;
 import com.api.Service.EmpresaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,17 +26,17 @@ public class EmpresaController {
     }
 
     @GetMapping("/selecionar")
-    public ResponseEntity<List<Empresa>> listarEmpresas() {
+    public ResponseEntity<List<Enterprise>> listarEmpresas() {
         // Se lançar uma RuntimeException aqui, o Spring vai chamar o método do GlobalException automaticamente
-        List<Empresa> empresas = empresaService.listarEmpresa();
-        return ResponseEntity.ok(empresas);
+        List<Enterprise> enterprises = empresaService.listarEmpresa();
+        return ResponseEntity.ok(enterprises);
     }
 
     @PostMapping("/inserir")
-    public ResponseEntity<?> inserirEmpresa(@RequestBody Empresa empresa) {
-        Empresa empresaSalvo = empresaService.inserirEmpresa(empresa);
+    public ResponseEntity<?> inserirEmpresa(@RequestBody Enterprise enterprise) {
+        Enterprise enterpriseSalvo = empresaService.inserirEmpresa(enterprise);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body("Empresa inserido com sucesso! ID: " + empresaSalvo.getId());
+                .body("Empresa inserido com sucesso! ID: " + enterpriseSalvo.getId());
     }
 
     @DeleteMapping("/excluir/{id}")
@@ -48,8 +47,8 @@ public class EmpresaController {
 
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<?> atualizarEmpresa(@PathVariable Long id, @Valid @RequestBody Empresa empresaAtualizado) {
-        empresaService.atualizarEmpresa(id, empresaAtualizado);
+    public ResponseEntity<?> atualizarEmpresa(@PathVariable Long id, @Valid @RequestBody Enterprise enterpriseAtualizado) {
+        empresaService.atualizarEmpresa(id, enterpriseAtualizado);
         return ResponseEntity.ok("Empresa atualizado com sucesso!");
     }
 

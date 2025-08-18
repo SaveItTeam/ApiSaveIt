@@ -1,9 +1,7 @@
 package com.api.Controller;
 
 import com.api.Exception.GlobalException;
-import com.api.Model.Endereco;
-import com.api.Model.Funcionario;
-import com.api.Service.EnderecoService;
+import com.api.Model.Employee;
 import com.api.Service.FuncionarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,19 +25,19 @@ public class FuncionarioController {
 
 
     @GetMapping("/selecionar")
-    public ResponseEntity<List<Funcionario>> listarFuncionarios() {
+    public ResponseEntity<List<Employee>> listarFuncionarios() {
         // Se lançar uma RuntimeException aqui, o Spring vai chamar o método do GlobalException automaticamente
-        List<Funcionario> funcionarios = funcionarioService.listarFuncionario();
-        return ResponseEntity.ok(funcionarios);
+        List<Employee> employees = funcionarioService.listarFuncionario();
+        return ResponseEntity.ok(employees);
     }
 
 
 
     @PostMapping("/inserir")
-    public ResponseEntity<?> inserirFuncionario(@RequestBody Funcionario funcionario) {
-        Funcionario funcionarioSalvo = funcionarioService.inserirFuncionario(funcionario);
+    public ResponseEntity<?> inserirFuncionario(@RequestBody Employee employee) {
+        Employee employeeSalvo = funcionarioService.inserirFuncionario(employee);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body("Funcionario inserido com sucesso! ID: " + funcionarioSalvo.getId());
+                .body("Funcionario inserido com sucesso! ID: " + employeeSalvo.getId());
     }
 
 
@@ -53,8 +51,8 @@ public class FuncionarioController {
 
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<?> atualizarFuncionario(@PathVariable Long id, @Valid @RequestBody Funcionario funcionarioAtualizado) {
-        funcionarioService.atualizarFuncionario(id, funcionarioAtualizado);
+    public ResponseEntity<?> atualizarFuncionario(@PathVariable Long id, @Valid @RequestBody Employee employeeAtualizado) {
+        funcionarioService.atualizarFuncionario(id, employeeAtualizado);
         return ResponseEntity.ok("Funcionario atualizado com sucesso!");
     }
 

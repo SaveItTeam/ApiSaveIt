@@ -1,9 +1,7 @@
 package com.api.Controller;
 
 import com.api.Exception.GlobalException;
-import com.api.Model.Endereco;
-import com.api.Model.Produto;
-import com.api.Service.EnderecoService;
+import com.api.Model.Product;
 import com.api.Service.ProdutoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,19 +25,19 @@ public class ProdutoController {
 
 
     @GetMapping("/selecionar")
-    public ResponseEntity<List<Produto>> listarProdutos() {
+    public ResponseEntity<List<Product>> listarProdutos() {
         // Se lançar uma RuntimeException aqui, o Spring vai chamar o método do GlobalException automaticamente
-        List<Produto> produtos = produtoService.listarProduto();
-        return ResponseEntity.ok(produtos);
+        List<Product> products = produtoService.listarProduto();
+        return ResponseEntity.ok(products);
     }
 
 
 
     @PostMapping("/inserir")
-    public ResponseEntity<?> inserirProduto(@RequestBody Produto produto) {
-        Produto produtoSalvo = produtoService.inserirProduto(produto);
+    public ResponseEntity<?> inserirProduto(@RequestBody Product product) {
+        Product productSalvo = produtoService.inserirProduto(product);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body("Produto inserido com sucesso! ID: " + produtoSalvo.getId());
+                .body("Produto inserido com sucesso! ID: " + productSalvo.getId());
     }
 
 
@@ -53,8 +51,8 @@ public class ProdutoController {
 
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<?> atualizarProduto(@PathVariable Long id, @Valid @RequestBody Produto produtoAtualizado) {
-        produtoService.atualizarProduto(id, produtoAtualizado);
+    public ResponseEntity<?> atualizarProduto(@PathVariable Long id, @Valid @RequestBody Product productAtualizado) {
+        produtoService.atualizarProduto(id, productAtualizado);
         return ResponseEntity.ok("Produto atualizado com sucesso!");
     }
 

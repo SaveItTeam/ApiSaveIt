@@ -1,6 +1,6 @@
 package com.api.Service;
 
-import com.api.Model.Empresa;
+import com.api.Model.Enterprise;
 import com.api.Repository.EmpresaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,11 +23,11 @@ public class EmpresaService {
 
 
     //    Métodos de busca
-    public List<Empresa> listarEmpresa(){return empresaRepository.findAll();}
+    public List<Enterprise> listarEmpresa(){return empresaRepository.findAll();}
 
     // Inserção de enderecos
-    public Empresa inserirEmpresa(Empresa empresa) {
-        return empresaRepository.save(empresa);
+    public Enterprise inserirEmpresa(Enterprise enterprise) {
+        return empresaRepository.save(enterprise);
     }
 
     // Deleção de endereços
@@ -41,61 +41,61 @@ public class EmpresaService {
 
 
     // Atualização de endereços
-    public Empresa atualizarEmpresa(Long id, Empresa empresaAtualizada) {
-        Empresa empresa = empresaRepository.findById(id)
+    public Enterprise atualizarEmpresa(Long id, Enterprise enterpriseAtualizada) {
+        Enterprise enterprise = empresaRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Endereco com ID " + id + " não encontrado"));
 
-        empresa.setCnpj(empresaAtualizada.getCnpj());
-        empresa.setNome(empresaAtualizada.getNome());
-        empresa.setCodigo(empresaAtualizada.getCodigo());
-        empresa.setEmail(empresaAtualizada.getEmail());
-        empresa.setTipoUsuario(empresaAtualizada.getTipoUsuario());
-        empresa.setTelefone(empresaAtualizada.getTelefone());
-        empresa.setEndereco_id(empresaAtualizada.getEndereco_id());
-        empresa.setSenha(empresaAtualizada.getSenha());
-        empresa.setCategoria(empresaAtualizada.getCategoria());
-        empresa.setIs_buyer(empresaAtualizada.isIs_buyer());
+        enterprise.setCnpj(enterpriseAtualizada.getCnpj());
+        enterprise.setName(enterpriseAtualizada.getName());
+        enterprise.setPlan_id(enterpriseAtualizada.getPlan_id());
+        enterprise.setEmail(enterpriseAtualizada.getEmail());
+        enterprise.setTipoUsuario(enterpriseAtualizada.getTipoUsuario());
+        enterprise.setPhone_number(enterpriseAtualizada.getPhone_number());
+        enterprise.setAddress_id(enterpriseAtualizada.getAddress_id());
+        enterprise.setPassword(enterpriseAtualizada.getPassword());
+        enterprise.setCategory(enterpriseAtualizada.getCategory());
+        enterprise.setIs_buyer(enterpriseAtualizada.isIs_buyer());
 
-        return empresaRepository.save(empresa);
+        return empresaRepository.save(enterprise);
     }
     // Atualização de endereço parcial
 
-    public Empresa atualizarEmpresaParcial(Long id, Map<String, Object> updates) {
-        Empresa empresa = empresaRepository.findById(id)
+    public Enterprise atualizarEmpresaParcial(Long id, Map<String, Object> updates) {
+        Enterprise enterprise = empresaRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Empresa com ID " + id + " não encontrado"));
 
         if (updates.containsKey("cnpj")) {
-            empresa.setCnpj((String) updates.get("cnpj"));
+            enterprise.setCnpj((String) updates.get("cnpj"));
         }
         if (updates.containsKey("nome")) {
-            empresa.setNome((String) updates.get("nome"));
+            enterprise.setName((String) updates.get("nome"));
         }
         if (updates.containsKey("codigo")) {
-            empresa.setCodigo((String) updates.get("codigo"));
+            enterprise.setPlan_id((String) updates.get("codigo"));
         }
         if (updates.containsKey("email")) {
-            empresa.setEmail((String) updates.get("email"));
+            enterprise.setEmail((String) updates.get("email"));
         }
         if (updates.containsKey("tipo_usuario")) {
-            empresa.setTipoUsuario((String) updates.get("tipo_usuario"));
+            enterprise.setTipoUsuario((String) updates.get("tipo_usuario"));
         }
         if (updates.containsKey("telefone")) {
-            empresa.setTelefone((String) updates.get("telefone"));
+            enterprise.setPhone_number((String) updates.get("telefone"));
         }
         if (updates.containsKey("endereco_id")) {
-            empresa.setEndereco_id((long) updates.get("endereco_id"));
+            enterprise.setAddress_id((long) updates.get("endereco_id"));
         }
         if (updates.containsKey("senha")) {
-            empresa.setSenha((String) updates.get("senha"));
+            enterprise.setPassword((String) updates.get("senha"));
         }
         if (updates.containsKey("categoria")) {
-            empresa.setCategoria((String) updates.get("categoria"));
+            enterprise.setCategory((String) updates.get("categoria"));
         }
         if (updates.containsKey("is_buyer")) {
-            empresa.setIs_buyer((boolean) updates.get("is_buyer"));
+            enterprise.setIs_buyer((boolean) updates.get("is_buyer"));
         }
 
-        return empresaRepository.save(empresa);
+        return empresaRepository.save(enterprise);
     }
 
 }

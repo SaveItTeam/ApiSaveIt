@@ -1,6 +1,6 @@
 package com.api.Service;
 
-import com.api.Model.Endereco;
+import com.api.Model.Address;
 import com.api.Repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,11 +20,11 @@ public class EnderecoService {
 
 
     //    Métodos de busca
-    public List<Endereco> listarEnderecos(){return enderecoRepository.findAll();}
+    public List<Address> listarEnderecos(){return enderecoRepository.findAll();}
 
     // Inserção de enderecos
-    public Endereco inserirEndereco(Endereco endereco) {
-        return enderecoRepository.save(endereco);
+    public Address inserirEndereco(Address address) {
+        return enderecoRepository.save(address);
     }
 
     // Deleção de endereços
@@ -36,57 +36,57 @@ public class EnderecoService {
         //        return;
     }
     // Atualização de endereços
-    public Endereco atualizarEndereco(Long id, Endereco enderecoAtualizado) {
-        Endereco endereco = enderecoRepository.findById(id)
+    public Address atualizarEndereco(Long id, Address addressAtualizado) {
+        Address address = enderecoRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Endereco com ID " + id + " não encontrado"));
 
-        endereco.setNome(enderecoAtualizado.getNome());
-        endereco.setEstado(enderecoAtualizado.getEstado());
-        endereco.setRua(enderecoAtualizado.getRua());
-        endereco.setCep(enderecoAtualizado.getCep());
-        endereco.setBairro(enderecoAtualizado.getBairro());
-        endereco.setComplemento(enderecoAtualizado.getComplemento());
-        endereco.setLogradouro(enderecoAtualizado.getLogradouro());
-        endereco.setNumero(enderecoAtualizado.getNumero());
+        address.setNome(addressAtualizado.getNome());
+        address.setState(addressAtualizado.getState());
+        address.setPublic_place(addressAtualizado.getPublic_place());
+        address.setCep(addressAtualizado.getCep());
+        address.setNeighborhood(addressAtualizado.getNeighborhood());
+        address.setComplement(addressAtualizado.getComplement());
+        address.setLogradouro(addressAtualizado.getLogradouro());
+        address.setNumber(addressAtualizado.getNumber());
 
-        return enderecoRepository.save(endereco);
+        return enderecoRepository.save(address);
     }
 
     // Atualização de endereço parcial
 
-    public Endereco atualizarEnderecoParcial(Long id, Map<String, Object> updates) {
-        Endereco endereco = enderecoRepository.findById(id)
+    public Address atualizarEnderecoParcial(Long id, Map<String, Object> updates) {
+        Address address = enderecoRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Endereco com ID " + id + " não encontrado"));
 
         if (updates.containsKey("nome")) {
-            endereco.setNome((String) updates.get("nome"));
+            address.setNome((String) updates.get("nome"));
         }
         if (updates.containsKey("cidade")) {
-            endereco.setCidade((String) updates.get("cidade"));
+            address.setCity((String) updates.get("cidade"));
         }
         if (updates.containsKey("estado")) {
-            endereco.setEstado((String) updates.get("estado"));
+            address.setState((String) updates.get("estado"));
         }
         if (updates.containsKey("rua")) {
-            endereco.setRua((String) updates.get("rua"));
+            address.setPublic_place((String) updates.get("rua"));
         }
         if (updates.containsKey("cep")) {
-            endereco.setCep((String) updates.get("cep"));
+            address.setCep((String) updates.get("cep"));
         }
         if (updates.containsKey("bairro")) {
-            endereco.setBairro((String) updates.get("bairro"));
+            address.setNeighborhood((String) updates.get("bairro"));
         }
         if (updates.containsKey("complemento")) {
-            endereco.setComplemento((String) updates.get("complemento"));
+            address.setComplement((String) updates.get("complemento"));
         }
         if (updates.containsKey("logradouro")) {
-            endereco.setLogradouro((String) updates.get("logradouro"));
+            address.setLogradouro((String) updates.get("logradouro"));
         }
         if (updates.containsKey("numero")) {
-            endereco.setNumero((String) updates.get("numero"));
+            address.setNumber((String) updates.get("numero"));
         }
 
-        return enderecoRepository.save(endereco);
+        return enderecoRepository.save(address);
     }
 
 }

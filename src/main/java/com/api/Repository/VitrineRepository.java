@@ -1,8 +1,7 @@
 package com.api.Repository;
 
-import com.api.Model.Produto;
-import com.api.Model.Vitrine;
+import com.api.Model.ShowCase;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface VitrineRepository extends JpaRepository<Vitrine, Long> {
+public interface VitrineRepository extends JpaRepository<ShowCase, Long> {
 }

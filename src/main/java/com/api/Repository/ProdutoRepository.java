@@ -1,8 +1,7 @@
 package com.api.Repository;
 
-import com.api.Model.Endereco;
-import com.api.Model.Produto;
+import com.api.Model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ProdutoRepository extends JpaRepository<Produto, Long> {
+public interface ProdutoRepository extends JpaRepository<Product, Long> {
 }

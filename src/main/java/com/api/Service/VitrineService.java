@@ -1,13 +1,10 @@
 package com.api.Service;
 
-import com.api.Model.Produto;
-import com.api.Model.Vitrine;
-import com.api.Repository.ProdutoRepository;
+import com.api.Model.ShowCase;
 import com.api.Repository.VitrineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -20,11 +17,11 @@ public class VitrineService {
         this.vitrineRepository = vitrineRepository;
     }
     //    Métodos de busca
-    public List<Vitrine> listarVitrine(){return vitrineRepository.findAll();}
+    public List<ShowCase> listarVitrine(){return vitrineRepository.findAll();}
 
     // Inserção de enderecos
-    public Vitrine inserirVitrine(Vitrine vitrine) {
-        return vitrineRepository.save(vitrine);
+    public ShowCase inserirVitrine(ShowCase showCase) {
+        return vitrineRepository.save(showCase);
     }
 
     // Deleção de endereços
@@ -36,33 +33,33 @@ public class VitrineService {
         //        return;
     }
     // Atualização de endereços
-    public Vitrine atualizarVitrine(Long id, Vitrine vitrineAtualizado) {
-        Vitrine vitrine = vitrineRepository.findById(id)
+    public ShowCase atualizarVitrine(Long id, ShowCase showCaseAtualizado) {
+        ShowCase showCase = vitrineRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Vitrine com ID " + id + " não encontrado"));
 
-        vitrine.setDescricao(vitrineAtualizado.getDescricao());
-        vitrine.setPreco(vitrineAtualizado.getPreco());
-        vitrine.setLote_id(vitrineAtualizado.getLote_id());
+        showCase.setDescription(showCaseAtualizado.getDescription());
+        showCase.setPrice(showCaseAtualizado.getPrice());
+        showCase.setBatch_id(showCaseAtualizado.getBatch_id());
 
-        return vitrineRepository.save(vitrine);
+        return vitrineRepository.save(showCase);
     }
 
     // Atualização de endereço parcial
 
-    public Vitrine atualizarVitrineParcial(Long id, Map<String, Object> updates) {
-        Vitrine vitrine = vitrineRepository.findById(id)
+    public ShowCase atualizarVitrineParcial(Long id, Map<String, Object> updates) {
+        ShowCase showCase = vitrineRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Vitrine com ID " + id + " não encontrado"));
 
         if (updates.containsKey("descricao")) {
-            vitrine.setDescricao((String) updates.get("descricao"));
+            showCase.setDescription((String) updates.get("descricao"));
         }
         if (updates.containsKey("preco")) {
-            vitrine.setPreco((double) updates.get("preco"));
+            showCase.setPrice((double) updates.get("preco"));
         }
         if (updates.containsKey("lote_id")) {
-            vitrine.setLote_id((long) updates.get("lote_id"));
+            showCase.setBatch_id((long) updates.get("lote_id"));
         }
 
-        return vitrineRepository.save(vitrine);
+        return vitrineRepository.save(showCase);
     }
 }

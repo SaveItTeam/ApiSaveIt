@@ -1,8 +1,6 @@
 package com.api.Service;
 
-import com.api.Model.Endereco;
 import com.api.Model.Lote;
-import com.api.Repository.EnderecoRepository;
 import com.api.Repository.LoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -73,7 +71,7 @@ public class LoteService {
             lote.setQuantity((int) updates.get("quantity"));
         }
         if (updates.containsKey("product_id")) {
-            lote.setProduct_id((int) updates.get("product_id"));
+            lote.setProduct_id((long) updates.get("product_id"));
         }
 
         return loteRepository.save(lote);

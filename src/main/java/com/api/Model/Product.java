@@ -3,9 +3,8 @@ package com.api.Model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
-import java.util.Date;
 @Entity
-public class Produto {
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull(message = "Campo vazio")
@@ -15,25 +14,25 @@ public class Produto {
     private String sku;
     @NotNull(message = "Nome vazio")
     @Column(length = 100)
-    private String nome;
+    private String name;
     @NotNull(message = "Marca vazio")
     @Column(length = 50)
-    private String marca;
+    private String brand;
     @Column(length = 500)
     private String descricao;
     @NotNull(message = "Id da empresa vazia")
-    private long empresa_id;
+    private long enterprise_id;
 
-    public Produto() {
+    public Product() {
     }
 
-    public Produto(long id, String sku, String nome, String marca, String descricao, long empresa_id) {
+    public Product(long id, String sku, String name, String brand, String descricao, long enterprise_id) {
         this.id = id;
         this.sku = sku;
-        this.nome = nome;
-        this.marca = marca;
+        this.name = name;
+        this.brand = brand;
         this.descricao = descricao;
-        this.empresa_id = empresa_id;
+        this.enterprise_id = enterprise_id;
     }
 
     public long getId() {
@@ -52,20 +51,20 @@ public class Produto {
         this.sku = sku;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getMarca() {
-        return marca;
+    public String getBrand() {
+        return brand;
     }
 
-    public void setMarca(String marca) {
-        this.marca = marca;
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
     public String getDescricao() {
@@ -76,12 +75,12 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    public long getEmpresa_id() {
-        return empresa_id;
+    public long getEnterprise_id() {
+        return enterprise_id;
     }
 
-    public void setEmpresa_id(long empresa_id) {
-        this.empresa_id = empresa_id;
+    public void setEnterprise_id(long enterprise_id) {
+        this.enterprise_id = enterprise_id;
     }
 
     @Override
@@ -89,10 +88,10 @@ public class Produto {
         return "Produto{" +
                 "id=" + id +
                 ", sku='" + sku + '\'' +
-                ", nome='" + nome + '\'' +
-                ", marca='" + marca + '\'' +
+                ", nome='" + name + '\'' +
+                ", marca='" + brand + '\'' +
                 ", descricao='" + descricao + '\'' +
-                ", empresa_id=" + empresa_id +
+                ", empresa_id=" + enterprise_id +
                 '}';
     }
 

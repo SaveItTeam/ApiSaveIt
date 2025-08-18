@@ -1,7 +1,7 @@
 package com.api.Controller;
 
 import com.api.Exception.GlobalException;
-import com.api.Model.Endereco;
+import com.api.Model.Address;
 import com.api.Service.EnderecoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,19 +26,19 @@ public class EnderecoController {
 
 
     @GetMapping("/selecionar")
-    public ResponseEntity<List<Endereco>> listarEnderecos() {
+    public ResponseEntity<List<Address>> listarEnderecos() {
         // Se lançar uma RuntimeException aqui, o Spring vai chamar o método do GlobalException automaticamente
-        List<Endereco> enderecos = enderecoService.listarEnderecos();
-        return ResponseEntity.ok(enderecos);
+        List<Address> addresses = enderecoService.listarEnderecos();
+        return ResponseEntity.ok(addresses);
     }
 
 
 
     @PostMapping("/inserir")
-    public ResponseEntity<?> inserirEndereco(@RequestBody Endereco endereco) {
-        Endereco enderecoSalvo = enderecoService.inserirEndereco(endereco);
+    public ResponseEntity<?> inserirEndereco(@RequestBody Address address) {
+        Address addressSalvo = enderecoService.inserirEndereco(address);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body("Endereco inserido com sucesso! ID: " + enderecoSalvo.getId());
+                .body("Endereco inserido com sucesso! ID: " + addressSalvo.getId());
     }
 
 
@@ -52,8 +52,8 @@ public class EnderecoController {
 
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<?> atualizarEndereco(@PathVariable Long id, @Valid @RequestBody Endereco enderecoAtualizado) {
-        enderecoService.atualizarEndereco(id, enderecoAtualizado);
+    public ResponseEntity<?> atualizarEndereco(@PathVariable Long id, @Valid @RequestBody Address addressAtualizado) {
+        enderecoService.atualizarEndereco(id, addressAtualizado);
         return ResponseEntity.ok("Endereco atualizado com sucesso!");
     }
 

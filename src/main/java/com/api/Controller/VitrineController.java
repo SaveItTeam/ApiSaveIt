@@ -1,9 +1,7 @@
 package com.api.Controller;
 
 import com.api.Exception.GlobalException;
-import com.api.Model.Produto;
-import com.api.Model.Vitrine;
-import com.api.Service.ProdutoService;
+import com.api.Model.ShowCase;
 import com.api.Service.VitrineService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,19 +25,19 @@ public class VitrineController {
 
 
     @GetMapping("/selecionar")
-    public ResponseEntity<List<Vitrine>> listarVitrine() {
+    public ResponseEntity<List<ShowCase>> listarVitrine() {
         // Se lançar uma RuntimeException aqui, o Spring vai chamar o método do GlobalException automaticamente
-        List<Vitrine> vitrines = vitrineService.listarVitrine();
-        return ResponseEntity.ok(vitrines);
+        List<ShowCase> showCases = vitrineService.listarVitrine();
+        return ResponseEntity.ok(showCases);
     }
 
 
 
     @PostMapping("/inserir")
-    public ResponseEntity<?> inserirVitrine(@RequestBody Vitrine vitrine) {
-        Vitrine vitrineSalvo = vitrineService.inserirVitrine(vitrine);
+    public ResponseEntity<?> inserirVitrine(@RequestBody ShowCase showCase) {
+        ShowCase showCaseSalvo = vitrineService.inserirVitrine(showCase);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body("Vitrine inserido com sucesso! ID: " + vitrineSalvo.getId());
+                .body("Vitrine inserido com sucesso! ID: " + showCaseSalvo.getId());
     }
 
 
@@ -53,8 +51,8 @@ public class VitrineController {
 
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<?> atualizarVitrine(@PathVariable Long id, @Valid @RequestBody Vitrine vitrineAtualizado) {
-        vitrineService.atualizarVitrine(id, vitrineAtualizado);
+    public ResponseEntity<?> atualizarVitrine(@PathVariable Long id, @Valid @RequestBody ShowCase showCaseAtualizado) {
+        vitrineService.atualizarVitrine(id, showCaseAtualizado);
         return ResponseEntity.ok("Vitrine atualizado com sucesso!");
     }
 
