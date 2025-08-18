@@ -10,11 +10,11 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 @Service
-public class EnderecoService {
+public class AddressService {
     private final EnderecoRepository enderecoRepository;
 
     @Autowired
-    public EnderecoService(EnderecoRepository enderecoRepository) {
+    public AddressService(EnderecoRepository enderecoRepository) {
         this.enderecoRepository = enderecoRepository;
     }
 
@@ -61,29 +61,29 @@ public class EnderecoService {
         if (updates.containsKey("nome")) {
             address.setNome((String) updates.get("nome"));
         }
-        if (updates.containsKey("cidade")) {
-            address.setCity((String) updates.get("cidade"));
+        if (updates.containsKey("city")) {
+            address.setCity((String) updates.get("city"));
         }
-        if (updates.containsKey("estado")) {
-            address.setState((String) updates.get("estado"));
+        if (updates.containsKey("state")) {
+            address.setState((String) updates.get("state"));
         }
-        if (updates.containsKey("rua")) {
-            address.setPublic_place((String) updates.get("rua"));
+        if (updates.containsKey("public_place")) {
+            address.setPublic_place((String) updates.get("public_place"));
         }
         if (updates.containsKey("cep")) {
             address.setCep((String) updates.get("cep"));
         }
-        if (updates.containsKey("bairro")) {
-            address.setNeighborhood((String) updates.get("bairro"));
+        if (updates.containsKey("neighborhood")) {
+            address.setNeighborhood((String) updates.get("neighborhood"));
         }
-        if (updates.containsKey("complemento")) {
-            address.setComplement((String) updates.get("complemento"));
+        if (updates.containsKey("complement")) {
+            address.setComplement((String) updates.get("complement"));
         }
         if (updates.containsKey("logradouro")) {
             address.setLogradouro((String) updates.get("logradouro"));
         }
-        if (updates.containsKey("numero")) {
-            address.setNumber((String) updates.get("numero"));
+        if (updates.containsKey("number")) {
+            address.setNumber((String) updates.get("number"));
         }
 
         return enderecoRepository.save(address);

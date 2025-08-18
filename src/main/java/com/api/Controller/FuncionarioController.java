@@ -2,7 +2,7 @@ package com.api.Controller;
 
 import com.api.Exception.GlobalException;
 import com.api.Model.Employee;
-import com.api.Service.FuncionarioService;
+import com.api.Service.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,19 +15,19 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/funcionario")
 public class FuncionarioController {
-    private final FuncionarioService funcionarioService;
+    private final EmployeeService employeeService;
     private GlobalException ge;
 
     @Autowired
-    public FuncionarioController(FuncionarioService funcionarioService) {
-        this.funcionarioService = funcionarioService;
+    public FuncionarioController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
 
     @GetMapping("/selecionar")
     public ResponseEntity<List<Employee>> listarFuncionarios() {
         // Se lançar uma RuntimeException aqui, o Spring vai chamar o método do GlobalException automaticamente
-        List<Employee> employees = funcionarioService.listarFuncionario();
+        List<Employee> employees = employeeService.listarFuncionario();
         return ResponseEntity.ok(employees);
     }
 
@@ -35,7 +35,7 @@ public class FuncionarioController {
 
     @PostMapping("/inserir")
     public ResponseEntity<?> inserirFuncionario(@RequestBody Employee employee) {
-        Employee employeeSalvo = funcionarioService.inserirFuncionario(employee);
+        Employee employeeSalvo = employeeService.inserirFuncionario(employee);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Funcionario inserido com sucesso! ID: " + employeeSalvo.getId());
     }
@@ -44,7 +44,7 @@ public class FuncionarioController {
 
     @DeleteMapping("/excluir/{id}")
     public ResponseEntity<?> excluirFuncionario(@PathVariable Long id) {
-        funcionarioService.excluirFuncionario(id);
+        employeeService.excluirFuncionario(id);
         return ResponseEntity.ok("Funcionario excluído com sucesso!");
     }
 
@@ -52,7 +52,7 @@ public class FuncionarioController {
 
     @PutMapping("/atualizar/{id}")
     public ResponseEntity<?> atualizarFuncionario(@PathVariable Long id, @Valid @RequestBody Employee employeeAtualizado) {
-        funcionarioService.atualizarFuncionario(id, employeeAtualizado);
+        employeeService.atualizarFuncionario(id, employeeAtualizado);
         return ResponseEntity.ok("Funcionario atualizado com sucesso!");
     }
 
@@ -60,7 +60,7 @@ public class FuncionarioController {
 
     @PatchMapping("/atualizarParcial/{id}")
     public ResponseEntity<?> atualizarFuncionarioParcial(@PathVariable Long id, @Valid @RequestBody Map<String, Object> updates) {
-        funcionarioService.atualizarFuncionarioParcial(id, updates);
+        employeeService.atualizarFuncionarioParcial(id, updates);
         return ResponseEntity.ok("Funcionario atualizado parcialmente com sucesso!");
     }
 

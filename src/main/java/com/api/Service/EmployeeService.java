@@ -10,11 +10,11 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 @Service
-public class FuncionarioService {
+public class EmployeeService {
     private final FuncionarioRepository funcionarioRepository;
 
     @Autowired
-    public FuncionarioService(FuncionarioRepository funcionarioRepository) {
+    public EmployeeService(FuncionarioRepository funcionarioRepository) {
         this.funcionarioRepository = funcionarioRepository;
     }
 
@@ -50,17 +50,17 @@ public class FuncionarioService {
         Employee employee = funcionarioRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Funcionario com ID " + id + " não encontrado"));
 
-        if (updates.containsKey("nome")) {
-            employee.setName((String) updates.get("nome"));
+        if (updates.containsKey("name")) {
+            employee.setName((String) updates.get("name"));
         }
         if (updates.containsKey("email")) {
             employee.setEmail((String) updates.get("email"));
         }
-        if (updates.containsKey("senha")) {
-            employee.setPassword((String) updates.get("senha"));
+        if (updates.containsKey("password")) {
+            employee.setPassword((String) updates.get("password"));
         }
-        if (updates.containsKey("empresa_id")) {
-            employee.setEnterprise_id((long) updates.get("empresa_id"));
+        if (updates.containsKey("enterprise_id")) {
+            employee.setEnterprise_id((long) updates.get("enterprise_id"));
         }
 
         return funcionarioRepository.save(employee);

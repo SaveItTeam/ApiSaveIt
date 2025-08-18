@@ -10,11 +10,11 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 @Service
-public class ProdutoService {
+public class ProductService {
     private final ProdutoRepository produtoRepository;
 
     @Autowired
-    public ProdutoService(ProdutoRepository produtoRepository) {
+    public ProductService(ProdutoRepository produtoRepository) {
         this.produtoRepository = produtoRepository;
     }
     //    Métodos de busca
@@ -56,17 +56,17 @@ public class ProdutoService {
         if (updates.containsKey("sku")) {
             product.setSku((String) updates.get("sku"));
         }
-        if (updates.containsKey("nome")) {
-            product.setName((String) updates.get("nome"));
+        if (updates.containsKey("name")) {
+            product.setName((String) updates.get("name"));
         }
-        if (updates.containsKey("marca")) {
-            product.setBrand((String) updates.get("marca"));
+        if (updates.containsKey("brand")) {
+            product.setBrand((String) updates.get("brand"));
         }
         if (updates.containsKey("descricao")) {
             product.setDescricao((String) updates.get("descricao"));
         }
-        if (updates.containsKey("empresa_id")) {
-            product.setEnterprise_id((long) updates.get("empresa_id"));
+        if (updates.containsKey("enterprise_id")) {
+            product.setEnterprise_id((long) updates.get("enterprise_id"));
         }
 
         return produtoRepository.save(product);

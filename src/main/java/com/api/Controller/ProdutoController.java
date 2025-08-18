@@ -2,7 +2,7 @@ package com.api.Controller;
 
 import com.api.Exception.GlobalException;
 import com.api.Model.Product;
-import com.api.Service.ProdutoService;
+import com.api.Service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,19 +15,19 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/produto")
 public class ProdutoController {
-    private final ProdutoService produtoService;
+    private final ProductService productService;
     private GlobalException ge;
 
     @Autowired
-    public ProdutoController(ProdutoService produtoService) {
-        this.produtoService = produtoService;
+    public ProdutoController(ProductService productService) {
+        this.productService = productService;
     }
 
 
     @GetMapping("/selecionar")
     public ResponseEntity<List<Product>> listarProdutos() {
         // Se lançar uma RuntimeException aqui, o Spring vai chamar o método do GlobalException automaticamente
-        List<Product> products = produtoService.listarProduto();
+        List<Product> products = productService.listarProduto();
         return ResponseEntity.ok(products);
     }
 
@@ -35,7 +35,7 @@ public class ProdutoController {
 
     @PostMapping("/inserir")
     public ResponseEntity<?> inserirProduto(@RequestBody Product product) {
-        Product productSalvo = produtoService.inserirProduto(product);
+        Product productSalvo = productService.inserirProduto(product);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Produto inserido com sucesso! ID: " + productSalvo.getId());
     }
@@ -44,7 +44,7 @@ public class ProdutoController {
 
     @DeleteMapping("/excluir/{id}")
     public ResponseEntity<?> excluirProduto(@PathVariable Long id) {
-        produtoService.excluirProduto(id);
+        productService.excluirProduto(id);
         return ResponseEntity.ok("Produto excluído com sucesso!");
     }
 
@@ -52,7 +52,7 @@ public class ProdutoController {
 
     @PutMapping("/atualizar/{id}")
     public ResponseEntity<?> atualizarProduto(@PathVariable Long id, @Valid @RequestBody Product productAtualizado) {
-        produtoService.atualizarProduto(id, productAtualizado);
+        productService.atualizarProduto(id, productAtualizado);
         return ResponseEntity.ok("Produto atualizado com sucesso!");
     }
 
@@ -60,7 +60,7 @@ public class ProdutoController {
 
     @PatchMapping("/atualizarParcial/{id}")
     public ResponseEntity<?> atualizarProdutoParcial(@PathVariable Long id, @Valid @RequestBody Map<String, Object> updates) {
-        produtoService.atualizarProdutoParcial(id, updates);
+        productService.atualizarProdutoParcial(id, updates);
         return ResponseEntity.ok("Produto atualizado parcialmente com sucesso!");
     }
 

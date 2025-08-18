@@ -2,7 +2,7 @@ package com.api.Controller;
 
 import com.api.Exception.GlobalException;
 import com.api.Model.ShowCase;
-import com.api.Service.VitrineService;
+import com.api.Service.ShowCaseService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,19 +15,19 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/vitrine")
 public class VitrineController {
-    private final VitrineService vitrineService;
+    private final ShowCaseService showCaseService;
     private GlobalException ge;
 
     @Autowired
-    public VitrineController(VitrineService vitrineService) {
-        this.vitrineService = vitrineService;
+    public VitrineController(ShowCaseService showCaseService) {
+        this.showCaseService = showCaseService;
     }
 
 
     @GetMapping("/selecionar")
     public ResponseEntity<List<ShowCase>> listarVitrine() {
         // Se lançar uma RuntimeException aqui, o Spring vai chamar o método do GlobalException automaticamente
-        List<ShowCase> showCases = vitrineService.listarVitrine();
+        List<ShowCase> showCases = showCaseService.listarVitrine();
         return ResponseEntity.ok(showCases);
     }
 
@@ -35,7 +35,7 @@ public class VitrineController {
 
     @PostMapping("/inserir")
     public ResponseEntity<?> inserirVitrine(@RequestBody ShowCase showCase) {
-        ShowCase showCaseSalvo = vitrineService.inserirVitrine(showCase);
+        ShowCase showCaseSalvo = showCaseService.inserirVitrine(showCase);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Vitrine inserido com sucesso! ID: " + showCaseSalvo.getId());
     }
@@ -44,7 +44,7 @@ public class VitrineController {
 
     @DeleteMapping("/excluir/{id}")
     public ResponseEntity<?> excluirVitrine(@PathVariable Long id) {
-        vitrineService.excluirVitrine(id);
+        showCaseService.excluirVitrine(id);
         return ResponseEntity.ok("Vitrine excluído com sucesso!");
     }
 
@@ -52,7 +52,7 @@ public class VitrineController {
 
     @PutMapping("/atualizar/{id}")
     public ResponseEntity<?> atualizarVitrine(@PathVariable Long id, @Valid @RequestBody ShowCase showCaseAtualizado) {
-        vitrineService.atualizarVitrine(id, showCaseAtualizado);
+        showCaseService.atualizarVitrine(id, showCaseAtualizado);
         return ResponseEntity.ok("Vitrine atualizado com sucesso!");
     }
 
@@ -60,7 +60,7 @@ public class VitrineController {
 
     @PatchMapping("/atualizarParcial/{id}")
     public ResponseEntity<?> atualizarVitrineParcial(@PathVariable Long id, @Valid @RequestBody Map<String, Object> updates) {
-        vitrineService.atualizarVitrineParcial(id, updates);
+        showCaseService.atualizarVitrineParcial(id, updates);
         return ResponseEntity.ok("Vitrine atualizado parcialmente com sucesso!");
     }
 

@@ -10,13 +10,13 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 @Service
-public class EmpresaService {
+public class EnterpriseService {
 
 
     private final EmpresaRepository empresaRepository;
 
     @Autowired
-    public EmpresaService(EmpresaRepository empresaRepository) {
+    public EnterpriseService(EmpresaRepository empresaRepository) {
         this.empresaRepository = empresaRepository;
     }
 
@@ -67,11 +67,11 @@ public class EmpresaService {
         if (updates.containsKey("cnpj")) {
             enterprise.setCnpj((String) updates.get("cnpj"));
         }
-        if (updates.containsKey("nome")) {
-            enterprise.setName((String) updates.get("nome"));
+        if (updates.containsKey("name")) {
+            enterprise.setName((String) updates.get("name"));
         }
-        if (updates.containsKey("codigo")) {
-            enterprise.setPlan_id((String) updates.get("codigo"));
+        if (updates.containsKey("plan_id")) {
+            enterprise.setPlan_id((String) updates.get("plan_id"));
         }
         if (updates.containsKey("email")) {
             enterprise.setEmail((String) updates.get("email"));
@@ -79,17 +79,17 @@ public class EmpresaService {
         if (updates.containsKey("tipo_usuario")) {
             enterprise.setTipoUsuario((String) updates.get("tipo_usuario"));
         }
-        if (updates.containsKey("telefone")) {
-            enterprise.setPhone_number((String) updates.get("telefone"));
+        if (updates.containsKey("phone_number")) {
+            enterprise.setPhone_number((String) updates.get("phone_number"));
         }
         if (updates.containsKey("endereco_id")) {
             enterprise.setAddress_id((long) updates.get("endereco_id"));
         }
-        if (updates.containsKey("senha")) {
-            enterprise.setPassword((String) updates.get("senha"));
+        if (updates.containsKey("password")) {
+            enterprise.setPassword((String) updates.get("password"));
         }
-        if (updates.containsKey("categoria")) {
-            enterprise.setCategory((String) updates.get("categoria"));
+        if (updates.containsKey("category")) {
+            enterprise.setCategory((String) updates.get("category"));
         }
         if (updates.containsKey("is_buyer")) {
             enterprise.setIs_buyer((boolean) updates.get("is_buyer"));

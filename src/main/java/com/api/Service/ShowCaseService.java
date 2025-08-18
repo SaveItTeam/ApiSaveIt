@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 @Service
-public class VitrineService {
+public class ShowCaseService {
     private final VitrineRepository vitrineRepository;
 
     @Autowired
-    public VitrineService(VitrineRepository vitrineRepository) {
+    public ShowCaseService(VitrineRepository vitrineRepository) {
         this.vitrineRepository = vitrineRepository;
     }
     //    Métodos de busca
@@ -50,14 +50,14 @@ public class VitrineService {
         ShowCase showCase = vitrineRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Vitrine com ID " + id + " não encontrado"));
 
-        if (updates.containsKey("descricao")) {
-            showCase.setDescription((String) updates.get("descricao"));
+        if (updates.containsKey("description")) {
+            showCase.setDescription((String) updates.get("description"));
         }
-        if (updates.containsKey("preco")) {
-            showCase.setPrice((double) updates.get("preco"));
+        if (updates.containsKey("price")) {
+            showCase.setPrice((double) updates.get("price"));
         }
-        if (updates.containsKey("lote_id")) {
-            showCase.setBatch_id((long) updates.get("lote_id"));
+        if (updates.containsKey("batch_id")) {
+            showCase.setBatch_id((long) updates.get("batch_id"));
         }
 
         return vitrineRepository.save(showCase);
