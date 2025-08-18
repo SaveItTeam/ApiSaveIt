@@ -1,7 +1,7 @@
 package com.api.Service;
 
 import com.api.Model.Lote;
-import com.api.Repository.LoteRepository;
+import com.api.Repository.BatchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,20 +12,20 @@ import java.util.NoSuchElementException;
 
 @Service
 public class LoteService {
-    private final LoteRepository loteRepository;
+    private final BatchRepository batchRepository;
 
     @Autowired
-    public LoteService(LoteRepository loteRepository) {
-        this.loteRepository = loteRepository;
+    public LoteService(BatchRepository batchRepository) {
+        this.batchRepository = batchRepository;
     }
 
 
     //    Métodos de busca
-    public List<Lote> listarLotes(){return loteRepository.findAll();}
+    public List<Lote> listarLotes(){return batchRepository.findAll();}
 
     // Inserção
     public Lote inserirLote(Lote lote) {
-        return loteRepository.save(lote);
+        return batchRepository.save(lote);
     }
 
     // Deleção
@@ -33,12 +33,12 @@ public class LoteService {
         // Se o produto não for encontrado, pode ser lançado um erro posteriormente.
         // Dependendo da implementação do repository, pode ser necessário buscar primeiro o produto.
         //        Endereco existe = buscarProdutoPorId(id);
-        loteRepository.deleteById(id);
+        batchRepository.deleteById(id);
         //        return;
     }
     // Atualização
     public Lote atualizarLote(Long id, Lote loteAtualizado) {
-        Lote lote = loteRepository.findById(id)
+        Lote lote = batchRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Lote com ID " + id + " não encontrado"));
 
         lote.setUnite_measure(loteAtualizado.getUnite_measure());
@@ -48,11 +48,11 @@ public class LoteService {
         lote.setQuantity(loteAtualizado.getQuantity());
         lote.setProduct_id(loteAtualizado.getProduct_id());
 
-        return loteRepository.save(lote);
+        return batchRepository.save(lote);
     }
 
     public Lote atualizarLoteParcial(Long id, Map<String, Object> updates) {
-        Lote lote = loteRepository.findById(id)
+        Lote lote = batchRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Lote com ID " + id + " não encontrado"));
 
         if (updates.containsKey("unit_measure")) {
@@ -74,6 +74,6 @@ public class LoteService {
             lote.setProduct_id((long) updates.get("product_id"));
         }
 
-        return loteRepository.save(lote);
+        return batchRepository.save(lote);
     }
 }

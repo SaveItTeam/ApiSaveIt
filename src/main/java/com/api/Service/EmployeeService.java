@@ -1,7 +1,7 @@
 package com.api.Service;
 
 import com.api.Model.Employee;
-import com.api.Repository.FuncionarioRepository;
+import com.api.Repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,30 +11,30 @@ import java.util.NoSuchElementException;
 
 @Service
 public class EmployeeService {
-    private final FuncionarioRepository funcionarioRepository;
+    private final EmployeeRepository employeeRepository;
 
     @Autowired
-    public EmployeeService(FuncionarioRepository funcionarioRepository) {
-        this.funcionarioRepository = funcionarioRepository;
+    public EmployeeService(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
     }
 
 
     //    Métodos de busca
-    public List<Employee> listarFuncionario(){return funcionarioRepository.findAll();}
+    public List<Employee> listarFuncionario(){return employeeRepository.findAll();}
 
     public Employee inserirFuncionario(Employee employee) {
-        return funcionarioRepository.save(employee);
+        return employeeRepository.save(employee);
     }
 
     public void excluirFuncionario(Long id) {
         // Se o produto não for encontrado, pode ser lançado um erro posteriormente.
         // Dependendo da implementação do repository, pode ser necessário buscar primeiro o produto.
         //        Endereco existe = buscarProdutoPorId(id);
-        funcionarioRepository.deleteById(id);
+        employeeRepository.deleteById(id);
         //        return;
     }
     public Employee atualizarFuncionario(Long id, Employee employeeAtualizado) {
-        Employee employee = funcionarioRepository.findById(id)
+        Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Funcionario com ID " + id + " não encontrado"));
 
         employee.setName(employeeAtualizado.getName());
@@ -42,12 +42,12 @@ public class EmployeeService {
         employee.setPassword(employeeAtualizado.getPassword());
         employee.setEnterprise_id(employeeAtualizado.getEnterprise_id());
 
-        return funcionarioRepository.save(employee);
+        return employeeRepository.save(employee);
     }
 
 
     public Employee atualizarFuncionarioParcial(Long id, Map<String, Object> updates) {
-        Employee employee = funcionarioRepository.findById(id)
+        Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Funcionario com ID " + id + " não encontrado"));
 
         if (updates.containsKey("name")) {
@@ -63,6 +63,6 @@ public class EmployeeService {
             employee.setEnterprise_id((long) updates.get("enterprise_id"));
         }
 
-        return funcionarioRepository.save(employee);
+        return employeeRepository.save(employee);
     }
 }

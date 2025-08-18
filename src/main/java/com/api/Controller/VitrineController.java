@@ -1,8 +1,8 @@
 package com.api.Controller;
 
 import com.api.Exception.GlobalException;
-import com.api.Model.ShowCase;
-import com.api.Service.ShowCaseService;
+import com.api.Model.Showcase;
+import com.api.Service.ShowcaseService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,29 +15,29 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/vitrine")
 public class VitrineController {
-    private final ShowCaseService showCaseService;
+    private final ShowcaseService showCaseService;
     private GlobalException ge;
 
     @Autowired
-    public VitrineController(ShowCaseService showCaseService) {
+    public VitrineController(ShowcaseService showCaseService) {
         this.showCaseService = showCaseService;
     }
 
 
     @GetMapping("/selecionar")
-    public ResponseEntity<List<ShowCase>> listarVitrine() {
+    public ResponseEntity<List<Showcase>> listarVitrine() {
         // Se lançar uma RuntimeException aqui, o Spring vai chamar o método do GlobalException automaticamente
-        List<ShowCase> showCases = showCaseService.listarVitrine();
-        return ResponseEntity.ok(showCases);
+        List<Showcase> showcases = showCaseService.listarVitrine();
+        return ResponseEntity.ok(showcases);
     }
 
 
 
     @PostMapping("/inserir")
-    public ResponseEntity<?> inserirVitrine(@RequestBody ShowCase showCase) {
-        ShowCase showCaseSalvo = showCaseService.inserirVitrine(showCase);
+    public ResponseEntity<?> inserirVitrine(@RequestBody Showcase showCase) {
+        Showcase showcaseSalvo = showCaseService.inserirVitrine(showCase);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body("Vitrine inserido com sucesso! ID: " + showCaseSalvo.getId());
+                .body("Vitrine inserido com sucesso! ID: " + showcaseSalvo.getId());
     }
 
 
@@ -51,8 +51,8 @@ public class VitrineController {
 
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<?> atualizarVitrine(@PathVariable Long id, @Valid @RequestBody ShowCase showCaseAtualizado) {
-        showCaseService.atualizarVitrine(id, showCaseAtualizado);
+    public ResponseEntity<?> atualizarVitrine(@PathVariable Long id, @Valid @RequestBody Showcase showcaseAtualizado) {
+        showCaseService.atualizarVitrine(id, showcaseAtualizado);
         return ResponseEntity.ok("Vitrine atualizado com sucesso!");
     }
 

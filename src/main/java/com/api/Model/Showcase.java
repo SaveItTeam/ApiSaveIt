@@ -3,7 +3,7 @@ package com.api.Model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 @Entity
-public class ShowCase {
+public class Showcase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true)
@@ -18,10 +18,10 @@ public class ShowCase {
     @NotNull(message = "lote_id vazio")
     private long batch_id;
 
-    public ShowCase() {
+    public Showcase() {
     }
 
-    public ShowCase(long id, String description, double price, long batch_id) {
+    public Showcase(long id, String description, double price, long batch_id) {
         this.id = id;
         this.description = description;
         this.price = price;

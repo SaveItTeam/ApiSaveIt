@@ -1,7 +1,7 @@
 package com.api.Service;
 
 import com.api.Model.Product;
-import com.api.Repository.ProdutoRepository;
+import com.api.Repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,18 +11,18 @@ import java.util.NoSuchElementException;
 
 @Service
 public class ProductService {
-    private final ProdutoRepository produtoRepository;
+    private final ProductRepository productRepository;
 
     @Autowired
-    public ProductService(ProdutoRepository produtoRepository) {
-        this.produtoRepository = produtoRepository;
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
     //    Métodos de busca
-    public List<Product> listarProduto(){return produtoRepository.findAll();}
+    public List<Product> listarProduto(){return productRepository.findAll();}
 
     // Inserção de enderecos
     public Product inserirProduto(Product product) {
-        return produtoRepository.save(product);
+        return productRepository.save(product);
     }
 
     // Deleção de endereços
@@ -30,12 +30,12 @@ public class ProductService {
         // Se o produto não for encontrado, pode ser lançado um erro posteriormente.
         // Dependendo da implementação do repository, pode ser necessário buscar primeiro o produto.
         //        Endereco existe = buscarProdutoPorId(id);
-        produtoRepository.deleteById(id);
+        productRepository.deleteById(id);
         //        return;
     }
     // Atualização de endereços
     public Product atualizarProduto(Long id, Product productAtualizado) {
-        Product product = produtoRepository.findById(id)
+        Product product = productRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Produto com ID " + id + " não encontrado"));
 
         product.setSku(productAtualizado.getSku());
@@ -44,13 +44,13 @@ public class ProductService {
         product.setDescricao(productAtualizado.getDescricao());
         product.setEnterprise_id(productAtualizado.getEnterprise_id());
 
-        return produtoRepository.save(product);
+        return productRepository.save(product);
     }
 
     // Atualização de endereço parcial
 
     public Product atualizarProdutoParcial(Long id, Map<String, Object> updates) {
-        Product product = produtoRepository.findById(id)
+        Product product = productRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Produto com ID " + id + " não encontrado"));
 
         if (updates.containsKey("sku")) {
@@ -69,7 +69,7 @@ public class ProductService {
             product.setEnterprise_id((long) updates.get("enterprise_id"));
         }
 
-        return produtoRepository.save(product);
+        return productRepository.save(product);
     }
 
 

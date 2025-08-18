@@ -1,7 +1,7 @@
 package com.api.Service;
 
 import com.api.Model.Enterprise;
-import com.api.Repository.EmpresaRepository;
+import com.api.Repository.EnterpriseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,21 +13,21 @@ import java.util.NoSuchElementException;
 public class EnterpriseService {
 
 
-    private final EmpresaRepository empresaRepository;
+    private final EnterpriseRepository enterpriseRepository;
 
     @Autowired
-    public EnterpriseService(EmpresaRepository empresaRepository) {
-        this.empresaRepository = empresaRepository;
+    public EnterpriseService(EnterpriseRepository enterpriseRepository) {
+        this.enterpriseRepository = enterpriseRepository;
     }
 
 
 
     //    Métodos de busca
-    public List<Enterprise> listarEmpresa(){return empresaRepository.findAll();}
+    public List<Enterprise> listarEmpresa(){return enterpriseRepository.findAll();}
 
     // Inserção de enderecos
     public Enterprise inserirEmpresa(Enterprise enterprise) {
-        return empresaRepository.save(enterprise);
+        return enterpriseRepository.save(enterprise);
     }
 
     // Deleção de endereços
@@ -35,14 +35,14 @@ public class EnterpriseService {
         // Se o produto não for encontrado, pode ser lançado um erro posteriormente.
         // Dependendo da implementação do repository, pode ser necessário buscar primeiro o produto.
         //        Endereco existe = buscarProdutoPorId(id);
-        empresaRepository.deleteById(id);
+        enterpriseRepository.deleteById(id);
         //        return;
     }
 
 
     // Atualização de endereços
     public Enterprise atualizarEmpresa(Long id, Enterprise enterpriseAtualizada) {
-        Enterprise enterprise = empresaRepository.findById(id)
+        Enterprise enterprise = enterpriseRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Endereco com ID " + id + " não encontrado"));
 
         enterprise.setCnpj(enterpriseAtualizada.getCnpj());
@@ -56,12 +56,12 @@ public class EnterpriseService {
         enterprise.setCategory(enterpriseAtualizada.getCategory());
         enterprise.setIs_buyer(enterpriseAtualizada.isIs_buyer());
 
-        return empresaRepository.save(enterprise);
+        return enterpriseRepository.save(enterprise);
     }
     // Atualização de endereço parcial
 
     public Enterprise atualizarEmpresaParcial(Long id, Map<String, Object> updates) {
-        Enterprise enterprise = empresaRepository.findById(id)
+        Enterprise enterprise = enterpriseRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Empresa com ID " + id + " não encontrado"));
 
         if (updates.containsKey("cnpj")) {
@@ -95,7 +95,7 @@ public class EnterpriseService {
             enterprise.setIs_buyer((boolean) updates.get("is_buyer"));
         }
 
-        return empresaRepository.save(enterprise);
+        return enterpriseRepository.save(enterprise);
     }
 
 }

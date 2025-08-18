@@ -1,7 +1,7 @@
 package com.api.Service;
 
 import com.api.Model.Address;
-import com.api.Repository.EnderecoRepository;
+import com.api.Repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,20 +11,20 @@ import java.util.NoSuchElementException;
 
 @Service
 public class AddressService {
-    private final EnderecoRepository enderecoRepository;
+    private final AddressRepository addressRepository;
 
     @Autowired
-    public AddressService(EnderecoRepository enderecoRepository) {
-        this.enderecoRepository = enderecoRepository;
+    public AddressService(AddressRepository addressRepository) {
+        this.addressRepository = addressRepository;
     }
 
 
     //    Métodos de busca
-    public List<Address> listarEnderecos(){return enderecoRepository.findAll();}
+    public List<Address> listarEnderecos(){return addressRepository.findAll();}
 
     // Inserção de enderecos
     public Address inserirEndereco(Address address) {
-        return enderecoRepository.save(address);
+        return addressRepository.save(address);
     }
 
     // Deleção de endereços
@@ -32,12 +32,12 @@ public class AddressService {
         // Se o produto não for encontrado, pode ser lançado um erro posteriormente.
         // Dependendo da implementação do repository, pode ser necessário buscar primeiro o produto.
         //        Endereco existe = buscarProdutoPorId(id);
-        enderecoRepository.deleteById(id);
+        addressRepository.deleteById(id);
         //        return;
     }
     // Atualização de endereços
     public Address atualizarEndereco(Long id, Address addressAtualizado) {
-        Address address = enderecoRepository.findById(id)
+        Address address = addressRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Endereco com ID " + id + " não encontrado"));
 
         address.setNome(addressAtualizado.getNome());
@@ -49,13 +49,13 @@ public class AddressService {
         address.setLogradouro(addressAtualizado.getLogradouro());
         address.setNumber(addressAtualizado.getNumber());
 
-        return enderecoRepository.save(address);
+        return addressRepository.save(address);
     }
 
     // Atualização de endereço parcial
 
     public Address atualizarEnderecoParcial(Long id, Map<String, Object> updates) {
-        Address address = enderecoRepository.findById(id)
+        Address address = addressRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Endereco com ID " + id + " não encontrado"));
 
         if (updates.containsKey("nome")) {
@@ -86,7 +86,7 @@ public class AddressService {
             address.setNumber((String) updates.get("number"));
         }
 
-        return enderecoRepository.save(address);
+        return addressRepository.save(address);
     }
 
 }
