@@ -22,9 +22,6 @@ public class Enterprise {
     @Column(length = 100)
     @NotNull(message = "Email vazio")
     private String email;
-    @Column(length = 50)
-    @NotNull(message = "Tipo de usuario vazio")
-    private String tipo_usuario;
     @Column(length = 20)
     @NotNull(message = "Telefone vazio")
     private String phone_number;
@@ -41,13 +38,12 @@ public class Enterprise {
     public Enterprise() {
     }
 
-    public Enterprise(long id, String cnpj, String name, String plan_id, String email, String tipo_usuario, String phone_number, long address_id, String password, String category, boolean is_buyer) {
+    public Enterprise(long id, String cnpj, String name, String plan_id, String email, String phone_number, long address_id, String password, String category, boolean is_buyer) {
         this.id = id;
         this.cnpj = cnpj;
         this.name = name;
         this.plan_id = plan_id;
         this.email = email;
-        this.tipo_usuario = tipo_usuario;
         this.phone_number = phone_number;
         this.address_id = address_id;
         this.password = password;
@@ -69,14 +65,6 @@ public class Enterprise {
 
     public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
-    }
-
-    public String getTipoUsuario() {
-        return tipo_usuario;
-    }
-
-    public void setTipoUsuario(String tipoUsuario) {
-        this.tipo_usuario = tipoUsuario;
     }
 
     public String getEmail() {
@@ -109,14 +97,6 @@ public class Enterprise {
 
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
-    }
-
-    public String getTipo_usuario() {
-        return tipo_usuario;
-    }
-
-    public void setTipo_usuario(String tipo_usuario) {
-        this.tipo_usuario = tipo_usuario;
     }
 
     public long getAddress_id() {
@@ -158,7 +138,6 @@ public class Enterprise {
                 ", nome='" + name + '\'' +
                 ", codigo='" + plan_id + '\'' +
                 ", email='" + email + '\'' +
-                ", tipo_usuario='" + tipo_usuario + '\'' +
                 ", telefone='" + phone_number + '\'' +
                 ", endereco_id=" + address_id +
                 ", senha='" + password + '\'' +

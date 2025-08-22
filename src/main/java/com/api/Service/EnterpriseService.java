@@ -20,18 +20,18 @@ public class EnterpriseService {
         this.enterpriseRepository = enterpriseRepository;
     }
 
-    public List<Enterprise> listarEmpresa(){return enterpriseRepository.findAll();}
+    public List<Enterprise> listEnterprise(){return enterpriseRepository.findAll();}
 
-    public Enterprise inserirEmpresa(Enterprise enterprise) {
+    public Enterprise insertEnterprise(Enterprise enterprise) {
         return enterpriseRepository.save(enterprise);
     }
 
-    public void excluirEmpresa(Long id) {
+    public void deleteEnterprise(Long id) {
         enterpriseRepository.deleteById(id);
     }
 
 
-    public Enterprise atualizarEmpresa(Long id, Enterprise enterpriseAtualizada) {
+    public Enterprise updateEnterprise(Long id, Enterprise enterpriseAtualizada) {
         Enterprise enterprise = enterpriseRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Endereco com ID " + id + " não encontrado"));
 
@@ -39,7 +39,6 @@ public class EnterpriseService {
         enterprise.setName(enterpriseAtualizada.getName());
         enterprise.setPlan_id(enterpriseAtualizada.getPlan_id());
         enterprise.setEmail(enterpriseAtualizada.getEmail());
-        enterprise.setTipoUsuario(enterpriseAtualizada.getTipoUsuario());
         enterprise.setPhone_number(enterpriseAtualizada.getPhone_number());
         enterprise.setAddress_id(enterpriseAtualizada.getAddress_id());
         enterprise.setPassword(enterpriseAtualizada.getPassword());
@@ -49,7 +48,7 @@ public class EnterpriseService {
         return enterpriseRepository.save(enterprise);
     }
 
-    public Enterprise atualizarEmpresaParcial(Long id, Map<String, Object> updates) {
+    public Enterprise updateEnterprisePartial(Long id, Map<String, Object> updates) {
         Enterprise enterprise = enterpriseRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Empresa com ID " + id + " não encontrado"));
 
@@ -64,9 +63,6 @@ public class EnterpriseService {
         }
         if (updates.containsKey("email")) {
             enterprise.setEmail((String) updates.get("email"));
-        }
-        if (updates.containsKey("tipo_usuario")) {
-            enterprise.setTipoUsuario((String) updates.get("tipo_usuario"));
         }
         if (updates.containsKey("phone_number")) {
             enterprise.setPhone_number((String) updates.get("phone_number"));

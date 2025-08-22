@@ -26,34 +26,34 @@ public class EnterpriseController {
     }
 
     @GetMapping("/selecionar")
-    public ResponseEntity<List<Enterprise>> listarEmpresas() {
-        List<Enterprise> enterprises = enterpriseService.listarEmpresa();
+    public ResponseEntity<List<Enterprise>> listEnterprise() {
+        List<Enterprise> enterprises = enterpriseService.listEnterprise();
         return ResponseEntity.ok(enterprises);
     }
 
     @PostMapping("/inserir")
-    public ResponseEntity<?> inserirEmpresa(@RequestBody Enterprise enterprise) {
-        Enterprise enterpriseSalvo = enterpriseService.inserirEmpresa(enterprise);
+    public ResponseEntity<?> insertEnterprise(@RequestBody Enterprise enterprise) {
+        Enterprise enterpriseSalvo = enterpriseService.insertEnterprise(enterprise);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Empresa inserido com sucesso! ID: " + enterpriseSalvo.getId());
     }
 
     @DeleteMapping("/excluir/{id}")
-    public ResponseEntity<?> excluirEmpresa(@PathVariable Long id) {
-        enterpriseService.excluirEmpresa(id);
+    public ResponseEntity<?> deleteEnterprise(@PathVariable Long id) {
+        enterpriseService.deleteEnterprise(id);
         return ResponseEntity.ok("Empresa excluído com sucesso!");
     }
 
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<?> atualizarEmpresa(@PathVariable Long id, @Valid @RequestBody Enterprise enterpriseAtualizado) {
-        enterpriseService.atualizarEmpresa(id, enterpriseAtualizado);
+    public ResponseEntity<?> updateEnterprise(@PathVariable Long id, @Valid @RequestBody Enterprise enterpriseAtualizado) {
+        enterpriseService.updateEnterprise(id, enterpriseAtualizado);
         return ResponseEntity.ok("Empresa atualizado com sucesso!");
     }
 
     @PatchMapping("/atualizarParcial/{id}")
-    public ResponseEntity<?> atualizarEnderecoParcial(@PathVariable Long id, @Valid @RequestBody Map<String, Object> updates) {
-        enterpriseService.atualizarEmpresaParcial(id, updates);
+    public ResponseEntity<?> updateEnterprisePartial(@PathVariable Long id, @Valid @RequestBody Map<String, Object> updates) {
+        enterpriseService.updateEnterprisePartial(id, updates);
         return ResponseEntity.ok("Empresa atualizado parcialmente com sucesso!");
     }
 
