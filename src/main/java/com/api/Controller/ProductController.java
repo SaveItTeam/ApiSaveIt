@@ -14,12 +14,12 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/produto")
-public class ProdutoController {
+public class ProductController {
     private final ProductService productService;
     private GlobalException ge;
 
     @Autowired
-    public ProdutoController(ProductService productService) {
+    public ProductController(ProductService productService) {
         this.productService = productService;
     }
 

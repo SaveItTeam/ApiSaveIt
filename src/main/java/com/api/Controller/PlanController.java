@@ -1,9 +1,7 @@
 package com.api.Controller;
 
 import com.api.Exception.GlobalException;
-import com.api.Model.Lote;
 import com.api.Model.Plan;
-import com.api.Service.LoteService;
 import com.api.Service.PlanService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

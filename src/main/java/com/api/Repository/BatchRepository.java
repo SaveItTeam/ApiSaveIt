@@ -1,7 +1,7 @@
 package com.api.Repository;
 
-import com.api.Model.Lote;
+import com.api.Model.Batch;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface BatchRepository extends JpaRepository<Lote, Long> {
+public interface BatchRepository extends JpaRepository<Batch, Long> {
 }

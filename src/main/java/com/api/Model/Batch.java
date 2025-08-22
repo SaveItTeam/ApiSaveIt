@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
-public class Lote {
+public class Batch {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull(message = "Campo vazio")
@@ -30,7 +30,7 @@ public class Lote {
     @NotNull(message = "Id do produto vazio")
     private long product_id;
 
-    public Lote(long id, String unite_measure, Date entry_date, String batch_code, Date expiriation_date, int quantity, long product_id) {
+    public Batch(long id, String unite_measure, Date entry_date, String batch_code, Date expiriation_date, int quantity, long product_id) {
         this.id = id;
         this.unite_measure = unite_measure;
         this.entry_date = entry_date;
@@ -40,7 +40,7 @@ public class Lote {
         this.product_id = product_id;
     }
 
-    public Lote() {
+    public Batch() {
     }
 
     public long getId() {

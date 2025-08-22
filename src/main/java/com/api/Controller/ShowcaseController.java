@@ -14,12 +14,12 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/vitrine")
-public class VitrineController {
+public class ShowcaseController {
     private final ShowcaseService showCaseService;
     private GlobalException ge;
 
     @Autowired
-    public VitrineController(ShowcaseService showCaseService) {
+    public ShowcaseController(ShowcaseService showCaseService) {
         this.showCaseService = showCaseService;
     }
 

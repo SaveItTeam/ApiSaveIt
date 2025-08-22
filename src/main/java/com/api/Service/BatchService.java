@@ -1,6 +1,6 @@
 package com.api.Service;
 
-import com.api.Model.Lote;
+import com.api.Model.Batch;
 import com.api.Repository.BatchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,21 +11,21 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 @Service
-public class LoteService {
+public class BatchService {
     private final BatchRepository batchRepository;
 
     @Autowired
-    public LoteService(BatchRepository batchRepository) {
+    public BatchService(BatchRepository batchRepository) {
         this.batchRepository = batchRepository;
     }
 
 
     //    Métodos de busca
-    public List<Lote> listarLotes(){return batchRepository.findAll();}
+    public List<Batch> listarLotes(){return batchRepository.findAll();}
 
     // Inserção
-    public Lote inserirLote(Lote lote) {
-        return batchRepository.save(lote);
+    public Batch inserirLote(Batch batch) {
+        return batchRepository.save(batch);
     }
 
     // Deleção
@@ -37,43 +37,43 @@ public class LoteService {
         //        return;
     }
     // Atualização
-    public Lote atualizarLote(Long id, Lote loteAtualizado) {
-        Lote lote = batchRepository.findById(id)
+    public Batch atualizarLote(Long id, Batch batchAtualizado) {
+        Batch batch = batchRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Lote com ID " + id + " não encontrado"));
 
-        lote.setUnite_measure(loteAtualizado.getUnite_measure());
-        lote.setEntry_date(loteAtualizado.getEntry_date());
-        lote.setBatch_code(loteAtualizado.getBatch_code());
-        lote.setExpiriation_date(loteAtualizado.getExpiriation_date());
-        lote.setQuantity(loteAtualizado.getQuantity());
-        lote.setProduct_id(loteAtualizado.getProduct_id());
+        batch.setUnite_measure(batchAtualizado.getUnite_measure());
+        batch.setEntry_date(batchAtualizado.getEntry_date());
+        batch.setBatch_code(batchAtualizado.getBatch_code());
+        batch.setExpiriation_date(batchAtualizado.getExpiriation_date());
+        batch.setQuantity(batchAtualizado.getQuantity());
+        batch.setProduct_id(batchAtualizado.getProduct_id());
 
-        return batchRepository.save(lote);
+        return batchRepository.save(batch);
     }
 
-    public Lote atualizarLoteParcial(Long id, Map<String, Object> updates) {
-        Lote lote = batchRepository.findById(id)
+    public Batch atualizarLoteParcial(Long id, Map<String, Object> updates) {
+        Batch batch = batchRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Lote com ID " + id + " não encontrado"));
 
         if (updates.containsKey("unit_measure")) {
-            lote.setUnite_measure((String) updates.get("unit_measure"));
+            batch.setUnite_measure((String) updates.get("unit_measure"));
         }
         if (updates.containsKey("entry_date")) {
-            lote.setEntry_date((Date) updates.get("entry_date"));
+            batch.setEntry_date((Date) updates.get("entry_date"));
         }
         if (updates.containsKey("batch_code")) {
-            lote.setBatch_code((String) updates.get("batch_code"));
+            batch.setBatch_code((String) updates.get("batch_code"));
         }
         if (updates.containsKey("expiriation_date")) {
-            lote.setExpiriation_date((Date) updates.get("expiriation_date"));
+            batch.setExpiriation_date((Date) updates.get("expiriation_date"));
         }
         if (updates.containsKey("quantity")) {
-            lote.setQuantity((int) updates.get("quantity"));
+            batch.setQuantity((int) updates.get("quantity"));
         }
         if (updates.containsKey("product_id")) {
-            lote.setProduct_id((long) updates.get("product_id"));
+            batch.setProduct_id((long) updates.get("product_id"));
         }
 
-        return batchRepository.save(lote);
+        return batchRepository.save(batch);
     }
 }
