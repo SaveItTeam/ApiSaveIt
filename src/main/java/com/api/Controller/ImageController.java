@@ -1,9 +1,7 @@
 package com.api.Controller;
 
 import com.api.Exception.GlobalException;
-import com.api.Model.Funcionario;
 import com.api.Model.Image;
-import com.api.Service.FuncionarioService;
 import com.api.Service.ImageService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

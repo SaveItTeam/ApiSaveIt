@@ -14,13 +14,13 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/endereco")
-public class EnderecoController {
+public class AddressController {
 
     private final AddressService addressService;
     private GlobalException ge;
 
     @Autowired
-    public EnderecoController(AddressService addressService) {
+    public AddressController(AddressService addressService) {
             this.addressService = addressService;
     }
 

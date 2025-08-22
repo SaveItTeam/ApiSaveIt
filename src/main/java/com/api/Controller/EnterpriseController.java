@@ -14,14 +14,14 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/empresa")
-public class EmpresaController {
+public class EnterpriseController {
 
 
     private final EnterpriseService enterpriseService;
     private GlobalException ge;
 
     @Autowired
-    public EmpresaController(EnterpriseService enterpriseService) {
+    public EnterpriseController(EnterpriseService enterpriseService) {
         this.enterpriseService = enterpriseService;
     }
 
