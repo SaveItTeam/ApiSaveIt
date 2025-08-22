@@ -18,21 +18,15 @@ public class PlanService {
     }
 
 
-    //    Métodos de busca
     public List<Plan> listPlan(){return planRepository.findAll();}
 
-    // Inserção
     public Plan insertPlan(Plan plan) {
         return planRepository.save(plan);
     }
 
     // Deleção
     public void deletePlan(Long id) {
-        // Se o produto não for encontrado, pode ser lançado um erro posteriormente.
-        // Dependendo da implementação do repository, pode ser necessário buscar primeiro o produto.
-        //        Endereco existe = buscarProdutoPorId(id);
         planRepository.deleteById(id);
-        //        return;
     }
     // Atualização
     public Plan updatePlan(Long id, Plan planAtualizado) {

@@ -26,7 +26,6 @@ public class PlanController {
 
     @GetMapping("/selecionar")
     public ResponseEntity<List<Plan>> listPlan() {
-        // Se lançar uma RuntimeException aqui, o Spring vai chamar o método do GlobalException automaticamente
         List<Plan> plans = planService.listPlan();
         return ResponseEntity.ok(plans);
     }
