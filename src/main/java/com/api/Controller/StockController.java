@@ -15,6 +15,10 @@ import java.net.Socket;
 import java.util.List;
 import java.util.Map;
 
+
+
+@RestController
+@RequestMapping("/api/estoque")
 public class StockController {
 
     private final StockService stockService;
