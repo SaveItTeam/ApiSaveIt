@@ -25,15 +25,13 @@ public class Address {
     private String neighborhood;
     @Column(length = 100)
     private String complement;
-    @Column(length = 255)
-    private String logradouro;
     @Column(length = 10)
     private String number;
 
     public Address() {
     }
 
-    public Address(long id, String nome, String state, String public_place, String cep, String neighborhood, String complement, String logradouro, String number) {
+    public Address(long id, String nome, String state, String public_place, String cep, String neighborhood, String complement, String number) {
         this.id = id;
         this.nome = nome;
         this.state = state;
@@ -41,7 +39,6 @@ public class Address {
         this.cep = cep;
         this.neighborhood = neighborhood;
         this.complement = complement;
-        this.logradouro = logradouro;
         this.number = number;
     }
 
@@ -109,14 +106,6 @@ public class Address {
         this.city = city;
     }
 
-    public String getLogradouro() {
-        return logradouro;
-    }
-
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
-    }
-
     public String getNumber() {
         return number;
     }
@@ -136,7 +125,6 @@ public class Address {
                 ", cep='" + cep + '\'' +
                 ", bairro='" + neighborhood + '\'' +
                 ", complemento='" + complement + '\'' +
-                ", logradouro='" + logradouro + '\'' +
                 ", numero='" + number + '\'' +
                 '}';
     }

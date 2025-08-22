@@ -19,24 +19,16 @@ public class AddressService {
     }
 
 
-    //    Métodos de busca
-    public List<Address> listarEnderecos(){return addressRepository.findAll();}
+    public List<Address> listAddress(){return addressRepository.findAll();}
 
-    // Inserção de enderecos
-    public Address inserirEndereco(Address address) {
+    public Address insertAddress(Address address) {
         return addressRepository.save(address);
     }
 
-    // Deleção de endereços
-    public void excluirEndereco(Long id) {
-        // Se o produto não for encontrado, pode ser lançado um erro posteriormente.
-        // Dependendo da implementação do repository, pode ser necessário buscar primeiro o produto.
-        //        Endereco existe = buscarProdutoPorId(id);
+    public void deleteAddress(Long id) {
         addressRepository.deleteById(id);
-        //        return;
     }
-    // Atualização de endereços
-    public Address atualizarEndereco(Long id, Address addressAtualizado) {
+    public Address updateAddress(Long id, Address addressAtualizado) {
         Address address = addressRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Endereco com ID " + id + " não encontrado"));
 
@@ -45,16 +37,15 @@ public class AddressService {
         address.setPublic_place(addressAtualizado.getPublic_place());
         address.setCep(addressAtualizado.getCep());
         address.setNeighborhood(addressAtualizado.getNeighborhood());
+        address.setCity(addressAtualizado.getCity());
         address.setComplement(addressAtualizado.getComplement());
-        address.setLogradouro(addressAtualizado.getLogradouro());
         address.setNumber(addressAtualizado.getNumber());
 
         return addressRepository.save(address);
     }
 
-    // Atualização de endereço parcial
 
-    public Address atualizarEnderecoParcial(Long id, Map<String, Object> updates) {
+    public Address updateAddressPartial(Long id, Map<String, Object> updates) {
         Address address = addressRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Endereco com ID " + id + " não encontrado"));
 
@@ -78,9 +69,6 @@ public class AddressService {
         }
         if (updates.containsKey("complement")) {
             address.setComplement((String) updates.get("complement"));
-        }
-        if (updates.containsKey("logradouro")) {
-            address.setLogradouro((String) updates.get("logradouro"));
         }
         if (updates.containsKey("number")) {
             address.setNumber((String) updates.get("number"));
