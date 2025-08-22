@@ -16,16 +16,16 @@ public class ShowcaseService {
     public ShowcaseService(ShowcaseRepository showcaseRepository) {
         this.showcaseRepository = showcaseRepository;
     }
-    public List<Showcase> listarVitrine(){return showcaseRepository.findAll();}
+    public List<Showcase> listShowcase(){return showcaseRepository.findAll();}
 
-    public Showcase inserirVitrine(Showcase showCase) {
+    public Showcase insertShowcase(Showcase showCase) {
         return showcaseRepository.save(showCase);
     }
 
-    public void excluirVitrine(Long id) {
+    public void deleteShowcase(Long id) {
         showcaseRepository.deleteById(id);
     }
-    public Showcase atualizarVitrine(Long id, Showcase showcaseAtualizado) {
+    public Showcase updateShowcase(Long id, Showcase showcaseAtualizado) {
         Showcase showCase = showcaseRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Vitrine com ID " + id + " não encontrado"));
 
@@ -36,7 +36,7 @@ public class ShowcaseService {
         return showcaseRepository.save(showCase);
     }
 
-    public Showcase atualizarVitrineParcial(Long id, Map<String, Object> updates) {
+    public Showcase updateShowcasePartial(Long id, Map<String, Object> updates) {
         Showcase showCase = showcaseRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Vitrine com ID " + id + " não encontrado"));
 

@@ -25,16 +25,16 @@ public class ShowcaseController {
 
 
     @GetMapping("/selecionar")
-    public ResponseEntity<List<Showcase>> listarVitrine() {
-        List<Showcase> showcases = showCaseService.listarVitrine();
+    public ResponseEntity<List<Showcase>> listShowcase() {
+        List<Showcase> showcases = showCaseService.listShowcase();
         return ResponseEntity.ok(showcases);
     }
 
 
 
     @PostMapping("/inserir")
-    public ResponseEntity<?> inserirVitrine(@RequestBody Showcase showCase) {
-        Showcase showcaseSalvo = showCaseService.inserirVitrine(showCase);
+    public ResponseEntity<?> insertShowcase(@RequestBody Showcase showCase) {
+        Showcase showcaseSalvo = showCaseService.insertShowcase(showCase);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Vitrine inserido com sucesso! ID: " + showcaseSalvo.getId());
     }
@@ -42,24 +42,24 @@ public class ShowcaseController {
 
 
     @DeleteMapping("/excluir/{id}")
-    public ResponseEntity<?> excluirVitrine(@PathVariable Long id) {
-        showCaseService.excluirVitrine(id);
+    public ResponseEntity<?> deleteShowcase(@PathVariable Long id) {
+        showCaseService.deleteShowcase(id);
         return ResponseEntity.ok("Vitrine excluído com sucesso!");
     }
 
 
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<?> atualizarVitrine(@PathVariable Long id, @Valid @RequestBody Showcase showcaseAtualizado) {
-        showCaseService.atualizarVitrine(id, showcaseAtualizado);
+    public ResponseEntity<?> updateShowcase(@PathVariable Long id, @Valid @RequestBody Showcase showcaseAtualizado) {
+        showCaseService.updateShowcase(id, showcaseAtualizado);
         return ResponseEntity.ok("Vitrine atualizado com sucesso!");
     }
 
 
 
     @PatchMapping("/atualizarParcial/{id}")
-    public ResponseEntity<?> atualizarVitrineParcial(@PathVariable Long id, @Valid @RequestBody Map<String, Object> updates) {
-        showCaseService.atualizarVitrineParcial(id, updates);
+    public ResponseEntity<?> updateShowcasePartial(@PathVariable Long id, @Valid @RequestBody Map<String, Object> updates) {
+        showCaseService.updateShowcasePartial(id, updates);
         return ResponseEntity.ok("Vitrine atualizado parcialmente com sucesso!");
     }
 
