@@ -17,24 +17,16 @@ public class ProductService {
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
-    //    Métodos de busca
-    public List<Product> listarProduto(){return productRepository.findAll();}
+    public List<Product> listProduct(){return productRepository.findAll();}
 
-    // Inserção de enderecos
-    public Product inserirProduto(Product product) {
+    public Product insertProduct(Product product) {
         return productRepository.save(product);
     }
 
-    // Deleção de endereços
-    public void excluirProduto(Long id) {
-        // Se o produto não for encontrado, pode ser lançado um erro posteriormente.
-        // Dependendo da implementação do repository, pode ser necessário buscar primeiro o produto.
-        //        Endereco existe = buscarProdutoPorId(id);
+    public void deleteProduct(Long id) {
         productRepository.deleteById(id);
-        //        return;
     }
-    // Atualização de endereços
-    public Product atualizarProduto(Long id, Product productAtualizado) {
+    public Product updateProduct(Long id, Product productAtualizado) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Produto com ID " + id + " não encontrado"));
 
@@ -47,9 +39,8 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    // Atualização de endereço parcial
 
-    public Product atualizarProdutoParcial(Long id, Map<String, Object> updates) {
+    public Product updateProductPartial(Long id, Map<String, Object> updates) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Produto com ID " + id + " não encontrado"));
 

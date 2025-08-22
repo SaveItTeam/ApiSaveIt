@@ -19,21 +19,16 @@ public class ImageService {
     }
 
 
-    //    Métodos de busca
-    public List<Image> listarImage(){return imageRepository.findAll();}
+    public List<Image> listImage(){return imageRepository.findAll();}
 
-    public Image inserirImage(Image image) {
+    public Image insertImage(Image image) {
         return imageRepository.save(image);
     }
 
-    public void excluirImage(Long id) {
-        // Se o produto não for encontrado, pode ser lançado um erro posteriormente.
-        // Dependendo da implementação do repository, pode ser necessário buscar primeiro o produto.
-        //        Endereco existe = buscarProdutoPorId(id);
+    public void deleteImage(Long id) {
         imageRepository.deleteById(id);
-        //        return;
     }
-    public Image atualizarImage(Long id, Image imageAtualizado) {
+    public Image updateImage(Long id, Image imageAtualizado) {
         Image image = imageRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Imagem com ID " + id + " não encontrado"));
 
@@ -42,9 +37,7 @@ public class ImageService {
 
         return imageRepository.save(image);
     }
-
-
-    public Image atualizarImageParcial(Long id, Map<String, Object> updates) {
+    public Image updateImagePartial(Long id, Map<String, Object> updates) {
         Image image = imageRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Image com ID " + id + " não encontrado"));
 

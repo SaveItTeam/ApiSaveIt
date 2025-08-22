@@ -26,8 +26,7 @@ public class EmployeeController {
 
     @GetMapping("/selecionar")
     public ResponseEntity<List<Employee>> listarFuncionarios() {
-        // Se lançar uma RuntimeException aqui, o Spring vai chamar o método do GlobalException automaticamente
-        List<Employee> employees = employeeService.listarFuncionario();
+        List<Employee> employees = employeeService.listEmployee();
         return ResponseEntity.ok(employees);
     }
 
@@ -35,7 +34,7 @@ public class EmployeeController {
 
     @PostMapping("/inserir")
     public ResponseEntity<?> inserirFuncionario(@RequestBody Employee employee) {
-        Employee employeeSalvo = employeeService.inserirFuncionario(employee);
+        Employee employeeSalvo = employeeService.insertEmployee(employee);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Funcionario inserido com sucesso! ID: " + employeeSalvo.getId());
     }
@@ -44,7 +43,7 @@ public class EmployeeController {
 
     @DeleteMapping("/excluir/{id}")
     public ResponseEntity<?> excluirFuncionario(@PathVariable Long id) {
-        employeeService.excluirFuncionario(id);
+        employeeService.deleteEmployee(id);
         return ResponseEntity.ok("Funcionario excluído com sucesso!");
     }
 
@@ -52,7 +51,7 @@ public class EmployeeController {
 
     @PutMapping("/atualizar/{id}")
     public ResponseEntity<?> atualizarFuncionario(@PathVariable Long id, @Valid @RequestBody Employee employeeAtualizado) {
-        employeeService.atualizarFuncionario(id, employeeAtualizado);
+        employeeService.updateEmployee(id, employeeAtualizado);
         return ResponseEntity.ok("Funcionario atualizado com sucesso!");
     }
 
@@ -60,7 +59,7 @@ public class EmployeeController {
 
     @PatchMapping("/atualizarParcial/{id}")
     public ResponseEntity<?> atualizarFuncionarioParcial(@PathVariable Long id, @Valid @RequestBody Map<String, Object> updates) {
-        employeeService.atualizarFuncionarioParcial(id, updates);
+        employeeService.updateEmployeePartial(id, updates);
         return ResponseEntity.ok("Funcionario atualizado parcialmente com sucesso!");
     }
 

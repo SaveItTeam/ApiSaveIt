@@ -26,17 +26,16 @@ public class AddressController {
 
 
     @GetMapping("/selecionar")
-    public ResponseEntity<List<Address>> listarEnderecos() {
-        // Se lançar uma RuntimeException aqui, o Spring vai chamar o método do GlobalException automaticamente
-        List<Address> addresses = addressService.listarEnderecos();
+    public ResponseEntity<List<Address>> listAddress() {
+        List<Address> addresses = addressService.listAddress();
         return ResponseEntity.ok(addresses);
     }
 
 
 
     @PostMapping("/inserir")
-    public ResponseEntity<?> inserirEndereco(@RequestBody Address address) {
-        Address addressSalvo = addressService.inserirEndereco(address);
+    public ResponseEntity<?> insertAddress(@RequestBody Address address) {
+        Address addressSalvo = addressService.insertAddress(address);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Endereco inserido com sucesso! ID: " + addressSalvo.getId());
     }
@@ -44,24 +43,24 @@ public class AddressController {
 
 
     @DeleteMapping("/excluir/{id}")
-    public ResponseEntity<?> excluirEndereco(@PathVariable Long id) {
-        addressService.excluirEndereco(id);
+    public ResponseEntity<?> deleteAddress(@PathVariable Long id) {
+        addressService.deleteAddress(id);
         return ResponseEntity.ok("Endereco excluído com sucesso!");
     }
 
 
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<?> atualizarEndereco(@PathVariable Long id, @Valid @RequestBody Address addressAtualizado) {
-        addressService.atualizarEndereco(id, addressAtualizado);
+    public ResponseEntity<?> updateAddress(@PathVariable Long id, @Valid @RequestBody Address addressAtualizado) {
+        addressService.updateAddress(id, addressAtualizado);
         return ResponseEntity.ok("Endereco atualizado com sucesso!");
     }
 
 
 
     @PatchMapping("/atualizarParcial/{id}")
-    public ResponseEntity<?> atualizarEnderecoParcial(@PathVariable Long id, @Valid @RequestParam Map<String, Object> updates) {
-        addressService.atualizarEnderecoParcial(id, updates);
+    public ResponseEntity<?> updateAddressPartial(@PathVariable Long id, @Valid @RequestParam Map<String, Object> updates) {
+        addressService.updateAddressPartial(id, updates);
         return ResponseEntity.ok("Endereco atualizado parcialmente com sucesso!");
     }
 

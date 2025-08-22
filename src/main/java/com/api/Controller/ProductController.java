@@ -25,17 +25,16 @@ public class ProductController {
 
 
     @GetMapping("/selecionar")
-    public ResponseEntity<List<Product>> listarProdutos() {
-        // Se lançar uma RuntimeException aqui, o Spring vai chamar o método do GlobalException automaticamente
-        List<Product> products = productService.listarProduto();
+    public ResponseEntity<List<Product>> listProduct() {
+        List<Product> products = productService.listProduct();
         return ResponseEntity.ok(products);
     }
 
 
 
     @PostMapping("/inserir")
-    public ResponseEntity<?> inserirProduto(@RequestBody Product product) {
-        Product productSalvo = productService.inserirProduto(product);
+    public ResponseEntity<?> insertProduct(@RequestBody Product product) {
+        Product productSalvo = productService.insertProduct(product);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Produto inserido com sucesso! ID: " + productSalvo.getId());
     }
@@ -43,24 +42,24 @@ public class ProductController {
 
 
     @DeleteMapping("/excluir/{id}")
-    public ResponseEntity<?> excluirProduto(@PathVariable Long id) {
-        productService.excluirProduto(id);
+    public ResponseEntity<?> deleteProduct(@PathVariable Long id) {
+        productService.deleteProduct(id);
         return ResponseEntity.ok("Produto excluído com sucesso!");
     }
 
 
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<?> atualizarProduto(@PathVariable Long id, @Valid @RequestBody Product productAtualizado) {
-        productService.atualizarProduto(id, productAtualizado);
+    public ResponseEntity<?> updateProduct(@PathVariable Long id, @Valid @RequestBody Product productAtualizado) {
+        productService.updateProduct(id, productAtualizado);
         return ResponseEntity.ok("Produto atualizado com sucesso!");
     }
 
 
 
     @PatchMapping("/atualizarParcial/{id}")
-    public ResponseEntity<?> atualizarProdutoParcial(@PathVariable Long id, @Valid @RequestBody Map<String, Object> updates) {
-        productService.atualizarProdutoParcial(id, updates);
+    public ResponseEntity<?> updateProductPartial(@PathVariable Long id, @Valid @RequestBody Map<String, Object> updates) {
+        productService.updateProductPartial(id, updates);
         return ResponseEntity.ok("Produto atualizado parcialmente com sucesso!");
     }
 

@@ -17,7 +17,7 @@ public class Image {
     private long product_id;
 
 
-    public Image(long id, @NotNull(message = "Codigo binario vazia") Byte[] image, long product_id) {
+    public Image(long id, Byte[] image, long product_id) {
         this.id = id;
         this.image = image;
         this.product_id = product_id;

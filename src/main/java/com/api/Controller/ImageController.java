@@ -25,17 +25,16 @@ public class ImageController {
 
 
     @GetMapping("/selecionar")
-    public ResponseEntity<List<Image>> listarImage() {
-        // Se lançar uma RuntimeException aqui, o Spring vai chamar o método do GlobalException automaticamente
-        List<Image> images = imageService.listarImage();
+    public ResponseEntity<List<Image>> listImage() {
+        List<Image> images = imageService.listImage();
         return ResponseEntity.ok(images);
     }
 
 
 
     @PostMapping("/inserir")
-    public ResponseEntity<?> inserirImage(@RequestBody Image image) {
-        Image imageSalvo = imageService.inserirImage(image);
+    public ResponseEntity<?> insertImage(@RequestBody Image image) {
+        Image imageSalvo = imageService.insertImage(image);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Imagem inserido com sucesso! ID: " + imageSalvo.getId());
     }
@@ -43,24 +42,24 @@ public class ImageController {
 
 
     @DeleteMapping("/excluir/{id}")
-    public ResponseEntity<?> excluirImage(@PathVariable Long id) {
-        imageService.excluirImage(id);
+    public ResponseEntity<?> deleteImage(@PathVariable Long id) {
+        imageService.deleteImage(id);
         return ResponseEntity.ok("Imagem excluído com sucesso!");
     }
 
 
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<?> atualizarImagem(@PathVariable Long id, @Valid @RequestBody Image imageAtualizado) {
-        imageService.atualizarImage(id, imageAtualizado);
+    public ResponseEntity<?> updateImage(@PathVariable Long id, @Valid @RequestBody Image imageAtualizado) {
+        imageService.updateImage(id, imageAtualizado);
         return ResponseEntity.ok("Imagem atualizada com sucesso!");
     }
 
 
 
     @PatchMapping("/atualizarParcial/{id}")
-    public ResponseEntity<?> atualizarImageParcial(@PathVariable Long id, @Valid @RequestBody Map<String, Object> updates) {
-        imageService.atualizarImageParcial(id, updates);
+    public ResponseEntity<?> updateImagePartial(@PathVariable Long id, @Valid @RequestBody Map<String, Object> updates) {
+        imageService.updateImagePartial(id, updates);
         return ResponseEntity.ok("Imagem atualizado parcialmente com sucesso!");
     }
 }
