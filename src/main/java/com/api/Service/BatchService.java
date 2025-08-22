@@ -20,24 +20,17 @@ public class BatchService {
     }
 
 
-    //    Métodos de busca
-    public List<Batch> listarLotes(){return batchRepository.findAll();}
+    public List<Batch> listBatch(){return batchRepository.findAll();}
 
-    // Inserção
-    public Batch inserirLote(Batch batch) {
+    public Batch insertBatch(Batch batch) {
         return batchRepository.save(batch);
     }
 
-    // Deleção
-    public void excluirLote(Long id) {
-        // Se o produto não for encontrado, pode ser lançado um erro posteriormente.
-        // Dependendo da implementação do repository, pode ser necessário buscar primeiro o produto.
-        //        Endereco existe = buscarProdutoPorId(id);
+    public void deleteBatch(Long id) {
         batchRepository.deleteById(id);
-        //        return;
     }
     // Atualização
-    public Batch atualizarLote(Long id, Batch batchAtualizado) {
+    public Batch updateBatch(Long id, Batch batchAtualizado) {
         Batch batch = batchRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Lote com ID " + id + " não encontrado"));
 
@@ -51,7 +44,7 @@ public class BatchService {
         return batchRepository.save(batch);
     }
 
-    public Batch atualizarLoteParcial(Long id, Map<String, Object> updates) {
+    public Batch updateBatchPartial(Long id, Map<String, Object> updates) {
         Batch batch = batchRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Lote com ID " + id + " não encontrado"));
 
