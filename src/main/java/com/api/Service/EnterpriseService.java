@@ -20,27 +20,17 @@ public class EnterpriseService {
         this.enterpriseRepository = enterpriseRepository;
     }
 
-
-
-    //    Métodos de busca
     public List<Enterprise> listarEmpresa(){return enterpriseRepository.findAll();}
 
-    // Inserção de enderecos
     public Enterprise inserirEmpresa(Enterprise enterprise) {
         return enterpriseRepository.save(enterprise);
     }
 
-    // Deleção de endereços
     public void excluirEmpresa(Long id) {
-        // Se o produto não for encontrado, pode ser lançado um erro posteriormente.
-        // Dependendo da implementação do repository, pode ser necessário buscar primeiro o produto.
-        //        Endereco existe = buscarProdutoPorId(id);
         enterpriseRepository.deleteById(id);
-        //        return;
     }
 
 
-    // Atualização de endereços
     public Enterprise atualizarEmpresa(Long id, Enterprise enterpriseAtualizada) {
         Enterprise enterprise = enterpriseRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Endereco com ID " + id + " não encontrado"));
@@ -58,7 +48,6 @@ public class EnterpriseService {
 
         return enterpriseRepository.save(enterprise);
     }
-    // Atualização de endereço parcial
 
     public Enterprise atualizarEmpresaParcial(Long id, Map<String, Object> updates) {
         Enterprise enterprise = enterpriseRepository.findById(id)
