@@ -26,7 +26,6 @@ public class ImageController {
 
     @GetMapping("/selecionar")
     public ResponseEntity<List<Image>> listarImage() {
-        // Se lançar uma RuntimeException aqui, o Spring vai chamar o método do GlobalException automaticamente
         List<Image> images = imageService.listarImage();
         return ResponseEntity.ok(images);
     }

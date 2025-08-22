@@ -19,7 +19,6 @@ public class ImageService {
     }
 
 
-    //    Métodos de busca
     public List<Image> listarImage(){return imageRepository.findAll();}
 
     public Image inserirImage(Image image) {
@@ -27,11 +26,7 @@ public class ImageService {
     }
 
     public void excluirImage(Long id) {
-        // Se o produto não for encontrado, pode ser lançado um erro posteriormente.
-        // Dependendo da implementação do repository, pode ser necessário buscar primeiro o produto.
-        //        Endereco existe = buscarProdutoPorId(id);
         imageRepository.deleteById(id);
-        //        return;
     }
     public Image atualizarImage(Long id, Image imageAtualizado) {
         Image image = imageRepository.findById(id)
