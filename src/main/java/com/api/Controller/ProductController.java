@@ -26,7 +26,6 @@ public class ProductController {
 
     @GetMapping("/selecionar")
     public ResponseEntity<List<Product>> listarProdutos() {
-        // Se lançar uma RuntimeException aqui, o Spring vai chamar o método do GlobalException automaticamente
         List<Product> products = productService.listarProduto();
         return ResponseEntity.ok(products);
     }
