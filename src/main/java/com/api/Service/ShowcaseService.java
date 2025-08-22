@@ -1,0 +1,65 @@
+package com.api.Service;
+
+import com.api.Model.Showcase;
+import com.api.Repository.ShowcaseRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
+@Service
+public class ShowcaseService {
+    private final ShowcaseRepository showcaseRepository;
+
+    @Autowired
+    public ShowcaseService(ShowcaseRepository showcaseRepository) {
+        this.showcaseRepository = showcaseRepository;
+    }
+    //    Métodos de busca
+    public List<Showcase> listarVitrine(){return showcaseRepository.findAll();}
+
+    // Inserção de enderecos
+    public Showcase inserirVitrine(Showcase showCase) {
+        return showcaseRepository.save(showCase);
+    }
+
+    // Deleção de endereços
+    public void excluirVitrine(Long id) {
+        // Se o produto não for encontrado, pode ser lançado um erro posteriormente.
+        // Dependendo da implementação do repository, pode ser necessário buscar primeiro o produto.
+        //        Endereco existe = buscarProdutoPorId(id);
+        showcaseRepository.deleteById(id);
+        //        return;
+    }
+    // Atualização de endereços
+    public Showcase atualizarVitrine(Long id, Showcase showcaseAtualizado) {
+        Showcase showCase = showcaseRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Vitrine com ID " + id + " não encontrado"));
+
+        showCase.setDescription(showcaseAtualizado.getDescription());
+        showCase.setPrice(showcaseAtualizado.getPrice());
+        showCase.setBatch_id(showcaseAtualizado.getBatch_id());
+
+        return showcaseRepository.save(showCase);
+    }
+
+    // Atualização de endereço parcial
+
+    public Showcase atualizarVitrineParcial(Long id, Map<String, Object> updates) {
+        Showcase showCase = showcaseRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Vitrine com ID " + id + " não encontrado"));
+
+        if (updates.containsKey("description")) {
+            showCase.setDescription((String) updates.get("description"));
+        }
+        if (updates.containsKey("price")) {
+            showCase.setPrice((double) updates.get("price"));
+        }
+        if (updates.containsKey("batch_id")) {
+            showCase.setBatch_id((long) updates.get("batch_id"));
+        }
+
+        return showcaseRepository.save(showCase);
+    }
+}

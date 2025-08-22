@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-public class Empresa {
+public class Enterprise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull(message = "Campo vazio")
@@ -15,44 +15,43 @@ public class Empresa {
     private String cnpj;
     @Column(length = 100)
     @NotNull(message = "Nome vazio")
-    private String nome;
+    private String name;
     @Column(length = 50)
     @NotNull(message = "Codigo vazio")
-    private String codigo;
+    private String plan_id;
     @Column(length = 100)
     @NotNull(message = "Email vazio")
     private String email;
-    //ajustar campo tipoUsuario para que fique tudo minusculo
     @Column(length = 50)
     @NotNull(message = "Tipo de usuario vazio")
     private String tipo_usuario;
     @Column(length = 20)
     @NotNull(message = "Telefone vazio")
-    private String telefone;
+    private String phone_number;
     @NotNull(message = "Id do endereco vazio")
-    private long endereco_id;
+    private long address_id;
     @NotNull(message = "Senha vazia")
     @Column(length = 255)
-    private String senha;
+    private String password;
     @NotNull(message = "Categoria vazia")
     @Column(length = 100)
-    private String categoria;
+    private String category;
     @NotNull(message = "is buyer vazio")
     private boolean is_buyer;
-    public Empresa() {
+    public Enterprise() {
     }
 
-    public Empresa(long id, String cnpj, String nome, String codigo, String email, String tipo_usuario, String telefone, long endereco_id, String senha, String categoria, boolean is_buyer) {
+    public Enterprise(long id, String cnpj, String name, String plan_id, String email, String tipo_usuario, String phone_number, long address_id, String password, String category, boolean is_buyer) {
         this.id = id;
         this.cnpj = cnpj;
-        this.nome = nome;
-        this.codigo = codigo;
+        this.name = name;
+        this.plan_id = plan_id;
         this.email = email;
         this.tipo_usuario = tipo_usuario;
-        this.telefone = telefone;
-        this.endereco_id = endereco_id;
-        this.senha = senha;
-        this.categoria = categoria;
+        this.phone_number = phone_number;
+        this.address_id = address_id;
+        this.password = password;
+        this.category = category;
         this.is_buyer = is_buyer;
     }
 
@@ -64,12 +63,12 @@ public class Empresa {
         this.id = id;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getPhone_number() {
+        return phone_number;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
     }
 
     public String getTipoUsuario() {
@@ -88,20 +87,20 @@ public class Empresa {
         this.email = email;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public String getPlan_id() {
+        return plan_id;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setPlan_id(String plan_id) {
+        this.plan_id = plan_id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getCnpj() {
@@ -120,28 +119,28 @@ public class Empresa {
         this.tipo_usuario = tipo_usuario;
     }
 
-    public long getEndereco_id() {
-        return endereco_id;
+    public long getAddress_id() {
+        return address_id;
     }
 
-    public void setEndereco_id(long endereco_id) {
-        this.endereco_id = endereco_id;
+    public void setAddress_id(long address_id) {
+        this.address_id = address_id;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getPassword() {
+        return password;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getCategoria() {
-        return categoria;
+    public String getCategory() {
+        return category;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public boolean isIs_buyer() {
@@ -156,14 +155,14 @@ public class Empresa {
         return "Empresa{" +
                 "id=" + id +
                 ", cnpj='" + cnpj + '\'' +
-                ", nome='" + nome + '\'' +
-                ", codigo='" + codigo + '\'' +
+                ", nome='" + name + '\'' +
+                ", codigo='" + plan_id + '\'' +
                 ", email='" + email + '\'' +
                 ", tipo_usuario='" + tipo_usuario + '\'' +
-                ", telefone='" + telefone + '\'' +
-                ", endereco_id=" + endereco_id +
-                ", senha='" + senha + '\'' +
-                ", categoria='" + categoria + '\'' +
+                ", telefone='" + phone_number + '\'' +
+                ", endereco_id=" + address_id +
+                ", senha='" + password + '\'' +
+                ", categoria='" + category + '\'' +
                 ", is_buyer=" + is_buyer +
                 '}';
     }

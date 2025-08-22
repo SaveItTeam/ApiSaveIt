@@ -1,10 +1,8 @@
 package com.api.Controller;
 
 import com.api.Exception.GlobalException;
-import com.api.Model.Endereco;
-import com.api.Model.Produto;
-import com.api.Service.EnderecoService;
-import com.api.Service.ProdutoService;
+import com.api.Model.Product;
+import com.api.Service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,44 +15,44 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/produto")
 public class ProdutoController {
-    private final ProdutoService produtoService;
+    private final ProductService productService;
     private GlobalException ge;
 
     @Autowired
-    public ProdutoController(ProdutoService produtoService) {
-        this.produtoService = produtoService;
+    public ProdutoController(ProductService productService) {
+        this.productService = productService;
     }
 
 
     @GetMapping("/selecionar")
-    public ResponseEntity<List<Produto>> listarProdutos() {
+    public ResponseEntity<List<Product>> listarProdutos() {
         // Se lançar uma RuntimeException aqui, o Spring vai chamar o método do GlobalException automaticamente
-        List<Produto> produtos = produtoService.listarProduto();
-        return ResponseEntity.ok(produtos);
+        List<Product> products = productService.listarProduto();
+        return ResponseEntity.ok(products);
     }
 
 
 
     @PostMapping("/inserir")
-    public ResponseEntity<?> inserirProduto(@RequestBody Produto produto) {
-        Produto produtoSalvo = produtoService.inserirProduto(produto);
+    public ResponseEntity<?> inserirProduto(@RequestBody Product product) {
+        Product productSalvo = productService.inserirProduto(product);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body("Produto inserido com sucesso! ID: " + produtoSalvo.getId());
+                .body("Produto inserido com sucesso! ID: " + productSalvo.getId());
     }
 
 
 
     @DeleteMapping("/excluir/{id}")
     public ResponseEntity<?> excluirProduto(@PathVariable Long id) {
-        produtoService.excluirProduto(id);
+        productService.excluirProduto(id);
         return ResponseEntity.ok("Produto excluído com sucesso!");
     }
 
 
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<?> atualizarProduto(@PathVariable Long id, @Valid @RequestBody Produto produtoAtualizado) {
-        produtoService.atualizarProduto(id, produtoAtualizado);
+    public ResponseEntity<?> atualizarProduto(@PathVariable Long id, @Valid @RequestBody Product productAtualizado) {
+        productService.atualizarProduto(id, productAtualizado);
         return ResponseEntity.ok("Produto atualizado com sucesso!");
     }
 
@@ -62,7 +60,7 @@ public class ProdutoController {
 
     @PatchMapping("/atualizarParcial/{id}")
     public ResponseEntity<?> atualizarProdutoParcial(@PathVariable Long id, @Valid @RequestBody Map<String, Object> updates) {
-        produtoService.atualizarProdutoParcial(id, updates);
+        productService.atualizarProdutoParcial(id, updates);
         return ResponseEntity.ok("Produto atualizado parcialmente com sucesso!");
     }
 

@@ -28,9 +28,9 @@ public class Lote {
     private int quantity;
     @Column(length = 20)
     @NotNull(message = "Id do produto vazio")
-    private int product_id;
+    private long product_id;
 
-    public Lote(long id, String unite_measure, Date entry_date, String batch_code, Date expiriation_date, int quantity, int product_id) {
+    public Lote(long id, String unite_measure, Date entry_date, String batch_code, Date expiriation_date, int quantity, long product_id) {
         this.id = id;
         this.unite_measure = unite_measure;
         this.entry_date = entry_date;
@@ -91,11 +91,11 @@ public class Lote {
         this.quantity = quantity;
     }
 
-    public int getProduct_id() {
+    public long getProduct_id() {
         return product_id;
     }
 
-    public void setProduct_id(int product_id) {
+    public void setProduct_id(long product_id) {
         this.product_id = product_id;
     }
 

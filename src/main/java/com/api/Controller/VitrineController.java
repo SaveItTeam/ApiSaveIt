@@ -1,10 +1,8 @@
 package com.api.Controller;
 
 import com.api.Exception.GlobalException;
-import com.api.Model.Produto;
-import com.api.Model.Vitrine;
-import com.api.Service.ProdutoService;
-import com.api.Service.VitrineService;
+import com.api.Model.Showcase;
+import com.api.Service.ShowcaseService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,44 +15,44 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/vitrine")
 public class VitrineController {
-    private final VitrineService vitrineService;
+    private final ShowcaseService showCaseService;
     private GlobalException ge;
 
     @Autowired
-    public VitrineController(VitrineService vitrineService) {
-        this.vitrineService = vitrineService;
+    public VitrineController(ShowcaseService showCaseService) {
+        this.showCaseService = showCaseService;
     }
 
 
     @GetMapping("/selecionar")
-    public ResponseEntity<List<Vitrine>> listarVitrine() {
+    public ResponseEntity<List<Showcase>> listarVitrine() {
         // Se lançar uma RuntimeException aqui, o Spring vai chamar o método do GlobalException automaticamente
-        List<Vitrine> vitrines = vitrineService.listarVitrine();
-        return ResponseEntity.ok(vitrines);
+        List<Showcase> showcases = showCaseService.listarVitrine();
+        return ResponseEntity.ok(showcases);
     }
 
 
 
     @PostMapping("/inserir")
-    public ResponseEntity<?> inserirVitrine(@RequestBody Vitrine vitrine) {
-        Vitrine vitrineSalvo = vitrineService.inserirVitrine(vitrine);
+    public ResponseEntity<?> inserirVitrine(@RequestBody Showcase showCase) {
+        Showcase showcaseSalvo = showCaseService.inserirVitrine(showCase);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body("Vitrine inserido com sucesso! ID: " + vitrineSalvo.getId());
+                .body("Vitrine inserido com sucesso! ID: " + showcaseSalvo.getId());
     }
 
 
 
     @DeleteMapping("/excluir/{id}")
     public ResponseEntity<?> excluirVitrine(@PathVariable Long id) {
-        vitrineService.excluirVitrine(id);
+        showCaseService.excluirVitrine(id);
         return ResponseEntity.ok("Vitrine excluído com sucesso!");
     }
 
 
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<?> atualizarVitrine(@PathVariable Long id, @Valid @RequestBody Vitrine vitrineAtualizado) {
-        vitrineService.atualizarVitrine(id, vitrineAtualizado);
+    public ResponseEntity<?> atualizarVitrine(@PathVariable Long id, @Valid @RequestBody Showcase showcaseAtualizado) {
+        showCaseService.atualizarVitrine(id, showcaseAtualizado);
         return ResponseEntity.ok("Vitrine atualizado com sucesso!");
     }
 
@@ -62,7 +60,7 @@ public class VitrineController {
 
     @PatchMapping("/atualizarParcial/{id}")
     public ResponseEntity<?> atualizarVitrineParcial(@PathVariable Long id, @Valid @RequestBody Map<String, Object> updates) {
-        vitrineService.atualizarVitrineParcial(id, updates);
+        showCaseService.atualizarVitrineParcial(id, updates);
         return ResponseEntity.ok("Vitrine atualizado parcialmente com sucesso!");
     }
 
