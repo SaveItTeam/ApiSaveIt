@@ -16,23 +16,15 @@ public class ShowcaseService {
     public ShowcaseService(ShowcaseRepository showcaseRepository) {
         this.showcaseRepository = showcaseRepository;
     }
-    //    Métodos de busca
     public List<Showcase> listarVitrine(){return showcaseRepository.findAll();}
 
-    // Inserção de enderecos
     public Showcase inserirVitrine(Showcase showCase) {
         return showcaseRepository.save(showCase);
     }
 
-    // Deleção de endereços
     public void excluirVitrine(Long id) {
-        // Se o produto não for encontrado, pode ser lançado um erro posteriormente.
-        // Dependendo da implementação do repository, pode ser necessário buscar primeiro o produto.
-        //        Endereco existe = buscarProdutoPorId(id);
         showcaseRepository.deleteById(id);
-        //        return;
     }
-    // Atualização de endereços
     public Showcase atualizarVitrine(Long id, Showcase showcaseAtualizado) {
         Showcase showCase = showcaseRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Vitrine com ID " + id + " não encontrado"));
@@ -43,8 +35,6 @@ public class ShowcaseService {
 
         return showcaseRepository.save(showCase);
     }
-
-    // Atualização de endereço parcial
 
     public Showcase atualizarVitrineParcial(Long id, Map<String, Object> updates) {
         Showcase showCase = showcaseRepository.findById(id)

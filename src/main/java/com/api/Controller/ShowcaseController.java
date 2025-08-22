@@ -26,7 +26,6 @@ public class ShowcaseController {
 
     @GetMapping("/selecionar")
     public ResponseEntity<List<Showcase>> listarVitrine() {
-        // Se lançar uma RuntimeException aqui, o Spring vai chamar o método do GlobalException automaticamente
         List<Showcase> showcases = showCaseService.listarVitrine();
         return ResponseEntity.ok(showcases);
     }
