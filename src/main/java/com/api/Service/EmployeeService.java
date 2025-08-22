@@ -19,21 +19,16 @@ public class EmployeeService {
     }
 
 
-    //    Métodos de busca
-    public List<Employee> listarFuncionario(){return employeeRepository.findAll();}
+    public List<Employee> listEmployee(){return employeeRepository.findAll();}
 
-    public Employee inserirFuncionario(Employee employee) {
+    public Employee insertEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
 
-    public void excluirFuncionario(Long id) {
-        // Se o produto não for encontrado, pode ser lançado um erro posteriormente.
-        // Dependendo da implementação do repository, pode ser necessário buscar primeiro o produto.
-        //        Endereco existe = buscarProdutoPorId(id);
+    public void deleteEmployee(Long id) {
         employeeRepository.deleteById(id);
-        //        return;
     }
-    public Employee atualizarFuncionario(Long id, Employee employeeAtualizado) {
+    public Employee updateEmployee(Long id, Employee employeeAtualizado) {
         Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Funcionario com ID " + id + " não encontrado"));
 
@@ -46,7 +41,7 @@ public class EmployeeService {
     }
 
 
-    public Employee atualizarFuncionarioParcial(Long id, Map<String, Object> updates) {
+    public Employee updateEmployeePartial(Long id, Map<String, Object> updates) {
         Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Funcionario com ID " + id + " não encontrado"));
 
