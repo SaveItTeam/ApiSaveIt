@@ -3,10 +3,14 @@ package com.api.Controller;
 import com.api.Exception.GlobalException;
 import com.api.Model.Product;
 import com.api.Service.ProductService;
+import com.api.validator.OnCreate;
+import com.api.validator.OnPatch;
 import jakarta.validation.Valid;
+import jakarta.validation.groups.Default;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,7 +37,7 @@ public class ProductController {
 
 
     @PostMapping("/inserir")
-    public ResponseEntity<?> insertProduct(@RequestBody Product product) {
+    public ResponseEntity<?> insertProduct(@RequestBody @Validated({OnCreate.class, Default.class}) Product product) {
         Product productSalvo = productService.insertProduct(product);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Produto inserido com sucesso! ID: " + productSalvo.getId());
@@ -50,7 +54,7 @@ public class ProductController {
 
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<?> updateProduct(@PathVariable Long id, @Valid @RequestBody Product productAtualizado) {
+    public ResponseEntity<?> updateProduct(@PathVariable Long id, @Validated({OnCreate.class, Default.class}) @RequestBody Product productAtualizado) {
         productService.updateProduct(id, productAtualizado);
         return ResponseEntity.ok("Produto atualizado com sucesso!");
     }
@@ -58,7 +62,7 @@ public class ProductController {
 
 
     @PatchMapping("/atualizarParcial/{id}")
-    public ResponseEntity<?> updateProductPartial(@PathVariable Long id, @Valid @RequestBody Map<String, Object> updates) {
+    public ResponseEntity<?> updateProductPartial(@PathVariable Long id,  @Validated({OnPatch.class, Default.class})  @RequestBody Map<String, Object> updates) {
         productService.updateProductPartial(id, updates);
         return ResponseEntity.ok("Produto atualizado parcialmente com sucesso!");
     }
