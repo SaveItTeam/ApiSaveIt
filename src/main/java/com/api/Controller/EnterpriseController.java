@@ -3,6 +3,7 @@ package com.api.Controller;
 import com.api.Exception.GlobalException;
 import com.api.Model.Enterprise;
 import com.api.Service.EnterpriseService;
+import com.api.dto.enterprise.EnterpriseRequestDTO;
 import com.api.dto.enterprise.EnterpriseResponseDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class EnterpriseController {
     }
 
     @PostMapping("/inserir")
-    public ResponseEntity<?> insertEnterprise(@RequestBody Enterprise enterprise) {
+    public ResponseEntity<?> insertEnterprise(@RequestBody EnterpriseRequestDTO enterprise) {
         enterpriseService.insertEnterprise(enterprise);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Empresa inserido com sucesso!");
