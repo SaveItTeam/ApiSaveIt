@@ -1,44 +1,43 @@
-package com.api.Model;
+package com.api.dto.Batch;
 
-import jakarta.persistence.*;
+import com.api.Model.Batch;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
 
-@Entity
-public class Batch {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull(message = "Campo vazio")
-    @Column(unique = true)
-    private long id;
+public class BatchRequestDTO {
+    @Column(length = 255)
+    @NotNull(message = "Unidade de medida vazio")
     private String unite_measure;
+    @NotNull(message = "Data de entrada vazia vazio")
     private Date entry_date;
+    @Column(length = 255)
+    @NotNull(message = "Batch_code vazio")
     private String batch_code;
+    @Column(length = 100)
+    @NotNull(message = "Data de validade vazio")
     private Date expiriation_date;
+    @Column(length = 50)
+    @NotNull(message = "Quantidade vazio")
     private int quantity;
+    @Column(length = 20)
+    @NotNull(message = "Id do produto vazio")
     private long product_id;
 
-    public Batch(long id, String unite_measure, Date entry_date, String batch_code, Date expiriation_date, int quantity, long product_id) {
-        this.id = id;
-        this.unite_measure = unite_measure;
-        this.entry_date = entry_date;
-        this.batch_code = batch_code;
-        this.expiriation_date = expiriation_date;
-        this.quantity = quantity;
-        this.product_id = product_id;
+    public BatchRequestDTO() {
     }
 
-    public Batch() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
+//    public static Batch toModel(BatchRequestDTO batchRequestDTO) {
+//        Batch newBatch = new Batch();
+//        newBatch.setUnite_measure(batchRequestDTO.unite_measure);
+//        newBatch.setEntry_date(batchRequestDTO.entry_date);
+//        newBatch.setBatch_code(batchRequestDTO.batch_code);
+//        newBatch.setExpiriation_date(batchRequestDTO.expiriation_date);
+//        newBatch.setQuantity(batchRequestDTO.quantity);
+//        newBatch.setProduct_id(batchRequestDTO.product_id);
+//        return newBatch;
+//    }
 
     public String getUnite_measure() {
         return unite_measure;
@@ -86,18 +85,5 @@ public class Batch {
 
     public void setProduct_id(long product_id) {
         this.product_id = product_id;
-    }
-
-    @Override
-    public String toString() {
-        return "Lote{" +
-                "id=" + id +
-                ", unite_measure='" + unite_measure + '\'' +
-                ", entry_date=" + entry_date +
-                ", batch_code='" + batch_code + '\'' +
-                ", expiriation_date=" + expiriation_date +
-                ", quantity=" + quantity +
-                ", product_id=" + product_id +
-                '}';
     }
 }

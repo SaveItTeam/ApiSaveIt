@@ -1,27 +1,24 @@
-package com.api.Model;
+package com.api.dto.employee;
 
-import jakarta.persistence.*;
+import com.api.Model.Employee;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
-@Entity
-public class Employee {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true)
+
+public class EmployeeResponseDTO {
     private long id;
     private String name;
     private String email;
-    private String password;
     private long enterprise_id;
 
-    public Employee() {
+    public EmployeeResponseDTO(long enterprise_id, String email, String name, long id) {
+        this.enterprise_id = enterprise_id;
+        this.email = email;
+        this.name = name;
+        this.id = id;
     }
 
-    public Employee(long id, String name, String email, String password, long enterprise_id) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.enterprise_id = enterprise_id;
+    public static EmployeeResponseDTO toDTO(Employee employee) {
+        return new EmployeeResponseDTO(employee.getEnterprise_id(), employee.getEmail(), employee.getName(), employee.getId());
     }
 
     public long getId() {
@@ -48,14 +45,6 @@ public class Employee {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public long getEnterprise_id() {
         return enterprise_id;
     }
@@ -64,15 +53,13 @@ public class Employee {
         this.enterprise_id = enterprise_id;
     }
 
-
     @Override
     public String toString() {
-        return "Funcionario{" +
+        return "EmployeeResponseDTO{" +
                 "id=" + id +
-                ", nome='" + name + '\'' +
+                ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", senha='" + password + '\'' +
-                ", empresa_id=" + enterprise_id +
+                ", enterprise_id=" + enterprise_id +
                 '}';
     }
 }

@@ -1,28 +1,32 @@
-package com.api.Model;
+package com.api.dto.Plan;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 
-import java.util.Date;
-@Entity
-public class Plan {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PlanRequestDTO {
+    @NotNull(message = "Campo vazio")
     @Column(unique = true)
     private long id;
+    @NotNull(message = "Nome vazio")
+    @Column(length = 255)
     private String name;
+    @NotNull(message = "Plano vazio")
     private Double price;
+    @Column(length = 255)
+    @NotNull(message = "Descricao vazio")
     private String description;
 
-    public Plan() {
+    public PlanRequestDTO(String description, Double price, String name, long id) {
+        this.description = description;
+        this.price = price;
+        this.name = name;
+        this.id = id;
     }
 
-    public Plan(long id, String name, Double price, String description) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.description = description;
+    public PlanRequestDTO() {
     }
+
+
 
     public long getId() {
         return id;
@@ -54,15 +58,5 @@ public class Plan {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @Override
-    public String toString() {
-        return "Plan{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", description='" + description + '\'' +
-                '}';
     }
 }

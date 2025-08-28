@@ -30,10 +30,8 @@ public class ProductService {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Produto com ID " + id + " não encontrado"));
 
-        product.setSku(productAtualizado.getSku());
         product.setName(productAtualizado.getName());
         product.setBrand(productAtualizado.getBrand());
-        product.setDescricao(productAtualizado.getDescricao());
         product.setEnterprise_id(productAtualizado.getEnterprise_id());
 
         return productRepository.save(product);
@@ -44,17 +42,11 @@ public class ProductService {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Produto com ID " + id + " não encontrado"));
 
-        if (updates.containsKey("sku")) {
-            product.setSku((String) updates.get("sku"));
-        }
         if (updates.containsKey("name")) {
             product.setName((String) updates.get("name"));
         }
         if (updates.containsKey("brand")) {
             product.setBrand((String) updates.get("brand"));
-        }
-        if (updates.containsKey("descricao")) {
-            product.setDescricao((String) updates.get("descricao"));
         }
         if (updates.containsKey("enterprise_id")) {
             product.setEnterprise_id((long) updates.get("enterprise_id"));

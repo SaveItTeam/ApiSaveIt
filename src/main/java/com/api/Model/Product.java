@@ -58,10 +58,8 @@ public class Product {
     public String toString() {
         return "Produto{" +
                 "id=" + id +
-                ", sku='" + sku + '\'' +
                 ", nome='" + name + '\'' +
                 ", marca='" + brand + '\'' +
-                ", descricao='" + descricao + '\'' +
                 ", empresa_id=" + enterprise_id +
                 '}';
     }

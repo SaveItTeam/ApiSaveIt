@@ -1,4 +1,4 @@
-package com.api.dto;
+package com.api.dto.product;
 
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;

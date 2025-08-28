@@ -1,4 +1,4 @@
-package com.api.dto;
+package com.api.dto.product;
 
 public class ProductResponseDTO {
     private long id;

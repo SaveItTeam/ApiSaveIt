@@ -1,16 +1,11 @@
-package com.api.Model;
+package com.api.dto.Batch;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import com.api.Model.Batch;
+import com.api.dto.address.AddressResponseDTO;
 
 import java.util.Date;
 
-@Entity
-public class Batch {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull(message = "Campo vazio")
-    @Column(unique = true)
+public class BatchResponseDTO {
     private long id;
     private String unite_measure;
     private Date entry_date;
@@ -19,7 +14,8 @@ public class Batch {
     private int quantity;
     private long product_id;
 
-    public Batch(long id, String unite_measure, Date entry_date, String batch_code, Date expiriation_date, int quantity, long product_id) {
+
+    public BatchResponseDTO(long id, String unite_measure, Date entry_date, String batch_code, Date expiriation_date, int quantity, long product_id) {
         this.id = id;
         this.unite_measure = unite_measure;
         this.entry_date = entry_date;
@@ -29,8 +25,9 @@ public class Batch {
         this.product_id = product_id;
     }
 
-    public Batch() {
-    }
+//    public static BatchResponseDTO toDTO(Batch batch) {
+//        return new BatchResponseDTO(batch.getId(),batch.getUnite_measure(), batch.getEntry_date(), batch.getBatch_code(), batch.getExpiriation_date(), batch.getQuantity(), batch.getProduct_id());
+//    }
 
     public long getId() {
         return id;
@@ -90,7 +87,7 @@ public class Batch {
 
     @Override
     public String toString() {
-        return "Lote{" +
+        return "BatchResponseDTO{" +
                 "id=" + id +
                 ", unite_measure='" + unite_measure + '\'' +
                 ", entry_date=" + entry_date +

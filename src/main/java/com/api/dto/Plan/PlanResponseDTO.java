@@ -1,23 +1,12 @@
-package com.api.Model;
+package com.api.dto.Plan;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-
-import java.util.Date;
-@Entity
-public class Plan {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true)
+public class PlanResponseDTO {
     private long id;
     private String name;
     private Double price;
     private String description;
 
-    public Plan() {
-    }
-
-    public Plan(long id, String name, Double price, String description) {
+    public PlanResponseDTO(long id, String name, Double price, String description) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -58,7 +47,7 @@ public class Plan {
 
     @Override
     public String toString() {
-        return "Plan{" +
+        return "PlanResponseDTO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +

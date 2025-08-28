@@ -1,14 +1,6 @@
-package com.api.Model;
+package com.api.dto.enterprise;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-
-@Entity
-public class Enterprise {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull(message = "Campo vazio")
-    @Column(unique = true)
+public class EnterpriseResponseDTO {
     private long id;
     private String cnpj;
     private String name;
@@ -19,10 +11,8 @@ public class Enterprise {
     private String password;
     private String category;
     private boolean is_buyer;
-    public Enterprise() {
-    }
 
-    public Enterprise(long id, String cnpj, String name, String plan_id, String email, String phone_number, long address_id, String password, String category, boolean is_buyer) {
+    public EnterpriseResponseDTO(long id, String cnpj, String name, String plan_id, String email, String phone_number, long address_id, String password, String category, boolean is_buyer) {
         this.id = id;
         this.cnpj = cnpj;
         this.name = name;
@@ -43,28 +33,12 @@ public class Enterprise {
         this.id = id;
     }
 
-    public String getPhone_number() {
-        return phone_number;
+    public String getCnpj() {
+        return cnpj;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPlan_id() {
-        return plan_id;
-    }
-
-    public void setPlan_id(String plan_id) {
-        this.plan_id = plan_id;
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
 
     public String getName() {
@@ -75,12 +49,28 @@ public class Enterprise {
         this.name = name;
     }
 
-    public String getCnpj() {
-        return cnpj;
+    public String getPlan_id() {
+        return plan_id;
     }
 
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
+    public void setPlan_id(String plan_id) {
+        this.plan_id = plan_id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone_number() {
+        return phone_number;
+    }
+
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
     }
 
     public long getAddress_id() {
@@ -114,18 +104,19 @@ public class Enterprise {
     public void setIs_buyer(boolean is_buyer) {
         this.is_buyer = is_buyer;
     }
+
     @Override
     public String toString() {
-        return "Empresa{" +
+        return "EnterpriseResponseDTO{" +
                 "id=" + id +
                 ", cnpj='" + cnpj + '\'' +
-                ", nome='" + name + '\'' +
-                ", codigo='" + plan_id + '\'' +
+                ", name='" + name + '\'' +
+                ", plan_id='" + plan_id + '\'' +
                 ", email='" + email + '\'' +
-                ", telefone='" + phone_number + '\'' +
-                ", endereco_id=" + address_id +
-                ", senha='" + password + '\'' +
-                ", categoria='" + category + '\'' +
+                ", phone_number='" + phone_number + '\'' +
+                ", address_id=" + address_id +
+                ", password='" + password + '\'' +
+                ", category='" + category + '\'' +
                 ", is_buyer=" + is_buyer +
                 '}';
     }

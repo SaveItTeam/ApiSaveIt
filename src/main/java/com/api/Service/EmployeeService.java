@@ -2,6 +2,9 @@ package com.api.Service;
 
 import com.api.Model.Employee;
 import com.api.Repository.EmployeeRepository;
+import com.api.dto.employee.EmployeeRequestDTO;
+import com.api.dto.employee.EmployeeResponseDTO;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,23 +15,26 @@ import java.util.NoSuchElementException;
 @Service
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
+    private final ObjectMapper objectMapper;
 
     @Autowired
-    public EmployeeService(EmployeeRepository employeeRepository) {
+    public EmployeeService(EmployeeRepository employeeRepository, ObjectMapper objectMapper) {
         this.employeeRepository = employeeRepository;
+        this.objectMapper = objectMapper;
     }
 
 
     public List<Employee> listEmployee(){return employeeRepository.findAll();}
 
-    public Employee insertEmployee(Employee employee) {
-        return employeeRepository.save(employee);
+    public void insertEmployee(EmployeeRequestDTO employee) {
+        Employee employeeRequest = objectMapper.convertValue(employee, Employee.class);
+        employeeRepository.save(employeeRequest);
     }
 
     public void deleteEmployee(Long id) {
         employeeRepository.deleteById(id);
     }
-    public Employee updateEmployee(Long id, Employee employeeAtualizado) {
+    public EmployeeResponseDTO updateEmployee(Long id, EmployeeRequestDTO employeeAtualizado) {
         Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Funcionario com ID " + id + " não encontrado"));
 
@@ -37,11 +43,12 @@ public class EmployeeService {
         employee.setPassword(employeeAtualizado.getPassword());
         employee.setEnterprise_id(employeeAtualizado.getEnterprise_id());
 
-        return employeeRepository.save(employee);
+        employeeRepository.save(employee);
+        return objectMapper.convertValue(employee, EmployeeResponseDTO.class);
     }
 
 
-    public Employee updateEmployeePartial(Long id, Map<String, Object> updates) {
+    public EmployeeResponseDTO updateEmployeePartial(Long id, Map<String, Object> updates) {
         Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Funcionario com ID " + id + " não encontrado"));
 
@@ -58,6 +65,7 @@ public class EmployeeService {
             employee.setEnterprise_id((long) updates.get("enterprise_id"));
         }
 
-        return employeeRepository.save(employee);
+        employeeRepository.save(employee);
+        return objectMapper.convertValue(employee, EmployeeResponseDTO.class);
     }
 }
