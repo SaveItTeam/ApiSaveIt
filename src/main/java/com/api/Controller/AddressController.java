@@ -38,7 +38,7 @@ public class AddressController {
 
     @GetMapping("/selecionar")
     public ResponseEntity<List<AddressResponseDTO>> listAddress() {
-        List<AddressRequestDTO> addresses = addressService.listAddress();
+        List<AddressResponseDTO> addresses = addressService.listAddress();
         return ResponseEntity.ok(addresses);
     }
 

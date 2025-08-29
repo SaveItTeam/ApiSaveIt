@@ -42,7 +42,7 @@ public class ImageService {
                 .orElseThrow(() -> new NoSuchElementException("Image com ID " + id + " não encontrado"));
 
         if (updates.containsKey("image")) {
-            image.setImage((Byte[]) updates.get("image"));
+            image.setImage((String) updates.get("image"));
         }
         if (updates.containsKey("product_id")) {
             image.setProduct_id((long) updates.get("product_id"));
