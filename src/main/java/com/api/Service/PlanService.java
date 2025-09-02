@@ -2,26 +2,40 @@ package com.api.Service;
 
 import com.api.Model.Plan;
 import com.api.Repository.PlanRepository;
+import com.api.dto.Plan.PlanRequestDTO;
+import com.api.dto.Plan.PlanResponseDTO;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 @Service
 public class PlanService {
     private final PlanRepository planRepository;
+    private final ObjectMapper objectMapper;
 
     @Autowired
-    public PlanService(PlanRepository planRepository) {
+    public PlanService(PlanRepository planRepository, ObjectMapper objectMapper) {
         this.planRepository = planRepository;
+        this.objectMapper = objectMapper;
     }
 
 
-    public List<Plan> listPlan(){return planRepository.findAll();}
+    public List<PlanResponseDTO> listPlan(){
+        List<Plan> plans = planRepository.findAll();
+        List<PlanResponseDTO> plansResponse = new ArrayList<>();
+        for (Plan plan : plans) {
+            plansResponse.add(objectMapper.convertValue(plan, PlanResponseDTO.class));
+        }
+        return plansResponse;
+    }
 
-    public Plan insertPlan(Plan plan) {
-        return planRepository.save(plan);
+    public void insertPlan(PlanRequestDTO plan) {
+        Plan planRequest = objectMapper.convertValue(plan, Plan.class);
+        planRepository.save(planRequest);
     }
 
     // Deleção
@@ -29,7 +43,7 @@ public class PlanService {
         planRepository.deleteById(id);
     }
     // Atualização
-    public Plan updatePlan(Long id, Plan planAtualizado) {
+    public Plan updatePlan(Long id, PlanRequestDTO planAtualizado) {
         Plan plan = planRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Plan com ID " + id + " não encontrado"));
 
@@ -40,7 +54,7 @@ public class PlanService {
         return planRepository.save(plan);
     }
 
-    public Plan updatePlanPartial(Long id, Map<String, Object> updates) {
+    public PlanResponseDTO updatePlanPartial(Long id, Map<String, Object> updates) {
         Plan plan = planRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Plan com ID " + id + " não encontrado"));
 
@@ -54,6 +68,7 @@ public class PlanService {
             plan.setDescription((String) updates.get("description"));
         }
 
-        return planRepository.save(plan);
+        planRepository.save(plan);
+        return objectMapper.convertValue(plan, PlanResponseDTO.class);
     }
 }

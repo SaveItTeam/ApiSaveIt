@@ -4,9 +4,6 @@ import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 
 public class PlanRequestDTO {
-    @NotNull(message = "Campo vazio")
-    @Column(unique = true)
-    private long id;
     @NotNull(message = "Nome vazio")
     @Column(length = 255)
     private String name;
@@ -20,21 +17,11 @@ public class PlanRequestDTO {
         this.description = description;
         this.price = price;
         this.name = name;
-        this.id = id;
     }
 
     public PlanRequestDTO() {
     }
 
-
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

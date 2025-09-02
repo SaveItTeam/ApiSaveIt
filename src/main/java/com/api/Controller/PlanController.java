@@ -3,6 +3,8 @@ package com.api.Controller;
 import com.api.Exception.GlobalException;
 import com.api.Model.Plan;
 import com.api.Service.PlanService;
+import com.api.dto.Plan.PlanRequestDTO;
+import com.api.dto.Plan.PlanResponseDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,18 +27,18 @@ public class PlanController {
 
 
     @GetMapping("/selecionar")
-    public ResponseEntity<List<Plan>> listPlan() {
-        List<Plan> plans = planService.listPlan();
+    public ResponseEntity<List<PlanResponseDTO>> listPlan() {
+        List<PlanResponseDTO> plans = planService.listPlan();
         return ResponseEntity.ok(plans);
     }
 
 
 
     @PostMapping("/inserir")
-    public ResponseEntity<?> insertPlan(@RequestBody Plan plan) {
-        Plan planSalvo = planService.insertPlan(plan);
+    public ResponseEntity<?> insertPlan(@RequestBody PlanRequestDTO plan) {
+        planService.insertPlan(plan);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body("plano inserido com sucesso! ID: " + planSalvo.getId());
+                .body("plano inserido com sucesso!");
     }
 
 
@@ -50,7 +52,7 @@ public class PlanController {
 
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<?> updatePlan(@PathVariable Long id, @Valid @RequestBody Plan planAtualizado) {
+    public ResponseEntity<?> updatePlan(@PathVariable Long id, @Valid @RequestBody PlanRequestDTO planAtualizado) {
         planService.updatePlan(id, planAtualizado);
         return ResponseEntity.ok("Plano atualizado com sucesso!");
     }
