@@ -38,7 +38,7 @@ public class ShowcaseController {
     public ResponseEntity<?> insertShowcase(@RequestBody ShowcaseRequestDTO showCase) {
         ShowcaseResponseDTO showcaseSalvo = showCaseService.insertShowcase(showCase);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body("Vitrine inserido com sucesso! ID: " + showcaseSalvo.getId());
+                .body("Vitrine inserido com sucesso!");
     }
 
 
