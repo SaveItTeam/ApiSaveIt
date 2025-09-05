@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -24,7 +25,14 @@ public class EmployeeService {
     }
 
 
-    public List<Employee> listEmployee(){return employeeRepository.findAll();}
+    public List<EmployeeResponseDTO> listEmployee(){
+        List<Employee> employees = employeeRepository.findAll();
+        List<EmployeeResponseDTO> employeeResponseDTOs = new ArrayList<>();
+        for (Employee employee : employees) {
+            employeeResponseDTOs.add(objectMapper.convertValue(employee, EmployeeResponseDTO.class));
+        }
+        return employeeResponseDTOs;
+    }
 
     public void insertEmployee(EmployeeRequestDTO employee) {
         Employee employeeRequest = objectMapper.convertValue(employee, Employee.class);

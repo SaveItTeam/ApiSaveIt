@@ -1,27 +1,20 @@
-package com.api.Model;
+package com.api.dto.image;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 
-import java.util.Arrays;
-
-@Entity
-public class Image {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true)
+public class ImageRequestDTO {
+        @Column(unique = true)
     private long id;
+    @NotNull(message = "Codigo binario vazia")
     private String image;
+    @NotNull(message = "id do produto vazio")
     private long product_id;
 
-
-    public Image(long id, String image, long product_id) {
+    public ImageRequestDTO(long id, String image, long product_id) {
         this.id = id;
         this.image = image;
         this.product_id = product_id;
-    }
-
-    public Image() {
     }
 
     public long getId() {
@@ -50,10 +43,8 @@ public class Image {
 
     @Override
     public String toString() {
-        return "Image{" +
-                "id=" + id +
-                ", nome=" + image +
-                ", product_id=" + product_id +
-                '}';
+        return "ImageRequestDTO [id=" + id + ", image=" + image + ", product_id=" + product_id + "]";
     }
+    
+    
 }

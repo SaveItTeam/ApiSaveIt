@@ -1,13 +1,16 @@
 package com.api.Service;
 
 import com.api.Model.Batch;
+import com.api.Model.Enterprise;
 import com.api.Repository.BatchRepository;
 import com.api.dto.Batch.BatchRequestDTO;
 import com.api.dto.Batch.BatchResponseDTO;
+import com.api.dto.enterprise.EnterpriseResponseDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +28,14 @@ public class BatchService {
     }
 
 
-    public List<Batch> listBatch(){return batchRepository.findAll();}
+    public List<BatchResponseDTO> listBatch(){
+        List<Batch> batchs = batchRepository.findAll();
+        List<BatchResponseDTO> returnList = new ArrayList<>();
+        for(Batch batch: batchs){
+            returnList.add(objectMapper.convertValue(batch, BatchResponseDTO.class));
+        }
+        return returnList;
+    }
 
     public void insertBatch(BatchRequestDTO batch) {
         Batch response = objectMapper.convertValue(batch, Batch.class);

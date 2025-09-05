@@ -3,7 +3,9 @@ package com.api.Controller;
 import com.api.Exception.GlobalException;
 import com.api.Model.Image;
 import com.api.Service.ImageService;
+
 import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+
+import com.api.dto.image.ImageRequestDTO;
+import com.api.dto.image.ImageResponseDTO;
 
 @RestController
 @RequestMapping("/api/image")
@@ -25,18 +30,18 @@ public class ImageController {
 
 
     @GetMapping("/selecionar")
-    public ResponseEntity<List<Image>> listImage() {
-        List<Image> images = imageService.listImage();
+    public ResponseEntity<List<ImageResponseDTO>> listImage() {
+        List<ImageResponseDTO> images = imageService.listImage();
         return ResponseEntity.ok(images);
     }
 
 
 
     @PostMapping("/inserir")
-    public ResponseEntity<?> insertImage(@RequestBody Image image) {
-        Image imageSalvo = imageService.insertImage(image);
+    public ResponseEntity<?> insertImage(@RequestBody ImageRequestDTO image) {
+        imageService.insertImage(image);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body("Imagem inserido com sucesso! ID: " + imageSalvo.getId());
+                .body("Imagem inserido com sucesso!");
     }
 
 
@@ -50,7 +55,7 @@ public class ImageController {
 
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<?> updateImage(@PathVariable Long id, @Valid @RequestBody Image imageAtualizado) {
+    public ResponseEntity<?> updateImage(@PathVariable Long id, @Valid @RequestBody ImageRequestDTO imageAtualizado) {
         imageService.updateImage(id, imageAtualizado);
         return ResponseEntity.ok("Imagem atualizada com sucesso!");
     }

@@ -31,8 +31,8 @@ public class BatchController {
 
 
     @GetMapping("/selecionar")
-    public ResponseEntity<List<Batch>> listBatch() {
-        List<Batch> batches = batchService.listBatch();
+    public ResponseEntity<List<BatchResponseDTO>> listBatch() {
+        List<BatchResponseDTO> batches = batchService.listBatch();
         return ResponseEntity.ok(batches);
     }
 

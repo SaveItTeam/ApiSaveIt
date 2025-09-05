@@ -5,8 +5,10 @@ import com.api.Model.Product;
 import com.api.Service.ProductService;
 import com.api.validator.OnCreate;
 import com.api.validator.OnPatch;
+
 import jakarta.validation.Valid;
 import jakarta.validation.groups.Default;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+
+import com.api.dto.product.ProductRequestDTO;
+import com.api.dto.product.ProductResponseDTO;
 
 @RestController
 @RequestMapping("/api/produto")
@@ -29,18 +34,18 @@ public class ProductController {
 
 
     @GetMapping("/selecionar")
-    public ResponseEntity<List<Product>> listProduct() {
-        List<Product> products = productService.listProduct();
+    public ResponseEntity<List<ProductResponseDTO>> listProduct() {
+        List<ProductResponseDTO> products = productService.listProduct();
         return ResponseEntity.ok(products);
     }
 
 
 
     @PostMapping("/inserir")
-    public ResponseEntity<?> insertProduct(@RequestBody @Validated({OnCreate.class, Default.class}) Product product) {
-        Product productSalvo = productService.insertProduct(product);
+    public ResponseEntity<?> insertProduct(@RequestBody @Validated({OnCreate.class, Default.class}) ProductRequestDTO product) {
+        productService.insertProduct(product);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body("Produto inserido com sucesso! ID: " + productSalvo.getId());
+                .body("Produto inserido com sucesso!");
     }
 
 
@@ -54,7 +59,7 @@ public class ProductController {
 
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<?> updateProduct(@PathVariable Long id, @Validated({OnCreate.class, Default.class}) @RequestBody Product productAtualizado) {
+    public ResponseEntity<?> updateProduct(@PathVariable Long id, @Validated({OnCreate.class, Default.class}) @RequestBody ProductRequestDTO productAtualizado) {
         productService.updateProduct(id, productAtualizado);
         return ResponseEntity.ok("Produto atualizado com sucesso!");
     }
@@ -63,8 +68,8 @@ public class ProductController {
 
     @PatchMapping("/atualizarParcial/{id}")
     public ResponseEntity<?> updateProductPartial(@PathVariable Long id,  @Validated({OnPatch.class, Default.class})  @RequestBody Map<String, Object> updates) {
-        productService.updateProductPartial(id, updates);
-        return ResponseEntity.ok("Produto atualizado parcialmente com sucesso!");
+        ProductResponseDTO responseDTO = productService.updateProductPartial(id, updates);
+        return ResponseEntity.ok("Produto atualizado parcialmente com sucesso! " + responseDTO);
     }
 
 

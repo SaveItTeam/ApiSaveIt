@@ -27,8 +27,8 @@ public class EmployeeController {
 
 
     @GetMapping("/selecionar")
-    public ResponseEntity<List<Employee>> listarFuncionarios() {
-        List<Employee> employees = employeeService.listEmployee();
+    public ResponseEntity<List<EmployeeResponseDTO>> listarFuncionarios() {
+        List<EmployeeResponseDTO> employees = employeeService.listEmployee();
         return ResponseEntity.ok(employees);
     }
 
