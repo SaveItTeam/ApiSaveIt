@@ -8,24 +8,15 @@ import jakarta.validation.constraints.NotNull;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull(message = "Campo vazio")
     @Column(unique = true)
     private long id;
-    @Column(length = 100)
     private String nome;
-    @Column(length = 50)
     private String state;
-    @Column(length = 100)
     private String city;
-    @Column(length = 100)
     private String public_place;
-    @Column(length = 20)
     private String cep;
-    @Column(length = 100)
     private String neighborhood;
-    @Column(length = 100)
     private String complement;
-    @Column(length = 10)
     private String number;
 
     public Address() {

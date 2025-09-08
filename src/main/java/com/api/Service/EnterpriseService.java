@@ -2,9 +2,13 @@ package com.api.Service;
 
 import com.api.Model.Enterprise;
 import com.api.Repository.EnterpriseRepository;
+import com.api.dto.enterprise.EnterpriseRequestDTO;
+import com.api.dto.enterprise.EnterpriseResponseDTO;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -14,16 +18,26 @@ public class EnterpriseService {
 
 
     private final EnterpriseRepository enterpriseRepository;
+    private final ObjectMapper objectMapper;
 
     @Autowired
-    public EnterpriseService(EnterpriseRepository enterpriseRepository) {
+    public EnterpriseService(EnterpriseRepository enterpriseRepository, ObjectMapper objectMapper, ObjectMapper objectMapper1) {
         this.enterpriseRepository = enterpriseRepository;
+        this.objectMapper = objectMapper1;
     }
 
-    public List<Enterprise> listEnterprise(){return enterpriseRepository.findAll();}
+    public List<EnterpriseResponseDTO> listEnterprise(){
+        List<Enterprise> enterprises = enterpriseRepository.findAll();
+        List<EnterpriseResponseDTO> returnList = new ArrayList<>();
+        for(Enterprise enterprise: enterprises){
+            returnList.add(objectMapper.convertValue(enterprise, EnterpriseResponseDTO.class));
+        }
+        return returnList;
+    }
 
-    public Enterprise insertEnterprise(Enterprise enterprise) {
-        return enterpriseRepository.save(enterprise);
+    public void insertEnterprise(EnterpriseRequestDTO enterprise) {
+        Enterprise enterpriseRequest = objectMapper.convertValue(enterprise, Enterprise.class);
+        enterpriseRepository.save(enterpriseRequest);
     }
 
     public void deleteEnterprise(Long id) {
@@ -31,7 +45,7 @@ public class EnterpriseService {
     }
 
 
-    public Enterprise updateEnterprise(Long id, Enterprise enterpriseAtualizada) {
+    public EnterpriseResponseDTO updateEnterprise(Long id, Enterprise enterpriseAtualizada) {
         Enterprise enterprise = enterpriseRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Endereco com ID " + id + " não encontrado"));
 
@@ -45,10 +59,12 @@ public class EnterpriseService {
         enterprise.setCategory(enterpriseAtualizada.getCategory());
         enterprise.setIs_buyer(enterpriseAtualizada.isIs_buyer());
 
-        return enterpriseRepository.save(enterprise);
+        enterpriseRepository.save(enterprise);
+        EnterpriseResponseDTO enterpriseResponseDTO = objectMapper.convertValue(enterprise, EnterpriseResponseDTO.class);
+        return enterpriseResponseDTO;
     }
 
-    public Enterprise updateEnterprisePartial(Long id, Map<String, Object> updates) {
+    public EnterpriseResponseDTO updateEnterprisePartial(Long id, Map<String, Object> updates) {
         Enterprise enterprise = enterpriseRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Empresa com ID " + id + " não encontrado"));
 
@@ -80,7 +96,9 @@ public class EnterpriseService {
             enterprise.setIs_buyer((boolean) updates.get("is_buyer"));
         }
 
-        return enterpriseRepository.save(enterprise);
+        enterpriseRepository.save(enterprise);
+        EnterpriseResponseDTO enterpriseResponseDTO = objectMapper.convertValue(enterprise, EnterpriseResponseDTO.class);
+        return enterpriseResponseDTO;
     }
 
 }

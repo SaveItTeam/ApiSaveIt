@@ -2,7 +2,11 @@ package com.api.Controller;
 
 import com.api.Exception.GlobalException;
 import com.api.Model.Batch;
+import com.api.Service.AddressService;
 import com.api.Service.BatchService;
+import com.api.dto.Batch.BatchRequestDTO;
+import com.api.dto.Batch.BatchResponseDTO;
+import com.api.dto.address.AddressResponseDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,27 +20,29 @@ import java.util.Map;
 @RequestMapping("/api/lote")
 public class BatchController {
     private final BatchService batchService;
+    private final AddressService addressService;
     private GlobalException ge;
 
     @Autowired
-    public BatchController(BatchService batchService) {
+    public BatchController(BatchService batchService, AddressService addressService) {
         this.batchService = batchService;
+        this.addressService = addressService;
     }
 
 
     @GetMapping("/selecionar")
-    public ResponseEntity<List<Batch>> listBatch() {
-        List<Batch> batches = batchService.listBatch();
+    public ResponseEntity<List<BatchResponseDTO>> listBatch() {
+        List<BatchResponseDTO> batches = batchService.listBatch();
         return ResponseEntity.ok(batches);
     }
 
 
 
     @PostMapping("/inserir")
-    public ResponseEntity<?> insertBatch(@RequestBody Batch batch) {
-        Batch batchSalvo = batchService.insertBatch(batch);
+    public ResponseEntity<?> insertBatch(@RequestBody BatchRequestDTO batch) {
+        batchService.insertBatch(batch);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body("Lote inserido com sucesso! ID: " + batchSalvo.getId());
+                .body("Lote inserido com sucesso!");
     }
 
 
@@ -50,17 +56,17 @@ public class BatchController {
 
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<?> updateBatch(@PathVariable Long id, @Valid @RequestBody Batch batchAtualizado) {
-        batchService.updateBatch(id, batchAtualizado);
-        return ResponseEntity.ok("Lote atualizado com sucesso!");
+    public ResponseEntity<?> updateBatch(@PathVariable Long id, @Valid @RequestBody BatchRequestDTO batchAtualizado) {
+        BatchResponseDTO batchResponseDTO = batchService.updateBatch(id, batchAtualizado);
+        return ResponseEntity.ok("Lote atualizado com sucesso!" + batchResponseDTO);
     }
 
 
 
     @PatchMapping("/atualizarParcial/{id}")
     public ResponseEntity<?> updateBatchPartial(@PathVariable Long id, @Valid @RequestBody Map<String, Object> updates) {
-        batchService.updateBatchPartial(id, updates);
-        return ResponseEntity.ok("Lote atualizado parcialmente com sucesso!");
+        BatchResponseDTO batchResponse = batchService.updateBatchPartial(id, updates);
+        return ResponseEntity.ok("Lote atualizado parcialmente com sucesso!" + batchResponse);
     }
 
 

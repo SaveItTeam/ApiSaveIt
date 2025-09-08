@@ -7,14 +7,10 @@ import jakarta.validation.constraints.NotNull;
 public class Stock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull(message = "Campo vazio")
     @Column(unique = true)
     private long id;
-    @NotNull(message = "Quantidade de estoque vazio")
     private int quantity;
-    @NotNull(message = "Quantidade da saída esta vazia")
     private int quantity_output;
-    @NotNull(message = "Codigo do LOTE esta vazia")
     private int batch_id;
 
     public Stock() {

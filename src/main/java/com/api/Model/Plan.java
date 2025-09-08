@@ -8,16 +8,10 @@ import java.util.Date;
 public class Plan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull(message = "Campo vazio")
     @Column(unique = true)
     private long id;
-    @NotNull(message = "Nome vazio")
-    @Column(length = 255)
     private String name;
-    @NotNull(message = "Plano vazio")
     private Double price;
-    @Column(length = 255)
-    @NotNull(message = "Descricao vazio")
     private String description;
 
     public Plan() {

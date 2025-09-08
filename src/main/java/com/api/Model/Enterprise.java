@@ -10,30 +10,14 @@ public class Enterprise {
     @NotNull(message = "Campo vazio")
     @Column(unique = true)
     private long id;
-    @Column(length = 20)
-    @NotNull(message = "Cnpj vazio")
     private String cnpj;
-    @Column(length = 100)
-    @NotNull(message = "Nome vazio")
     private String name;
-    @Column(length = 50)
-    @NotNull(message = "Codigo vazio")
     private String plan_id;
-    @Column(length = 100)
-    @NotNull(message = "Email vazio")
     private String email;
-    @Column(length = 20)
-    @NotNull(message = "Telefone vazio")
     private String phone_number;
-    @NotNull(message = "Id do endereco vazio")
     private long address_id;
-    @NotNull(message = "Senha vazia")
-    @Column(length = 255)
     private String password;
-    @NotNull(message = "Categoria vazia")
-    @Column(length = 100)
     private String category;
-    @NotNull(message = "is buyer vazio")
     private boolean is_buyer;
     public Enterprise() {
     }

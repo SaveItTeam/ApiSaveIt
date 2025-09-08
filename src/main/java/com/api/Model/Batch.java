@@ -12,22 +12,11 @@ public class Batch {
     @NotNull(message = "Campo vazio")
     @Column(unique = true)
     private long id;
-    @Column(length = 255)
-    @NotNull(message = "Unidade de medida vazio")
     private String unite_measure;
-    @NotNull(message = "Data de entrada vazia vazio")
     private Date entry_date;
-    @Column(length = 255)
-    @NotNull(message = "Batch_code vazio")
     private String batch_code;
-    @Column(length = 100)
-    @NotNull(message = "Data de validade vazio")
     private Date expiriation_date;
-    @Column(length = 50)
-    @NotNull(message = "Quantidade vazio")
     private int quantity;
-    @Column(length = 20)
-    @NotNull(message = "Id do produto vazio")
     private long product_id;
 
     public Batch(long id, String unite_measure, Date entry_date, String batch_code, Date expiriation_date, int quantity, long product_id) {

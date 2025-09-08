@@ -11,13 +11,11 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true)
     private long id;
-    @NotNull(message = "Codigo binario vazia")
-    private Byte[] image;
-    @NotNull(message = "id do produto vazio")
+    private String image;
     private long product_id;
 
 
-    public Image(long id, Byte[] image, long product_id) {
+    public Image(long id, String image, long product_id) {
         this.id = id;
         this.image = image;
         this.product_id = product_id;
@@ -34,11 +32,11 @@ public class Image {
         this.id = id;
     }
 
-    public Byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(Byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
@@ -54,7 +52,7 @@ public class Image {
     public String toString() {
         return "Image{" +
                 "id=" + id +
-                ", nome=" + Arrays.toString(image) +
+                ", nome=" + image +
                 ", product_id=" + product_id +
                 '}';
     }

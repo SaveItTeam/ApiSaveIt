@@ -1,31 +1,48 @@
 package com.api.Service;
 
-import com.api.Model.Stock;
-import com.api.Repository.StockRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.api.Model.Address;
+import com.api.Model.Stock;
+import com.api.Repository.StockRepository;
+import com.api.dto.address.AddressResponseDTO;
+import com.api.dto.estock.StockRequestDTO;
+import com.api.dto.estock.StockResponseDTO;
+import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 public class StockService {
 
     private final StockRepository stockRepository;
+    private final ObjectMapper objectMapper;
 
     @Autowired
-    public StockService(StockRepository stockRepository){
+    public StockService(StockRepository stockRepository, ObjectMapper objectMapper){
         this.stockRepository = stockRepository;
+        this.objectMapper = objectMapper;
     }
 
 
 
     //    Métodos de busca
-    public List<Stock> listStock(){return stockRepository.findAll();}
+    public List<StockResponseDTO> listStock(){
+        List<Stock> stocks = stockRepository.findAll();
+        List<StockResponseDTO> stockResponseDTOS = new ArrayList<>();
+        for (Stock stock : stocks) {
+            stockResponseDTOS.add(objectMapper.convertValue(stock, StockResponseDTO.class));
+        }
+        return stockResponseDTOS;
+    }
 
     // Inserção de enderecos
-    public Stock insertStock(Stock stock) {
-        return stockRepository.save(stock);
+    public void insertStock(StockRequestDTO stock) {
+        Stock stockRequest = objectMapper.convertValue(stock, Stock.class);
+        stockRepository.save(stockRequest);
     }
 
     // Deleção de endereços
@@ -39,7 +56,7 @@ public class StockService {
 
 
     // Atualização de endereços
-    public Stock updateStock(Long id, Stock stockAtualizado) {
+    public StockResponseDTO updateStock(Long id, StockRequestDTO stockAtualizado) {
         Stock stock = stockRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Estoque com ID " + id + " não encontrado"));
 
@@ -47,11 +64,12 @@ public class StockService {
         stock.setQuantity_output(stockAtualizado.getQuantity_output());
         stock.setBatch_id(stockAtualizado.getBatch_id());
 
-        return stockRepository.save(stock);
+        stockRepository.save(stock);
+        return objectMapper.convertValue(stock, StockResponseDTO.class);
     }
     // Atualização de endereço parcial
 
-    public Stock updateStockPartial(Long id, Map<String, Object> updates) {
+    public StockResponseDTO updateStockPartial(Long id, Map<String, Object> updates) {
         Stock stock = stockRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Estoque com ID " + id + " não encontrado"));
 
@@ -64,6 +82,7 @@ public class StockService {
         if (updates.containsKey("batch_id")) {
             stock.setBatch_id((int) updates.get("batch_id"));
         }
-        return stockRepository.save(stock);
+        stockRepository.save(stock);
+        return objectMapper.convertValue(stock, StockResponseDTO.class);
     }
 }

@@ -7,31 +7,18 @@ import jakarta.validation.constraints.NotNull;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull(message = "Campo vazio")
-    @Column(unique = true)
     private long id;
-    @Column(length = 50)
-    private String sku;
-    @NotNull(message = "Nome vazio")
-    @Column(length = 100)
     private String name;
-    @NotNull(message = "Marca vazio")
-    @Column(length = 50)
     private String brand;
-    @Column(length = 500)
-    private String descricao;
-    @NotNull(message = "Id da empresa vazia")
     private long enterprise_id;
 
     public Product() {
     }
 
-    public Product(long id, String sku, String name, String brand, String descricao, long enterprise_id) {
+    public Product(long id, String name, String brand,long enterprise_id) {
         this.id = id;
-        this.sku = sku;
         this.name = name;
         this.brand = brand;
-        this.descricao = descricao;
         this.enterprise_id = enterprise_id;
     }
 
@@ -41,14 +28,6 @@ public class Product {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getSku() {
-        return sku;
-    }
-
-    public void setSku(String sku) {
-        this.sku = sku;
     }
 
     public String getName() {
@@ -67,14 +46,6 @@ public class Product {
         this.brand = brand;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
     public long getEnterprise_id() {
         return enterprise_id;
     }
@@ -87,10 +58,8 @@ public class Product {
     public String toString() {
         return "Produto{" +
                 "id=" + id +
-                ", sku='" + sku + '\'' +
                 ", nome='" + name + '\'' +
                 ", marca='" + brand + '\'' +
-                ", descricao='" + descricao + '\'' +
                 ", empresa_id=" + enterprise_id +
                 '}';
     }

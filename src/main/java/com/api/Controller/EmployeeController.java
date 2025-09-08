@@ -3,6 +3,8 @@ package com.api.Controller;
 import com.api.Exception.GlobalException;
 import com.api.Model.Employee;
 import com.api.Service.EmployeeService;
+import com.api.dto.employee.EmployeeRequestDTO;
+import com.api.dto.employee.EmployeeResponseDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,18 +27,18 @@ public class EmployeeController {
 
 
     @GetMapping("/selecionar")
-    public ResponseEntity<List<Employee>> listarFuncionarios() {
-        List<Employee> employees = employeeService.listEmployee();
+    public ResponseEntity<List<EmployeeResponseDTO>> listarFuncionarios() {
+        List<EmployeeResponseDTO> employees = employeeService.listEmployee();
         return ResponseEntity.ok(employees);
     }
 
 
 
     @PostMapping("/inserir")
-    public ResponseEntity<?> inserirFuncionario(@RequestBody Employee employee) {
-        Employee employeeSalvo = employeeService.insertEmployee(employee);
+    public ResponseEntity<?> inserirFuncionario(@RequestBody EmployeeRequestDTO employee) {
+        employeeService.insertEmployee(employee);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body("Funcionario inserido com sucesso! ID: " + employeeSalvo.getId());
+                .body("Funcionario inserido com sucesso!!");
     }
 
 
@@ -50,7 +52,7 @@ public class EmployeeController {
 
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<?> atualizarFuncionario(@PathVariable Long id, @Valid @RequestBody Employee employeeAtualizado) {
+    public ResponseEntity<?> atualizarFuncionario(@PathVariable Long id, @Valid @RequestBody EmployeeRequestDTO employeeAtualizado) {
         employeeService.updateEmployee(id, employeeAtualizado);
         return ResponseEntity.ok("Funcionario atualizado com sucesso!");
     }

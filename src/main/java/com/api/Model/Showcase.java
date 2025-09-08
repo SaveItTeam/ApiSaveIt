@@ -8,14 +8,8 @@ public class Showcase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true)
     private long id;
-
-    @Column(length = 500)
     private String description;
-
-    @NotNull(message = "Preço vazio")
     private double price;
-
-    @NotNull(message = "lote_id vazio")
     private long batch_id;
 
     public Showcase() {

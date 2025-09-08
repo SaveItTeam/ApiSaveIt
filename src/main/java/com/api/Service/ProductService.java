@@ -1,7 +1,10 @@
 package com.api.Service;
 
+import java.util.ArrayList;
+
 import com.api.Model.Product;
 import com.api.Repository.ProductRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,58 +12,67 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import com.api.dto.product.ProductRequestDTO;
+import com.api.dto.product.ProductResponseDTO;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
+    private final ObjectMapper objectMapper;
 
     @Autowired
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository, ObjectMapper objectMapper) {
         this.productRepository = productRepository;
+        this.objectMapper = objectMapper;
     }
-    public List<Product> listProduct(){return productRepository.findAll();}
+    public List<ProductResponseDTO> listProduct(){
+        List<Product> products = productRepository.findAll();
+        List<ProductResponseDTO> productResponseDTO = new ArrayList<>();
+        for (Product product : products) {
+            productResponseDTO.add(objectMapper.convertValue(product, ProductResponseDTO.class));
+        }
+        return productResponseDTO;
+    }
 
-    public Product insertProduct(Product product) {
-        return productRepository.save(product);
+    public void insertProduct(ProductRequestDTO product) {
+        Product productResponse = objectMapper.convertValue(product, Product.class);
+        productRepository.save(productResponse);
+        
     }
 
     public void deleteProduct(Long id) {
         productRepository.deleteById(id);
     }
-    public Product updateProduct(Long id, Product productAtualizado) {
+    public ProductResponseDTO updateProduct(Long id, ProductRequestDTO productAtualizado) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Produto com ID " + id + " não encontrado"));
 
-        product.setSku(productAtualizado.getSku());
         product.setName(productAtualizado.getName());
         product.setBrand(productAtualizado.getBrand());
-        product.setDescricao(productAtualizado.getDescricao());
         product.setEnterprise_id(productAtualizado.getEnterprise_id());
 
-        return productRepository.save(product);
+        productRepository.save(product);
+        return objectMapper.convertValue(product, ProductResponseDTO.class);
     }
 
 
-    public Product updateProductPartial(Long id, Map<String, Object> updates) {
+    public ProductResponseDTO updateProductPartial(Long id, Map<String, Object> updates) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Produto com ID " + id + " não encontrado"));
 
-        if (updates.containsKey("sku")) {
-            product.setSku((String) updates.get("sku"));
-        }
         if (updates.containsKey("name")) {
             product.setName((String) updates.get("name"));
         }
         if (updates.containsKey("brand")) {
             product.setBrand((String) updates.get("brand"));
         }
-        if (updates.containsKey("descricao")) {
-            product.setDescricao((String) updates.get("descricao"));
-        }
         if (updates.containsKey("enterprise_id")) {
             product.setEnterprise_id((long) updates.get("enterprise_id"));
         }
 
-        return productRepository.save(product);
+        productRepository.save(product);
+        return objectMapper.convertValue(product, ProductResponseDTO.class);
     }
 
 

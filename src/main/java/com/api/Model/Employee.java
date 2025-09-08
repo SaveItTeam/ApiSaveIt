@@ -8,16 +8,9 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true)
     private long id;
-    @NotNull(message = "Nome vazio")
-    @Column(length = 255)
     private String name;
-    @Column(length = 255)
-    @NotNull(message = "Email vazio")
     private String email;
-    @NotNull(message = "Senha vazia")
-    @Column(length = 255)
     private String password;
-    @NotNull(message = "empresa_id vazio")
     private long enterprise_id;
 
     public Employee() {
