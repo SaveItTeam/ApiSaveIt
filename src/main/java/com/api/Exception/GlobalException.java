@@ -53,5 +53,10 @@ public class GlobalException {
         });
         return ResponseEntity.badRequest().body(erros);
     }
+    @ExceptionHandler(InvalidDataException.class)
+    public ResponseEntity<Map<String, String>> handleInvalidDataException
+            (InvalidDataException ex) {
+        return ResponseEntity.badRequest().body(ex.getErros());
+    }
 
 }
