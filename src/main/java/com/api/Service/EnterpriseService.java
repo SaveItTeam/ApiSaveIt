@@ -35,6 +35,10 @@ public class EnterpriseService {
         return returnList;
     }
 
+    public EnterpriseResponseDTO findByEmail(String email) {
+        return objectMapper.convertValue(enterpriseRepository.findByEmail(email), EnterpriseResponseDTO.class);
+    }
+
     public void insertEnterprise(EnterpriseRequestDTO enterprise) {
         Enterprise enterpriseRequest = objectMapper.convertValue(enterprise, Enterprise.class);
         enterpriseRepository.save(enterpriseRequest);

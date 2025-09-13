@@ -35,10 +35,10 @@ public class ProductService {
         return productResponseDTO;
     }
 
-    public void insertProduct(ProductRequestDTO product) {
+    public ProductResponseDTO insertProduct(ProductRequestDTO product) {
         Product productResponse = objectMapper.convertValue(product, Product.class);
         productRepository.save(productResponse);
-        
+        return objectMapper.convertValue(productResponse, ProductResponseDTO.class);
     }
 
     public void deleteProduct(Long id) {
