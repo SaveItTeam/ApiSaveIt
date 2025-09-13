@@ -5,5 +5,5 @@ import com.api.dto.enterprise.EnterpriseResponseDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EnterpriseRepository extends JpaRepository<Enterprise, Long> {
-    EnterpriseResponseDTO findByEmail(String email);
+    Enterprise findByEmail(String email);
 }
