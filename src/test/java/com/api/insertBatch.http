@@ -1,0 +1,26 @@
+POST http://localhost:8080/api/lote/inserir
+Content-Type: application/json
+
+{
+  "batch": {
+    "entry_date": "2025-09-16T00:40:26.446Z",
+    "batch_code": "string",
+    "quantity": 0,
+    "product_id": 0,
+    "unit_measure": "str=asdvsfsdsfdsgssafda",
+    "expiration_date": "2025-09-16T00:40:26.446Z"
+  },
+  "product": {
+    "id": 10,
+    "sku": "string",
+    "name": "string",
+    "brand": "string",
+    "descricao": "string",
+    "enterprise_id": 31
+  },
+  "image": {
+    "id": 0,
+    "image": "string",
+    "product_id": 1
+  }
+}

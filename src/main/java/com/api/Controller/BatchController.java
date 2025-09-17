@@ -58,7 +58,7 @@ public class BatchController {
         batchService.insertBatch(batchRequestDTO);
 
         ImageRequestDTO imageRequestDTO = batch.getImage();
-        imageRequestDTO.setProduct_id(batch.getImage().getId());
+        imageRequestDTO.setProduct_id(batch.getProduct().getId());
         imageService.insertImage(imageRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Lote inserido com sucesso!");

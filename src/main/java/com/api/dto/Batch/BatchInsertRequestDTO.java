@@ -11,6 +11,13 @@ public class BatchInsertRequestDTO {
     public BatchInsertRequestDTO() {
     }
 
+    public BatchInsertRequestDTO(ImageRequestDTO image, ProductRequestDTO product, BatchRequestDTO batch) {
+        this.image = image;
+        this.product = product;
+        this.batch = batch;
+    }
+
+
     public BatchRequestDTO getBatch() {
         return batch;
     }
@@ -33,5 +40,14 @@ public class BatchInsertRequestDTO {
 
     public void setImage(ImageRequestDTO image) {
         this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        return "BatchInsertRequestDTO{" +
+                "batch=" + batch +
+                ", product=" + product +
+                ", image=" + image +
+                '}';
     }
 }
