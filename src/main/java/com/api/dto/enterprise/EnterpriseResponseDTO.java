@@ -7,19 +7,19 @@ public class EnterpriseResponseDTO {
     private String plan_id;
     private String email;
     private String phone_number;
-    private long address_id;
+    private long endereco_id;
     private String password;
     private String category;
     private boolean is_buyer;
 
-    public EnterpriseResponseDTO(long id, String cnpj, String name, String plan_id, String email, String phone_number, long address_id, String password, String category, boolean is_buyer) {
+    public EnterpriseResponseDTO(long id, String cnpj, String name, String plan_id, String email, String phone_number, long endereco_id, String password, String category, boolean is_buyer) {
         this.id = id;
         this.cnpj = cnpj;
         this.name = name;
         this.plan_id = plan_id;
         this.email = email;
         this.phone_number = phone_number;
-        this.address_id = address_id;
+        this.endereco_id = endereco_id;
         this.password = password;
         this.category = category;
         this.is_buyer = is_buyer;
@@ -73,12 +73,12 @@ public class EnterpriseResponseDTO {
         this.phone_number = phone_number;
     }
 
-    public long getAddress_id() {
-        return address_id;
+    public long getEndereco_id() {
+        return endereco_id;
     }
 
-    public void setAddress_id(long address_id) {
-        this.address_id = address_id;
+    public void setEndereco_id(long endereco_id) {
+        this.endereco_id = endereco_id;
     }
 
     public String getPassword() {
@@ -114,7 +114,7 @@ public class EnterpriseResponseDTO {
                 ", plan_id='" + plan_id + '\'' +
                 ", email='" + email + '\'' +
                 ", phone_number='" + phone_number + '\'' +
-                ", address_id=" + address_id +
+                ", endereco_id=" + endereco_id +
                 ", password='" + password + '\'' +
                 ", category='" + category + '\'' +
                 ", is_buyer=" + is_buyer +

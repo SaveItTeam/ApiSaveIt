@@ -21,7 +21,7 @@ public class EnterpriseRequestDTO {
     @NotNull(message = "Telefone vazio")
     private String phone_number;
     @NotNull(message = "Id do endereco vazio")
-    private long address_id;
+    private long endereco_id;
     @NotNull(message = "Senha vazia")
     @Column(length = 255)
     private String password;
@@ -40,7 +40,7 @@ public class EnterpriseRequestDTO {
         enterpriseModel.setEmail(enterprise.getEmail());
         enterpriseModel.setPassword(enterprise.getPassword());
         enterpriseModel.setPhone_number(enterprise.getPhone_number());
-        enterpriseModel.setAddress_id(enterprise.getAddress_id());
+        enterpriseModel.setEndereco_id(enterprise.getEndereco_id());
         enterpriseModel.setCategory(enterprise.getCategory());
         enterpriseModel.setIs_buyer(enterprise.isIs_buyer());
         return enterpriseModel;
@@ -86,12 +86,12 @@ public class EnterpriseRequestDTO {
         this.phone_number = phone_number;
     }
 
-    public long getAddress_id() {
-        return address_id;
+    public long getEndereco_id() {
+        return endereco_id;
     }
 
-    public void setAddress_id(long address_id) {
-        this.address_id = address_id;
+    public void setEndereco_id(long endereco_id) {
+        this.endereco_id = endereco_id;
     }
 
     public String getPassword() {
