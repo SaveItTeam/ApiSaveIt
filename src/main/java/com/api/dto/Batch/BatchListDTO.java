@@ -3,27 +3,29 @@ package com.api.dto.Batch;
 import java.util.Date;
 
 public class BatchListDTO {
-    private int enterpriseId;
+    private Long id;
     private String name;
-    private Date expirationDate;
+    private Date expiration_date;
     private int quantity;
-    private String imageUrl;
+    private String image;
 
-    public BatchListDTO(int enterpriseId, String name, Date expirationDate, int quantity, String imageUrl) {
-        this.enterpriseId = enterpriseId;
+    public BatchListDTO(Long id, String name, Date expiration_date, int quantity, String image) {
+        this.id = id;
         this.name = name;
-        this.expirationDate = expirationDate;
+        this.expiration_date = expiration_date;
         this.quantity = quantity;
-        this.imageUrl = imageUrl;
+        this.image = image;
     }
 
-
-    public int getEnterpriseId() {
-        return enterpriseId;
+    public BatchListDTO() {
     }
 
-    public void setEnterpriseId(int enterpriseId) {
-        this.enterpriseId = enterpriseId;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -34,12 +36,12 @@ public class BatchListDTO {
         this.name = name;
     }
 
-    public Date getExpirationDate() {
-        return expirationDate;
+    public Date getExpiration_date() {
+        return expiration_date;
     }
 
-    public void setExpirationDate(Date expirationDate) {
-        this.expirationDate = expirationDate;
+    public void setExpiration_date(Date expiration_date) {
+        this.expiration_date = expiration_date;
     }
 
     public int getQuantity() {
@@ -50,22 +52,22 @@ public class BatchListDTO {
         this.quantity = quantity;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImage() {
+        return image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     @Override
     public String toString() {
         return "BatchListDTO{" +
-                "enterpriseId=" + enterpriseId +
+                "enterpriseId=" + id +
                 ", name='" + name + '\'' +
-                ", expirationDate=" + expirationDate +
+                ", expirationDate=" + expiration_date +
                 ", quantity=" + quantity +
-                ", imageUrl='" + imageUrl + '\'' +
+                ", imageUrl='" + image + '\'' +
                 '}';
     }
 }
