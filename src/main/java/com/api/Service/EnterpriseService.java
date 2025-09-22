@@ -35,6 +35,10 @@ public class EnterpriseService {
         return returnList;
     }
 
+    public EnterpriseResponseDTO findByEmail(String email) {
+        return objectMapper.convertValue(enterpriseRepository.findByEmail(email), EnterpriseResponseDTO.class);
+    }
+
     public void insertEnterprise(EnterpriseRequestDTO enterprise) {
         Enterprise enterpriseRequest = objectMapper.convertValue(enterprise, Enterprise.class);
         enterpriseRepository.save(enterpriseRequest);
@@ -54,7 +58,7 @@ public class EnterpriseService {
         enterprise.setPlan_id(enterpriseAtualizada.getPlan_id());
         enterprise.setEmail(enterpriseAtualizada.getEmail());
         enterprise.setPhone_number(enterpriseAtualizada.getPhone_number());
-        enterprise.setAddress_id(enterpriseAtualizada.getAddress_id());
+        enterprise.setEndereco_id(enterpriseAtualizada.getEndereco_id());
         enterprise.setPassword(enterpriseAtualizada.getPassword());
         enterprise.setCategory(enterpriseAtualizada.getCategory());
         enterprise.setIs_buyer(enterpriseAtualizada.isIs_buyer());
@@ -84,7 +88,7 @@ public class EnterpriseService {
             enterprise.setPhone_number((String) updates.get("phone_number"));
         }
         if (updates.containsKey("endereco_id")) {
-            enterprise.setAddress_id((long) updates.get("endereco_id"));
+            enterprise.setEndereco_id((long) updates.get("endereco_id"));
         }
         if (updates.containsKey("password")) {
             enterprise.setPassword((String) updates.get("password"));

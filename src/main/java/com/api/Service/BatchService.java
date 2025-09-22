@@ -2,10 +2,13 @@ package com.api.Service;
 
 import com.api.Model.Batch;
 import com.api.Model.Enterprise;
+import com.api.Model.Product;
 import com.api.Repository.BatchRepository;
+import com.api.dto.Batch.BatchListDTO;
 import com.api.dto.Batch.BatchRequestDTO;
 import com.api.dto.Batch.BatchResponseDTO;
 import com.api.dto.enterprise.EnterpriseResponseDTO;
+import com.api.dto.product.ProductRequestDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +40,10 @@ public class BatchService {
         return returnList;
     }
 
+    public List<BatchListDTO> listProductBatch(long enterpriseId){
+        return batchRepository.listOfBatches(enterpriseId);
+    }
+
     public void insertBatch(BatchRequestDTO batch) {
         Batch response = objectMapper.convertValue(batch, Batch.class);
         batchRepository.save(response);
@@ -50,10 +57,10 @@ public class BatchService {
         Batch batch = batchRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Lote com ID " + id + " não encontrado"));
 
-        batch.setUnite_measure(batchAtualizado.getUnite_measure());
+        batch.setUnit_measure(batchAtualizado.getUnit_measure());
         batch.setEntry_date(batchAtualizado.getEntry_date());
         batch.setBatch_code(batchAtualizado.getBatch_code());
-        batch.setExpiriation_date(batchAtualizado.getExpiriation_date());
+        batch.setExpiration_date(batchAtualizado.getExpiration_date());
         batch.setQuantity(batchAtualizado.getQuantity());
         batch.setProduct_id(batchAtualizado.getProduct_id());
 
@@ -66,7 +73,7 @@ public class BatchService {
                 .orElseThrow(() -> new NoSuchElementException("Lote com ID " + id + " não encontrado"));
 
         if (updates.containsKey("unit_measure")) {
-            batch.setUnite_measure((String) updates.get("unit_measure"));
+            batch.setUnit_measure((String) updates.get("unit_measure"));
         }
         if (updates.containsKey("entry_date")) {
             batch.setEntry_date((Date) updates.get("entry_date"));
@@ -74,8 +81,8 @@ public class BatchService {
         if (updates.containsKey("batch_code")) {
             batch.setBatch_code((String) updates.get("batch_code"));
         }
-        if (updates.containsKey("expiriation_date")) {
-            batch.setExpiriation_date((Date) updates.get("expiriation_date"));
+        if (updates.containsKey("expiration_date")) {
+            batch.setExpiration_date((Date) updates.get("expiration_date"));
         }
         if (updates.containsKey("quantity")) {
             batch.setQuantity((int) updates.get("quantity"));

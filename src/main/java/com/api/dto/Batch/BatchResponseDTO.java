@@ -7,20 +7,20 @@ import java.util.Date;
 
 public class BatchResponseDTO {
     private long id;
-    private String unite_measure;
+    private String unit_measure;
     private Date entry_date;
     private String batch_code;
-    private Date expiriation_date;
+    private Date expiration_date;
     private int quantity;
     private long product_id;
 
 
-    public BatchResponseDTO(long id, String unite_measure, Date entry_date, String batch_code, Date expiriation_date, int quantity, long product_id) {
+    public BatchResponseDTO(long id, String unit_measure, Date entry_date, String batch_code, Date expiration_date, int quantity, long product_id) {
         this.id = id;
-        this.unite_measure = unite_measure;
+        this.unit_measure = unit_measure;
         this.entry_date = entry_date;
         this.batch_code = batch_code;
-        this.expiriation_date = expiriation_date;
+        this.expiration_date = expiration_date;
         this.quantity = quantity;
         this.product_id = product_id;
     }
@@ -37,12 +37,12 @@ public class BatchResponseDTO {
         this.id = id;
     }
 
-    public String getUnite_measure() {
-        return unite_measure;
+    public String getUnit_measure() {
+        return unit_measure;
     }
 
-    public void setUnite_measure(String unite_measure) {
-        this.unite_measure = unite_measure;
+    public void setUnit_measure(String unit_measure) {
+        this.unit_measure = unit_measure;
     }
 
     public Date getEntry_date() {
@@ -61,12 +61,12 @@ public class BatchResponseDTO {
         this.batch_code = batch_code;
     }
 
-    public Date getExpiriation_date() {
-        return expiriation_date;
+    public Date getExpiration_date() {
+        return expiration_date;
     }
 
-    public void setExpiriation_date(Date expiriation_date) {
-        this.expiriation_date = expiriation_date;
+    public void setExpiration_date(Date expiration_date) {
+        this.expiration_date = expiration_date;
     }
 
     public int getQuantity() {
@@ -89,10 +89,10 @@ public class BatchResponseDTO {
     public String toString() {
         return "BatchResponseDTO{" +
                 "id=" + id +
-                ", unite_measure='" + unite_measure + '\'' +
+                ", unit_measure='" + unit_measure + '\'' +
                 ", entry_date=" + entry_date +
                 ", batch_code='" + batch_code + '\'' +
-                ", expiriation_date=" + expiriation_date +
+                ", expiration_date=" + expiration_date +
                 ", quantity=" + quantity +
                 ", product_id=" + product_id +
                 '}';

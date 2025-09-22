@@ -4,7 +4,6 @@ import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 
 public class ProductRequestDTO {
-    @NotNull(message = "Campo vazio")
     @Column(unique = true)
     private long id;
     @Column(length = 50)

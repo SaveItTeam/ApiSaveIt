@@ -1,6 +1,7 @@
 package com.api.dto.Batch;
 
-import com.api.Model.Batch;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 
@@ -9,15 +10,15 @@ import java.util.Date;
 public class BatchRequestDTO {
     @Column(length = 255)
     @NotNull(message = "Unidade de medida vazio")
-    private String unite_measure;
+    private String unit_measure;
     @NotNull(message = "Data de entrada vazia vazio")
     private Date entry_date;
     @Column(length = 255)
     @NotNull(message = "Batch_code vazio")
     private String batch_code;
-    @Column(length = 100)
     @NotNull(message = "Data de validade vazio")
-    private Date expiriation_date;
+    @JsonProperty("expiration_date")
+    private Date expiration_date;
     @Column(length = 50)
     @NotNull(message = "Quantidade vazio")
     private int quantity;
@@ -28,7 +29,16 @@ public class BatchRequestDTO {
     public BatchRequestDTO() {
     }
 
-//    public static Batch toModel(BatchRequestDTO batchRequestDTO) {
+    public BatchRequestDTO(String unit_measure, Date entry_date, String batch_code, Date expiration_date, int quantity, long product_id) {
+        this.unit_measure = unit_measure;
+        this.entry_date = entry_date;
+        this.batch_code = batch_code;
+        this.expiration_date = expiration_date;
+        this.quantity = quantity;
+        this.product_id = product_id;
+    }
+
+    //    public static Batch toModel(BatchRequestDTO batchRequestDTO) {
 //        Batch newBatch = new Batch();
 //        newBatch.setUnite_measure(batchRequestDTO.unite_measure);
 //        newBatch.setEntry_date(batchRequestDTO.entry_date);
@@ -39,12 +49,12 @@ public class BatchRequestDTO {
 //        return newBatch;
 //    }
 
-    public String getUnite_measure() {
-        return unite_measure;
+    public String getUnit_measure() {
+        return unit_measure;
     }
 
-    public void setUnite_measure(String unite_measure) {
-        this.unite_measure = unite_measure;
+    public void setUnit_measure(String unit_measure) {
+        this.unit_measure = unit_measure;
     }
 
     public Date getEntry_date() {
@@ -63,12 +73,12 @@ public class BatchRequestDTO {
         this.batch_code = batch_code;
     }
 
-    public Date getExpiriation_date() {
-        return expiriation_date;
+    public Date getExpiration_date() {
+        return expiration_date;
     }
 
-    public void setExpiriation_date(Date expiriation_date) {
-        this.expiriation_date = expiriation_date;
+    public void setExpiration_date(Date expiration_date) {
+        this.expiration_date = expiration_date;
     }
 
     public int getQuantity() {
@@ -85,5 +95,17 @@ public class BatchRequestDTO {
 
     public void setProduct_id(long product_id) {
         this.product_id = product_id;
+    }
+
+    @Override
+    public String toString() {
+        return "BatchRequestDTO{" +
+                "unit_measure='" + unit_measure + '\'' +
+                ", entry_date=" + entry_date +
+                ", batch_code='" + batch_code + '\'' +
+                ", expiration_date=" + expiration_date +
+                ", quantity=" + quantity +
+                ", product_id=" + product_id +
+                '}';
     }
 }

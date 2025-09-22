@@ -40,6 +40,12 @@ public class EnterpriseController {
                 .body("Empresa inserido com sucesso!");
     }
 
+    @GetMapping("listarEmail/{email}")
+    public ResponseEntity<EnterpriseResponseDTO> listEnterpriseByEmail(@PathVariable String email) {
+        EnterpriseResponseDTO responseDTO = enterpriseService.findByEmail(email);
+        return ResponseEntity.ok(responseDTO);
+    }
+
     @DeleteMapping("/excluir/{id}")
     public ResponseEntity<?> deleteEnterprise(@PathVariable Long id) {
         enterpriseService.deleteEnterprise(id);

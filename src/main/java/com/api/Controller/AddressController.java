@@ -30,7 +30,7 @@ public class AddressController {
 
     @Autowired
     public AddressController(AddressService addressService, LocalValidatorFactoryBean defaultValidator, BatchService batchService) {
-            this.addressService = addressService;
+        this.addressService = addressService;
         this.defaultValidator = defaultValidator;
         this.batchService = batchService;
     }
@@ -43,14 +43,12 @@ public class AddressController {
     }
 
 
-
     @PostMapping("/inserir")
     public ResponseEntity<?> insertAddress(@Validated({OnCreate.class, Default.class}) @RequestBody AddressRequestDTO address) {
         addressService.insertAddress(address);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Endereco inserido com sucesso!");
     }
-
 
 
     @DeleteMapping("/excluir/{id}")
@@ -60,7 +58,6 @@ public class AddressController {
     }
 
 
-
     @PutMapping("/atualizar/{id}")
     public ResponseEntity<?> updateAddress(@PathVariable Long id, @Valid @RequestBody AddressRequestDTO addressAtualizado) {
         AddressResponseDTO addressResponseDTO = addressService.updateAddress(id, addressAtualizado);
@@ -68,13 +65,11 @@ public class AddressController {
     }
 
 
-
     @PatchMapping("/atualizarParcial/{id}")
     public ResponseEntity<?> updateAddressPartial(@PathVariable Long id, @Valid @RequestParam Map<String, Object> updates) {
         AddressResponseDTO addressResponseDTO = addressService.updateAddressPartial(id, updates);
         return ResponseEntity.ok(addressResponseDTO);
     }
-
 
 
 }
