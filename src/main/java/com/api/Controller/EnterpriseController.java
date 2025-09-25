@@ -1,8 +1,13 @@
 package com.api.Controller;
 
 import com.api.Exception.GlobalException;
+import com.api.Model.Address;
 import com.api.Model.Enterprise;
+import com.api.Service.AddressService;
 import com.api.Service.EnterpriseService;
+import com.api.dto.address.AddressRequestDTO;
+import com.api.dto.address.AddressResponseDTO;
+import com.api.dto.enterprise.EnterpriseInsertDTO;
 import com.api.dto.enterprise.EnterpriseRequestDTO;
 import com.api.dto.enterprise.EnterpriseResponseDTO;
 import jakarta.validation.Valid;
@@ -20,11 +25,13 @@ public class EnterpriseController {
 
 
     private final EnterpriseService enterpriseService;
+    private final AddressService addressService;
     private GlobalException ge;
 
     @Autowired
-    public EnterpriseController(EnterpriseService enterpriseService) {
+    public EnterpriseController(EnterpriseService enterpriseService, AddressService addressService) {
         this.enterpriseService = enterpriseService;
+        this.addressService = addressService;
     }
 
     @GetMapping("/selecionar")
@@ -34,8 +41,12 @@ public class EnterpriseController {
     }
 
     @PostMapping("/inserir")
-    public ResponseEntity<?> insertEnterprise(@RequestBody EnterpriseRequestDTO enterprise) {
-        enterpriseService.insertEnterprise(enterprise);
+    public ResponseEntity<?> insertEnterprise(@RequestBody EnterpriseInsertDTO enterpriseInsert) {
+        AddressResponseDTO addressResponseDTO = addressService.insertAddress(enterpriseInsert.getAddress());
+
+        EnterpriseRequestDTO enterpriseResponseDTO = enterpriseInsert.getEnterprise();
+        enterpriseResponseDTO.setEndereco_id(addressResponseDTO.getId());
+        enterpriseService.insertEnterprise(enterpriseResponseDTO);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Empresa inserido com sucesso!");
     }
