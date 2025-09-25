@@ -6,6 +6,9 @@ import com.api.Service.ProductService;
 import com.api.validator.OnCreate;
 import com.api.validator.OnPatch;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import jakarta.validation.groups.Default;
 
@@ -34,6 +37,11 @@ public class ProductController {
 
 
     @GetMapping("/selecionar")
+    @Operation(summary = "Listar todos os produtos")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Lista de produtos retornada com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     public ResponseEntity<List<ProductResponseDTO>> listProduct() {
         List<ProductResponseDTO> products = productService.listProduct();
         return ResponseEntity.ok(products);
@@ -42,6 +50,12 @@ public class ProductController {
 
 
     @PostMapping("/inserir")
+    @Operation(summary = "Inserir um novo produto")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Produto inserido com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     public ResponseEntity<?> insertProduct(@RequestBody @Validated({OnCreate.class, Default.class}) ProductRequestDTO product) {
         productService.insertProduct(product);
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -51,6 +65,12 @@ public class ProductController {
 
 
     @DeleteMapping("/excluir/{id}")
+    @Operation(summary = "Excluir um produto")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Produto excluído com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Produto não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     public ResponseEntity<?> deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
         return ResponseEntity.ok("Produto excluído com sucesso!");
@@ -59,6 +79,13 @@ public class ProductController {
 
 
     @PutMapping("/atualizar/{id}")
+    @Operation(summary = "Atualizar um produto")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Produto atualizado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos"),
+            @ApiResponse(responseCode = "404", description = "Produto não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     public ResponseEntity<?> updateProduct(@PathVariable Long id, @Validated({OnCreate.class, Default.class}) @RequestBody ProductRequestDTO productAtualizado) {
         productService.updateProduct(id, productAtualizado);
         return ResponseEntity.ok("Produto atualizado com sucesso!");
@@ -67,6 +94,13 @@ public class ProductController {
 
 
     @PatchMapping("/atualizarParcial/{id}")
+    @Operation(summary = "Atualizar parcialmente um produto")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Produto atualizado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos"),
+            @ApiResponse(responseCode = "404", description = "Produto não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     public ResponseEntity<?> updateProductPartial(@PathVariable Long id,  @Validated({OnPatch.class, Default.class})  @RequestBody Map<String, Object> updates) {
         ProductResponseDTO responseDTO = productService.updateProductPartial(id, updates);
         return ResponseEntity.ok("Produto atualizado parcialmente com sucesso! " + responseDTO);

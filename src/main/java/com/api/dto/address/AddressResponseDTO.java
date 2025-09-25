@@ -1,17 +1,28 @@
 package com.api.dto.address;
 
 import com.api.Model.Address;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 
+@Schema(description = "DTO de resposta para informações do endereço")
 public class AddressResponseDTO {
+    @Schema(description = "ID do endereço", example = "1")
     private long id;
+    @Schema(description = "Nome do endereço", example = "Casa")
     private String nome;
+    @Schema(description = "Estado do endereço", example = "SP")
     private String state;
+    @Schema(description = "Cidade do endereço", example = "São Paulo")
     private String city;
+    @Schema(description = "Logradouro do endereço", example = "Rua das Flores")
     private String public_place;
+    @Schema(description = "CEP do endereço", example = "12345-678")
     private String cep;
+    @Schema(description = "Bairro do endereço", example = "Jardim das Acácias")
     private String neighborhood;
+    @Schema(description = "Complemento do endereço", example = "Apto 101")
     private String complement;
+    @Schema(description = "Número do endereço", example = "100")
     private String number;
 
     public AddressResponseDTO(long id, String nome, String state, String city, String public_place, String cep, String neighborhood, String complement, String number) {
