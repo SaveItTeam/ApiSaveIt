@@ -10,18 +10,18 @@ public class AddressResponseDTO {
     private String city;
     private String public_place;
     private String cep;
-    private String neighborhood;
+    private String neighbourhood;
     private String complement;
     private String number;
 
-    public AddressResponseDTO(long id, String nome, String state, String city, String public_place, String cep, String neighborhood, String complement, String number) {
+    public AddressResponseDTO(long id, String nome, String state, String city, String public_place, String cep, String neighbourhood, String complement, String number) {
         this.id = id;
         this.nome = nome;
         this.state = state;
         this.city = city;
         this.public_place = public_place;
         this.cep = cep;
-        this.neighborhood = neighborhood;
+        this.neighbourhood = neighbourhood;
         this.complement = complement;
         this.number = number;
     }
@@ -78,12 +78,12 @@ public class AddressResponseDTO {
         this.cep = cep;
     }
 
-    public String getNeighborhood() {
-        return neighborhood;
+    public String getNeighbourhood() {
+        return neighbourhood;
     }
 
-    public void setNeighborhood(String neighborhood) {
-        this.neighborhood = neighborhood;
+    public void setNeighbourhood(String neighbourhood) {
+        this.neighbourhood = neighbourhood;
     }
 
     public String getComplement() {
@@ -111,7 +111,7 @@ public class AddressResponseDTO {
                 ", city='" + city + '\'' +
                 ", public_place='" + public_place + '\'' +
                 ", cep='" + cep + '\'' +
-                ", neighborhood='" + neighborhood + '\'' +
+                ", neighbourhood='" + neighbourhood + '\'' +
                 ", complement='" + complement + '\'' +
                 ", number='" + number + '\'' +
                 '}';

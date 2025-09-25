@@ -13,7 +13,7 @@ public class EnterpriseRequestDTO {
     private String name;
     @Column(length = 50)
     @NotNull(message = "Codigo vazio")
-    private String plan_id;
+    private int plan_id;
     @Column(length = 100)
     @NotNull(message = "Email vazio")
     private String email;
@@ -62,11 +62,11 @@ public class EnterpriseRequestDTO {
         this.name = name;
     }
 
-    public String getPlan_id() {
+    public int getPlan_id() {
         return plan_id;
     }
 
-    public void setPlan_id(String plan_id) {
+    public void setPlan_id(int plan_id) {
         this.plan_id = plan_id;
     }
 

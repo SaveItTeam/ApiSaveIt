@@ -16,7 +16,7 @@ public class AddressRequestDTO {
     @Column(length = 20)
     private String cep;
     @Column(length = 100)
-    private String neighborhood;
+    private String neighbourhood;
     @Column(length = 100)
     private String complement;
     @Column(length = 10)
@@ -78,12 +78,12 @@ public class AddressRequestDTO {
         this.cep = cep;
     }
 
-    public String getNeighborhood() {
-        return neighborhood;
+    public String getNeighbourhood() {
+        return neighbourhood;
     }
 
-    public void setNeighborhood(String neighborhood) {
-        this.neighborhood = neighborhood;
+    public void setNeighbourhood(String neighbourhood) {
+        this.neighbourhood = neighbourhood;
     }
 
     public String getComplement() {

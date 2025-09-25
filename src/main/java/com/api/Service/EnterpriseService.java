@@ -80,7 +80,7 @@ public class EnterpriseService {
             enterprise.setName((String) updates.get("name"));
         }
         if (updates.containsKey("plan_id")) {
-            enterprise.setPlan_id((String) updates.get("plan_id"));
+            enterprise.setPlan_id((int) updates.get("plan_id"));
         }
         if (updates.containsKey("email")) {
             enterprise.setEmail((String) updates.get("email"));

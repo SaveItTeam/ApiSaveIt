@@ -52,7 +52,7 @@ public class AddressService {
         address.setState(addressAtualizado.getState());
         address.setPublic_place(addressAtualizado.getPublic_place());
         address.setCep(addressAtualizado.getCep());
-        address.setNeighborhood(addressAtualizado.getNeighborhood());
+        address.setNeighbourhood(addressAtualizado.getNeighbourhood());
         address.setCity(addressAtualizado.getCity());
         address.setComplement(addressAtualizado.getComplement());
         address.setNumber(addressAtualizado.getNumber());
@@ -82,8 +82,8 @@ public class AddressService {
         if (updates.containsKey("cep")) {
             address.setCep((String) updates.get("cep"));
         }
-        if (updates.containsKey("neighborhood")) {
-            address.setNeighborhood((String) updates.get("neighborhood"));
+        if (updates.containsKey("neighbourhood")) {
+            address.setNeighbourhood((String) updates.get("neighbourhood"));
         }
         if (updates.containsKey("complement")) {
             address.setComplement((String) updates.get("complement"));
