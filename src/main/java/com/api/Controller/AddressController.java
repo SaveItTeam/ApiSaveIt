@@ -7,6 +7,9 @@ import com.api.Service.BatchService;
 import com.api.dto.address.AddressRequestDTO;
 import com.api.dto.address.AddressResponseDTO;
 import com.api.validator.OnCreate;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import jakarta.validation.groups.Default;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +40,11 @@ public class AddressController {
 
 
     @GetMapping("/selecionar")
+    @Operation(summary = "Listar todos os endereços")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Lista de endereços retornada com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     public ResponseEntity<List<AddressResponseDTO>> listAddress() {
         List<AddressResponseDTO> addresses = addressService.listAddress();
         return ResponseEntity.ok(addresses);
@@ -44,6 +52,12 @@ public class AddressController {
 
 
     @PostMapping("/inserir")
+    @Operation(summary = "Inserir um novo endereço")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Endereço inserido com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     public ResponseEntity<?> insertAddress(@Validated({OnCreate.class, Default.class}) @RequestBody AddressRequestDTO address) {
         addressService.insertAddress(address);
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -52,6 +66,12 @@ public class AddressController {
 
 
     @DeleteMapping("/excluir/{id}")
+    @Operation(summary = "Excluir um endereço pelo ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Endereço excluído com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Endereço não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     public ResponseEntity<?> deleteAddress(@PathVariable Long id) {
         addressService.deleteAddress(id);
         return ResponseEntity.ok("Endereco excluído com sucesso!");
@@ -59,6 +79,13 @@ public class AddressController {
 
 
     @PutMapping("/atualizar/{id}")
+    @Operation(summary = "Atualizar um endereço pelo ID")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Endereço atualizado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos"),
+            @ApiResponse(responseCode = "404", description = "Endereço não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     public ResponseEntity<?> updateAddress(@PathVariable Long id, @Valid @RequestBody AddressRequestDTO addressAtualizado) {
         AddressResponseDTO addressResponseDTO = addressService.updateAddress(id, addressAtualizado);
         return ResponseEntity.ok(addressResponseDTO);
@@ -66,6 +93,13 @@ public class AddressController {
 
 
     @PatchMapping("/atualizarParcial/{id}")
+    @Operation(summary = "Atualizar parcialmente um endereço pelo ID")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Endereço atualizado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos"),
+            @ApiResponse(responseCode = "404", description = "Endereço não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     public ResponseEntity<?> updateAddressPartial(@PathVariable Long id, @Valid @RequestParam Map<String, Object> updates) {
         AddressResponseDTO addressResponseDTO = addressService.updateAddressPartial(id, updates);
         return ResponseEntity.ok(addressResponseDTO);
