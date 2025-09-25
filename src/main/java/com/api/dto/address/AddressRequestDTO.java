@@ -23,7 +23,7 @@ public class AddressRequestDTO {
     private String cep;
     @Schema(description = "Bairro do endereço", example = "Jardim das Acácias")
     @Column(length = 100)
-    private String neighborhood;
+    private String neighbourhood;
     @Schema(description = "Complemento do endereço", example = "Apto 101")
     @Column(length = 100)
     private String complement;
@@ -88,12 +88,12 @@ public class AddressRequestDTO {
         this.cep = cep;
     }
 
-    public String getNeighborhood() {
-        return neighborhood;
+    public String getNeighbourhood() {
+        return neighbourhood;
     }
 
-    public void setNeighborhood(String neighborhood) {
-        this.neighborhood = neighborhood;
+    public void setNeighbourhood(String neighbourhood) {
+        this.neighbourhood = neighbourhood;
     }
 
     public String getComplement() {

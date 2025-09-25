@@ -34,9 +34,10 @@ public class AddressService {
         return addressResponseDTOS;
     }
 
-    public void insertAddress(AddressRequestDTO address) {
+    public AddressResponseDTO insertAddress(AddressRequestDTO address) {
         Address addressResponse = objectMapper.convertValue(address, Address.class);
-        addressRepository.save(addressResponse);
+        Address address1 = addressRepository.save(addressResponse);
+        return objectMapper.convertValue(address1, AddressResponseDTO.class);
     }
 
     public void deleteAddress(Long id) {
@@ -51,7 +52,7 @@ public class AddressService {
         address.setState(addressAtualizado.getState());
         address.setPublic_place(addressAtualizado.getPublic_place());
         address.setCep(addressAtualizado.getCep());
-        address.setNeighborhood(addressAtualizado.getNeighborhood());
+        address.setNeighbourhood(addressAtualizado.getNeighbourhood());
         address.setCity(addressAtualizado.getCity());
         address.setComplement(addressAtualizado.getComplement());
         address.setNumber(addressAtualizado.getNumber());
@@ -81,8 +82,8 @@ public class AddressService {
         if (updates.containsKey("cep")) {
             address.setCep((String) updates.get("cep"));
         }
-        if (updates.containsKey("neighborhood")) {
-            address.setNeighborhood((String) updates.get("neighborhood"));
+        if (updates.containsKey("neighbourhood")) {
+            address.setNeighbourhood((String) updates.get("neighbourhood"));
         }
         if (updates.containsKey("complement")) {
             address.setComplement((String) updates.get("complement"));

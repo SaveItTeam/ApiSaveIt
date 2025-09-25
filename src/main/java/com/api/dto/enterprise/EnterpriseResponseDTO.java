@@ -4,7 +4,7 @@ public class EnterpriseResponseDTO {
     private long id;
     private String cnpj;
     private String name;
-    private String plan_id;
+    private int plan_id;
     private String email;
     private String phone_number;
     private long endereco_id;
@@ -12,7 +12,7 @@ public class EnterpriseResponseDTO {
     private String category;
     private boolean is_buyer;
 
-    public EnterpriseResponseDTO(long id, String cnpj, String name, String plan_id, String email, String phone_number, long endereco_id, String password, String category, boolean is_buyer) {
+    public EnterpriseResponseDTO(long id, String cnpj, String name, int plan_id, String email, String phone_number, long endereco_id, String password, String category, boolean is_buyer) {
         this.id = id;
         this.cnpj = cnpj;
         this.name = name;
@@ -49,11 +49,11 @@ public class EnterpriseResponseDTO {
         this.name = name;
     }
 
-    public String getPlan_id() {
+    public int getPlan_id() {
         return plan_id;
     }
 
-    public void setPlan_id(String plan_id) {
+    public void setPlan_id(int plan_id) {
         this.plan_id = plan_id;
     }
 
