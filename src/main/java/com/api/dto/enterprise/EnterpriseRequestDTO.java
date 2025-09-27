@@ -25,11 +25,7 @@ public class EnterpriseRequestDTO {
     @NotNull(message = "Senha vazia")
     @Column(length = 255)
     private String password;
-    @NotNull(message = "Categoria vazia")
-    @Column(length = 100)
-    private String category;
-    @NotNull(message = "is buyer vazio")
-    private boolean is_buyer;
+
 
     public EnterpriseRequestDTO() {
     }
@@ -41,8 +37,6 @@ public class EnterpriseRequestDTO {
         enterpriseModel.setPassword(enterprise.getPassword());
         enterpriseModel.setPhone_number(enterprise.getPhone_number());
         enterpriseModel.setEndereco_id(enterprise.getEndereco_id());
-        enterpriseModel.setCategory(enterprise.getCategory());
-        enterpriseModel.setIs_buyer(enterprise.isIs_buyer());
         return enterpriseModel;
     }
 
@@ -102,19 +96,6 @@ public class EnterpriseRequestDTO {
         this.password = password;
     }
 
-    public String getCategory() {
-        return category;
-    }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
 
-    public boolean isIs_buyer() {
-        return is_buyer;
-    }
-
-    public void setIs_buyer(boolean is_buyer) {
-        this.is_buyer = is_buyer;
-    }
 }

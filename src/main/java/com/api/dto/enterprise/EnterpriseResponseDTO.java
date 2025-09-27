@@ -9,10 +9,8 @@ public class EnterpriseResponseDTO {
     private String phone_number;
     private long endereco_id;
     private String password;
-    private String category;
-    private boolean is_buyer;
 
-    public EnterpriseResponseDTO(long id, String cnpj, String name, int plan_id, String email, String phone_number, long endereco_id, String password, String category, boolean is_buyer) {
+    public EnterpriseResponseDTO(long id, String cnpj, String name, int plan_id, String email, String phone_number, long endereco_id, String password) {
         this.id = id;
         this.cnpj = cnpj;
         this.name = name;
@@ -21,8 +19,6 @@ public class EnterpriseResponseDTO {
         this.phone_number = phone_number;
         this.endereco_id = endereco_id;
         this.password = password;
-        this.category = category;
-        this.is_buyer = is_buyer;
     }
 
     public long getId() {
@@ -89,21 +85,6 @@ public class EnterpriseResponseDTO {
         this.password = password;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public boolean isIs_buyer() {
-        return is_buyer;
-    }
-
-    public void setIs_buyer(boolean is_buyer) {
-        this.is_buyer = is_buyer;
-    }
 
     @Override
     public String toString() {
@@ -116,8 +97,6 @@ public class EnterpriseResponseDTO {
                 ", phone_number='" + phone_number + '\'' +
                 ", endereco_id=" + endereco_id +
                 ", password='" + password + '\'' +
-                ", category='" + category + '\'' +
-                ", is_buyer=" + is_buyer +
                 '}';
     }
 }

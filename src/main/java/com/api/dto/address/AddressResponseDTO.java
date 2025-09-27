@@ -8,8 +8,7 @@ import jakarta.persistence.Column;
 public class AddressResponseDTO {
     @Schema(description = "ID do endereço", example = "1")
     private long id;
-    @Schema(description = "Nome do endereço", example = "Casa")
-    private String nome;
+
     @Schema(description = "Estado do endereço", example = "SP")
     private String state;
     @Schema(description = "Cidade do endereço", example = "São Paulo")
@@ -25,9 +24,8 @@ public class AddressResponseDTO {
     @Schema(description = "Número do endereço", example = "100")
     private String number;
 
-    public AddressResponseDTO(long id, String nome, String state, String city, String public_place, String cep, String neighbourhood, String complement, String number) {
+    public AddressResponseDTO(long id, String state, String city, String public_place, String cep, String neighbourhood, String complement, String number) {
         this.id = id;
-        this.nome = nome;
         this.state = state;
         this.city = city;
         this.public_place = public_place;
@@ -49,13 +47,6 @@ public class AddressResponseDTO {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 
     public String getState() {
         return state;
@@ -117,7 +108,6 @@ public class AddressResponseDTO {
     public String toString() {
         return "AddressResponseDTO{" +
                 "id=" + id +
-                ", nome='" + nome + '\'' +
                 ", state='" + state + '\'' +
                 ", city='" + city + '\'' +
                 ", public_place='" + public_place + '\'' +

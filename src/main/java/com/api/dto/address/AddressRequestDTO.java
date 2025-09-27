@@ -7,10 +7,7 @@ import jakarta.validation.constraints.NotEmpty;
 
 public class AddressRequestDTO {
     @Column(length = 100)
-    @Schema(description = "Nome do endereço", example = "Casa")
-    private String nome;
     @Schema(description = "Estado do endereço", example = "SP")
-    @Column(length = 50)
     private String state;
     @Schema(description = "Cidade do endereço", example = "São Paulo")
     @Column(length = 100)
@@ -48,13 +45,6 @@ public class AddressRequestDTO {
 //        return address;
 //    }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 
     public String getState() {
         return state;

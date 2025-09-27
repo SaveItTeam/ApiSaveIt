@@ -61,8 +61,6 @@ public class EnterpriseService {
         enterprise.setPhone_number(enterpriseAtualizada.getPhone_number());
         enterprise.setEndereco_id(enterpriseAtualizada.getEndereco_id());
         enterprise.setPassword(enterpriseAtualizada.getPassword());
-        enterprise.setCategory(enterpriseAtualizada.getCategory());
-        enterprise.setIs_buyer(enterpriseAtualizada.isIs_buyer());
 
         enterpriseRepository.save(enterprise);
         EnterpriseResponseDTO enterpriseResponseDTO = objectMapper.convertValue(enterprise, EnterpriseResponseDTO.class);
@@ -93,12 +91,6 @@ public class EnterpriseService {
         }
         if (updates.containsKey("password")) {
             enterprise.setPassword((String) updates.get("password"));
-        }
-        if (updates.containsKey("category")) {
-            enterprise.setCategory((String) updates.get("category"));
-        }
-        if (updates.containsKey("is_buyer")) {
-            enterprise.setIs_buyer((boolean) updates.get("is_buyer"));
         }
 
         enterpriseRepository.save(enterprise);

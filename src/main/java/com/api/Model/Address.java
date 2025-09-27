@@ -10,7 +10,6 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true)
     private long id;
-    private String nome;
     private String state;
     private String city;
     private String public_place;
@@ -22,9 +21,8 @@ public class Address {
     public Address() {
     }
 
-    public Address(long id, String nome, String state, String public_place, String cep, String neighbourhood, String complement, String number) {
+    public Address(long id, String state, String public_place, String cep, String neighbourhood, String complement, String number) {
         this.id = id;
-        this.nome = nome;
         this.state = state;
         this.public_place = public_place;
         this.cep = cep;
@@ -41,13 +39,7 @@ public class Address {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
-    }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 
     public String getState() {
         return state;
@@ -109,7 +101,6 @@ public class Address {
     public String toString() {
         return "Endereco{" +
                 "id=" + id +
-                ", nome='" + nome + '\'' +
                 ", estado='" + state + '\'' +
                 ", cidade='" + city + '\'' +
                 ", rua='" + public_place + '\'' +
