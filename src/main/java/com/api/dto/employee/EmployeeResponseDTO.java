@@ -14,16 +14,18 @@ public class EmployeeResponseDTO {
     private String email;
     @Schema(description = "ID da empresa do funcionário", example = "1")
     private long enterprise_id;
-
-    public EmployeeResponseDTO(long enterprise_id, String email, String name, long id) {
+    @Schema(description = "É admin campo bool", example = "true")
+    private boolean is_buyer;
+    public EmployeeResponseDTO(long enterprise_id, String email, String name, long id, boolean is_buyer) {
         this.enterprise_id = enterprise_id;
         this.email = email;
         this.name = name;
         this.id = id;
+        this.is_buyer = is_buyer;
     }
 
     public static EmployeeResponseDTO toDTO(Employee employee) {
-        return new EmployeeResponseDTO(employee.getEnterprise_id(), employee.getEmail(), employee.getName(), employee.getId());
+        return new EmployeeResponseDTO(employee.getEnterprise_id(), employee.getEmail(), employee.getName(), employee.getId(), employee.getIs_buyer());
     }
 
     public long getId() {
@@ -58,6 +60,14 @@ public class EmployeeResponseDTO {
         this.enterprise_id = enterprise_id;
     }
 
+    public boolean getIs_buyer() {
+        return is_buyer;
+    }
+
+    public void setIs_buyer(boolean is_buyer) {
+        this.is_buyer = is_buyer;
+    }
+
     @Override
     public String toString() {
         return "EmployeeResponseDTO{" +
@@ -65,6 +75,7 @@ public class EmployeeResponseDTO {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", enterprise_id=" + enterprise_id +
+                ", is_buyer=" + is_buyer +
                 '}';
     }
 }

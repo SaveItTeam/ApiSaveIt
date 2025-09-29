@@ -21,7 +21,8 @@ public class EmployeeRequestDTO {
     @NotNull(message = "empresa_id vazio")
     @Schema(description = "ID da empresa do funcionário", example = "1")
     private long enterprise_id;
-
+    @NotNull(message = "Is buyer vazio")
+    private boolean is_buyer = false;
     public EmployeeRequestDTO() {
     }
 
@@ -31,6 +32,7 @@ public class EmployeeRequestDTO {
         employeeModel.setEmail(employee.getEmail());
         employeeModel.setPassword(employee.getPassword());
         employeeModel.setEnterprise_id(employee.getEnterprise_id());
+        employeeModel.setIs_buyer(employee.getIs_buyer());
         return employeeModel;
     }
 
@@ -64,5 +66,11 @@ public class EmployeeRequestDTO {
 
     public void setEnterprise_id(long enterprise_id) {
         this.enterprise_id = enterprise_id;
+    }
+    public boolean getIs_buyer() {
+        return is_buyer;
+    }
+    public void setIs_buyer(boolean is_buyer) {
+        this.is_buyer = is_buyer;
     }
 }

@@ -12,16 +12,17 @@ public class Employee {
     private String email;
     private String password;
     private long enterprise_id;
-
+    private boolean is_buyer = false;
     public Employee() {
     }
 
-    public Employee(long id, String name, String email, String password, long enterprise_id) {
+    public Employee(long id, String name, String email, String password, long enterprise_id, boolean is_buyer) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.enterprise_id = enterprise_id;
+        this.is_buyer = is_buyer;
     }
 
     public long getId() {
@@ -63,7 +64,12 @@ public class Employee {
     public void setEnterprise_id(long enterprise_id) {
         this.enterprise_id = enterprise_id;
     }
-
+    public boolean getIs_buyer() {
+        return is_buyer;
+    }
+    public void setIs_buyer(boolean is_buyer) {
+        this.is_buyer = is_buyer;
+    }
 
     @Override
     public String toString() {
@@ -73,6 +79,7 @@ public class Employee {
                 ", email='" + email + '\'' +
                 ", senha='" + password + '\'' +
                 ", empresa_id=" + enterprise_id +
+                ", is_buyer=" + is_buyer +
                 '}';
     }
 }

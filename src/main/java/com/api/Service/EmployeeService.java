@@ -72,6 +72,9 @@ public class EmployeeService {
         if (updates.containsKey("enterprise_id")) {
             employee.setEnterprise_id((long) updates.get("enterprise_id"));
         }
+        if (updates.containsKey("is_buyer")) {
+            employee.setIs_buyer((boolean) updates.get("is_buyer"));
+        }
 
         employeeRepository.save(employee);
         return objectMapper.convertValue(employee, EmployeeResponseDTO.class);
