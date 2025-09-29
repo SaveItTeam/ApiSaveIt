@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/empresa")
+@RequestMapping("/api/enterprise")
 public class EnterpriseController {
 
 
