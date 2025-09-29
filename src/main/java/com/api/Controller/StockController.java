@@ -26,7 +26,7 @@ import com.api.dto.estock.StockResponseDTO;
 
 
 @RestController
-@RequestMapping("/api/estoque")
+@RequestMapping("/api/stock")
 public class StockController {
 
     private final StockService stockService;

@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/vitrine")
+@RequestMapping("/api/showcase")
 public class ShowcaseController {
     private final ShowcaseService showCaseService;
     private GlobalException ge;

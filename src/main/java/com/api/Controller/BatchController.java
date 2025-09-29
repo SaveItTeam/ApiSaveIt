@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/lote")
+@RequestMapping("/api/batch")
 public class BatchController {
     private final BatchService batchService;
     private final AddressService addressService;

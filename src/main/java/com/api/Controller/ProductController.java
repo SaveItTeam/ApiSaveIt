@@ -25,7 +25,7 @@ import com.api.dto.product.ProductRequestDTO;
 import com.api.dto.product.ProductResponseDTO;
 
 @RestController
-@RequestMapping("/api/produto")
+@RequestMapping("/api/product")
 public class ProductController {
     private final ProductService productService;
     private GlobalException ge;

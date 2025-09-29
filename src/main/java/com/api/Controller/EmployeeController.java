@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/funcionario")
+@RequestMapping("/api/employee")
 public class EmployeeController {
     private final EmployeeService employeeService;
     private GlobalException ge;
