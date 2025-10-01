@@ -15,8 +15,6 @@ import java.util.NoSuchElementException;
 
 @Service
 public class EnterpriseService {
-
-
     private final EnterpriseRepository enterpriseRepository;
     private final ObjectMapper objectMapper;
 
