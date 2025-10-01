@@ -8,12 +8,10 @@ import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.api.Model.Address;
 import com.api.Model.Stock;
 import com.api.Repository.StockRepository;
-import com.api.dto.address.AddressResponseDTO;
-import com.api.dto.estock.StockRequestDTO;
-import com.api.dto.estock.StockResponseDTO;
+import com.api.dto.stock.StockRequestDTO;
+import com.api.dto.stock.StockResponseDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 public class StockService {
@@ -60,7 +58,7 @@ public class StockService {
         Stock stock = stockRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Estoque com ID " + id + " não encontrado"));
 
-        stock.setQuantity(stockAtualizado.getQuantity());
+        stock.setQuantity_input(stockAtualizado.getQuantity_input());
         stock.setQuantity_output(stockAtualizado.getQuantity_output());
         stock.setBatch_id(stockAtualizado.getBatch_id());
 
@@ -73,8 +71,8 @@ public class StockService {
         Stock stock = stockRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Estoque com ID " + id + " não encontrado"));
 
-        if (updates.containsKey("quantity")) {
-            stock.setQuantity((int) updates.get("quantity"));
+        if (updates.containsKey("quantity_input")) {
+            stock.setQuantity_input((int) updates.get("quantity"));
         }
         if (updates.containsKey("quantity_output")) {
             stock.setQuantity_output((int) updates.get("quantity_output"));

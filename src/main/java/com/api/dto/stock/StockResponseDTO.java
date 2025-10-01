@@ -1,25 +1,12 @@
-package com.api.Model;
+package com.api.dto.stock;
 
-import jakarta.persistence.*;
-
-@Entity
-public class Stock {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true)
+public class StockResponseDTO {
     private long id;
     private int quantity_input;
     private int quantity_output;
     private int batch_id;
 
-    public Stock() {
-    }
-
-    public Stock(long id, int quantity_input, int quantity_output, int batch_id) {
-        this.id = id;
-        this.quantity_input = quantity_input;
-        this.quantity_output = quantity_output;
-        this.batch_id = batch_id;
+    public StockResponseDTO() {
     }
 
     public long getId() {
@@ -34,8 +21,8 @@ public class Stock {
         return quantity_input;
     }
 
-    public void setQuantity_input(int quantity) {
-        this.quantity_input = quantity;
+    public void setQuantity_input(int quantity_input) {
+        this.quantity_input = quantity_input;
     }
 
     public int getQuantity_output() {
@@ -56,9 +43,9 @@ public class Stock {
 
     @Override
     public String toString() {
-        return "Estoque{" +
+        return "StockResponseDTO{" +
                 "id=" + id +
-                ", quantity_input=" + quantity_input +
+                ", quantity=" + quantity_input +
                 ", quantity_output=" + quantity_output +
                 ", batch_id=" + batch_id +
                 '}';
