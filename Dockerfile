@@ -15,10 +15,3 @@ COPY --from=build /app/target/*.jar app.jar
 
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
-
-FROM python:3.11-slim AS python
-
-WORKDIR /app
-RUN echo "Hello World!" > /app/test.txt
-
-CMD ["cat", "/app/test.txt"]
