@@ -32,9 +32,7 @@ public class AddressRequestDTO {
     @Schema(description = "Complemento do endereço", example = "Apto 101")
     @Column(length = 100)
     private String complement;
-    @Schema(description = "Número do endereço", example = "100")
-    @Column(length = 10)
-    private String number;
+
 
 
     public AddressRequestDTO() {
@@ -109,13 +107,7 @@ public class AddressRequestDTO {
         this.complement = complement;
     }
 
-    public String getNumber() {
-        return number;
-    }
 
-    public void setNumber(String number) {
-        this.number = number;
-    }
 
     public int getHouse_number() {
         return house_number;

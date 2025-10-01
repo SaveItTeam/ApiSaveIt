@@ -17,11 +17,11 @@ public class Enterprise {
     private String phone_number;
     private long address_id;
     private String password;
-    private String category;
+
     public Enterprise() {
     }
 
-    public Enterprise(long id, String cnpj, String name, int plan_id, String email, String phone_number, long address_id, String password, String category) {
+    public Enterprise(long id, String cnpj, String name, int plan_id, String email, String phone_number, long address_id, String password) {
         this.id = id;
         this.cnpj = cnpj;
         this.name = name;
@@ -30,7 +30,6 @@ public class Enterprise {
         this.phone_number = phone_number;
         this.address_id = address_id;
         this.password = password;
-        this.category = category;
     }
 
     public long getId() {
@@ -97,13 +96,6 @@ public class Enterprise {
         this.password = password;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
 
     @Override
     public String toString() {
@@ -116,7 +108,6 @@ public class Enterprise {
                 ", telefone='" + phone_number + '\'' +
                 ", endereco_id=" + address_id +
                 ", senha='" + password + '\'' +
-                ", categoria='" + category + '\'' +
                 '}';
     }
 }

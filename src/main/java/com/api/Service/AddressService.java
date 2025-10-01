@@ -48,14 +48,12 @@ public class AddressService {
         Address address = addressRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Endereco com ID " + id + " não encontrado"));
 
-        address.setNome(addressAtualizado.getNome());
         address.setState(addressAtualizado.getState());
         address.setPublic_place(addressAtualizado.getPublic_place());
         address.setCep(addressAtualizado.getCep());
         address.setNeighbourhood(addressAtualizado.getNeighbourhood());
         address.setCity(addressAtualizado.getCity());
         address.setComplement(addressAtualizado.getComplement());
-        address.setNumber(addressAtualizado.getNumber());
 
         addressRepository.save(address);
         AddressResponseDTO addressResponseDTO = objectMapper.convertValue(address, AddressResponseDTO.class);
@@ -67,9 +65,7 @@ public class AddressService {
         Address address = addressRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Endereco com ID " + id + " não encontrado"));
 
-        if (updates.containsKey("nome")) {
-            address.setNome((String) updates.get("nome"));
-        }
+
         if (updates.containsKey("city")) {
             address.setCity((String) updates.get("city"));
         }
@@ -87,9 +83,6 @@ public class AddressService {
         }
         if (updates.containsKey("complement")) {
             address.setComplement((String) updates.get("complement"));
-        }
-        if (updates.containsKey("number")) {
-            address.setNumber((String) updates.get("number"));
         }
         if (updates.containsKey("house_number")) {
             address.setHouse_number((int) updates.get("house_number"));

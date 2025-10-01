@@ -9,9 +9,8 @@ public class EnterpriseResponseDTO {
     private String phone_number;
     private long address_id;
     private String password;
-    private String category;
 
-    public EnterpriseResponseDTO(long id, String cnpj, String name, int plan_id, String email, String phone_number, long address_id, String password, String category) {
+    public EnterpriseResponseDTO(long id, String cnpj, String name, int plan_id, String email, String phone_number, long address_id, String password) {
         this.id = id;
         this.cnpj = cnpj;
         this.name = name;
@@ -20,7 +19,6 @@ public class EnterpriseResponseDTO {
         this.phone_number = phone_number;
         this.address_id = address_id;
         this.password = password;
-        this.category = category;
     }
 
     public long getId() {
@@ -87,14 +85,6 @@ public class EnterpriseResponseDTO {
         this.password = password;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     @Override
     public String toString() {
         return "EnterpriseResponseDTO{" +
@@ -106,7 +96,6 @@ public class EnterpriseResponseDTO {
                 ", phone_number='" + phone_number + '\'' +
                 ", endereco_id=" + address_id +
                 ", password='" + password + '\'' +
-                ", category='" + category + '\'' +
                 '}';
     }
 }
