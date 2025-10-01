@@ -20,12 +20,14 @@ public class AddressResponseDTO {
     private String cep;
     @Schema(description = "Bairro do endereço", example = "Jardim das Acácias")
     private String neighbourhood;
+    @Schema(description = "Número da casa", example = "100A")
+    private int house_number;
     @Schema(description = "Complemento do endereço", example = "Apto 101")
     private String complement;
     @Schema(description = "Número do endereço", example = "100")
     private String number;
 
-    public AddressResponseDTO(long id, String nome, String state, String city, String public_place, String cep, String neighbourhood, String complement, String number) {
+    public AddressResponseDTO(long id, String nome, String state, String city, String public_place, String cep, String neighbourhood, String complement, String number, int house_number) {
         this.id = id;
         this.nome = nome;
         this.state = state;
@@ -35,6 +37,7 @@ public class AddressResponseDTO {
         this.neighbourhood = neighbourhood;
         this.complement = complement;
         this.number = number;
+        this.house_number = house_number;
     }
 
 //    public static AddressResponseDTO toDTO(Address address) {
@@ -112,7 +115,12 @@ public class AddressResponseDTO {
     public void setNumber(String number) {
         this.number = number;
     }
-
+    public int getHouse_number() {
+        return house_number;
+    }
+    public void setHouse_number(int house_number) {
+        this.house_number = house_number;
+    }
     @Override
     public String toString() {
         return "AddressResponseDTO{" +
