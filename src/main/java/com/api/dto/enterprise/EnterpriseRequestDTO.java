@@ -25,9 +25,7 @@ public class EnterpriseRequestDTO {
     @NotNull(message = "Senha vazia")
     @Column(length = 255)
     private String password;
-    @NotNull(message = "Categoria vazia")
-    @Column(length = 100)
-    private String category;
+
     public EnterpriseRequestDTO() {
     }
 
@@ -38,7 +36,6 @@ public class EnterpriseRequestDTO {
         enterpriseModel.setPassword(enterprise.getPassword());
         enterpriseModel.setPhone_number(enterprise.getPhone_number());
         enterpriseModel.setAddress_id(enterprise.getAddress_id());
-        enterpriseModel.setCategory(enterprise.getCategory());
         return enterpriseModel;
     }
 
@@ -98,12 +95,7 @@ public class EnterpriseRequestDTO {
         this.password = password;
     }
 
-    public String getCategory() {
-        return category;
-    }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
+
 
 }

@@ -59,7 +59,6 @@ public class EnterpriseService {
         enterprise.setPhone_number(enterpriseAtualizada.getPhone_number());
         enterprise.setAddress_id(enterpriseAtualizada.getAddress_id());
         enterprise.setPassword(enterpriseAtualizada.getPassword());
-        enterprise.setCategory(enterpriseAtualizada.getCategory());
 
         enterpriseRepository.save(enterprise);
         EnterpriseResponseDTO enterpriseResponseDTO = objectMapper.convertValue(enterprise, EnterpriseResponseDTO.class);
@@ -91,9 +90,7 @@ public class EnterpriseService {
         if (updates.containsKey("password")) {
             enterprise.setPassword((String) updates.get("password"));
         }
-        if (updates.containsKey("category")) {
-            enterprise.setCategory((String) updates.get("category"));
-        }
+
 
         enterpriseRepository.save(enterprise);
         EnterpriseResponseDTO enterpriseResponseDTO = objectMapper.convertValue(enterprise, EnterpriseResponseDTO.class);

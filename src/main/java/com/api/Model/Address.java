@@ -10,7 +10,6 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true)
     private long id;
-    private String nome;
     private String state;
     private String city;
     private String public_place;
@@ -18,20 +17,18 @@ public class Address {
     private String neighbourhood;
     private int house_number;
     private String complement;
-    private String number;
+
 
     public Address() {
     }
 
-    public Address(long id, String nome, String state, String public_place, String cep, String neighbourhood, String complement, String number, String city, int house_number) {
+    public Address(long id, String state, String public_place, String cep, String neighbourhood, String complement, String city, int house_number) {
         this.id = id;
-        this.nome = nome;
         this.state = state;
         this.public_place = public_place;
         this.cep = cep;
         this.neighbourhood = neighbourhood;
         this.complement = complement;
-        this.number = number;
         this.city = city;
         this.house_number = house_number;
     }
@@ -44,13 +41,7 @@ public class Address {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
-    }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 
     public String getState() {
         return state;
@@ -100,13 +91,6 @@ public class Address {
         this.city = city;
     }
 
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
     public int getHouse_number() {
         return house_number;
     }
@@ -118,14 +102,12 @@ public class Address {
     public String toString() {
         return "Endereco{" +
                 "id=" + id +
-                ", nome='" + nome + '\'' +
                 ", estado='" + state + '\'' +
                 ", cidade='" + city + '\'' +
                 ", rua='" + public_place + '\'' +
                 ", cep='" + cep + '\'' +
                 ", bairro='" + neighbourhood + '\'' +
                 ", complemento='" + complement + '\'' +
-                ", numero='" + number + '\'' +
                 ", house_number='" + house_number + '\'' +
                 '}';
     }
