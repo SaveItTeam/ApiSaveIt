@@ -1,7 +1,7 @@
 package com.api.Model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+
 @Entity
 public class Employee {
     @Id
@@ -12,17 +12,17 @@ public class Employee {
     private String email;
     private String password;
     private long enterprise_id;
-    private boolean is_buyer = false;
+    private boolean is_admin = false;
     public Employee() {
     }
 
-    public Employee(long id, String name, String email, String password, long enterprise_id, boolean is_buyer) {
+    public Employee(long id, String name, String email, String password, long enterprise_id, boolean is_admin) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.enterprise_id = enterprise_id;
-        this.is_buyer = is_buyer;
+        this.is_admin = is_admin;
     }
 
     public long getId() {
@@ -64,11 +64,11 @@ public class Employee {
     public void setEnterprise_id(long enterprise_id) {
         this.enterprise_id = enterprise_id;
     }
-    public boolean getIs_buyer() {
-        return is_buyer;
+    public boolean getIs_admin() {
+        return is_admin;
     }
-    public void setIs_buyer(boolean is_buyer) {
-        this.is_buyer = is_buyer;
+    public void setIs_admin(boolean is_buyer) {
+        this.is_admin = is_buyer;
     }
 
     @Override
@@ -79,7 +79,7 @@ public class Employee {
                 ", email='" + email + '\'' +
                 ", senha='" + password + '\'' +
                 ", empresa_id=" + enterprise_id +
-                ", is_buyer=" + is_buyer +
+                ", is_admin=" + is_admin +
                 '}';
     }
 }
