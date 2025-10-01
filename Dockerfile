@@ -6,15 +6,19 @@ COPY pom.xml .
 RUN mvn dependency:go-offline -B
 
 COPY src ./src
-
 RUN mvn clean package -DskipTests
 
-FROM eclipse-temurin:21-jdk-jammy
+FROM eclipse-temurin:21-jdk-jammy AS java
 
 WORKDIR /app
-
 COPY --from=build /app/target/*.jar app.jar
 
 EXPOSE 8080
-
 ENTRYPOINT ["java", "-jar", "app.jar"]
+
+FROM python:3.11-slim AS python
+
+WORKDIR /app
+RUN echo "Hello World!" > /app/test.txt
+
+CMD ["cat", "/app/test.txt"]
