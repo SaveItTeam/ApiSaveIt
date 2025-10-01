@@ -1,7 +1,6 @@
 package com.api.Model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Stock {
@@ -9,16 +8,16 @@ public class Stock {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true)
     private long id;
-    private int quantity;
+    private int quantity_input;
     private int quantity_output;
     private int batch_id;
 
     public Stock() {
     }
 
-    public Stock(long id, int quantity, int quantity_output, int batch_id) {
+    public Stock(long id, int quantity_input, int quantity_output, int batch_id) {
         this.id = id;
-        this.quantity = quantity;
+        this.quantity_input = quantity_input;
         this.quantity_output = quantity_output;
         this.batch_id = batch_id;
     }
@@ -31,12 +30,12 @@ public class Stock {
         this.id = id;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getQuantity_input() {
+        return quantity_input;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setQuantity_input(int quantity) {
+        this.quantity_input = quantity;
     }
 
     public int getQuantity_output() {
@@ -59,7 +58,7 @@ public class Stock {
     public String toString() {
         return "Estoque{" +
                 "id=" + id +
-                ", quantity=" + quantity +
+                ", quantity_input=" + quantity_input +
                 ", quantity_output=" + quantity_output +
                 ", batch_id=" + batch_id +
                 '}';

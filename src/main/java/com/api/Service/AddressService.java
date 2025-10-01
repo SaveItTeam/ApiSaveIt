@@ -91,6 +91,9 @@ public class AddressService {
         if (updates.containsKey("number")) {
             address.setNumber((String) updates.get("number"));
         }
+        if (updates.containsKey("house_number")) {
+            address.setHouse_number((int) updates.get("house_number"));
+        }
 
         addressRepository.save(address);
 

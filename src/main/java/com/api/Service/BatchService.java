@@ -1,14 +1,10 @@
 package com.api.Service;
 
 import com.api.Model.Batch;
-import com.api.Model.Enterprise;
-import com.api.Model.Product;
 import com.api.Repository.BatchRepository;
 import com.api.dto.Batch.BatchListDTO;
 import com.api.dto.Batch.BatchRequestDTO;
 import com.api.dto.Batch.BatchResponseDTO;
-import com.api.dto.enterprise.EnterpriseResponseDTO;
-import com.api.dto.product.ProductRequestDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,7 +57,7 @@ public class BatchService {
         batch.setEntry_date(batchAtualizado.getEntry_date());
         batch.setBatch_code(batchAtualizado.getBatch_code());
         batch.setExpiration_date(batchAtualizado.getExpiration_date());
-        batch.setQuantity(batchAtualizado.getQuantity());
+        batch.setQuantity_measure(batchAtualizado.getQuantity_measure());
         batch.setProduct_id(batchAtualizado.getProduct_id());
 
         batchRepository.save(batch);
@@ -84,8 +80,8 @@ public class BatchService {
         if (updates.containsKey("expiration_date")) {
             batch.setExpiration_date((Date) updates.get("expiration_date"));
         }
-        if (updates.containsKey("quantity")) {
-            batch.setQuantity((int) updates.get("quantity"));
+        if (updates.containsKey("quantity_measure")) {
+            batch.setQuantity_measure((int) updates.get("quantity_measure"));
         }
         if (updates.containsKey("product_id")) {
             batch.setProduct_id((long) updates.get("product_id"));

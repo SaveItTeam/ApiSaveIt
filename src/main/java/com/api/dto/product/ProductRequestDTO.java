@@ -15,7 +15,7 @@ public class ProductRequestDTO {
     @Column(length = 50)
     private String brand;
     @Column(length = 500)
-    private String descricao;
+    private String description;
     @NotNull(message = "Id da empresa vazia")
     private long enterprise_id;
 
@@ -52,12 +52,12 @@ public class ProductRequestDTO {
         this.brand = brand;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public long getEnterprise_id() {

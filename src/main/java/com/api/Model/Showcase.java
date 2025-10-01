@@ -2,6 +2,9 @@ package com.api.Model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+
+import java.util.Date;
+
 @Entity
 public class Showcase {
     @Id
@@ -11,15 +14,16 @@ public class Showcase {
     private String description;
     private double price;
     private long batch_id;
-
+    private Date entrance_date;
     public Showcase() {
     }
 
-    public Showcase(long id, String description, double price, long batch_id) {
+    public Showcase(long id, String description, double price, long batch_id, Date entrance_date) {
         this.id = id;
         this.description = description;
         this.price = price;
         this.batch_id = batch_id;
+        this.entrance_date = entrance_date;
     }
 
     public long getId() {
@@ -53,7 +57,12 @@ public class Showcase {
     public void setBatch_id(long batch_id) {
         this.batch_id = batch_id;
     }
-
+    public Date getEntrance_date() {
+        return entrance_date;
+    }
+    public void setEntrance_date(Date entrance_date) {
+        this.entrance_date = entrance_date;
+    }
     @Override
     public String toString() {
         return "Vitrine{" +
@@ -61,6 +70,7 @@ public class Showcase {
                 ", descricao='" + description + '\'' +
                 ", preco=" + price +
                 ", lote_id=" + batch_id +
+                ", data_entrada=" + entrance_date +
                 '}';
     }
 }

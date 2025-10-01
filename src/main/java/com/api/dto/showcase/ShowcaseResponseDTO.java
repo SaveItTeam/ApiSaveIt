@@ -2,6 +2,8 @@ package com.api.dto.showcase;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.util.Date;
+
 public class ShowcaseResponseDTO {
     @Schema(description = "ID da vitrine", example = "1")
     private long id;
@@ -11,12 +13,14 @@ public class ShowcaseResponseDTO {
     private double price;
     @Schema(description = "ID do lote associado à vitrine", example = "1")
     private long batch_id;
+    private Date entrance_date;
 
-    public ShowcaseResponseDTO(long id, String description, double price, long batch_id) {
+    public ShowcaseResponseDTO(long id, String description, double price, long batch_id, Date entrance_date) {
         this.id = id;
         this.description = description;
         this.price = price;
         this.batch_id = batch_id;
+        this.entrance_date = entrance_date;
     }
 
     public long getId() {

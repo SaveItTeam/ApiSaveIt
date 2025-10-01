@@ -51,6 +51,7 @@ public class ProductService {
         product.setName(productAtualizado.getName());
         product.setBrand(productAtualizado.getBrand());
         product.setEnterprise_id(productAtualizado.getEnterprise_id());
+        product.setDescription(productAtualizado.getDescription());
 
         productRepository.save(product);
         return objectMapper.convertValue(product, ProductResponseDTO.class);
@@ -69,6 +70,9 @@ public class ProductService {
         }
         if (updates.containsKey("enterprise_id")) {
             product.setEnterprise_id((long) updates.get("enterprise_id"));
+        }
+        if (updates.containsKey("description")) {
+            product.setDescription((String) updates.get("description"));
         }
 
         productRepository.save(product);

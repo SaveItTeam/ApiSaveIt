@@ -16,13 +16,14 @@ public class Address {
     private String public_place;
     private String cep;
     private String neighbourhood;
+    private int house_number;
     private String complement;
     private String number;
 
     public Address() {
     }
 
-    public Address(long id, String nome, String state, String public_place, String cep, String neighbourhood, String complement, String number) {
+    public Address(long id, String nome, String state, String public_place, String cep, String neighbourhood, String complement, String number, String city, int house_number) {
         this.id = id;
         this.nome = nome;
         this.state = state;
@@ -31,6 +32,8 @@ public class Address {
         this.neighbourhood = neighbourhood;
         this.complement = complement;
         this.number = number;
+        this.city = city;
+        this.house_number = house_number;
     }
 
     public long getId() {
@@ -104,6 +107,12 @@ public class Address {
     public void setNumber(String number) {
         this.number = number;
     }
+    public int getHouse_number() {
+        return house_number;
+    }
+    public void setHouse_number(int house_number) {
+        this.house_number = house_number;
+    }
 
     @Override
     public String toString() {
@@ -117,6 +126,7 @@ public class Address {
                 ", bairro='" + neighbourhood + '\'' +
                 ", complemento='" + complement + '\'' +
                 ", numero='" + number + '\'' +
+                ", house_number='" + house_number + '\'' +
                 '}';
     }
 }

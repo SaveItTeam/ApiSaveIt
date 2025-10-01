@@ -1,6 +1,5 @@
 package com.api.dto.Batch;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
@@ -27,7 +26,7 @@ public class BatchRequestDTO {
     @Column(length = 50)
     @NotNull(message = "Quantidade vazio")
     @Schema(description = "Quantidade de itens no lote", example = "100")
-    private int quantity;
+    private int quantity_measure;
     @Column(length = 20)
     @NotNull(message = "Id do produto vazio")
     @Schema(description = "ID do produto associado ao lote", example = "1")
@@ -36,12 +35,12 @@ public class BatchRequestDTO {
     public BatchRequestDTO() {
     }
 
-    public BatchRequestDTO(String unit_measure, Date entry_date, String batch_code, Date expiration_date, int quantity, long product_id) {
+    public BatchRequestDTO(String unit_measure, Date entry_date, String batch_code, Date expiration_date, int quantity_measure, long product_id) {
         this.unit_measure = unit_measure;
         this.entry_date = entry_date;
         this.batch_code = batch_code;
         this.expiration_date = expiration_date;
-        this.quantity = quantity;
+        this.quantity_measure = quantity_measure;
         this.product_id = product_id;
     }
 
@@ -88,12 +87,12 @@ public class BatchRequestDTO {
         this.expiration_date = expiration_date;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getQuantity_measure() {
+        return quantity_measure;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setQuantity_measure(int quantity_measure) {
+        this.quantity_measure = quantity_measure;
     }
 
     public long getProduct_id() {
@@ -111,7 +110,7 @@ public class BatchRequestDTO {
                 ", entry_date=" + entry_date +
                 ", batch_code='" + batch_code + '\'' +
                 ", expiration_date=" + expiration_date +
-                ", quantity=" + quantity +
+                ", quantity_measure=" + quantity_measure +
                 ", product_id=" + product_id +
                 '}';
     }

@@ -1,4 +1,4 @@
-package com.api.dto.estock;
+package com.api.dto.stock;
 
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
@@ -7,17 +7,12 @@ public class StockRequestDTO {
     @NotNull(message = "Campo vazio")
     @Column(unique = true)
     private long id;
-    @NotNull(message = "Quantidade de estoque vazio")
-    private int quantity;
+    @NotNull(message = "Quantidade de entrada estoque vazio")
+    private int quantity_input;
     @NotNull(message = "Quantidade da saída esta vazia")
     private int quantity_output;
     @NotNull(message = "Codigo do LOTE esta vazia")
     private int batch_id;
-
-    public StockRequestDTO() {
-    }
-
-
 
     public long getId() {
         return id;
@@ -27,12 +22,12 @@ public class StockRequestDTO {
         this.id = id;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getQuantity_input() {
+        return quantity_input;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setQuantity_input(int quantity_input) {
+        this.quantity_input = quantity_input;
     }
 
     public int getQuantity_output() {
@@ -55,7 +50,7 @@ public class StockRequestDTO {
     public String toString() {
         return "StockRequestDTO{" +
                 "id=" + id +
-                ", quantity=" + quantity +
+                ", quantity=" + quantity_input +
                 ", quantity_output=" + quantity_output +
                 ", batch_id=" + batch_id +
                 '}';

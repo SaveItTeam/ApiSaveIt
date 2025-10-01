@@ -10,16 +10,17 @@ public class Product {
     private long id;
     private String name;
     private String brand;
+    private String description;
     private long enterprise_id;
-
     public Product() {
     }
 
-    public Product(long id, String name, String brand,long enterprise_id) {
+    public Product(long id, String name, String brand,long enterprise_id, String description) {
         this.id = id;
         this.name = name;
         this.brand = brand;
         this.enterprise_id = enterprise_id;
+        this.description = description;
     }
 
     public long getId() {
@@ -54,6 +55,14 @@ public class Product {
         this.enterprise_id = enterprise_id;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         return "Produto{" +
@@ -61,6 +70,7 @@ public class Product {
                 ", nome='" + name + '\'' +
                 ", marca='" + brand + '\'' +
                 ", empresa_id=" + enterprise_id +
+                ", descricao='" + description + '\'' +
                 '}';
     }
 

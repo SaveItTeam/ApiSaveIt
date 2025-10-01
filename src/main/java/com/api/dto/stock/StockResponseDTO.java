@@ -1,8 +1,8 @@
-package com.api.dto.estock;
+package com.api.dto.stock;
 
 public class StockResponseDTO {
     private long id;
-    private int quantity;
+    private int quantity_input;
     private int quantity_output;
     private int batch_id;
 
@@ -17,12 +17,12 @@ public class StockResponseDTO {
         this.id = id;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getQuantity_input() {
+        return quantity_input;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setQuantity_input(int quantity_input) {
+        this.quantity_input = quantity_input;
     }
 
     public int getQuantity_output() {
@@ -45,7 +45,7 @@ public class StockResponseDTO {
     public String toString() {
         return "StockResponseDTO{" +
                 "id=" + id +
-                ", quantity=" + quantity +
+                ", quantity=" + quantity_input +
                 ", quantity_output=" + quantity_output +
                 ", batch_id=" + batch_id +
                 '}';

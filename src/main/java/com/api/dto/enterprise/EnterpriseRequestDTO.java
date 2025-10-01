@@ -21,16 +21,13 @@ public class EnterpriseRequestDTO {
     @NotNull(message = "Telefone vazio")
     private String phone_number;
     @NotNull(message = "Id do endereco vazio")
-    private long endereco_id;
+    private long address_id;
     @NotNull(message = "Senha vazia")
     @Column(length = 255)
     private String password;
     @NotNull(message = "Categoria vazia")
     @Column(length = 100)
     private String category;
-    @NotNull(message = "is buyer vazio")
-    private boolean is_buyer;
-
     public EnterpriseRequestDTO() {
     }
 
@@ -40,9 +37,8 @@ public class EnterpriseRequestDTO {
         enterpriseModel.setEmail(enterprise.getEmail());
         enterpriseModel.setPassword(enterprise.getPassword());
         enterpriseModel.setPhone_number(enterprise.getPhone_number());
-        enterpriseModel.setEndereco_id(enterprise.getEndereco_id());
+        enterpriseModel.setAddress_id(enterprise.getAddress_id());
         enterpriseModel.setCategory(enterprise.getCategory());
-        enterpriseModel.setIs_buyer(enterprise.isIs_buyer());
         return enterpriseModel;
     }
 
@@ -86,12 +82,12 @@ public class EnterpriseRequestDTO {
         this.phone_number = phone_number;
     }
 
-    public long getEndereco_id() {
-        return endereco_id;
+    public long getAddress_id() {
+        return address_id;
     }
 
-    public void setEndereco_id(long endereco_id) {
-        this.endereco_id = endereco_id;
+    public void setAddress_id(long address_id) {
+        this.address_id = address_id;
     }
 
     public String getPassword() {
@@ -110,11 +106,4 @@ public class EnterpriseRequestDTO {
         this.category = category;
     }
 
-    public boolean isIs_buyer() {
-        return is_buyer;
-    }
-
-    public void setIs_buyer(boolean is_buyer) {
-        this.is_buyer = is_buyer;
-    }
 }

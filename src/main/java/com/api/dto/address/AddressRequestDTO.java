@@ -4,6 +4,7 @@ import com.api.Model.Address;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 public class AddressRequestDTO {
     @Column(length = 100)
@@ -24,6 +25,10 @@ public class AddressRequestDTO {
     @Schema(description = "Bairro do endereço", example = "Jardim das Acácias")
     @Column(length = 100)
     private String neighbourhood;
+    @Schema(description = "Número da casa", example = "100A")
+    @Column(length = 10)
+    @NotNull(message = "Número da casa não pode ser nulo")
+    private int house_number;
     @Schema(description = "Complemento do endereço", example = "Apto 101")
     @Column(length = 100)
     private String complement;
@@ -110,5 +115,12 @@ public class AddressRequestDTO {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public int getHouse_number() {
+        return house_number;
+    }
+    public void setHouse_number(int house_number) {
+        this.house_number = house_number;
     }
 }

@@ -7,22 +7,20 @@ public class EnterpriseResponseDTO {
     private int plan_id;
     private String email;
     private String phone_number;
-    private long endereco_id;
+    private long address_id;
     private String password;
     private String category;
-    private boolean is_buyer;
 
-    public EnterpriseResponseDTO(long id, String cnpj, String name, int plan_id, String email, String phone_number, long endereco_id, String password, String category, boolean is_buyer) {
+    public EnterpriseResponseDTO(long id, String cnpj, String name, int plan_id, String email, String phone_number, long address_id, String password, String category) {
         this.id = id;
         this.cnpj = cnpj;
         this.name = name;
         this.plan_id = plan_id;
         this.email = email;
         this.phone_number = phone_number;
-        this.endereco_id = endereco_id;
+        this.address_id = address_id;
         this.password = password;
         this.category = category;
-        this.is_buyer = is_buyer;
     }
 
     public long getId() {
@@ -73,12 +71,12 @@ public class EnterpriseResponseDTO {
         this.phone_number = phone_number;
     }
 
-    public long getEndereco_id() {
-        return endereco_id;
+    public long getAddress_id() {
+        return address_id;
     }
 
-    public void setEndereco_id(long endereco_id) {
-        this.endereco_id = endereco_id;
+    public void setAddress_id(long address_id) {
+        this.address_id = address_id;
     }
 
     public String getPassword() {
@@ -97,14 +95,6 @@ public class EnterpriseResponseDTO {
         this.category = category;
     }
 
-    public boolean isIs_buyer() {
-        return is_buyer;
-    }
-
-    public void setIs_buyer(boolean is_buyer) {
-        this.is_buyer = is_buyer;
-    }
-
     @Override
     public String toString() {
         return "EnterpriseResponseDTO{" +
@@ -114,10 +104,9 @@ public class EnterpriseResponseDTO {
                 ", plan_id='" + plan_id + '\'' +
                 ", email='" + email + '\'' +
                 ", phone_number='" + phone_number + '\'' +
-                ", endereco_id=" + endereco_id +
+                ", endereco_id=" + address_id +
                 ", password='" + password + '\'' +
                 ", category='" + category + '\'' +
-                ", is_buyer=" + is_buyer +
                 '}';
     }
 }

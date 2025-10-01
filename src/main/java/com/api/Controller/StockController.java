@@ -1,11 +1,8 @@
 package com.api.Controller;
 
 import com.api.Exception.GlobalException;
-import com.api.Model.Showcase;
-import com.api.Model.Stock;
-import com.api.Service.ShowcaseService;
 import com.api.Service.StockService;
-import com.api.dto.estock.StockRequestDTO;
+import com.api.dto.stock.StockRequestDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -17,11 +14,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.Socket;
 import java.util.List;
 import java.util.Map;
 
-import com.api.dto.estock.StockResponseDTO;
+import com.api.dto.stock.StockResponseDTO;
 
 
 

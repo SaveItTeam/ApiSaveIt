@@ -5,7 +5,7 @@ public class ProductResponseDTO {
     private String sku;
     private String name;
     private String brand;
-    private String descricao;
+    private String description;
     private long enterprise_id;
 
     public long getId() {
@@ -40,12 +40,12 @@ public class ProductResponseDTO {
         this.brand = brand;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public long getEnterprise_id() {
