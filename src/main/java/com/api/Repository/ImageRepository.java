@@ -27,9 +27,10 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
             "join Product p on b.product_id = p.id\n" +
             "left join Image i on i.product_id = p.id\n" +
             "join Enterprise e on p.enterprise_id = e.id\n" +
-            "join Address a on e.address_id = a.id",
+            "join Address a on e.address_id = a.id\n" +
+            "where s.id = :showcaseId",
             nativeQuery = true)
-    List<ProductShowcaseProjection> findShowcaseWithImages();
+    List<ProductShowcaseProjection> findShowcaseWithImage(@Param("showcaseId") Long showcaseId);
 
 
     @Query("select i from Image i where i.product_id = :productId")

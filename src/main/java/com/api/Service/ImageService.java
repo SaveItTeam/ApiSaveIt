@@ -37,8 +37,8 @@ public class ImageService {
         }
         return imagesResponse;
     }
-    public List<ProductShowcaseProjection> listShowcaseWithImages() {
-        return imageRepository.findShowcaseWithImages();
+    public List<ProductShowcaseProjection> listShowcaseWithImages(Long showcaseId) {
+        return imageRepository.findShowcaseWithImage(showcaseId);
     }
 
     public ImageResponseDTO getImageById(Long id) {

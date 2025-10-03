@@ -45,14 +45,14 @@ public class ImageController {
         List<ImageResponseDTO> images = imageService.listImage();
         return ResponseEntity.ok(images);
     }
-    @GetMapping("/showcase-images")
+    @GetMapping("/showcase-images/{showcaseId}")
     @Operation(summary = "Listar imagens para vitrine")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Lista de imagens para vitrine retornada com sucesso"),
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
-    public List<?> getShowcaseWithImages() {
-        return imageService.listShowcaseWithImages();
+    public List<?> getShowcaseWithImages(Long showcaseId) {
+        return imageService.listShowcaseWithImages(showcaseId);
     }
     @PostMapping("/inserir")
     @Operation(summary = "Inserir uma nova imagem")
