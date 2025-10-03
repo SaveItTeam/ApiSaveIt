@@ -2,6 +2,7 @@ package com.api.Service;
 
 import com.api.Model.Showcase;
 import com.api.Repository.ShowcaseRepository;
+import com.api.dto.showcase.ShowcaseListDTO;
 import com.api.dto.showcase.ShowcaseRequestDTO;
 import com.api.dto.showcase.ShowcaseResponseDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,6 +35,14 @@ public class ShowcaseService {
     public ShowcaseResponseDTO insertShowcase(ShowcaseRequestDTO showCase) {
         Showcase showcase = showcaseRepository.save(objectMapper.convertValue(showCase, Showcase.class));
         return objectMapper.convertValue(showcase, ShowcaseResponseDTO.class);
+    }
+
+    public List<ShowcaseListDTO> listShowcaseWithProduct() {
+        List<ShowcaseListDTO> showcaseListDTOS = showcaseRepository.findShowcaseWithProduct();
+        if (showcaseListDTOS.isEmpty()) {
+            throw new NoSuchElementException("Nenhuma vitrine encontrada");
+        }
+        return showcaseListDTOS;
     }
 
     public void deleteShowcase(Long id) {

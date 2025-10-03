@@ -31,4 +31,8 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
             nativeQuery = true)
     List<ProductShowcaseProjection> findShowcaseWithImages();
 
+
+    @Query("select i from Image i where i.product_id = :productId")
+    List<Image> findByProductId(@Param("productId") Long productId);
+
 }

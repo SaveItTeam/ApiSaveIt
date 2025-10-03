@@ -41,7 +41,19 @@ public class ImageService {
         return imageRepository.findShowcaseWithImages();
     }
 
+    public ImageResponseDTO getImageById(Long id) {
+        Image image = imageRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Imagem com ID " + id + " não encontrado"));
+        return objectMapper.convertValue(image, ImageResponseDTO.class);
+    }
 
+    public ImageResponseDTO getImageByProductId(Long productId) {
+        List<Image> images = imageRepository.findByProductId(productId);
+        if (images.isEmpty()) {
+            throw new NoSuchElementException("Imagem para o produto com ID " + productId + " não encontrado");
+        }
+        return objectMapper.convertValue(images.get(0), ImageResponseDTO.class);
+    }
 
     public void insertImage(ImageRequestDTO image) {
         Image imageResponse = objectMapper.convertValue(image, Image.class);

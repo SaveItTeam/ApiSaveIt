@@ -3,6 +3,7 @@ package com.api.Controller;
 import com.api.Exception.GlobalException;
 import com.api.Model.Showcase;
 import com.api.Service.ShowcaseService;
+import com.api.dto.showcase.ShowcaseListDTO;
 import com.api.dto.showcase.ShowcaseRequestDTO;
 import com.api.dto.showcase.ShowcaseResponseDTO;
 import jakarta.validation.Valid;
@@ -82,6 +83,17 @@ public class ShowcaseController {
     public ResponseEntity<?> updateShowcase(@PathVariable Long id, @Valid @RequestBody ShowcaseRequestDTO showcaseAtualizado) {
         showCaseService.updateShowcase(id, showcaseAtualizado);
         return ResponseEntity.ok("Vitrine atualizado com sucesso!");
+    }
+
+    @GetMapping("/listarVitrine")
+    @Operation(summary = "Listar vitrine com imagens e nomes dos produtos")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Lista de vitrine retornada com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
+    public ResponseEntity<List<ShowcaseListDTO>> listShowcasaWithProduct() {
+        List<ShowcaseListDTO> showcaseListDTOS = showCaseService.listShowcaseWithProduct();
+        return ResponseEntity.ok(showcaseListDTOS);
     }
 
 
