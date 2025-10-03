@@ -37,8 +37,12 @@ public class ImageService {
         }
         return imagesResponse;
     }
-    public List<ProductShowcaseProjection> listShowcaseWithImages(Long showcaseId) {
-        return imageRepository.findShowcaseWithImage(showcaseId);
+    public ProductShowcaseProjection listShowcaseWithImages(Long showcaseId) {
+        ProductShowcaseProjection result = imageRepository.findShowcaseWithImage(showcaseId);
+        if (result == null) {
+            throw new NoSuchElementException("Showcase não encontrado para o ID: " + showcaseId);
+        }
+        return result;
     }
 
     public ImageResponseDTO getImageById(Long id) {
