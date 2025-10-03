@@ -51,7 +51,7 @@ public class ImageController {
             @ApiResponse(responseCode = "200", description = "Lista de imagens para vitrine retornada com sucesso"),
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
-    public ResponseEntity<?> getShowcaseWithImages(@RequestParam Long showcaseId) {
+    public ResponseEntity<?> getShowcaseWithImages(@PathVariable Long showcaseId) {
         return ResponseEntity.ok(imageService.listShowcaseWithImages(showcaseId));
     }
     @PostMapping("/inserir")
