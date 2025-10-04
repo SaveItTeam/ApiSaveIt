@@ -20,5 +20,5 @@ public class Employee {
     private String email;
     private String password;
     private long enterprise_id;
-    private boolean is_admin = false;
+    private boolean is_admin;
 }

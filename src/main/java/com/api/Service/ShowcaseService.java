@@ -37,8 +37,13 @@ public class ShowcaseService {
         return objectMapper.convertValue(showcase, ShowcaseResponseDTO.class);
     }
 
-    public List<ShowcaseListDTO> listShowcaseWithProduct() {
-        List<ShowcaseListDTO> showcaseListDTOS = showcaseRepository.findShowcaseWithProduct();
+    public List<ShowcaseListDTO> listShowcaseWithProduct(String category) {
+        List<ShowcaseListDTO> showcaseListDTOS = new ArrayList<>();
+        if (category == "all") {
+            showcaseListDTOS = showcaseRepository.findShowcaseWithProduct();
+        }else {
+            showcaseListDTOS = showcaseRepository.findShowcaseWithProductByCategory(category);
+        }
         if (showcaseListDTOS.isEmpty()) {
             throw new NoSuchElementException("Nenhuma vitrine encontrada");
         }
