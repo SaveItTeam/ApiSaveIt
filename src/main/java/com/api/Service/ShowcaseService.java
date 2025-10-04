@@ -39,7 +39,7 @@ public class ShowcaseService {
 
     public List<ShowcaseListDTO> listShowcaseWithProduct(String category) {
         List<ShowcaseListDTO> showcaseListDTOS = new ArrayList<>();
-        if (category == "all") {
+        if (category.equals("all")) {
             showcaseListDTOS = showcaseRepository.findShowcaseWithProduct();
         }else {
             showcaseListDTOS = showcaseRepository.findShowcaseWithProductByCategory(category);
