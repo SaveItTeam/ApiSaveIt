@@ -4,7 +4,9 @@ import com.api.Model.Employee;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
+@Data
 public class EmployeeRequestDTO {
     @NotNull(message = "Nome vazio")
     @Column(length = 255)
@@ -23,54 +25,4 @@ public class EmployeeRequestDTO {
     private long enterprise_id;
     @NotNull(message = "Is buyer vazio")
     private boolean is_admin = false;
-    public EmployeeRequestDTO() {
-    }
-
-    public static Employee toModel(EmployeeRequestDTO employee) {
-        Employee employeeModel = new Employee();
-        employeeModel.setName(employee.getName());
-        employeeModel.setEmail(employee.getEmail());
-        employeeModel.setPassword(employee.getPassword());
-        employeeModel.setEnterprise_id(employee.getEnterprise_id());
-        employeeModel.setIs_admin(employee.getIs_admin());
-        return employeeModel;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public long getEnterprise_id() {
-        return enterprise_id;
-    }
-
-    public void setEnterprise_id(long enterprise_id) {
-        this.enterprise_id = enterprise_id;
-    }
-    public boolean getIs_admin() {
-        return is_admin;
-    }
-    public void setIs_admin(boolean is_admin) {
-        this.is_admin = is_admin;
-    }
 }

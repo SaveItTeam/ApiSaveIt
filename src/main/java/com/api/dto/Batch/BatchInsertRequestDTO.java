@@ -2,7 +2,9 @@ package com.api.dto.Batch;
 
 import com.api.dto.image.ImageRequestDTO;
 import com.api.dto.product.ProductRequestDTO;
+import lombok.Data;
 
+@Data
 public class BatchInsertRequestDTO {
     private BatchRequestDTO batch;
     private ProductRequestDTO product;

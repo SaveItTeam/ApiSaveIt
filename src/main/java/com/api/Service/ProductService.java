@@ -48,10 +48,12 @@ public class ProductService {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Produto com ID " + id + " não encontrado"));
 
+
         product.setName(productAtualizado.getName());
         product.setBrand(productAtualizado.getBrand());
         product.setEnterprise_id(productAtualizado.getEnterprise_id());
         product.setDescription(productAtualizado.getDescription());
+        product.setCategory(productAtualizado.getCategory());
 
         productRepository.save(product);
         return objectMapper.convertValue(product, ProductResponseDTO.class);
@@ -73,6 +75,9 @@ public class ProductService {
         }
         if (updates.containsKey("description")) {
             product.setDescription((String) updates.get("description"));
+        }
+        if( updates.containsKey("category")) {
+            product.setCategory((String) updates.get("category"));
         }
 
         productRepository.save(product);
