@@ -91,7 +91,7 @@ public class ShowcaseController {
             @ApiResponse(responseCode = "200", description = "Lista de vitrine retornada com sucesso"),
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
-    public ResponseEntity<List<ShowcaseListDTO>> listShowcasaWithProduct( @RequestParam String category) {
+    public ResponseEntity<List<ShowcaseListDTO>> listShowcasaWithProduct(@PathVariable String category) {
         List<ShowcaseListDTO> showcaseListDTOS = showCaseService.listShowcaseWithProduct(category);
         return ResponseEntity.ok(showcaseListDTOS);
     }
