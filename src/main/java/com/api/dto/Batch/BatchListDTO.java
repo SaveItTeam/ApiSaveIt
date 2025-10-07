@@ -14,4 +14,5 @@ public class BatchListDTO {
     private Date expiration_date;
     private int quantity;
     private String image;
+    private String unit_measure;
 }
