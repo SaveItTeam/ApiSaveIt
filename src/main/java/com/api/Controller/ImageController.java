@@ -45,14 +45,14 @@ public class ImageController {
         List<ImageResponseDTO> images = imageService.listImage();
         return ResponseEntity.ok(images);
     }
-    @GetMapping("/showcase-images")
+    @GetMapping("/showcase-images/{showcaseId}")
     @Operation(summary = "Listar imagens para vitrine")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Lista de imagens para vitrine retornada com sucesso"),
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
-    public List<?> getShowcaseWithImages() {
-        return imageService.listShowcaseWithImages();
+    public ResponseEntity<?> getShowcaseWithImages(@PathVariable Long showcaseId) {
+        return ResponseEntity.ok(imageService.listShowcaseWithImages(showcaseId));
     }
     @PostMapping("/inserir")
     @Operation(summary = "Inserir uma nova imagem")
@@ -66,6 +66,31 @@ public class ImageController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Imagem inserido com sucesso!");
     }
+
+    @GetMapping("/selecionar/{id}")
+    @Operation(summary = "Obter uma imagem por ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Imagem retornada com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Imagem não encontrada"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
+    public ResponseEntity<ImageResponseDTO> getImageById(@PathVariable Long id) {
+        ImageResponseDTO image = imageService.getImageById(id);
+        return ResponseEntity.ok(image);
+    }
+
+    @GetMapping("/selecionarPorProduto/{productId}")
+    @Operation(summary = "Obter uma imagem por ID do produto")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Imagem retornada com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Imagem não encontrada"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
+    public ResponseEntity<ImageResponseDTO> getImageByProductId(@PathVariable Long productId) {
+        ImageResponseDTO image = imageService.getImageByProductId(productId);
+        return ResponseEntity.ok(image);
+    }
+
     @DeleteMapping("/excluir/{id}")
     @Operation(summary = "Excluir uma imagem")
     @ApiResponses(value = {

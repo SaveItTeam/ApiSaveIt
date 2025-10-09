@@ -37,11 +37,27 @@ public class ImageService {
         }
         return imagesResponse;
     }
-    public List<ProductShowcaseProjection> listShowcaseWithImages() {
-        return imageRepository.findShowcaseWithImages();
+    public ProductShowcaseProjection listShowcaseWithImages(Long showcaseId) {
+        ProductShowcaseProjection result = imageRepository.findShowcaseWithImage(showcaseId);
+        if (result == null) {
+            throw new NoSuchElementException("Showcase não encontrado para o ID: " + showcaseId);
+        }
+        return result;
     }
 
+    public ImageResponseDTO getImageById(Long id) {
+        Image image = imageRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Imagem com ID " + id + " não encontrado"));
+        return objectMapper.convertValue(image, ImageResponseDTO.class);
+    }
 
+    public ImageResponseDTO getImageByProductId(Long productId) {
+        List<Image> images = imageRepository.findByProductId(productId);
+        if (images.isEmpty()) {
+            throw new NoSuchElementException("Imagem para o produto com ID " + productId + " não encontrado");
+        }
+        return objectMapper.convertValue(images.get(0), ImageResponseDTO.class);
+    }
 
     public void insertImage(ImageRequestDTO image) {
         Image imageResponse = objectMapper.convertValue(image, Image.class);
