@@ -10,7 +10,7 @@ public class ImageResponseDTO {
     @Schema(description = "Codigo binario da imagem", example = "menor ideia")
     private String image;
     @Schema(description = "ID do produto associado à imagem", example = "1")
-    private long product_id;
+    private long productId;
 
 
 }

@@ -8,8 +8,7 @@ import lombok.Data;
 public class ProductRequestDTO {
     @Column(unique = true)
     private long id;
-    @Column(length = 50)
-    private String sku;
+
     @NotNull(message = "Nome vazio")
     @Column(length = 100)
     private String name;

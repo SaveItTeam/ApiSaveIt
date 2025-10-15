@@ -45,6 +45,12 @@ public class BatchService {
         batchRepository.save(response);
     }
 
+    public BatchResponseDTO getBatchById(Long id) {
+        Batch batch = batchRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Lote com ID " + id + " não encontrado"));
+        return objectMapper.convertValue(batch, BatchResponseDTO.class);
+    }
+
     public void deleteBatch(Long id) {
         batchRepository.deleteById(id);
     }
@@ -53,12 +59,12 @@ public class BatchService {
         Batch batch = batchRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Lote com ID " + id + " não encontrado"));
 
-        batch.setUnit_measure(batchAtualizado.getUnit_measure());
-        batch.setEntry_date(batchAtualizado.getEntry_date());
-        batch.setBatch_code(batchAtualizado.getBatch_code());
-        batch.setExpiration_date(batchAtualizado.getExpiration_date());
-        batch.setQuantity_measure(batchAtualizado.getQuantity_measure());
-        batch.setProduct_id(batchAtualizado.getProduct_id());
+        batch.setUnitMeasure(batchAtualizado.getUnitMeasure());
+        batch.setEntryDate(batchAtualizado.getEntryDate());
+        batch.setBatchCode(batchAtualizado.getBatchCode());
+        batch.setExpirationDate(batchAtualizado.getExpirationDate());
+        batch.setQuantityMeasure(batchAtualizado.getQuantityMeasure());
+        batch.setProductId(batchAtualizado.getProductId());
 
         batchRepository.save(batch);
         return objectMapper.convertValue(batch, BatchResponseDTO.class);
@@ -69,22 +75,22 @@ public class BatchService {
                 .orElseThrow(() -> new NoSuchElementException("Lote com ID " + id + " não encontrado"));
 
         if (updates.containsKey("unit_measure")) {
-            batch.setUnit_measure((String) updates.get("unit_measure"));
+            batch.setUnitMeasure((String) updates.get("unit_measure"));
         }
         if (updates.containsKey("entry_date")) {
-            batch.setEntry_date((Date) updates.get("entry_date"));
+            batch.setEntryDate((Date) updates.get("entry_date"));
         }
         if (updates.containsKey("batch_code")) {
-            batch.setBatch_code((String) updates.get("batch_code"));
+            batch.setBatchCode((String) updates.get("batch_code"));
         }
         if (updates.containsKey("expiration_date")) {
-            batch.setExpiration_date((Date) updates.get("expiration_date"));
+            batch.setExpirationDate((Date) updates.get("expiration_date"));
         }
         if (updates.containsKey("quantity_measure")) {
-            batch.setQuantity_measure((int) updates.get("quantity_measure"));
+            batch.setQuantityMeasure((int) updates.get("quantity_measure"));
         }
         if (updates.containsKey("product_id")) {
-            batch.setProduct_id((long) updates.get("product_id"));
+            batch.setProductId((long) updates.get("product_id"));
         }
 
         batchRepository.save(batch);

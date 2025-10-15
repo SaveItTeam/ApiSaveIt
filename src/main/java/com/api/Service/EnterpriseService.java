@@ -54,10 +54,10 @@ public class EnterpriseService {
 
         enterprise.setCnpj(enterpriseAtualizada.getCnpj());
         enterprise.setName(enterpriseAtualizada.getName());
-        enterprise.setPlan_id(enterpriseAtualizada.getPlan_id());
+        enterprise.setPlanId(enterpriseAtualizada.getPlanId());
         enterprise.setEmail(enterpriseAtualizada.getEmail());
-        enterprise.setPhone_number(enterpriseAtualizada.getPhone_number());
-        enterprise.setAddress_id(enterpriseAtualizada.getAddress_id());
+        enterprise.setPhoneNumber(enterpriseAtualizada.getPhoneNumber());
+        enterprise.setAddressId(enterpriseAtualizada.getAddressId());
         enterprise.setPassword(enterpriseAtualizada.getPassword());
 
         enterpriseRepository.save(enterprise);
@@ -76,16 +76,16 @@ public class EnterpriseService {
             enterprise.setName((String) updates.get("name"));
         }
         if (updates.containsKey("plan_id")) {
-            enterprise.setPlan_id((int) updates.get("plan_id"));
+            enterprise.setPlanId((int) updates.get("plan_id"));
         }
         if (updates.containsKey("email")) {
             enterprise.setEmail((String) updates.get("email"));
         }
         if (updates.containsKey("phone_number")) {
-            enterprise.setPhone_number((String) updates.get("phone_number"));
+            enterprise.setPhoneNumber((String) updates.get("phone_number"));
         }
         if (updates.containsKey("adress_id")) {
-            enterprise.setAddress_id((long) updates.get("adress_id"));
+            enterprise.setAddressId((long) updates.get("adress_id"));
         }
         if (updates.containsKey("password")) {
             enterprise.setPassword((String) updates.get("password"));

@@ -22,7 +22,7 @@ public class EmployeeRequestDTO {
     private String password;
     @NotNull(message = "empresa_id vazio")
     @Schema(description = "ID da empresa do funcionário", example = "1")
-    private long enterprise_id;
+    private long enterpriseId;
     @NotNull(message = "Is buyer vazio")
-    private boolean is_admin = false;
+    private boolean isAdmin = false;
 }

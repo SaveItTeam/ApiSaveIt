@@ -12,11 +12,11 @@ import java.util.List;
 
 public interface BatchRepository extends JpaRepository<Batch, Long> {
 
-    @Query("select new com.api.dto.Batch.BatchListDTO(p.id, p.name, b.expiration_date, b.quantity_measure, i.image, b.unit_measure) " +
+    @Query("select new com.api.dto.Batch.BatchListDTO(p.id, p.name, b.expirationDate , b.quantityMeasure, i.image, b.unitMeasure) " +
             "from Batch b " +
-            "join Product p on b.product_id = p.id " +
-            "join Image i on p.id = i.product_id " +
-            "join Enterprise e on p.enterprise_id = e.id " +
+            "join Product p on b.productId = p.id " +
+            "join Image i on p.id = i.productId " +
+            "join Enterprise e on p.enterpriseId = e.id " +
             "where e.id = :enterpriseId")
     List<BatchListDTO> listOfBatches(@Param("enterpriseId") long enterpriseId);
 }

@@ -8,10 +8,10 @@ public class EnterpriseResponseDTO {
     private long id;
     private String cnpj;
     private String name;
-    private int plan_id;
+    private int planId;
     private String email;
-    private String phone_number;
-    private long address_id;
+    private String phoneNumber;
+    private long addressId;
     private String password;
 
 }

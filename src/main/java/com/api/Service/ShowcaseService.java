@@ -59,8 +59,8 @@ public class ShowcaseService {
 
         showCase.setDescription(showcaseAtualizado.getDescription());
         showCase.setPrice(showcaseAtualizado.getPrice());
-        showCase.setBatch_id(showcaseAtualizado.getBatch_id());
-        showCase.setEntrance_date(showcaseAtualizado.getEntrance_date());
+        showCase.setBatchId(showcaseAtualizado.getBatch_id());
+        showCase.setEntranceDate(showcaseAtualizado.getEntrance_date());
 
         showcaseRepository.save(showCase);
         ShowcaseResponseDTO showcaseResponseDTO = objectMapper.convertValue(showcaseAtualizado, ShowcaseResponseDTO.class);
@@ -78,10 +78,10 @@ public class ShowcaseService {
             showCase.setPrice((double) updates.get("price"));
         }
         if (updates.containsKey("batch_id")) {
-            showCase.setBatch_id((long) updates.get("batch_id"));
+            showCase.setBatchId((long) updates.get("batch_id"));
         }
         if (updates.containsKey("entrance_date")) {
-            showCase.setEntrance_date((java.util.Date) updates.get("entrance_date"));
+            showCase.setEntranceDate((java.util.Date) updates.get("entrance_date"));
         }
 
         showcaseRepository.save(showCase);

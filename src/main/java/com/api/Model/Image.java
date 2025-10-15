@@ -17,8 +17,10 @@ import java.util.Arrays;
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true)
+    @Column(name = "id",unique = true)
     private long id;
+    @Column(name = "image")
     private String image;
-    private long product_id;
+    @Column(name = "product_id")
+    private long productId;
 }

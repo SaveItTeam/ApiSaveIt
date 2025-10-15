@@ -49,7 +49,7 @@ public class AddressService {
                 .orElseThrow(() -> new NoSuchElementException("Endereco com ID " + id + " não encontrado"));
 
         address.setState(addressAtualizado.getState());
-        address.setPublic_place(addressAtualizado.getPublic_place());
+        address.setPublicPlace(addressAtualizado.getPublicPlace());
         address.setCep(addressAtualizado.getCep());
         address.setNeighbourhood(addressAtualizado.getNeighbourhood());
         address.setCity(addressAtualizado.getCity());
@@ -73,7 +73,7 @@ public class AddressService {
             address.setState((String) updates.get("state"));
         }
         if (updates.containsKey("public_place")) {
-            address.setPublic_place((String) updates.get("public_place"));
+            address.setPublicPlace((String) updates.get("public_place"));
         }
         if (updates.containsKey("cep")) {
             address.setCep((String) updates.get("cep"));
@@ -85,7 +85,7 @@ public class AddressService {
             address.setComplement((String) updates.get("complement"));
         }
         if (updates.containsKey("house_number")) {
-            address.setHouse_number((int) updates.get("house_number"));
+            address.setHouseNumber((int) updates.get("house_number"));
         }
 
         addressRepository.save(address);

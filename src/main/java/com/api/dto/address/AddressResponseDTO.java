@@ -18,13 +18,13 @@ public class AddressResponseDTO {
     @Schema(description = "Cidade do endereço", example = "São Paulo")
     private String city;
     @Schema(description = "Logradouro do endereço", example = "Rua das Flores")
-    private String public_place;
+    private String publicPlace;
     @Schema(description = "CEP do endereço", example = "12345-678")
     private String cep;
     @Schema(description = "Bairro do endereço", example = "Jardim das Acácias")
     private String neighbourhood;
     @Schema(description = "Número da casa", example = "100A")
-    private int house_number;
+    private int houseNumber;
     @Schema(description = "Complemento do endereço", example = "Apto 101")
     private String complement;
 }

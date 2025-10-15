@@ -10,15 +10,15 @@ import java.util.List;
 public interface ShowcaseRepository extends JpaRepository<Showcase, Long> {
 
     @Query("SELECT new com.api.dto.showcase.ShowcaseListDTO(s.id, p.name, i.image) FROM Showcase s " +
-            "JOIN Batch b on b.id = s.batch_id " +
-            "JOIN Product p on p.id = b.product_id " +
-            "JOIN Image i on i.product_id = p.id " +
+            "JOIN Batch b on b.id = s.batchId " +
+            "JOIN Product p on p.id = b.productId " +
+            "JOIN Image i on i.productId = p.id " +
             "WHERE p.category = :category ")
     List<ShowcaseListDTO> findShowcaseWithProductByCategory(String category);
 
     @Query("SELECT new com.api.dto.showcase.ShowcaseListDTO(s.id, p.name, i.image) FROM Showcase s " +
-            "JOIN Batch b on b.id = s.batch_id " +
-            "JOIN Product p on p.id = b.product_id " +
-            "JOIN Image i on i.product_id = p.id ")
+            "JOIN Batch b on b.id = s.batchId " +
+            "JOIN Product p on p.id = b.productId " +
+            "JOIN Image i on i.productId = p.id ")
     List<ShowcaseListDTO> findShowcaseWithProduct();
 }

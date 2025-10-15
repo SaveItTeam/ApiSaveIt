@@ -18,12 +18,18 @@ public class Batch {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull(message = "Campo vazio")
-    @Column(unique = true)
+    @Column(name = "id",unique = true)
     private long id;
-    private String unit_measure;
-    private Date entry_date;
-    private String batch_code;
-    private Date expiration_date;
-    private int quantity_measure;
-    private long product_id;
+    @Column(name = "unit_measure")
+    private String unitMeasure;
+    @Column(name = "entry_date")
+    private Date entryDate;
+    @Column(name = "batch_code")
+    private String batchCode;
+    @Column(name = "expiration_date")
+    private Date expirationDate;
+    @Column(name = "quantity_measure")
+    private int quantityMeasure;
+    @Column(name = "product_id")
+    private long productId;
 }

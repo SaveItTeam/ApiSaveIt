@@ -72,7 +72,7 @@ public class ImageService {
                 .orElseThrow(() -> new NoSuchElementException("Imagem com ID " + id + " não encontrado"));
 
         image.setImage(imageAtualizado.getImage());
-        image.setProduct_id(imageAtualizado.getProduct_id());
+        image.setProductId(imageAtualizado.getProductId());
 
         
         imageRepository.save(image);
@@ -86,7 +86,7 @@ public class ImageService {
             image.setImage((String) updates.get("image"));
         }
         if (updates.containsKey("product_id")) {
-            image.setProduct_id((long) updates.get("product_id"));
+            image.setProductId((long) updates.get("product_id"));
         }
 
         imageRepository.save(image);

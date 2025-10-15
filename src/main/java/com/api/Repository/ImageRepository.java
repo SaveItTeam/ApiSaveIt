@@ -33,7 +33,7 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
     ProductShowcaseProjection findShowcaseWithImage(@Param("showcaseId") Long showcaseId);
 
 
-    @Query("select i from Image i where i.product_id = :productId")
+    @Query("select i from Image i where i.productId = :productId")
     List<Image> findByProductId(@Param("productId") Long productId);
 
 }

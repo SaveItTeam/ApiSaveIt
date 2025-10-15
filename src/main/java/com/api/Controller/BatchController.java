@@ -12,8 +12,10 @@ import com.api.dto.Batch.BatchRequestDTO;
 import com.api.dto.Batch.BatchResponseDTO;
 import com.api.dto.address.AddressResponseDTO;
 import com.api.dto.image.ImageRequestDTO;
+import com.api.dto.image.ImageResponseDTO;
 import com.api.dto.product.ProductRequestDTO;
 import com.api.dto.product.ProductResponseDTO;
+import com.api.dto.product.ProductResponseInfoDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -68,11 +70,11 @@ public class BatchController {
         ProductResponseDTO productResponse = productService.insertProduct(batch.getProduct());
 
         BatchRequestDTO batchRequestDTO = batch.getBatch();
-        batchRequestDTO.setProduct_id(productResponse.getId());
+        batchRequestDTO.setProductId(productResponse.getId());
         batchService.insertBatch(batchRequestDTO);
 
         ImageRequestDTO imageRequestDTO = batch.getImage();
-        imageRequestDTO.setProduct_id(productResponse.getId());
+        imageRequestDTO.setProductId(productResponse.getId());
         imageService.insertImage(imageRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Lote inserido com sucesso!");
@@ -86,6 +88,21 @@ public class BatchController {
     })
     public ResponseEntity<List<BatchListDTO>> listProdutosLote(@PathVariable long enterpriseId) {
         return ResponseEntity.ok(batchService.listProductBatch(enterpriseId));
+    }
+
+    @GetMapping("informacoesProduto/{batchId}")
+    @Operation(summary = "Obter informações de um produto pelo ID do lote")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Informações do produto retornadas com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Produto não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
+    public ResponseEntity<ProductResponseInfoDTO> getProductInfo(@RequestParam Long id) {
+        BatchResponseDTO batch = batchService.getBatchById(id);
+        ProductResponseDTO product = productService.getProductById(batch.getProductId());
+        ImageResponseDTO image = imageService.getImageByProductId(product.getId());
+        ProductResponseInfoDTO productInfo = new ProductResponseInfoDTO(product, batch, image);
+        return ResponseEntity.ok(productInfo);
     }
 
     @DeleteMapping("/excluir/{id}")

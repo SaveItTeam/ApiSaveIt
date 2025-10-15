@@ -12,7 +12,6 @@ Content-Type: application/json
   },
   "product": {
     "id": 0,
-    "sku": "string",
     "name": "string",
     "brand": "string",
     "descricao": "string",

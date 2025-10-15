@@ -11,8 +11,8 @@ import java.util.Date;
 public class BatchListDTO {
     private Long id;
     private String name;
-    private Date expiration_date;
+    private Date expirationDate;
     private int quantity;
     private String image;
-    private String unit_measure;
+    private String unitMeasure;
 }

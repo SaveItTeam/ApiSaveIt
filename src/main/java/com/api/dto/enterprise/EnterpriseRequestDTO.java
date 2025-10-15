@@ -15,15 +15,15 @@ public class EnterpriseRequestDTO {
     private String name;
     @Column(length = 50)
     @NotNull(message = "Codigo vazio")
-    private int plan_id;
+    private int planId;
     @Column(length = 100)
     @NotNull(message = "Email vazio")
     private String email;
     @Column(length = 20)
     @NotNull(message = "Telefone vazio")
-    private String phone_number;
+    private String phoneNumber;
     @NotNull(message = "Id do endereco vazio")
-    private long address_id;
+    private long addressId;
     @NotNull(message = "Senha vazia")
     @Column(length = 255)
     private String password;

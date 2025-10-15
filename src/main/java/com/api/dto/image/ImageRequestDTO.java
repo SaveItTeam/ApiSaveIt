@@ -16,6 +16,6 @@ public class ImageRequestDTO {
     private String image;
     @NotNull(message = "id do produto vazio")
     @Schema(description = "ID do produto associado à imagem", example = "1")
-    private long product_id;
+    private long productId;
     
 }

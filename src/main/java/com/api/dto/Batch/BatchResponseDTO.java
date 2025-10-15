@@ -12,15 +12,15 @@ public class BatchResponseDTO {
     @Schema(description = "ID do lote", example = "1")
     private long id;
     @Schema(description = "Unidade de medida do lote", example = "kg, g, l, ml, un")
-    private String unit_measure;
+    private String unitMeasure;
     @NotNull(message = "Data de entrada vazia vazio")
-    private Date entry_date;
+    private Date entryDate;
     @Schema(description = "Código do lote", example = "ABC123")
-    private String batch_code;
+    private String batchCode;
     @Schema(description = "Data de validade do lote", example = "2024-10-10")
-    private Date expiration_date;
+    private Date expirationDate;
     @Schema(description = "Quantidade de itens no lote", example = "100")
-    private int quantity_measure;
+    private int quantityMeasure;
     @Schema(description = "ID do produto associado ao lote", example = "1")
-    private long product_id;
+    private long productId;
 }

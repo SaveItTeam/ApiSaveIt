@@ -15,10 +15,14 @@ import java.util.Date;
 public class Showcase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true)
+    @Column(name = "id",unique = true)
     private long id;
+    @Column(name = "name")
     private String description;
+    @Column(name = "price")
     private double price;
-    private long batch_id;
-    private Date entrance_date;
+    @Column(name = "batch_id")
+    private long batchId;
+    @Column(name = "entrance_date")
+    private Date entranceDate;
 }

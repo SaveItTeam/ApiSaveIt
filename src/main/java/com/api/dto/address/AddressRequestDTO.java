@@ -21,7 +21,7 @@ public class AddressRequestDTO {
     private String city;
     @Schema(description = "Logradouro do endereço", example = "Rua das Flores")
     @Column(length = 100)
-    private String public_place;
+    private String publicPlace;
     @Schema(description = "CEP do endereço", example = "12345-678")
     @Column(length = 20)
     private String cep;
@@ -31,91 +31,8 @@ public class AddressRequestDTO {
     @Schema(description = "Número da casa", example = "100A")
     @Column(length = 10)
     @NotNull(message = "Número da casa não pode ser nulo")
-    private int house_number;
+    private int houseNumber;
     @Schema(description = "Complemento do endereço", example = "Apto 101")
     @Column(length = 100)
     private String complement;
-
-
-
-    public AddressRequestDTO() {
-    }
-
-//    public static Address toModel(AddressRequestDTO addressRequest) {
-//        Address address = new Address();
-//        address.setNome(addressRequest.getNome());
-//        address.setState(addressRequest.getState());
-//        address.setCity(addressRequest.getCity());
-//        address.setPublic_place(addressRequest.getPublic_place());
-//        address.setCep(addressRequest.getCep());
-//        address.setNeighborhood(addressRequest.getNeighborhood());
-//        address.setComplement(addressRequest.getComplement());
-//        address.setNumber(addressRequest.getNumber());
-//        return address;
-//    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getPublic_place() {
-        return public_place;
-    }
-
-    public void setPublic_place(String public_place) {
-        this.public_place = public_place;
-    }
-
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-
-    public String getNeighbourhood() {
-        return neighbourhood;
-    }
-
-    public void setNeighbourhood(String neighbourhood) {
-        this.neighbourhood = neighbourhood;
-    }
-
-    public String getComplement() {
-        return complement;
-    }
-
-    public void setComplement(String complement) {
-        this.complement = complement;
-    }
-
-
-
-    public int getHouse_number() {
-        return house_number;
-    }
-    public void setHouse_number(int house_number) {
-        this.house_number = house_number;
-    }
 }

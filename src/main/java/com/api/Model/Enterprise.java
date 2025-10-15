@@ -16,13 +16,20 @@ public class Enterprise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull(message = "Campo vazio")
-    @Column(unique = true)
+    @Column(name = "id",unique = true)
     private long id;
+    @Column(name = "cnpj", unique = true)
     private String cnpj;
+    @Column(name = "name")
     private String name;
-    private int plan_id;
+    @Column(name = "plan_id")
+    private int planId;
+    @Column(name = "email", unique = true)
     private String email;
-    private String phone_number;
-    private long address_id;
+    @Column(name = "phone_number")
+    private String phoneNumber;
+    @Column(name = "address_id")
+    private long addressId;
+    @Column(name = "password")
     private String password;
 }
