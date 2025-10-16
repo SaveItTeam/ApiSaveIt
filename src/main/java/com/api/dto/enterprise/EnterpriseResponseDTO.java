@@ -10,6 +10,7 @@ public class EnterpriseResponseDTO {
     private String name;
     private int planId;
     private String email;
+    private String enterpriseImage;
     private String phoneNumber;
     private long addressId;
     private String password;

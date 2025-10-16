@@ -26,6 +26,8 @@ public class Enterprise {
     private int planId;
     @Column(name = "email", unique = true)
     private String email;
+    @Column(name = "enterprise_image")
+    private String enterpriseImage;
     @Column(name = "phone_number")
     private String phoneNumber;
     @Column(name = "address_id")

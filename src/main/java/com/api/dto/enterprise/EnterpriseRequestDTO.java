@@ -19,6 +19,9 @@ public class EnterpriseRequestDTO {
     @Column(length = 100)
     @NotNull(message = "Email vazio")
     private String email;
+    @Column(length = 100)
+    @NotNull(message = "Imagem vazia")
+    private String enterpriseImage;
     @Column(length = 20)
     @NotNull(message = "Telefone vazio")
     private String phoneNumber;

@@ -25,6 +25,9 @@ public class BatchRequestDTO {
     @JsonProperty("expiration_date")
     @Schema(description = "Data de validade do lote", example = "2024-10-10")
     private Date expirationDate;
+    @NotNull(message = "não pode ser vazio")
+    @Schema(description = "Quantidade máxima de itens no lote", example = "500")
+    private int maxQuantity;
     @Column(length = 50)
     @NotNull(message = "Quantidade vazio")
     @Schema(description = "Quantidade de itens no lote", example = "100")

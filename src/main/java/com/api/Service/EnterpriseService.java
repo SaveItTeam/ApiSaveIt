@@ -81,6 +81,9 @@ public class EnterpriseService {
         if (updates.containsKey("email")) {
             enterprise.setEmail((String) updates.get("email"));
         }
+        if(updates.containsKey("enterprise_image")) {
+            enterprise.setEnterpriseImage((String) updates.get("enterprise_image"));
+        }
         if (updates.containsKey("phone_number")) {
             enterprise.setPhoneNumber((String) updates.get("phone_number"));
         }

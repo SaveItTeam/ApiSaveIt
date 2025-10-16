@@ -26,6 +26,8 @@ public class Batch {
     private Date entryDate;
     @Column(name = "batch_code")
     private String batchCode;
+    @Column(name = "max_quantity")
+    private int maxQuantity;
     @Column(name = "expiration_date")
     private Date expirationDate;
     @Column(name = "quantity_measure")

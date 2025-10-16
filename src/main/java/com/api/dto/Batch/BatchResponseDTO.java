@@ -19,6 +19,8 @@ public class BatchResponseDTO {
     private String batchCode;
     @Schema(description = "Data de validade do lote", example = "2024-10-10")
     private Date expirationDate;
+    @Schema(description = "Quantidade máxima de itens no lote", example = "500")
+    private int maxQuantity;
     @Schema(description = "Quantidade de itens no lote", example = "100")
     private int quantityMeasure;
     @Schema(description = "ID do produto associado ao lote", example = "1")
