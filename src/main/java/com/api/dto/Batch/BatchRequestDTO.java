@@ -31,7 +31,7 @@ public class BatchRequestDTO {
     @Column(length = 50)
     @NotNull(message = "Quantidade vazio")
     @Schema(description = "Quantidade de itens no lote", example = "100")
-    private int quantityMeasure;
+    private int quantity;
     @Column(length = 20)
     @NotNull(message = "Id do produto vazio")
     @Schema(description = "ID do produto associado ao lote", example = "1")

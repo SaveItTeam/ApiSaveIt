@@ -12,6 +12,6 @@ public class BatchListDTO {
     private Long id;
     private String name;
     private Date expirationDate;
-    private String quantityMeasure;
+    private String quantity;
     private String image;
 }

@@ -22,7 +22,7 @@ public class BatchResponseDTO {
     @Schema(description = "Quantidade máxima de itens no lote", example = "500")
     private int maxQuantity;
     @Schema(description = "Quantidade de itens no lote", example = "100")
-    private int quantityMeasure;
+    private int quantity;
     @Schema(description = "ID do produto associado ao lote", example = "1")
     private long productId;
 }

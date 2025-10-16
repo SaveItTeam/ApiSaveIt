@@ -30,8 +30,8 @@ public class Batch {
     private int maxQuantity;
     @Column(name = "expiration_date")
     private Date expirationDate;
-    @Column(name = "quantity_measure")
-    private int quantityMeasure;
+    @Column(name = "quantity")
+    private int quantity;
     @Column(name = "product_id")
     private long productId;
 }
