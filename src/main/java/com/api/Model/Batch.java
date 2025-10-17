@@ -27,11 +27,10 @@ public class Batch {
     @Column(name = "batch_code")
     private String batchCode;
     @Column(name = "max_quantity")
-    private int maxQuantity;
+    private Integer maxQuantity;
     @Column(name = "expiration_date")
     private Date expirationDate;
-    @Column(name = "quantity")
-    private int quantity;
+    private Integer quantity;
     @Column(name = "product_id")
     private long productId;
 }
