@@ -102,7 +102,7 @@ public class StockController {
     })
     public ResponseEntity<?> updateStockPartial(@PathVariable Long id, @Valid @RequestBody Map<String, Object> updates) {
         StockResponseDTO stockResponseDTO = stockService.updateStockPartial(id, updates);
-        return ResponseEntity.ok("Estoque atualizado parcialmente com sucesso!");
+        return ResponseEntity.ok("Estoque atualizado parcialmente com sucesso!" + stockResponseDTO);
     }
 
 }

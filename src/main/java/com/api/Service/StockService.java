@@ -1,9 +1,10 @@
 package com.api.Service;
 
-import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
-import com.api.Exception.InvalidQuantityException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,8 @@ public class StockService {
         this.objectMapper = objectMapper;
     }
 
+
+
     //    Métodos de busca
     public List<StockResponseDTO> listStock(){
         List<Stock> stocks = stockRepository.findAll();
@@ -42,7 +45,11 @@ public class StockService {
 
     // Deleção de endereços
     public void deleteStock(Long id) {
+        // Se o produto não for encontrado, pode ser lançado um erro posteriormente.
+        // Dependendo da implementação do repository, pode ser necessário buscar primeiro o produto.
+        //        Endereco existe = buscarProdutoPorId(id);
         stockRepository.deleteById(id);
+        //        return;
     }
 
 
@@ -51,14 +58,9 @@ public class StockService {
         Stock stock = stockRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Estoque com ID " + id + " não encontrado"));
 
-        stock.setQuantityInput(stockAtualizado.getQuantityInput());
-        stock.setQuantityOutput(stockAtualizado.getQuantityOutput());
-        stock.setBatchId(stockAtualizado.getBatchId());
-        stock.setCreatedAt(stockAtualizado.getCreatedAt());
-        stock.setDiscardQuantity(stockAtualizado.getDiscardQuantity());
-        stock.setDiscardReason(stockAtualizado.getDiscardReason());
-        stock.setProductId(stockAtualizado.getProductId());
-
+        stock.setQuantity_input(stockAtualizado.getQuantity_input());
+        stock.setQuantity_output(stockAtualizado.getQuantity_output());
+        stock.setBatch_id(stockAtualizado.getBatch_id());
 
         stockRepository.save(stock);
         return objectMapper.convertValue(stock, StockResponseDTO.class);
@@ -69,46 +71,16 @@ public class StockService {
         Stock stock = stockRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Estoque com ID " + id + " não encontrado"));
 
-        if (updates.containsKey("quantityInput")) {
-            stock.setQuantityInput((Integer) updates.get("quantityInput"));
+        if (updates.containsKey("quantity_input")) {
+            stock.setQuantity_input((int) updates.get("quantity"));
         }
-        if (updates.containsKey("quantityOutput")) {
-            stock.setQuantityOutput((Integer) updates.get("quantityOutput"));
+        if (updates.containsKey("quantity_output")) {
+            stock.setQuantity_output((int) updates.get("quantity_output"));
         }
-        if (updates.containsKey("batchId")) {
-            stock.setBatchId(Long.valueOf(updates.get("batchId").toString()));
+        if (updates.containsKey("batch_id")) {
+            stock.setBatch_id((int) updates.get("batch_id"));
         }
-        if (updates.containsKey("createdAt")) {
-            stock.setCreatedAt(LocalDateTime.parse(updates.get("createdAt").toString()));
-        }
-        if (updates.containsKey("discardQuantity")) {
-            stock.setDiscardQuantity((Integer) updates.get("discardQuantity"));
-        }
-        if (updates.containsKey("discardReason")) {
-            stock.setDiscardReason(updates.get("discardReason").toString());
-        }
-        if (updates.containsKey("productId")) {
-            stock.setProductId(Long.valueOf(updates.get("productId").toString()));
-        }
-
         stockRepository.save(stock);
         return objectMapper.convertValue(stock, StockResponseDTO.class);
     }
-
-    private void validarQuantidade(StockRequestDTO stock) {
-        Map<String, String> erros = new HashMap<>();
-
-        if (stock.getQuantityInput() <= 0) {
-            erros.put("quantity", "A quantidade deve ser maior que zero.");
-        }
-
-        if (stock.getQuantityOutput() < 0) {
-            erros.put("quantity_output", "A quantidade de saída não pode ser negativa.");
-        }
-
-        if (!erros.isEmpty()) {
-            throw new InvalidQuantityException(erros);
-        }
-    }
-
 }
