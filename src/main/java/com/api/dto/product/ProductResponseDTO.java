@@ -9,5 +9,5 @@ public class ProductResponseDTO {
     private String brand;
     private String category;
     private String description;
-    private long enterprise_id;
+    private long enterpriseId;
 }
