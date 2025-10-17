@@ -64,6 +64,17 @@ public class EnterpriseController {
                 .body("Empresa inserida com sucesso!");
     }
 
+    @GetMapping("listarId/{id}")
+    @Operation(summary = "Listar empresa por ID")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Empresa retornada com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Empresa não encontrada"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
+    public ResponseEntity<EnterpriseResponseDTO> listEnterpriseById(@PathVariable Long id) {
+        EnterpriseResponseDTO responseDTO = enterpriseService.findById(id);
+        return ResponseEntity.ok(responseDTO);
+    }
 
     @GetMapping("listarEmail/{email}")
     @Operation(summary = "Listar empresa por email")
