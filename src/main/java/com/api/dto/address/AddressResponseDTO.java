@@ -8,8 +8,6 @@ import lombok.Value;
 public class AddressResponseDTO {
     @Schema(description = "ID do endereço", example = "1")
     private long id;
-    @Schema(description = "Nome do endereço", example = "Casa")
-    private String nome;
     @Schema(description = "Estado do endereço", example = "SP")
     private String state;
     @Schema(description = "Cidade do endereço", example = "São Paulo")
@@ -21,7 +19,7 @@ public class AddressResponseDTO {
     @Schema(description = "Bairro do endereço", example = "Jardim das Acácias")
     private String neighbourhood;
     @Schema(description = "Número da casa", example = "100A")
-    private int houseNumber;
+    private Integer houseNumber;
     @Schema(description = "Complemento do endereço", example = "Apto 101")
     private String complement;
 }
