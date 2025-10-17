@@ -1,6 +1,6 @@
 package com.api.validator;
 
-import com.api.Exception.InvalidDataException;
+import com.api.Exception.InvalidQuantityException;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -42,7 +42,7 @@ public class ProductPatchValidator {
         }
 
         if (!erros.isEmpty()) {
-            throw new InvalidDataException(erros);
+            throw new InvalidQuantityException(erros);
         }
     }
 }
