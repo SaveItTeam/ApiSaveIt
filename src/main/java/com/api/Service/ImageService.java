@@ -84,8 +84,8 @@ public class ImageService {
         if (updates.containsKey("image")) {
             image.setImage((String) updates.get("image"));
         }
-        if (updates.containsKey("product_id")) {
-            image.setProductId((long) updates.get("product_id"));
+        if (updates.containsKey("productId")) {
+            image.setProductId((long) updates.get("productId"));
         }
 
         imageRepository.save(image);
