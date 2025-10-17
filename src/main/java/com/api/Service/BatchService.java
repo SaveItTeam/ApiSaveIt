@@ -74,23 +74,26 @@ public class BatchService {
         Batch batch = batchRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Lote com ID " + id + " não encontrado"));
 
-        if (updates.containsKey("unit_measure")) {
-            batch.setUnitMeasure((String) updates.get("unit_measure"));
+        if (updates.containsKey("unitMeasure")) {
+            batch.setUnitMeasure((String) updates.get("unitMeasure"));
         }
-        if (updates.containsKey("entry_date")) {
-            batch.setEntryDate((Date) updates.get("entry_date"));
+        if (updates.containsKey("entryDate")) {
+            batch.setEntryDate((Date) updates.get("entryDate"));
         }
-        if (updates.containsKey("batch_code")) {
-            batch.setBatchCode((String) updates.get("batch_code"));
+        if (updates.containsKey("batchCode")) {
+            batch.setBatchCode((String) updates.get("batchCode"));
         }
-        if (updates.containsKey("expiration_date")) {
-            batch.setExpirationDate((Date) updates.get("expiration_date"));
+        if (updates.containsKey("expirationDate")) {
+            batch.setExpirationDate((Date) updates.get("expirationDate"));
         }
         if (updates.containsKey("quantity")) {
-            batch.setQuantity((int) updates.get("quantity"));
+            batch.setQuantity((Integer) updates.get("quantity"));
         }
-        if (updates.containsKey("product_id")) {
-            batch.setProductId((long) updates.get("product_id"));
+        if (updates.containsKey("productId")) {
+            batch.setProductId((long) updates.get("productId"));
+        }
+        if (updates.containsKey("maxQuantity")){
+            batch.setMaxQuantity((Integer) updates.get("maxQuantity"));
         }
 
         batchRepository.save(batch);

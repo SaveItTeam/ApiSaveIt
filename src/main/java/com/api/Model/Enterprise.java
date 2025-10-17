@@ -16,15 +16,14 @@ public class Enterprise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull(message = "Campo vazio")
-    @Column(name = "id",unique = true)
+    @Column(unique = true)
     private long id;
-    @Column(name = "cnpj", unique = true)
+    @Column(unique = true)
     private String cnpj;
-    @Column(name = "name")
     private String name;
     @Column(name = "plan_id")
-    private int planId;
-    @Column(name = "email", unique = true)
+    private long planId;
+    @Column(unique = true)
     private String email;
     @Column(name = "enterprise_image")
     private String enterpriseImage;
@@ -32,6 +31,5 @@ public class Enterprise {
     private String phoneNumber;
     @Column(name = "address_id")
     private long addressId;
-    @Column(name = "password")
     private String password;
 }

@@ -17,18 +17,14 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true)
     private long id;
-    @Column(name = "state")
     private String state;
-    @Column(name = "city")
     private String city;
     @Column(name = "public_place")
     private String publicPlace;
-    @Column(name = "cep")
     private String cep;
     @Column(name = "neighbourhood")
     private String neighbourhood;
     @Column(name = "house_number")
-    private int houseNumber;
-    @Column(name = "complement")
+    private Integer houseNumber;
     private String complement;
 }

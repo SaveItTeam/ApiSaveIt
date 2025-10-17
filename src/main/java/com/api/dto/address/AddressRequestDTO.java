@@ -8,9 +8,6 @@ import lombok.Data;
 
 @Data
 public class AddressRequestDTO {
-    @Column(length = 100)
-    @Schema(description = "Nome do endereço", example = "Casa")
-    private String nome;
     @Schema(description = "Estado do endereço", example = "SP")
     @Column(length = 50)
     private String state;
@@ -29,7 +26,7 @@ public class AddressRequestDTO {
     @Schema(description = "Número da casa", example = "100A")
     @Column(length = 10)
     @NotNull(message = "Número da casa não pode ser nulo")
-    private int houseNumber;
+    private Integer houseNumber;
     @Schema(description = "Complemento do endereço", example = "Apto 101")
     @Column(length = 100)
     private String complement;

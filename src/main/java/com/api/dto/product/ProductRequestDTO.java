@@ -21,5 +21,5 @@ public class ProductRequestDTO {
     @Column(length = 500)
     private String description;
     @NotNull(message = "Id da empresa vazia")
-    private long enterprise_id;
+    private long enterpriseId;
 }

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 @Service
-public class PlanService {
+public class  PlanService {
     private final PlanRepository planRepository;
     private final ObjectMapper objectMapper;
 

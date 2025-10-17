@@ -14,12 +14,9 @@ import lombok.Setter;
 public class Plan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",unique = true)
+    @Column(unique = true)
     private long id;
-    @Column(name = "name")
     private String name;
-    @Column(name = "price")
     private Double price;
-    @Column(name = "description")
     private String description;
 }

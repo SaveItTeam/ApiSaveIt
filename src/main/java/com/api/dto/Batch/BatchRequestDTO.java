@@ -27,11 +27,11 @@ public class BatchRequestDTO {
     private Date expirationDate;
     @NotNull(message = "não pode ser vazio")
     @Schema(description = "Quantidade máxima de itens no lote", example = "500")
-    private int maxQuantity;
+    private Integer maxQuantity;
     @Column(length = 50)
     @NotNull(message = "Quantidade vazio")
     @Schema(description = "Quantidade de itens no lote", example = "100")
-    private int quantity;
+    private Integer quantity;
     @Column(length = 20)
     @NotNull(message = "Id do produto vazio")
     @Schema(description = "ID do produto associado ao lote", example = "1")
