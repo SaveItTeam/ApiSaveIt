@@ -14,9 +14,8 @@ import lombok.Setter;
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",unique = true)
+    @Column(unique = true)
     private long id;
-    @Column(name = "image")
     private String image;
     @Column(name = "product_id")
     private long productId;
