@@ -72,8 +72,8 @@ public class AddressService {
         if (updates.containsKey("state")) {
             address.setState((String) updates.get("state"));
         }
-        if (updates.containsKey("public_place")) {
-            address.setPublicPlace((String) updates.get("public_place"));
+        if (updates.containsKey("publicPlace")) {
+            address.setPublicPlace((String) updates.get("publicPlace"));
         }
         if (updates.containsKey("cep")) {
             address.setCep((String) updates.get("cep"));
@@ -84,8 +84,8 @@ public class AddressService {
         if (updates.containsKey("complement")) {
             address.setComplement((String) updates.get("complement"));
         }
-        if (updates.containsKey("house_number")) {
-            address.setHouseNumber((int) updates.get("house_number"));
+        if (updates.containsKey("houseNumber")) {
+            address.setHouseNumber((Integer) updates.get("houseNumber"));
         }
 
         addressRepository.save(address);
