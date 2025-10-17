@@ -1,7 +1,6 @@
 package com.api.Controller;
 
 import com.api.Exception.GlobalException;
-import com.api.Model.Plan;
 import com.api.Service.PlanService;
 import com.api.dto.Plan.PlanRequestDTO;
 import com.api.dto.Plan.PlanResponseDTO;

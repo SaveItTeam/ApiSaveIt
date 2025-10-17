@@ -1,17 +1,12 @@
 package com.api.Controller;
 
 import com.api.Exception.GlobalException;
-import com.api.Model.Image;
 import com.api.Service.ImageService;
 
-import com.api.dto.showcaseImage.ShowcaseImageResponseDTO;
-import com.api.projection.ProductShowcaseProjection;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

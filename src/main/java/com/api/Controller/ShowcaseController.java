@@ -1,7 +1,6 @@
 package com.api.Controller;
 
 import com.api.Exception.GlobalException;
-import com.api.Model.Showcase;
 import com.api.Service.ShowcaseService;
 import com.api.dto.showcase.ShowcaseListDTO;
 import com.api.dto.showcase.ShowcaseRequestDTO;
@@ -41,7 +40,17 @@ public class ShowcaseController {
         return ResponseEntity.ok(showcases);
     }
 
-
+    @GetMapping("/selecionarPorEmpresa/{enterpriseId}")
+    @Operation(summary = "Listar vitrines por ID da empresa")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Lista de vitrines retornada com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Nenhuma vitrine encontrada para o ID da empresa"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
+    public ResponseEntity<List<ShowcaseListDTO>> listShowcaseByEnterpriseId(@PathVariable long enterpriseId) {
+        List<ShowcaseListDTO> showcaseListDTOS = showCaseService.listShowcaseWithProductByEnterpriseId(enterpriseId);
+        return ResponseEntity.ok(showcaseListDTOS);
+    }
 
     @PostMapping("/inserir")
     @Operation(summary = "Inserir uma nova vitrine")

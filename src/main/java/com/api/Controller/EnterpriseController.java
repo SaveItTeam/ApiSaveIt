@@ -57,7 +57,7 @@ public class EnterpriseController {
         AddressResponseDTO addressResponseDTO = addressService.insertAddress(enterpriseInsert.getAddress());
 
         EnterpriseRequestDTO enterpriseResponseDTO = enterpriseInsert.getEnterprise();
-        enterpriseResponseDTO.setAddress_id(addressResponseDTO.getId());
+        enterpriseResponseDTO.setAddressId(addressResponseDTO.getId());
         enterpriseService.insertEnterprise(enterpriseResponseDTO);
 
         return ResponseEntity.status(HttpStatus.CREATED)

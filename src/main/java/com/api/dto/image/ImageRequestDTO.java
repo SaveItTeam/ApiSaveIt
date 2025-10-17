@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import org.springframework.boot.convert.DataSizeUnit;
 
 @Data
 public class ImageRequestDTO {
@@ -16,6 +15,6 @@ public class ImageRequestDTO {
     private String image;
     @NotNull(message = "id do produto vazio")
     @Schema(description = "ID do produto associado à imagem", example = "1")
-    private long product_id;
+    private long productId;
     
 }

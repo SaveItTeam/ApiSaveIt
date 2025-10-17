@@ -49,7 +49,7 @@ public class EmployeeService {
         employee.setName(employeeAtualizado.getName());
         employee.setEmail(employeeAtualizado.getEmail());
         employee.setPassword(employeeAtualizado.getPassword());
-        employee.setEnterprise_id(employeeAtualizado.getEnterprise_id());
+        employee.setEnterpriseId(employeeAtualizado.getEnterpriseId());
 
         employeeRepository.save(employee);
         return objectMapper.convertValue(employee, EmployeeResponseDTO.class);
@@ -70,10 +70,10 @@ public class EmployeeService {
             employee.setPassword((String) updates.get("password"));
         }
         if (updates.containsKey("enterprise_id")) {
-            employee.setEnterprise_id((long) updates.get("enterprise_id"));
+            employee.setEnterpriseId((long) updates.get("enterprise_id"));
         }
         if (updates.containsKey("is_admin")) {
-            employee.set_admin((boolean) updates.get("is_admin"));
+            employee.setAdmin((boolean) updates.get("is_admin"));
         }
 
         employeeRepository.save(employee);

@@ -1,8 +1,6 @@
 package com.api.dto.stock;
 
-import lombok.Data;
 import lombok.Value;
-import org.springframework.boot.convert.DataSizeUnit;
 
 @Value
 public class StockResponseDTO {

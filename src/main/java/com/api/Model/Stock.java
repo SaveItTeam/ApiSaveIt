@@ -14,9 +14,12 @@ import lombok.Setter;
 public class Stock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true)
+    @Column(name = "id",unique = true)
     private long id;
+    @Column(name = "quantity_input")
     private int quantity_input;
+    @Column(name = "quantity_output")
     private int quantity_output;
+    @Column(name = "batch_id")
     private int batch_id;
 }

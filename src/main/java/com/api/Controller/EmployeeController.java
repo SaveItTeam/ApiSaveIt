@@ -1,7 +1,6 @@
 package com.api.Controller;
 
 import com.api.Exception.GlobalException;
-import com.api.Model.Employee;
 import com.api.Service.EmployeeService;
 import com.api.dto.employee.EmployeeRequestDTO;
 import com.api.dto.employee.EmployeeResponseDTO;

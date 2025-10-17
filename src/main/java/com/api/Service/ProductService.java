@@ -35,6 +35,12 @@ public class ProductService {
         return productResponseDTO;
     }
 
+    public ProductResponseDTO getProductById(Long id){
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Produto com ID " + id + " não encontrado"));
+        return objectMapper.convertValue(product, ProductResponseDTO.class);
+    }
+
     public ProductResponseDTO insertProduct(ProductRequestDTO product) {
         Product productResponse = objectMapper.convertValue(product, Product.class);
         productRepository.save(productResponse);
@@ -51,7 +57,7 @@ public class ProductService {
 
         product.setName(productAtualizado.getName());
         product.setBrand(productAtualizado.getBrand());
-        product.setEnterprise_id(productAtualizado.getEnterprise_id());
+        product.setEnterpriseId(productAtualizado.getEnterprise_id());
         product.setDescription(productAtualizado.getDescription());
         product.setCategory(productAtualizado.getCategory());
 
@@ -71,7 +77,7 @@ public class ProductService {
             product.setBrand((String) updates.get("brand"));
         }
         if (updates.containsKey("enterprise_id")) {
-            product.setEnterprise_id((long) updates.get("enterprise_id"));
+            product.setEnterpriseId((long) updates.get("enterprise_id"));
         }
         if (updates.containsKey("description")) {
             product.setDescription((String) updates.get("description"));

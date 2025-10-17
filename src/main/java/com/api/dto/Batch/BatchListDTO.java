@@ -1,7 +1,6 @@
 package com.api.dto.Batch;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Value;
 
 import java.util.Date;
@@ -11,8 +10,7 @@ import java.util.Date;
 public class BatchListDTO {
     private Long id;
     private String name;
-    private Date expiration_date;
-    private int quantity;
+    private Date expirationDate;
+    private String quantity;
     private String image;
-    private String unit_measure;
 }

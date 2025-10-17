@@ -1,7 +1,6 @@
 package com.api.Repository;
 
 import com.api.Model.Image;
-import com.api.Model.Product;
 import com.api.projection.ProductShowcaseProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -33,7 +32,7 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
     ProductShowcaseProjection findShowcaseWithImage(@Param("showcaseId") Long showcaseId);
 
 
-    @Query("select i from Image i where i.product_id = :productId")
+    @Query("select i from Image i where i.productId = :productId")
     List<Image> findByProductId(@Param("productId") Long productId);
 
 }

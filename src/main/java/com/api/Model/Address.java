@@ -2,7 +2,6 @@
 package com.api.Model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,13 +15,20 @@ import lombok.Setter;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true)
+    @Column(name = "id", unique = true)
     private long id;
+    @Column(name = "state")
     private String state;
+    @Column(name = "city")
     private String city;
-    private String public_place;
+    @Column(name = "public_place")
+    private String publicPlace;
+    @Column(name = "cep")
     private String cep;
+    @Column(name = "neighbourhood")
     private String neighbourhood;
-    private int house_number;
+    @Column(name = "house_number")
+    private int houseNumber;
+    @Column(name = "complement")
     private String complement;
 }
