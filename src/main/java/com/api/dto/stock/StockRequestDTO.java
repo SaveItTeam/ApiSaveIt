@@ -4,15 +4,22 @@ import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 public class StockRequestDTO {
     @NotNull(message = "Campo vazio")
     @Column(unique = true)
     private long id;
     @NotNull(message = "Quantidade de entrada estoque vazio")
-    private int quantity_input;
+    private Integer quantityInput;
     @NotNull(message = "Quantidade da saída esta vazia")
-    private int quantity_output;
+    private Integer quantityOutput;
     @NotNull(message = "Codigo do LOTE esta vazia")
-    private int batch_id;
+    private long batchId;
+    @NotNull(message = "Codigo do produto esta vazio")
+    private long productId;
+    private Integer discardQuantity;
+    private String discardReason;
+    private LocalDateTime createdAt;
 }
