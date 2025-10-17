@@ -37,6 +37,12 @@ public class EnterpriseService {
         return objectMapper.convertValue(enterpriseRepository.findByEmail(email), EnterpriseResponseDTO.class);
     }
 
+    public EnterpriseResponseDTO findById(Long id) {
+        Enterprise enterprise = enterpriseRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Empresa com ID " + id + " não encontrado"));
+        return objectMapper.convertValue(enterprise, EnterpriseResponseDTO.class);
+    }
+
     public EnterpriseResponseDTO insertEnterprise(EnterpriseRequestDTO enterprise) {
         Enterprise enterpriseRequest = objectMapper.convertValue(enterprise, Enterprise.class);
         Enterprise response = enterpriseRepository.save(enterpriseRequest);
