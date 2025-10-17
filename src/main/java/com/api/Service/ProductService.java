@@ -57,7 +57,7 @@ public class ProductService {
 
         product.setName(productAtualizado.getName());
         product.setBrand(productAtualizado.getBrand());
-        product.setEnterpriseId(productAtualizado.getEnterprise_id());
+        product.setEnterpriseId(productAtualizado.getEnterpriseId());
         product.setDescription(productAtualizado.getDescription());
         product.setCategory(productAtualizado.getCategory());
 
@@ -76,8 +76,8 @@ public class ProductService {
         if (updates.containsKey("brand")) {
             product.setBrand((String) updates.get("brand"));
         }
-        if (updates.containsKey("enterprise_id")) {
-            product.setEnterpriseId((long) updates.get("enterprise_id"));
+        if (updates.containsKey("enterpriseId")) {
+            product.setEnterpriseId((long) updates.get("enterpriseId"));
         }
         if (updates.containsKey("description")) {
             product.setDescription((String) updates.get("description"));
