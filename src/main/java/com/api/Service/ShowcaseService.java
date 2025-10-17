@@ -66,9 +66,12 @@ public class ShowcaseService {
                 .orElseThrow(() -> new NoSuchElementException("Vitrine com ID " + id + " não encontrado"));
 
         showCase.setDescription(showcaseAtualizado.getDescription());
+        showCase.setBatchId(showcaseAtualizado.getBatchId());
+        showCase.setQuantityShowcase(showcaseAtualizado.getQuantityShowcase());
+        showCase.setEntranceShowcase(showcaseAtualizado.getEntranceShowcase());
+        showCase.setName(showcaseAtualizado.getName());
+        showCase.setEntranceDate(showcaseAtualizado.getEntranceDate());
         showCase.setPrice(showcaseAtualizado.getPrice());
-        showCase.setBatchId(showcaseAtualizado.getBatch_id());
-        showCase.setEntranceDate(showcaseAtualizado.getEntrance_date());
 
         showcaseRepository.save(showCase);
         ShowcaseResponseDTO showcaseResponseDTO = objectMapper.convertValue(showcaseAtualizado, ShowcaseResponseDTO.class);
@@ -82,15 +85,25 @@ public class ShowcaseService {
         if (updates.containsKey("description")) {
             showCase.setDescription((String) updates.get("description"));
         }
+        if (updates.containsKey("batchId")) {
+            showCase.setBatchId((long) updates.get("batch_id"));
+        }
+        if (updates.containsKey("quantity_showcase")) {
+            showCase.setQuantityShowcase((Integer) updates.get("quantity_showcase"));
+        }
+        if (updates.containsKey("entranceShowcase")) {
+            showCase.setEntranceShowcase((java.util.Date) updates.get("entranceShowcase"));
+        }
+        if (updates.containsKey("name")) {
+            showCase.setName((String) updates.get("name"));
+        }
+        if (updates.containsKey("entranceDate")) {
+            showCase.setEntranceDate((java.util.Date) updates.get("entranceDate"));
+        }
         if (updates.containsKey("price")) {
             showCase.setPrice((double) updates.get("price"));
         }
-        if (updates.containsKey("batch_id")) {
-            showCase.setBatchId((long) updates.get("batch_id"));
-        }
-        if (updates.containsKey("entrance_date")) {
-            showCase.setEntranceDate((java.util.Date) updates.get("entrance_date"));
-        }
+
 
         showcaseRepository.save(showCase);
         return objectMapper.convertValue(showCase.getClass(), ShowcaseResponseDTO.class);
