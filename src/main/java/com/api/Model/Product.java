@@ -15,13 +15,9 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id",unique = true)
     private long id;
-    @Column(name = "name")
     private String name;
-    @Column(name = "brand")
     private String brand;
-    @Column(name = "description")
     private String description;
-    @Column(name = "category")
     private String category;
     @Column(name = "enterprise_id")
     private long enterpriseId;
