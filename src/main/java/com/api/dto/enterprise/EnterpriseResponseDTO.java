@@ -7,7 +7,7 @@ public class EnterpriseResponseDTO {
     private long id;
     private String cnpj;
     private String name;
-    private int planId;
+    private long planId;
     private String email;
     private String enterpriseImage;
     private String phoneNumber;

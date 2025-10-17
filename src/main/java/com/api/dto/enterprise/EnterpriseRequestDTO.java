@@ -14,7 +14,7 @@ public class EnterpriseRequestDTO {
     private String name;
     @Column(length = 50)
     @NotNull(message = "Codigo vazio")
-    private int planId;
+    private long planId;
     @Column(length = 100)
     @NotNull(message = "Email vazio")
     private String email;
