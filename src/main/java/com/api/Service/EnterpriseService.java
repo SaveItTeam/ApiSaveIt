@@ -87,14 +87,14 @@ public class EnterpriseService {
         if (updates.containsKey("email")) {
             enterprise.setEmail((String) updates.get("email"));
         }
-        if(updates.containsKey("enterprise_image")) {
-            enterprise.setEnterpriseImage((String) updates.get("enterprise_image"));
+        if(updates.containsKey("enterpriseImage")) {
+            enterprise.setEnterpriseImage((String) updates.get("enterpriseImage"));
         }
-        if (updates.containsKey("phone_number")) {
-            enterprise.setPhoneNumber((String) updates.get("phone_number"));
+        if (updates.containsKey("phoneNumber")) {
+            enterprise.setPhoneNumber((String) updates.get("phoneNumber"));
         }
-        if (updates.containsKey("adress_id")) {
-            enterprise.setAddressId((long) updates.get("adress_id"));
+        if (updates.containsKey("adressId")) {
+            enterprise.setAddressId((long) updates.get("adressId"));
         }
         if (updates.containsKey("password")) {
             enterprise.setPassword((String) updates.get("password"));
