@@ -69,11 +69,11 @@ public class EmployeeService {
         if (updates.containsKey("password")) {
             employee.setPassword((String) updates.get("password"));
         }
-        if (updates.containsKey("enterprise_id")) {
-            employee.setEnterpriseId((long) updates.get("enterprise_id"));
+        if (updates.containsKey("enterpriseId")) {
+            employee.setEnterpriseId((long) updates.get("enterpriseId"));
         }
-        if (updates.containsKey("is_admin")) {
-            employee.setAdmin((boolean) updates.get("is_admin"));
+        if (updates.containsKey("isAdmin")) {
+            employee.setAdmin((boolean) updates.get("isAdmin"));
         }
 
         employeeRepository.save(employee);
