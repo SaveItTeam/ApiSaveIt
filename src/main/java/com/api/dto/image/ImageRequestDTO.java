@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import org.springframework.boot.convert.DataSizeUnit;
 
 @Data
 public class ImageRequestDTO {

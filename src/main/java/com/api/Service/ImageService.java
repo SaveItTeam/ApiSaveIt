@@ -3,7 +3,6 @@ package com.api.Service;
 import com.api.Model.Image;
 import com.api.Repository.ImageRepository;
 
-import com.api.dto.showcaseImage.ShowcaseImageResponseDTO;
 import com.api.projection.ProductShowcaseProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

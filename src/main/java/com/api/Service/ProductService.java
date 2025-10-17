@@ -2,11 +2,9 @@ package com.api.Service;
 
 import java.util.ArrayList;
 
-import com.api.Model.Batch;
 import com.api.Model.Product;
 import com.api.Repository.ProductRepository;
 
-import com.api.dto.product.ProductResponseInfoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

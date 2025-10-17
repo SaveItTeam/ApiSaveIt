@@ -63,7 +63,7 @@ public class BatchService {
         batch.setEntryDate(batchAtualizado.getEntryDate());
         batch.setBatchCode(batchAtualizado.getBatchCode());
         batch.setExpirationDate(batchAtualizado.getExpirationDate());
-        batch.setQuantityMeasure(batchAtualizado.getQuantityMeasure());
+        batch.setQuantity(batchAtualizado.getQuantity());
         batch.setProductId(batchAtualizado.getProductId());
 
         batchRepository.save(batch);
@@ -86,8 +86,8 @@ public class BatchService {
         if (updates.containsKey("expiration_date")) {
             batch.setExpirationDate((Date) updates.get("expiration_date"));
         }
-        if (updates.containsKey("quantity_measure")) {
-            batch.setQuantityMeasure((int) updates.get("quantity_measure"));
+        if (updates.containsKey("quantity")) {
+            batch.setQuantity((int) updates.get("quantity"));
         }
         if (updates.containsKey("product_id")) {
             batch.setProductId((long) updates.get("product_id"));

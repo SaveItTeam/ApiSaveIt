@@ -1,7 +1,6 @@
 package com.api.dto.Batch;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Value;
 
 import java.util.Date;

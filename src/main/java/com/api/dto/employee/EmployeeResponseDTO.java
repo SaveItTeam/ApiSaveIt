@@ -1,8 +1,6 @@
 package com.api.dto.employee;
 
-import com.api.Model.Employee;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
 import lombok.Value;
 
 @Value

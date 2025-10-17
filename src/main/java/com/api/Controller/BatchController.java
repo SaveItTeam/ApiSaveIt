@@ -1,7 +1,6 @@
 package com.api.Controller;
 
 import com.api.Exception.GlobalException;
-import com.api.Model.Batch;
 import com.api.Service.AddressService;
 import com.api.Service.BatchService;
 import com.api.Service.ImageService;
@@ -10,10 +9,8 @@ import com.api.dto.Batch.BatchInsertRequestDTO;
 import com.api.dto.Batch.BatchListDTO;
 import com.api.dto.Batch.BatchRequestDTO;
 import com.api.dto.Batch.BatchResponseDTO;
-import com.api.dto.address.AddressResponseDTO;
 import com.api.dto.image.ImageRequestDTO;
 import com.api.dto.image.ImageResponseDTO;
-import com.api.dto.product.ProductRequestDTO;
 import com.api.dto.product.ProductResponseDTO;
 import com.api.dto.product.ProductResponseInfoDTO;
 import io.swagger.v3.oas.annotations.Operation;

@@ -1,8 +1,6 @@
 package com.api.dto.showcase;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jdk.jfr.DataAmount;
-import lombok.Data;
 import lombok.Value;
 
 import java.util.Date;

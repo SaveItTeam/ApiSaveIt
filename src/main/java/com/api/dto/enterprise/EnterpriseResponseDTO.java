@@ -1,6 +1,5 @@
 package com.api.dto.enterprise;
 
-import lombok.Data;
 import lombok.Value;
 
 @Value

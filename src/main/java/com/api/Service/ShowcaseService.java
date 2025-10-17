@@ -50,6 +50,14 @@ public class ShowcaseService {
         return showcaseListDTOS;
     }
 
+    public List<ShowcaseListDTO> listShowcaseWithProductByEnterpriseId(long enterpriseId) {
+        List<ShowcaseListDTO> showcaseListDTOS = showcaseRepository.findShowcaseWithProductByEnterpriseId(enterpriseId);
+        if (showcaseListDTOS.isEmpty()) {
+            throw new NoSuchElementException("Nenhuma vitrine encontrada para o ID da empresa: " + enterpriseId);
+        }
+        return showcaseListDTOS;
+    }
+
     public void deleteShowcase(Long id) {
         showcaseRepository.deleteById(id);
     }
