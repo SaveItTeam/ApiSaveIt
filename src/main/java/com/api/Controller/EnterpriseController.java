@@ -2,6 +2,7 @@ package com.api.Controller;
 
 import com.api.Exception.GlobalException;
 import com.api.Model.Enterprise;
+import com.api.OpenAPI.EnterpriseOpenApi;
 import com.api.Service.AddressService;
 import com.api.Service.EnterpriseService;
 import com.api.dto.address.AddressResponseDTO;
@@ -22,9 +23,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/enterprise")
-public class EnterpriseController {
-
-
+public class EnterpriseController implements EnterpriseOpenApi {
     private final EnterpriseService enterpriseService;
     private final AddressService addressService;
     private GlobalException ge;
@@ -36,23 +35,12 @@ public class EnterpriseController {
     }
 
     @GetMapping("/selecionar")
-    @Operation(summary = "Listar todas as empresas")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Lista de empresas retornada com sucesso"),
-            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
-    })
     public ResponseEntity<List<EnterpriseResponseDTO>> listEnterprise() {
         List<EnterpriseResponseDTO> enterprises = enterpriseService.listEnterprise();
         return ResponseEntity.ok(enterprises);
     }
 
     @PostMapping("/inserir")
-    @Operation(summary = "Inserir uma nova empresa")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Empresa inserida com sucesso"),
-            @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos"),
-            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
-    })
     public ResponseEntity<?> insertEnterprise(@RequestBody EnterpriseInsertDTO enterpriseInsert) {
         AddressResponseDTO addressResponseDTO = addressService.insertAddress(enterpriseInsert.getAddress());
 
@@ -65,36 +53,18 @@ public class EnterpriseController {
     }
 
     @GetMapping("listarId/{id}")
-    @Operation(summary = "Listar empresa por ID")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Empresa retornada com sucesso"),
-            @ApiResponse(responseCode = "404", description = "Empresa não encontrada"),
-            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
-    })
     public ResponseEntity<EnterpriseResponseDTO> listEnterpriseById(@PathVariable Long id) {
         EnterpriseResponseDTO responseDTO = enterpriseService.findById(id);
         return ResponseEntity.ok(responseDTO);
     }
 
     @GetMapping("listarEmail/{email}")
-    @Operation(summary = "Listar empresa por email")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Empresa retornada com sucesso"),
-            @ApiResponse(responseCode = "404", description = "Empresa não encontrada"),
-            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
-    })
     public ResponseEntity<EnterpriseResponseDTO> listEnterpriseByEmail(@PathVariable String email) {
         EnterpriseResponseDTO responseDTO = enterpriseService.findByEmail(email);
         return ResponseEntity.ok(responseDTO);
     }
 
     @DeleteMapping("/excluir/{id}")
-    @Operation(summary = "Excluir uma empresa")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Empresa excluída com sucesso"),
-            @ApiResponse(responseCode = "404", description = "Empresa não encontrada"),
-            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
-    })
     public ResponseEntity<?> deleteEnterprise(@PathVariable Long id) {
         enterpriseService.deleteEnterprise(id);
         return ResponseEntity.ok("Empresa excluído com sucesso!");
@@ -102,26 +72,12 @@ public class EnterpriseController {
 
 
     @PutMapping("/atualizar/{id}")
-    @Operation(summary = "Atualizar uma empresa")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Empresa atualizada com sucesso"),
-            @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos"),
-            @ApiResponse(responseCode = "404", description = "Empresa não encontrada"),
-            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
-    })
     public ResponseEntity<?> updateEnterprise(@PathVariable Long id, @Valid @RequestBody Enterprise enterpriseAtualizado) {
         enterpriseService.updateEnterprise(id, enterpriseAtualizado);
         return ResponseEntity.ok("Empresa atualizado com sucesso!");
     }
 
     @PatchMapping("/atualizarParcial/{id}")
-    @Operation(summary = "Atualizar parcialmente uma empresa")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Empresa atualizada com sucesso"),
-            @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos"),
-            @ApiResponse(responseCode = "404", description = "Empresa não encontrada"),
-            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
-    })
     public ResponseEntity<?> updateEnterprisePartial(@PathVariable Long id, @Valid @RequestBody Map<String, Object> updates) {
         enterpriseService.updateEnterprisePartial(id, updates);
         return ResponseEntity.ok("Empresa atualizado parcialmente com sucesso!");
