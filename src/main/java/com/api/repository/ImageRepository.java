@@ -1,4 +1,4 @@
-package com.api.Repository;
+package com.api.repository;
 
 import com.api.model.Image;
 import com.api.projection.ProductShowcaseProjection;

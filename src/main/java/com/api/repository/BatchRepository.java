@@ -1,4 +1,4 @@
-package com.api.Repository;
+package com.api.repository;
 
 import com.api.model.Batch;
 import com.api.dto.batch.BatchListDTO;

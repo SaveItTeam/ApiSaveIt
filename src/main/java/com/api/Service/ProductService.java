@@ -3,7 +3,7 @@ package com.api.Service;
 import java.util.ArrayList;
 
 import com.api.model.Product;
-import com.api.Repository.ProductRepository;
+import com.api.repository.ProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package com.api.Service;
 
 import com.api.model.Image;
-import com.api.Repository.ImageRepository;
+import com.api.repository.ImageRepository;
 
 import com.api.projection.ProductShowcaseProjection;
 import org.springframework.beans.factory.annotation.Autowired;

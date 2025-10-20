@@ -1,7 +1,7 @@
 package com.api.Service;
 
 import com.api.model.Plan;
-import com.api.Repository.PlanRepository;
+import com.api.repository.PlanRepository;
 import com.api.dto.Plan.PlanRequestDTO;
 import com.api.dto.Plan.PlanResponseDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,7 +1,7 @@
 package com.api.Service;
 
 import com.api.model.Enterprise;
-import com.api.Repository.EnterpriseRepository;
+import com.api.repository.EnterpriseRepository;
 import com.api.dto.enterprise.EnterpriseRequestDTO;
 import com.api.dto.enterprise.EnterpriseResponseDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;

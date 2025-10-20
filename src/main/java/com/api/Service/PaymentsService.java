@@ -1,7 +1,7 @@
 package com.api.Service;
 
 import com.api.model.Payments;
-import com.api.Repository.PaymentRepository;
+import com.api.repository.PaymentRepository;
 import com.api.dto.payments.PaymentRequestDTO;
 import com.api.dto.payments.PaymentResponseDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;

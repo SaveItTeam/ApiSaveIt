@@ -1,7 +1,7 @@
 package com.api.Service;
 
 import com.api.model.Employee;
-import com.api.Repository.EmployeeRepository;
+import com.api.repository.EmployeeRepository;
 import com.api.dto.employee.EmployeeRequestDTO;
 import com.api.dto.employee.EmployeeResponseDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,7 +1,7 @@
 package com.api.Service;
 
 import com.api.model.Showcase;
-import com.api.Repository.ShowcaseRepository;
+import com.api.repository.ShowcaseRepository;
 import com.api.dto.showcase.ShowcaseListDTO;
 import com.api.dto.showcase.ShowcaseRequestDTO;
 import com.api.dto.showcase.ShowcaseResponseDTO;

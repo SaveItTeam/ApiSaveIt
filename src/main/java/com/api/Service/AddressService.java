@@ -1,7 +1,7 @@
 package com.api.Service;
 
 import com.api.model.Address;
-import com.api.Repository.AddressRepository;
+import com.api.repository.AddressRepository;
 import com.api.dto.address.AddressRequestDTO;
 import com.api.dto.address.AddressResponseDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
