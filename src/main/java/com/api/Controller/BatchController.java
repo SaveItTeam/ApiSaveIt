@@ -1,6 +1,7 @@
 package com.api.Controller;
 
 import com.api.Exception.GlobalException;
+import com.api.OpenAPI.BatchOpenApi;
 import com.api.Service.AddressService;
 import com.api.Service.BatchService;
 import com.api.Service.ImageService;
@@ -27,7 +28,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/batch")
-public class BatchController {
+public class BatchController implements BatchOpenApi {
     private final BatchService batchService;
     private final AddressService addressService;
     private final ProductService productService;
@@ -44,25 +45,12 @@ public class BatchController {
 
 
     @GetMapping("/selecionar")
-    @Operation(summary = "Listar todos os lotes")
-    @ApiResponses(value = {
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Lista de lotes retornada com sucesso"),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Erro interno do servidor")
-    })
     public ResponseEntity<List<BatchResponseDTO>> listBatch() {
         List<BatchResponseDTO> batches = batchService.listBatch();
         return ResponseEntity.ok(batches);
     }
 
-
-
     @PostMapping("/inserir")
-    @Operation(summary = "Inserir um novo lote")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Lote inserido com sucesso"),
-            @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos"),
-            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
-    })
     public ResponseEntity<?> insertBatch(@RequestBody BatchInsertRequestDTO batch) {
         ProductResponseDTO productResponse = productService.insertProduct(batch.getProduct());
 
@@ -78,22 +66,11 @@ public class BatchController {
     }
 
     @GetMapping("/listarProdutosLote/{enterpriseId}")
-    @Operation(summary = "Listar produtos com seus lotes por ID da empresa")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Lista de produtos com lotes retornada com sucesso"),
-            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
-    })
     public ResponseEntity<List<BatchListDTO>> listProdutosLote(@PathVariable long enterpriseId) {
         return ResponseEntity.ok(batchService.listProductBatch(enterpriseId));
     }
 
     @GetMapping("informacoesProduto/{batchId}")
-    @Operation(summary = "Obter informações de um produto pelo ID do lote")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Informações do produto retornadas com sucesso"),
-            @ApiResponse(responseCode = "404", description = "Produto não encontrado"),
-            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
-    })
     public ResponseEntity<ProductResponseInfoDTO> getProductInfo(@RequestParam Long id) {
         BatchResponseDTO batch = batchService.getBatchById(id);
         ProductResponseDTO product = productService.getProductById(batch.getProductId());
@@ -103,46 +80,20 @@ public class BatchController {
     }
 
     @DeleteMapping("/excluir/{id}")
-    @Operation(summary = "Excluir um lote pelo ID")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Lote excluído com sucesso"),
-            @ApiResponse(responseCode = "404", description = "Lote não encontrado"),
-            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
-    })
     public ResponseEntity<?> deleteBatch(@PathVariable Long id) {
         batchService.deleteBatch(id);
         return ResponseEntity.ok("Lote excluído com sucesso!");
     }
 
-
-
     @PutMapping("/atualizar/{id}")
-    @Operation(summary = "Atualizar um lote pelo ID")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Lote atualizado com sucesso"),
-            @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos"),
-            @ApiResponse(responseCode = "404", description = "Lote não encontrado"),
-            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
-    })
     public ResponseEntity<?> updateBatch(@PathVariable Long id, @Valid @RequestBody BatchRequestDTO batchAtualizado) {
         BatchResponseDTO batchResponseDTO = batchService.updateBatch(id, batchAtualizado);
         return ResponseEntity.ok("Lote atualizado com sucesso!" + batchResponseDTO);
     }
 
-
-
     @PatchMapping("/atualizarParcial/{id}")
-    @Operation(summary = "Atualizar parcialmente um lote pelo ID")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Lote atualizado com sucesso"),
-            @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos"),
-            @ApiResponse(responseCode = "404", description = "Lote não encontrado"),
-            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
-    })
     public ResponseEntity<?> updateBatchPartial(@PathVariable Long id, @Valid @RequestBody Map<String, Object> updates) {
         BatchResponseDTO batchResponse = batchService.updateBatchPartial(id, updates);
         return ResponseEntity.ok("Lote atualizado parcialmente com sucesso!" + batchResponse);
     }
-
-
 }
