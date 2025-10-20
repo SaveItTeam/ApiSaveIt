@@ -1,4 +1,4 @@
-package com.api.Model;
+package com.api.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,12 +11,17 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Plan {
+public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true)
     private long id;
     private String name;
-    private Double price;
-    private String description;
+    @Column(unique = true)
+    private String email;
+    private String password;
+    @Column(name = "enterprise_id")
+    private long enterpriseId;
+    @Column(name = "is_admin")
+    private boolean isAdmin;
 }

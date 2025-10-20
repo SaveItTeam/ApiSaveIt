@@ -1,6 +1,6 @@
 package com.api.Service;
 
-import com.api.Model.Employee;
+import com.api.model.Employee;
 import com.api.Repository.EmployeeRepository;
 import com.api.dto.employee.EmployeeRequestDTO;
 import com.api.dto.employee.EmployeeResponseDTO;

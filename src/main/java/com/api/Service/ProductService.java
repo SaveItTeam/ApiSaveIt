@@ -2,7 +2,7 @@ package com.api.Service;
 
 import java.util.ArrayList;
 
-import com.api.Model.Product;
+import com.api.model.Product;
 import com.api.Repository.ProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;

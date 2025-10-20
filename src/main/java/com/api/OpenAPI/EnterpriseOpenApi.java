@@ -1,15 +1,12 @@
 package com.api.OpenAPI;
 
-import com.api.Model.Enterprise;
+import com.api.model.Enterprise;
 import com.api.dto.enterprise.EnterpriseInsertDTO;
 import com.api.dto.enterprise.EnterpriseResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Map;

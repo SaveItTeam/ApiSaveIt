@@ -1,6 +1,6 @@
 package com.api.Service;
 
-import com.api.Model.Batch;
+import com.api.model.Batch;
 import com.api.Repository.BatchRepository;
 import com.api.dto.batch.BatchListDTO;
 import com.api.dto.batch.BatchRequestDTO;

@@ -1,4 +1,4 @@
-package com.api.Model;
+package com.api.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

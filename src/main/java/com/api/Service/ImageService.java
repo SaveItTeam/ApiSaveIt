@@ -1,6 +1,6 @@
 package com.api.Service;
 
-import com.api.Model.Image;
+import com.api.model.Image;
 import com.api.Repository.ImageRepository;
 
 import com.api.projection.ProductShowcaseProjection;

@@ -1,6 +1,6 @@
 package com.api.Repository;
 
-import com.api.Model.Showcase;
+import com.api.model.Showcase;
 import com.api.dto.showcase.ShowcaseListDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

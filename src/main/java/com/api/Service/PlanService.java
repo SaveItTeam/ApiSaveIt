@@ -1,6 +1,6 @@
 package com.api.Service;
 
-import com.api.Model.Plan;
+import com.api.model.Plan;
 import com.api.Repository.PlanRepository;
 import com.api.dto.Plan.PlanRequestDTO;
 import com.api.dto.Plan.PlanResponseDTO;

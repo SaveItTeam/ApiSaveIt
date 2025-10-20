@@ -7,7 +7,7 @@ import com.api.exception.InvalidQuantityException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.api.Model.Stock;
+import com.api.model.Stock;
 import com.api.Repository.StockRepository;
 import com.api.dto.stock.StockRequestDTO;
 import com.api.dto.stock.StockResponseDTO;

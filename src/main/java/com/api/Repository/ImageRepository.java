@@ -1,6 +1,6 @@
 package com.api.Repository;
 
-import com.api.Model.Image;
+import com.api.model.Image;
 import com.api.projection.ProductShowcaseProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

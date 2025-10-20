@@ -1,6 +1,6 @@
 package com.api.Service;
 
-import com.api.Model.Payments;
+import com.api.model.Payments;
 import com.api.Repository.PaymentRepository;
 import com.api.dto.payments.PaymentRequestDTO;
 import com.api.dto.payments.PaymentResponseDTO;

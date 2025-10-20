@@ -1,5 +1,5 @@
 
-package com.api.Model;
+package com.api.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
