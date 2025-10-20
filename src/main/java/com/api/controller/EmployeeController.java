@@ -1,13 +1,10 @@
-package com.api.Controller;
+package com.api.controller;
 
 import com.api.Exception.GlobalException;
 import com.api.OpenAPI.EmployeeOpenApi;
 import com.api.Service.EmployeeService;
 import com.api.dto.employee.EmployeeRequestDTO;
 import com.api.dto.employee.EmployeeResponseDTO;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

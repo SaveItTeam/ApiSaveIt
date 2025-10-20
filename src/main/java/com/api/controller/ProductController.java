@@ -1,4 +1,4 @@
-package com.api.Controller;
+package com.api.controller;
 
 import com.api.Exception.GlobalException;
 
@@ -7,9 +7,6 @@ import com.api.Service.ProductService;
 import com.api.validator.OnCreate;
 import com.api.validator.OnPatch;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.groups.Default;
 
 import org.springframework.beans.factory.annotation.Autowired;

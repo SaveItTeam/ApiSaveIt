@@ -1,4 +1,4 @@
-package com.api.Controller;
+package com.api.controller;
 
 import com.api.Exception.GlobalException;
 import com.api.OpenAPI.BatchOpenApi;
@@ -14,9 +14,6 @@ import com.api.dto.image.ImageRequestDTO;
 import com.api.dto.image.ImageResponseDTO;
 import com.api.dto.product.ProductResponseDTO;
 import com.api.dto.product.ProductResponseInfoDTO;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

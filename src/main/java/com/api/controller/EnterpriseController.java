@@ -1,4 +1,4 @@
-package com.api.Controller;
+package com.api.controller;
 
 import com.api.Exception.GlobalException;
 import com.api.Model.Enterprise;
@@ -10,9 +10,6 @@ import com.api.dto.enterprise.EnterpriseInsertDTO;
 import com.api.dto.enterprise.EnterpriseRequestDTO;
 import com.api.dto.enterprise.EnterpriseResponseDTO;
 import jakarta.validation.Valid;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

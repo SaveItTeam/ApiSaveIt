@@ -1,12 +1,9 @@
-package com.api.Controller;
+package com.api.controller;
 
 import com.api.Exception.GlobalException;
 import com.api.OpenAPI.StockOpenApi;
 import com.api.Service.StockService;
 import com.api.dto.stock.StockRequestDTO;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 import jakarta.validation.Valid;
 
