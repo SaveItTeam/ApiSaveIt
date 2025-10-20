@@ -3,7 +3,7 @@ package com.api.Service;
 import java.time.LocalDateTime;
 import java.util.*;
 
-import com.api.Exception.InvalidQuantityException;
+import com.api.exception.InvalidQuantityException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

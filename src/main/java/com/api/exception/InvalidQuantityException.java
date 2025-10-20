@@ -1,4 +1,4 @@
-package com.api.Exception;
+package com.api.exception;
 
 import java.util.Map;
 

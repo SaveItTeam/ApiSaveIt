@@ -1,6 +1,6 @@
 package com.api.controller;
 
-import com.api.Exception.GlobalException;
+import com.api.exception.GlobalException;
 import com.api.OpenAPI.ShowcaseOpenApi;
 import com.api.Service.ShowcaseService;
 import com.api.dto.showcase.ShowcaseListDTO;

@@ -1,6 +1,6 @@
 package com.api.controller;
 
-import com.api.Exception.GlobalException;
+import com.api.exception.GlobalException;
 import com.api.OpenAPI.BatchOpenApi;
 import com.api.Service.AddressService;
 import com.api.Service.BatchService;

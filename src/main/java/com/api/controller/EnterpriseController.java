@@ -1,6 +1,6 @@
 package com.api.controller;
 
-import com.api.Exception.GlobalException;
+import com.api.exception.GlobalException;
 import com.api.Model.Enterprise;
 import com.api.OpenAPI.EnterpriseOpenApi;
 import com.api.Service.AddressService;

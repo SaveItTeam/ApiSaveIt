@@ -1,6 +1,6 @@
 package com.api.controller;
 
-import com.api.Exception.GlobalException;
+import com.api.exception.GlobalException;
 import com.api.OpenAPI.StockOpenApi;
 import com.api.Service.StockService;
 import com.api.dto.stock.StockRequestDTO;

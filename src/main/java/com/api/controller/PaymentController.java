@@ -1,6 +1,6 @@
 package com.api.controller;
 
-import com.api.Exception.GlobalException;
+import com.api.exception.GlobalException;
 import com.api.OpenAPI.PaymentOpenApi;
 import com.api.Service.PaymentsService;
 import com.api.dto.payments.PaymentRequestDTO;
