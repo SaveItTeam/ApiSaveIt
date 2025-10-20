@@ -2,7 +2,7 @@ package com.api.controller;
 
 import com.api.exception.GlobalException;
 import com.api.openapi.ShowcaseOpenApi;
-import com.api.Service.ShowcaseService;
+import com.api.service.ShowcaseService;
 import com.api.dto.showcase.ShowcaseListDTO;
 import com.api.dto.showcase.ShowcaseRequestDTO;
 import com.api.dto.showcase.ShowcaseResponseDTO;

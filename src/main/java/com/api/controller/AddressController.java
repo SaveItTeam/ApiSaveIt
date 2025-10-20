@@ -2,8 +2,8 @@ package com.api.controller;
 
 import com.api.exception.GlobalException;
 import com.api.openapi.AdressOpenApi;
-import com.api.Service.AddressService;
-import com.api.Service.BatchService;
+import com.api.service.AddressService;
+import com.api.service.BatchService;
 import com.api.dto.address.AddressRequestDTO;
 import com.api.dto.address.AddressResponseDTO;
 import com.api.validator.OnCreate;

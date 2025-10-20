@@ -2,7 +2,7 @@ package com.api.controller;
 
 import com.api.exception.GlobalException;
 import com.api.openapi.ImageOpenApi;
-import com.api.Service.ImageService;
+import com.api.service.ImageService;
 
 import jakarta.validation.Valid;
 

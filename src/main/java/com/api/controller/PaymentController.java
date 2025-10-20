@@ -2,7 +2,7 @@ package com.api.controller;
 
 import com.api.exception.GlobalException;
 import com.api.openapi.PaymentOpenApi;
-import com.api.Service.PaymentsService;
+import com.api.service.PaymentsService;
 import com.api.dto.payments.PaymentRequestDTO;
 import com.api.dto.payments.PaymentResponseDTO;
 import com.api.validator.OnCreate;

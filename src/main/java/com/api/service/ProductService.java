@@ -1,4 +1,4 @@
-package com.api.Service;
+package com.api.service;
 
 import java.util.ArrayList;
 

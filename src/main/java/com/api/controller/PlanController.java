@@ -2,7 +2,7 @@ package com.api.controller;
 
 import com.api.exception.GlobalException;
 import com.api.openapi.PlanOpenApi;
-import com.api.Service.PlanService;
+import com.api.service.PlanService;
 import com.api.dto.Plan.PlanRequestDTO;
 import com.api.dto.Plan.PlanResponseDTO;
 import jakarta.validation.Valid;

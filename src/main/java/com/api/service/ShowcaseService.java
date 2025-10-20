@@ -1,4 +1,4 @@
-package com.api.Service;
+package com.api.service;
 
 import com.api.model.Showcase;
 import com.api.repository.ShowcaseRepository;

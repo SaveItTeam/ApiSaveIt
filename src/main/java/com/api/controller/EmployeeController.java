@@ -2,7 +2,7 @@ package com.api.controller;
 
 import com.api.exception.GlobalException;
 import com.api.openapi.EmployeeOpenApi;
-import com.api.Service.EmployeeService;
+import com.api.service.EmployeeService;
 import com.api.dto.employee.EmployeeRequestDTO;
 import com.api.dto.employee.EmployeeResponseDTO;
 import jakarta.validation.Valid;

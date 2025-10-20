@@ -2,10 +2,10 @@ package com.api.controller;
 
 import com.api.exception.GlobalException;
 import com.api.openapi.BatchOpenApi;
-import com.api.Service.AddressService;
-import com.api.Service.BatchService;
-import com.api.Service.ImageService;
-import com.api.Service.ProductService;
+import com.api.service.AddressService;
+import com.api.service.BatchService;
+import com.api.service.ImageService;
+import com.api.service.ProductService;
 import com.api.dto.batch.BatchInsertRequestDTO;
 import com.api.dto.batch.BatchListDTO;
 import com.api.dto.batch.BatchRequestDTO;

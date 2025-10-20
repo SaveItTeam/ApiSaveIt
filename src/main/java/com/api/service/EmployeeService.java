@@ -1,4 +1,4 @@
-package com.api.Service;
+package com.api.service;
 
 import com.api.model.Employee;
 import com.api.repository.EmployeeRepository;
