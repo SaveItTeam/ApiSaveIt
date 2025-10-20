@@ -22,7 +22,6 @@ public class BatchRequestDTO {
     @Schema(description = "Código do lote", example = "ABC123")
     private String batchCode;
     @NotNull(message = "Data de validade vazio")
-    @JsonProperty("expiration_date")
     @Schema(description = "Data de validade do lote", example = "2024-10-10")
     private Date expirationDate;
     @NotNull(message = "não pode ser vazio")
