@@ -2,9 +2,9 @@ package com.api.Service;
 
 import com.api.Model.Batch;
 import com.api.Repository.BatchRepository;
-import com.api.dto.Batch.BatchListDTO;
-import com.api.dto.Batch.BatchRequestDTO;
-import com.api.dto.Batch.BatchResponseDTO;
+import com.api.dto.batch.BatchListDTO;
+import com.api.dto.batch.BatchRequestDTO;
+import com.api.dto.batch.BatchResponseDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

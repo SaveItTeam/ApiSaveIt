@@ -1,4 +1,4 @@
-package com.api.dto.Batch;
+package com.api.dto.batch;
 
 import lombok.AllArgsConstructor;
 import lombok.Value;

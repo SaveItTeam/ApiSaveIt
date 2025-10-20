@@ -1,4 +1,4 @@
-package com.api.dto.Batch;
+package com.api.dto.batch;
 
 import com.api.dto.image.ImageRequestDTO;
 import com.api.dto.product.ProductRequestDTO;
