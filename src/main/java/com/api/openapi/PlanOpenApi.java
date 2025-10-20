@@ -1,7 +1,7 @@
 package com.api.openapi;
 
-import com.api.dto.Plan.PlanRequestDTO;
-import com.api.dto.Plan.PlanResponseDTO;
+import com.api.dto.plan.PlanRequestDTO;
+import com.api.dto.plan.PlanResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

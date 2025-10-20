@@ -2,8 +2,8 @@ package com.api.service;
 
 import com.api.model.Plan;
 import com.api.repository.PlanRepository;
-import com.api.dto.Plan.PlanRequestDTO;
-import com.api.dto.Plan.PlanResponseDTO;
+import com.api.dto.plan.PlanRequestDTO;
+import com.api.dto.plan.PlanResponseDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
