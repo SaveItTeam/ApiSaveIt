@@ -2,7 +2,7 @@ package com.api.controller;
 
 import com.api.exception.GlobalException;
 
-import com.api.OpenAPI.ProdutoOpenAPI;
+import com.api.openapi.ProdutoOpenAPI;
 import com.api.Service.ProductService;
 import com.api.validator.OnCreate;
 import com.api.validator.OnPatch;

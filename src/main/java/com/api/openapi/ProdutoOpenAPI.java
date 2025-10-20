@@ -1,14 +1,11 @@
-package com.api.OpenAPI;
+package com.api.openapi;
 
 import com.api.dto.product.ProductRequestDTO;
 import com.api.dto.product.ProductResponseDTO;
-import com.api.validator.OnPatch;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import jakarta.validation.groups.Default;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

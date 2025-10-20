@@ -1,4 +1,4 @@
-package com.api.OpenAPI;
+package com.api.openapi;
 
 import com.api.dto.batch.BatchInsertRequestDTO;
 import com.api.dto.batch.BatchListDTO;

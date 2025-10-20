@@ -1,4 +1,4 @@
-package com.api.OpenAPI;
+package com.api.openapi;
 
 import com.api.model.Enterprise;
 import com.api.dto.enterprise.EnterpriseInsertDTO;

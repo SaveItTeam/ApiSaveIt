@@ -1,7 +1,7 @@
 package com.api.controller;
 
 import com.api.exception.GlobalException;
-import com.api.OpenAPI.AdressOpenApi;
+import com.api.openapi.AdressOpenApi;
 import com.api.Service.AddressService;
 import com.api.Service.BatchService;
 import com.api.dto.address.AddressRequestDTO;

@@ -2,7 +2,7 @@ package com.api.controller;
 
 import com.api.exception.GlobalException;
 import com.api.model.Enterprise;
-import com.api.OpenAPI.EnterpriseOpenApi;
+import com.api.openapi.EnterpriseOpenApi;
 import com.api.Service.AddressService;
 import com.api.Service.EnterpriseService;
 import com.api.dto.address.AddressResponseDTO;

@@ -1,7 +1,7 @@
 package com.api.controller;
 
 import com.api.exception.GlobalException;
-import com.api.OpenAPI.StockOpenApi;
+import com.api.openapi.StockOpenApi;
 import com.api.Service.StockService;
 import com.api.dto.stock.StockRequestDTO;
 
