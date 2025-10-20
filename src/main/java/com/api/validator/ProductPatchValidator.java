@@ -1,6 +1,6 @@
 package com.api.validator;
 
-import com.api.Exception.InvalidQuantityException;
+import com.api.exception.InvalidQuantityException;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;

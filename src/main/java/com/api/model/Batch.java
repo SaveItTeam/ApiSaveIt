@@ -1,0 +1,36 @@
+package com.api.model;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.Date;
+
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class Batch {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull(message = "Campo vazio")
+    @Column(name = "id",unique = true)
+    private long id;
+    @Column(name = "unit_measure")
+    private String unitMeasure;
+    @Column(name = "entry_date")
+    private Date entryDate;
+    @Column(name = "batch_code")
+    private String batchCode;
+    @Column(name = "max_quantity")
+    private Integer maxQuantity;
+    @Column(name = "expiration_date")
+    private Date expirationDate;
+    private Integer quantity;
+    @Column(name = "product_id")
+    private long productId;
+}
