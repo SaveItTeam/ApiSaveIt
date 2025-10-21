@@ -21,11 +21,7 @@ public class Showcase {
     private long batchId;
     @Column(name = "quantity_showcase")
     private Integer quantityShowcase;
-    @Column(name = "entrance_showcase")
-    private Date entranceShowcase;
-    private String name;
     @Column(name = "entrance_date")
     private Date entranceDate;
-    private Double price;
 
 }
