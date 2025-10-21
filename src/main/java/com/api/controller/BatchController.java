@@ -67,9 +67,9 @@ public class BatchController implements BatchOpenApi {
         return ResponseEntity.ok(batchService.listProductBatch(enterpriseId));
     }
 
-    @GetMapping("/informacoesProduto/{idBatch}")
-    public ResponseEntity<ProductResponseInfoDTO> getProductInfo(@PathVariable Long idBatch) {
-        BatchResponseDTO batch = batchService.getBatchById(idBatch);
+    @GetMapping("/informacoesProduto/{id}")
+    public ResponseEntity<ProductResponseInfoDTO> getProductInfo(@PathVariable Long id) {
+        BatchResponseDTO batch = batchService.getBatchById(id);
         ProductResponseDTO product = productService.getProductById(batch.getProductId());
         ImageResponseDTO image = imageService.getImageByProductId(product.getId());
         ProductResponseInfoDTO productInfo = new ProductResponseInfoDTO(product, batch, image);
