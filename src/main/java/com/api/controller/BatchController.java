@@ -1,4 +1,4 @@
-package com.api.controller;
+package com.api.Controller;
 
 import com.api.exception.GlobalException;
 import com.api.openapi.BatchOpenApi;
@@ -48,7 +48,7 @@ public class BatchController implements BatchOpenApi {
     }
 
     @PostMapping("/inserir")
-    public ResponseEntity<?> insertBatch(@RequestBody BatchInsertRequestDTO batch) {
+    public ResponseEntity<?> insertBatch(@Valid @RequestBody BatchInsertRequestDTO batch) {
         ProductResponseDTO productResponse = productService.insertProduct(batch.getProduct());
 
         BatchRequestDTO batchRequestDTO = batch.getBatch();
@@ -67,8 +67,8 @@ public class BatchController implements BatchOpenApi {
         return ResponseEntity.ok(batchService.listProductBatch(enterpriseId));
     }
 
-    @GetMapping("informacoesProduto/{batchId}")
-    public ResponseEntity<ProductResponseInfoDTO> getProductInfo(@RequestParam Long id) {
+    @GetMapping("/informacoesProduto/{id}")
+    public ResponseEntity<ProductResponseInfoDTO> getProductInfo(@PathVariable Long id) {
         BatchResponseDTO batch = batchService.getBatchById(id);
         ProductResponseDTO product = productService.getProductById(batch.getProductId());
         ImageResponseDTO image = imageService.getImageByProductId(product.getId());

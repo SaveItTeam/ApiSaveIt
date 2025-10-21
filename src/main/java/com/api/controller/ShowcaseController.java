@@ -47,7 +47,6 @@ public class ShowcaseController implements ShowcaseOpenApi {
     }
 
 
-
     @DeleteMapping("/excluir/{id}")
     public ResponseEntity<?> deleteShowcase(@PathVariable Long id) {
         showCaseService.deleteShowcase(id);

@@ -68,10 +68,7 @@ public class ShowcaseService {
         showCase.setDescription(showcaseAtualizado.getDescription());
         showCase.setBatchId(showcaseAtualizado.getBatchId());
         showCase.setQuantityShowcase(showcaseAtualizado.getQuantityShowcase());
-        showCase.setEntranceShowcase(showcaseAtualizado.getEntranceShowcase());
-        showCase.setName(showcaseAtualizado.getName());
         showCase.setEntranceDate(showcaseAtualizado.getEntranceDate());
-        showCase.setPrice(showcaseAtualizado.getPrice());
 
         showcaseRepository.save(showCase);
         ShowcaseResponseDTO showcaseResponseDTO = objectMapper.convertValue(showcaseAtualizado, ShowcaseResponseDTO.class);
@@ -91,17 +88,9 @@ public class ShowcaseService {
         if (updates.containsKey("quantity_showcase")) {
             showCase.setQuantityShowcase((Integer) updates.get("quantity_showcase"));
         }
-        if (updates.containsKey("entranceShowcase")) {
-            showCase.setEntranceShowcase((java.util.Date) updates.get("entranceShowcase"));
-        }
-        if (updates.containsKey("name")) {
-            showCase.setName((String) updates.get("name"));
-        }
+
         if (updates.containsKey("entranceDate")) {
             showCase.setEntranceDate((java.util.Date) updates.get("entranceDate"));
-        }
-        if (updates.containsKey("price")) {
-            showCase.setPrice((double) updates.get("price"));
         }
 
 

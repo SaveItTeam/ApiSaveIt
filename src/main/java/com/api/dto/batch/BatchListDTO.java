@@ -9,6 +9,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class BatchListDTO {
     private Long id;
+    private Long batchId;
     private String name;
     private Date expirationDate;
     private String quantity;
