@@ -43,7 +43,10 @@ public class GlobalException {
             body.put("message", "O e-mail informado já está cadastrado.");
         } else if (message.contains("enterprise_cnpj_key")) {
             body.put("message", "O CNPJ informado já está cadastrado.");
-        } else {
+        }else if (message.contains("product_enterprise_id_fkey")) {
+            body.put("message", "A empresa com esse ID não existe.");
+        }
+        else {
             body.put("message", "Erro de integridade ao salvar a empresa.");
         }
 

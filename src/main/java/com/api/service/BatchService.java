@@ -88,13 +88,13 @@ public class BatchService {
                     product.getEnterpriseId(),
                     image.getImage(),
                     lote.getQuantity(),
-                    lote.getEntryDate(),
-                    lote.getExpirationDate(),
+                    new java.sql.Date(lote.getEntryDate().getTime()),
+                    new java.sql.Date(lote.getExpirationDate().getTime()),
                     lote.getBatchCode(),
                     lote.getUnitMeasure()
             );
         }catch (DataIntegrityViolationException ex) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Violação de integridade de dados: " + ex.getMessage());
+            throw new DataIntegrityViolationException("Erro de integridade ao inserir a empresa: " + ex.getMessage());
         } catch (DataAccessException ex) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao acessar o banco de dados: " + ex.getMessage());
         }
