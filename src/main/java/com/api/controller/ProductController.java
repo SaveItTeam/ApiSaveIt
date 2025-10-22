@@ -56,7 +56,7 @@ public class ProductController implements ProdutoOpenAPI {
 
 
 
-    public ResponseEntity<?> updateProduct(@PathVariable Long id, @Validated({OnCreate.class, Default.class}) @RequestBody ProductRequestDTO productAtualizado) {
+    public ResponseEntity<?> updateProduct(@PathVariable Long id, @Validated({OnCreate.class, Default.class})  @RequestBody ProductRequestDTO productAtualizado) {
         productService.updateProduct(id, productAtualizado);
         return ResponseEntity.ok("Produto atualizado com sucesso!");
     }

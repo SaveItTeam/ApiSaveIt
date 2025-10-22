@@ -4,6 +4,7 @@ import com.api.model.Address;
 import com.api.repository.AddressRepository;
 import com.api.dto.address.AddressRequestDTO;
 import com.api.dto.address.AddressResponseDTO;
+import com.api.validator.AddressValidator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,6 +63,9 @@ public class AddressService {
 
 
     public AddressResponseDTO updateAddressPartial(Long id, Map<String, Object> updates) {
+        AddressValidator validator = new AddressValidator();
+        validator.validate(updates);
+
         Address address = addressRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Endereco com ID " + id + " não encontrado"));
 

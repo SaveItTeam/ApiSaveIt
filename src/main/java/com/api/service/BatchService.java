@@ -1,13 +1,22 @@
 package com.api.service;
 
+import com.api.Exception.InvalidCategoryException;
+import com.api.Exception.InvalidExpirationDateException;
+import com.api.Exception.InvalidUnitMeasureException;
 import com.api.model.Batch;
 import com.api.repository.BatchRepository;
 import com.api.dto.batch.BatchListDTO;
 import com.api.dto.batch.BatchRequestDTO;
 import com.api.dto.batch.BatchResponseDTO;
+import com.api.dto.batch.BatchInsertRequestDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -43,6 +52,48 @@ public class BatchService {
     public void insertBatch(BatchRequestDTO batch) {
         Batch response = objectMapper.convertValue(batch, Batch.class);
         batchRepository.save(response);
+    }
+
+    public void insertBatchEntity(BatchInsertRequestDTO batch) {
+        if (batch == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Requisição de lote ausente");
+        }
+
+        var product = batch.getProduct();
+        var image = batch.getImage();
+        var lote = batch.getBatch();
+
+        if (!(lote.getUnitMeasure().equals("KG"))&&(lote.getUnitMeasure().equals("L"))){
+            throw new InvalidUnitMeasureException("Unidade de medida inválida para o produto cadastrado");
+        }
+
+        if (!(product.getCategory().equals("Laticínios")) && !(product.getCategory().equals("Embutidos") && !(product.getCategory().equals("Outros")))) {
+            throw new InvalidCategoryException("Categoria inválida para o produto cadastrado");
+        }
+
+        if (lote.getEntryDate().before(lote.getEntryDate())) {
+            throw new InvalidExpirationDateException("Data de validade não pode ser menor ou igual a data de entrada");
+        }
+
+        try {
+            batchRepository.batchInsert(
+                    product.getName(),
+                    product.getDescription(),
+                    product.getCategory(),
+                    product.getBrand(),
+                    product.getEnterpriseId(),
+                    image.getImage(),
+                    lote.getQuantity(),
+                    lote.getEntryDate(),
+                    lote.getExpirationDate(),
+                    lote.getBatchCode(),
+                    lote.getUnitMeasure()
+            );
+        }catch (DataIntegrityViolationException ex) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Violação de integridade de dados: " + ex.getMessage());
+        } catch (DataAccessException ex) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao acessar o banco de dados: " + ex.getMessage());
+        }
     }
 
     public BatchResponseDTO getBatchById(Long id) {

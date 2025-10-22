@@ -5,6 +5,7 @@ import com.api.dto.image.ImageResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public interface ImageOpenApi {
             @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos"),
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
-    ResponseEntity<?> insertImage(ImageRequestDTO image);
+    ResponseEntity<?> insertImage(@Valid ImageRequestDTO image);
 
 
     @Operation(summary = "Obter uma imagem por ID")
@@ -71,7 +72,7 @@ public interface ImageOpenApi {
             @ApiResponse(responseCode = "404", description = "Imagem não encontrada"),
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
-    ResponseEntity<?> updateImage(Long id, ImageRequestDTO imageAtualizado);
+    ResponseEntity<?> updateImage(Long id,@Valid ImageRequestDTO imageAtualizado);
 
 
     @Operation(summary = "Atualizar parcialmente uma imagem")
@@ -81,7 +82,7 @@ public interface ImageOpenApi {
             @ApiResponse(responseCode = "404", description = "Imagem não encontrada"),
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
-    ResponseEntity<?> updateImagePartial(Long id, Map<String, Object> updates);
+    ResponseEntity<?> updateImagePartial(Long id,Map<String, Object> updates);
 }
 
 

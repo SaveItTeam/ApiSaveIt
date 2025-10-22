@@ -15,7 +15,7 @@ public class EnterpriseRequestDTO {
     @Column(length = 50)
     @NotNull(message = "Codigo vazio")
     private long planId;
-    @Column(length = 100)
+    @Column(length = 100, unique = true)
     @NotNull(message = "Email vazio")
     private String email;
     @Column(length = 100)

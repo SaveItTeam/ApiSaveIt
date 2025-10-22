@@ -5,6 +5,7 @@ import com.api.dto.address.AddressResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public interface AdressOpenApi {
             @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos"),
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
-    ResponseEntity<?> insertAddress(AddressRequestDTO address);
+    ResponseEntity<?> insertAddress(@Valid AddressRequestDTO address);
 
     @Operation(summary = "Excluir um endereço pelo ID")
     @ApiResponses(value = {
@@ -44,7 +45,7 @@ public interface AdressOpenApi {
             @ApiResponse(responseCode = "404", description = "Endereço não encontrado"),
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
-    ResponseEntity<?> updateAddress(Long id, AddressRequestDTO addressAtualizado);
+    ResponseEntity<?> updateAddress(Long id,@Valid AddressRequestDTO addressAtualizado);
 
 
     @Operation(summary = "Atualizar parcialmente um endereço pelo ID")

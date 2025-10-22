@@ -38,7 +38,7 @@ public class EnterpriseController implements EnterpriseOpenApi {
     }
 
     @PostMapping("/inserir")
-    public ResponseEntity<?> insertEnterprise(@RequestBody EnterpriseInsertDTO enterpriseInsert) {
+    public ResponseEntity<?> insertEnterprise(@Valid @RequestBody EnterpriseInsertDTO enterpriseInsert) {
         AddressResponseDTO addressResponseDTO = addressService.insertAddress(enterpriseInsert.getAddress());
 
         EnterpriseRequestDTO enterpriseResponseDTO = enterpriseInsert.getEnterprise();
@@ -75,7 +75,7 @@ public class EnterpriseController implements EnterpriseOpenApi {
     }
 
     @PatchMapping("/atualizarParcial/{id}")
-    public ResponseEntity<?> updateEnterprisePartial(@PathVariable Long id, @Valid @RequestBody Map<String, Object> updates) {
+    public ResponseEntity<?> updateEnterprisePartial(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
         enterpriseService.updateEnterprisePartial(id, updates);
         return ResponseEntity.ok("Empresa atualizado parcialmente com sucesso!");
     }

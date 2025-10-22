@@ -7,6 +7,7 @@ import com.api.dto.batch.BatchResponseDTO;
 import com.api.dto.product.ProductResponseInfoDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
@@ -28,7 +29,7 @@ public interface BatchOpenApi {
             @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos"),
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
-    ResponseEntity<?> insertBatch(BatchInsertRequestDTO batch);
+    ResponseEntity<?> insertBatch(@Valid BatchInsertRequestDTO batch);
 
     @Operation(summary = "Listar produtos com seus lotes por ID da empresa")
     @ApiResponses(value = {
@@ -60,7 +61,7 @@ public interface BatchOpenApi {
             @ApiResponse(responseCode = "404", description = "Lote não encontrado"),
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
-    ResponseEntity<?> updateBatch(Long id, BatchRequestDTO batchAtualizado);
+    ResponseEntity<?> updateBatch(Long id,@Valid BatchRequestDTO batchAtualizado);
 
     @Operation(summary = "Atualizar parcialmente um lote pelo ID")
     @ApiResponses({
@@ -69,5 +70,5 @@ public interface BatchOpenApi {
             @ApiResponse(responseCode = "404", description = "Lote não encontrado"),
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
-    ResponseEntity<?> updateBatchPartial(Long id, Map<String, Object> updates);
+    ResponseEntity<?> updateBatchPartial(Long id,Map<String, Object> updates);
 }

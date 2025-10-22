@@ -6,6 +6,7 @@ import com.api.dto.showcase.ShowcaseResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -35,7 +36,7 @@ public interface ShowcaseOpenApi {
             @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos"),
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
-    ResponseEntity<?> insertShowcase(ShowcaseRequestDTO showCase);
+    ResponseEntity<?> insertShowcase(@Valid ShowcaseRequestDTO showCase);
 
 
     @Operation(summary = "Excluir uma vitrine")
@@ -54,7 +55,7 @@ public interface ShowcaseOpenApi {
             @ApiResponse(responseCode = "404", description = "Vitrine não encontrada"),
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
-    ResponseEntity<?> updateShowcase(Long id, ShowcaseRequestDTO showcaseAtualizado);
+    ResponseEntity<?> updateShowcase(Long id,@Valid ShowcaseRequestDTO showcaseAtualizado);
 
 
     @Operation(summary = "Listar vitrine com imagens e nomes dos produtos")
