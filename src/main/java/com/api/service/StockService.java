@@ -46,6 +46,8 @@ public class StockService {
     }
 
 
+
+
     // Atualização de endereços
     public StockResponseDTO updateStock(Long id, StockRequestDTO stockAtualizado) {
         Stock stock = stockRepository.findById(id)
