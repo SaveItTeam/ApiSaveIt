@@ -35,6 +35,14 @@ public class EmployeeService {
         return employeeResponseDTOs;
     }
 
+    public EmployeeResponseDTO findByEmail(String email) {
+        Employee employee = employeeRepository.findByEmail(email);
+        if (employee == null) {
+            throw new NoSuchElementException("Funcionario com email " + email + " não encontrado");
+        }
+        return objectMapper.convertValue(employee, EmployeeResponseDTO.class);
+    }
+
     public void insertEmployee(EmployeeRequestDTO employee) {
         Employee employeeRequest = objectMapper.convertValue(employee, Employee.class);
         employeeRepository.save(employeeRequest);

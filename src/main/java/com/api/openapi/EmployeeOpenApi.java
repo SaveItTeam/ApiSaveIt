@@ -58,4 +58,13 @@ public interface EmployeeOpenApi {
     ResponseEntity<?> atualizarFuncionarioParcial(Long id, Map<String, Object> updates);
 
 
+    @Operation(summary = "Buscar funcionário por email")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Funcionário encontrado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Funcionário não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
+    ResponseEntity<EmployeeResponseDTO> buscarPorEmail(String email);
+
+
 }

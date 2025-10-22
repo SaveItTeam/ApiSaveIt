@@ -50,6 +50,12 @@ public class EmployeeController implements EmployeeOpenApi {
         return ResponseEntity.ok("Funcionario excluído com sucesso!");
     }
 
+    @GetMapping("/buscarPorEmail/{email}")
+    public ResponseEntity<EmployeeResponseDTO> buscarPorEmail(@PathVariable String email) {
+        EmployeeResponseDTO response = employeeService.findByEmail(email);
+        return ResponseEntity.ok(response);
+    }
+
 
 
     @PutMapping("/atualizar/{id}")

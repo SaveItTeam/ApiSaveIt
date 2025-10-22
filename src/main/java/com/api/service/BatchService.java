@@ -67,7 +67,11 @@ public class BatchService {
             throw new InvalidUnitMeasureException("Unidade de medida inválida para o produto cadastrado");
         }
 
-        if (!(product.getCategory().equals("Laticínios")) && !(product.getCategory().equals("Embutidos") && !(product.getCategory().equals("Outros")))) {
+        if (
+                !product.getCategory().equals("Laticínios") &&
+                        !product.getCategory().equals("Embutidos") &&
+                        !product.getCategory().equals("Outros")
+        ) {
             throw new InvalidCategoryException("Categoria inválida para o produto cadastrado");
         }
 
