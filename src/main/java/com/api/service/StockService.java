@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 import com.api.exception.InvalidQuantityException;
+import com.api.model.Batch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +18,13 @@ public class StockService {
 
     private final StockRepository stockRepository;
     private final ObjectMapper objectMapper;
+    private final com.api.repository.BatchRepository batchRepository;
 
     @Autowired
-    public StockService(StockRepository stockRepository, ObjectMapper objectMapper){
+    public StockService(StockRepository stockRepository, ObjectMapper objectMapper, com.api.repository.BatchRepository batchRepository){
         this.stockRepository = stockRepository;
         this.objectMapper = objectMapper;
+        this.batchRepository = batchRepository;
     }
 
     //    Métodos de busca
@@ -34,13 +37,29 @@ public class StockService {
         return stockResponseDTOS;
     }
 
-    // Inserção de enderecos
     public void insertStock(StockRequestDTO stock) {
+        Optional<Batch> batch = batchRepository.findById(stock.getBatchId());
+
+        if (batch.get().getQuantity() < stock.getQuantityOutput()) {
+            throw new InvalidQuantityException(Map.of("quantityInput", "A quantidade de entrada não pode ser maior que a quantidade disponível no lote."));
+        }else {
+            batch.get().setQuantity( (batch.get().getQuantity() - stock.getQuantityOutput()) + stock.getQuantityInput() );
+            if (stock.getDiscardQuantity() > 0) {
+                if (batch.get().getQuantity() < stock.getDiscardQuantity()) {
+                    throw new InvalidQuantityException(Map.of("discardQuantity", "A quantidade de descarte não pode ser maior que a quantidade disponível no lote."));
+                } else {
+                    batch.get().setQuantity(batch.get().getQuantity() - stock.getDiscardQuantity());
+                    batchRepository.save(batch.get());
+                }
+            }else {
+                batchRepository.save(batch.get());
+            }
+        }
+
         Stock stockRequest = objectMapper.convertValue(stock, Stock.class);
         stockRepository.save(stockRequest);
     }
 
-    // Deleção de endereços
     public void deleteStock(Long id) {
         stockRepository.deleteById(id);
     }
@@ -48,7 +67,6 @@ public class StockService {
 
 
 
-    // Atualização de endereços
     public StockResponseDTO updateStock(Long id, StockRequestDTO stockAtualizado) {
         Stock stock = stockRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Estoque com ID " + id + " não encontrado"));
@@ -65,7 +83,6 @@ public class StockService {
         stockRepository.save(stock);
         return objectMapper.convertValue(stock, StockResponseDTO.class);
     }
-    // Atualização de endereço parcial
 
     public StockResponseDTO updateStockPartial(Long id, Map<String, Object> updates) {
         Stock stock = stockRepository.findById(id)

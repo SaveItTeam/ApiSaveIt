@@ -34,13 +34,13 @@ public class StockController implements StockOpenApi {
 
     @GetMapping("/selecionar")
     public ResponseEntity<List<StockResponseDTO>> listStock() {
-        // Se lançar uma RuntimeException aqui, o Spring vai chamar o método do GlobalException automaticamente
         List<StockResponseDTO> stocks = stockService.listStock();
         return ResponseEntity.ok(stocks);
     }
 
     @PostMapping("/inserir")
-    public ResponseEntity<?> inserirVitrine(@RequestBody StockRequestDTO stock) {
+    public ResponseEntity<?> inserirStock(@RequestBody StockRequestDTO stock) {
+
         stockService.insertStock(stock);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Estoque inserido com sucesso!");
