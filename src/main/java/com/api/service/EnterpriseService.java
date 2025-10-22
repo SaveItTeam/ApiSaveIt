@@ -4,8 +4,11 @@ import com.api.model.Enterprise;
 import com.api.repository.EnterpriseRepository;
 import com.api.dto.enterprise.EnterpriseRequestDTO;
 import com.api.dto.enterprise.EnterpriseResponseDTO;
+import com.api.validator.EnterpriseValidator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -34,7 +37,11 @@ public class EnterpriseService {
     }
 
     public EnterpriseResponseDTO findByEmail(String email) {
-        return objectMapper.convertValue(enterpriseRepository.findByEmail(email), EnterpriseResponseDTO.class);
+        Enterprise enterprise = enterpriseRepository.findByEmail(email);
+        if (enterprise == null) {
+            throw new NoSuchElementException("Empresa com email " + email + " não encontrado");
+        }
+        return objectMapper.convertValue(objectMapper.convertValue(enterprise, EnterpriseResponseDTO.class), EnterpriseResponseDTO.class);
     }
 
     public EnterpriseResponseDTO findById(Long id) {
@@ -45,8 +52,14 @@ public class EnterpriseService {
 
     public EnterpriseResponseDTO insertEnterprise(EnterpriseRequestDTO enterprise) {
         Enterprise enterpriseRequest = objectMapper.convertValue(enterprise, Enterprise.class);
-        Enterprise response = enterpriseRepository.save(enterpriseRequest);
-        return objectMapper.convertValue(response, EnterpriseResponseDTO.class);
+        try {
+            Enterprise response = enterpriseRepository.save(enterpriseRequest);
+            return objectMapper.convertValue(response, EnterpriseResponseDTO.class);
+        }catch (DataIntegrityViolationException ex) {
+            throw new DataIntegrityViolationException("Erro de integridade ao inserir a empresa: " + ex.getMessage());
+        }catch (DataAccessException ex) {
+            throw new DataAccessException("Erro de acesso a dados ao inserir a empresa: " + ex.getMessage()) {};
+        }
     }
 
     public void deleteEnterprise(Long id) {
@@ -72,6 +85,10 @@ public class EnterpriseService {
     }
 
     public EnterpriseResponseDTO updateEnterprisePartial(Long id, Map<String, Object> updates) {
+
+        EnterpriseValidator validator = new EnterpriseValidator();
+        validator.validate(updates);
+
         Enterprise enterprise = enterpriseRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Empresa com ID " + id + " não encontrado"));
 

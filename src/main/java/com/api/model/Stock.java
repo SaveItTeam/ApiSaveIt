@@ -1,5 +1,6 @@
 package com.api.model;
 
+import com.api.dto.stock.StockSummary;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,6 +12,23 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
+@SqlResultSetMapping(
+        name = "StockSummaryMapping",
+        classes = @ConstructorResult(
+                targetClass = StockSummary.class,
+                columns = {
+                        @ColumnResult(name = "productId", type = Long.class),
+                        @ColumnResult(name = "totalQuantityInput", type = Integer.class),
+                        @ColumnResult(name = "totalQuantityOutput", type = Integer.class),
+                        @ColumnResult(name = "totalDiscardQuantity", type = Integer.class)
+                }
+        )
+)
+@NamedNativeQuery(
+        name = "Stock.getStockSummary",
+        query = "SELECT * FROM moviments(:enterpriseId)",
+        resultSetMapping = "StockSummaryMapping"
+)
 @NoArgsConstructor
 @AllArgsConstructor
 public class Stock {

@@ -26,7 +26,7 @@ public interface StockOpenApi {
             @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos"),
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
-    ResponseEntity<?> inserirVitrine(@RequestBody StockRequestDTO stock);
+    ResponseEntity<?> inserirStock(@RequestBody StockRequestDTO stock);
 
     @Operation(summary = "Excluir um estoque")
     @ApiResponses(value = {

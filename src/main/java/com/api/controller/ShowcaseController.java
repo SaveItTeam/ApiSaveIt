@@ -40,7 +40,7 @@ public class ShowcaseController implements ShowcaseOpenApi {
     }
 
     @PostMapping("/inserir")
-    public ResponseEntity<?> insertShowcase(@RequestBody ShowcaseRequestDTO showCase) {
+    public ResponseEntity<?> insertShowcase(@Valid @RequestBody ShowcaseRequestDTO showCase) {
         ShowcaseResponseDTO showcaseSalvo = showCaseService.insertShowcase(showCase);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Vitrine inserido com sucesso!");
@@ -70,7 +70,7 @@ public class ShowcaseController implements ShowcaseOpenApi {
 
 
     @PatchMapping("/atualizarParcial/{id}")
-    public ResponseEntity<?> updateShowcasePartial(@PathVariable Long id, @Valid @RequestBody Map<String, Object> updates) {
+    public ResponseEntity<?> updateShowcasePartial(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
         showCaseService.updateShowcasePartial(id, updates);
         return ResponseEntity.ok("Vitrine atualizado parcialmente com sucesso!");
     }

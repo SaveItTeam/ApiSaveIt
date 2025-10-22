@@ -4,6 +4,7 @@ import com.api.model.Employee;
 import com.api.repository.EmployeeRepository;
 import com.api.dto.employee.EmployeeRequestDTO;
 import com.api.dto.employee.EmployeeResponseDTO;
+import com.api.validator.EmployeeValidator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,14 @@ public class EmployeeService {
         return employeeResponseDTOs;
     }
 
+    public EmployeeResponseDTO findByEmail(String email) {
+        Employee employee = employeeRepository.findByEmail(email);
+        if (employee == null) {
+            throw new NoSuchElementException("Funcionario com email " + email + " não encontrado");
+        }
+        return objectMapper.convertValue(employee, EmployeeResponseDTO.class);
+    }
+
     public void insertEmployee(EmployeeRequestDTO employee) {
         Employee employeeRequest = objectMapper.convertValue(employee, Employee.class);
         employeeRepository.save(employeeRequest);
@@ -57,6 +66,9 @@ public class EmployeeService {
 
 
     public EmployeeResponseDTO updateEmployeePartial(Long id, Map<String, Object> updates) {
+        EmployeeValidator validator = new EmployeeValidator();
+        validator.validate(updates);
+
         Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Funcionario com ID " + id + " não encontrado"));
 

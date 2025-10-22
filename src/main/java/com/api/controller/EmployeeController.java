@@ -7,6 +7,7 @@ import com.api.dto.employee.EmployeeRequestDTO;
 import com.api.dto.employee.EmployeeResponseDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +36,7 @@ public class EmployeeController implements EmployeeOpenApi {
 
 
     @PostMapping("/inserir")
-    public ResponseEntity<?> inserirFuncionario(@RequestBody EmployeeRequestDTO employee) {
+    public ResponseEntity<?> inserirFuncionario(@Valid @RequestBody EmployeeRequestDTO employee) {
         employeeService.insertEmployee(employee);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Funcionario inserido com sucesso!!");
@@ -49,6 +50,12 @@ public class EmployeeController implements EmployeeOpenApi {
         return ResponseEntity.ok("Funcionario excluído com sucesso!");
     }
 
+    @GetMapping("/buscarPorEmail/{email}")
+    public ResponseEntity<EmployeeResponseDTO> buscarPorEmail(@PathVariable String email) {
+        EmployeeResponseDTO response = employeeService.findByEmail(email);
+        return ResponseEntity.ok(response);
+    }
+
 
 
     @PutMapping("/atualizar/{id}")
@@ -60,7 +67,7 @@ public class EmployeeController implements EmployeeOpenApi {
 
 
     @PatchMapping("/atualizarParcial/{id}")
-    public ResponseEntity<?> atualizarFuncionarioParcial(@PathVariable Long id, @Valid @RequestBody Map<String, Object> updates) {
+    public ResponseEntity<?> atualizarFuncionarioParcial(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
         employeeService.updateEmployeePartial(id, updates);
         return ResponseEntity.ok("Funcionario atualizado parcialmente com sucesso!");
     }

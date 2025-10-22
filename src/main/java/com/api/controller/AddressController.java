@@ -44,7 +44,7 @@ public class AddressController implements AdressOpenApi {
 
 
     @PostMapping("/inserir")
-    public ResponseEntity<?> insertAddress(@Validated({OnCreate.class, Default.class}) @RequestBody AddressRequestDTO address) {
+    public ResponseEntity<?> insertAddress(@Valid @RequestBody AddressRequestDTO address) {
         addressService.insertAddress(address);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Endereco inserido com sucesso!");
@@ -66,7 +66,7 @@ public class AddressController implements AdressOpenApi {
 
 
     @PatchMapping("/atualizarParcial/{id}")
-    public ResponseEntity<?> updateAddressPartial(@PathVariable Long id, @Valid @RequestParam Map<String, Object> updates) {
+    public ResponseEntity<?> updateAddressPartial(@PathVariable Long id, @RequestParam Map<String, Object> updates) {
         AddressResponseDTO addressResponseDTO = addressService.updateAddressPartial(id, updates);
         return ResponseEntity.ok(addressResponseDTO);
     }

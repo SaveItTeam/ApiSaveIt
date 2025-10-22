@@ -49,15 +49,7 @@ public class BatchController implements BatchOpenApi {
 
     @PostMapping("/inserir")
     public ResponseEntity<?> insertBatch(@Valid @RequestBody BatchInsertRequestDTO batch) {
-        ProductResponseDTO productResponse = productService.insertProduct(batch.getProduct());
-
-        BatchRequestDTO batchRequestDTO = batch.getBatch();
-        batchRequestDTO.setProductId(productResponse.getId());
-        batchService.insertBatch(batchRequestDTO);
-
-        ImageRequestDTO imageRequestDTO = batch.getImage();
-        imageRequestDTO.setProductId(productResponse.getId());
-        imageService.insertImage(imageRequestDTO);
+        batchService.insertBatchEntity(batch);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Lote inserido com sucesso!");
     }
@@ -89,7 +81,7 @@ public class BatchController implements BatchOpenApi {
     }
 
     @PatchMapping("/atualizarParcial/{id}")
-    public ResponseEntity<?> updateBatchPartial(@PathVariable Long id, @Valid @RequestBody Map<String, Object> updates) {
+    public ResponseEntity<?> updateBatchPartial(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
         BatchResponseDTO batchResponse = batchService.updateBatchPartial(id, updates);
         return ResponseEntity.ok("Lote atualizado parcialmente com sucesso!" + batchResponse);
     }

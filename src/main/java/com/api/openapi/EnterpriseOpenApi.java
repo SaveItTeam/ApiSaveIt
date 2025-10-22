@@ -6,6 +6,7 @@ import com.api.dto.enterprise.EnterpriseResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public interface EnterpriseOpenApi {
             @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos"),
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
-    ResponseEntity<?> insertEnterprise(EnterpriseInsertDTO enterpriseInsert);
+    ResponseEntity<?> insertEnterprise(@Valid EnterpriseInsertDTO enterpriseInsert);
 
 
     @Operation(summary = "Listar empresa por ID")
@@ -63,7 +64,7 @@ public interface EnterpriseOpenApi {
             @ApiResponse(responseCode = "404", description = "Empresa não encontrada"),
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
-    ResponseEntity<?> updateEnterprise(Long id, Enterprise enterpriseAtualizado);
+    ResponseEntity<?> updateEnterprise(Long id, @Valid Enterprise enterpriseAtualizado);
 
 
     @Operation(summary = "Atualizar parcialmente uma empresa")
