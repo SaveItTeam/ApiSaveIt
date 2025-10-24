@@ -13,4 +13,6 @@ public class AdminResponseDTO {
     private String name;
     @Schema(description = "Senha do administrador", example = "senhaSegura123")
     private String password;
+    @Schema(description = "Indica se ele pode ler ou executar os endpoints", example = "true")
+    private boolean write;
 }
