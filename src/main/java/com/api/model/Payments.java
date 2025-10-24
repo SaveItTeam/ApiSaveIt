@@ -1,9 +1,7 @@
 package com.api.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,17 +15,27 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Payments {
+
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "enterprise_id")
-    private long enterpriseId;
-    @Column(name = "plan_id")
-    private long planId;
+
+    @ManyToOne
+    @JoinColumn(name = "enterprise_id", nullable = false)
+    private Enterprise enterprise;
+
+    @ManyToOne
+    @JoinColumn(name = "plan_id", nullable = false)
+    private Plan plan;
+
+
     @Column(name = "payment_date")
     private Date paymentDate;
+
     private Double amount;
     private String status;
-    @Column(name = "paymentMethod")
+
+    @Column(name = "payment_method")
     private String paymentMethod;
 }
+
