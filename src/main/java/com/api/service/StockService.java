@@ -3,8 +3,11 @@ package com.api.service;
 import java.time.LocalDateTime;
 import java.util.*;
 
+import com.api.dto.stock.StockByProductSummary;
+import com.api.dto.stock.StockSummary;
 import com.api.exception.InvalidQuantityException;
 import com.api.model.Batch;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +22,16 @@ public class StockService {
     private final StockRepository stockRepository;
     private final ObjectMapper objectMapper;
     private final com.api.repository.BatchRepository batchRepository;
+    private final com.api.repository.EnterpriseRepository enterpriseRepository;
+    private final com.api.repository.ProductRepository productRepository;
 
     @Autowired
-    public StockService(StockRepository stockRepository, ObjectMapper objectMapper, com.api.repository.BatchRepository batchRepository){
+    public StockService(StockRepository stockRepository, ObjectMapper objectMapper, com.api.repository.BatchRepository batchRepository, com.api.repository.EnterpriseRepository enterpriseRepository, com.api.repository.ProductRepository productRepository){
         this.stockRepository = stockRepository;
         this.objectMapper = objectMapper;
         this.batchRepository = batchRepository;
+        this.enterpriseRepository = enterpriseRepository;
+        this.productRepository = productRepository;
     }
 
     //    Métodos de busca
@@ -65,7 +72,27 @@ public class StockService {
     }
 
 
+    public List<StockSummary> getStockSummary(Long enterpriseId) {
+        try {
+            return stockRepository.getStockSummary(enterpriseId);
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao buscar resumo do estoque: " + e.getMessage(), e);
+        }
+    }
 
+    public List<StockByProductSummary> getStockSummaryByProduct(Long enterpriseId, Long productId) {
+        if (enterpriseRepository.findById(enterpriseId).isEmpty()) {
+            throw new EntityNotFoundException("Empresa não encontrada.");
+        }
+        if(productRepository.findById(productId).isEmpty()) {
+            throw new EntityNotFoundException("Produto não encontrado.");
+        }
+        try {
+            return stockRepository.getStockSummaryByProduct(enterpriseId, productId);
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao buscar resumo do estoque por produto: " + e.getMessage(), e);
+        }
+    }
 
     public StockResponseDTO updateStock(Long id, StockRequestDTO stockAtualizado) {
         Stock stock = stockRepository.findById(id)

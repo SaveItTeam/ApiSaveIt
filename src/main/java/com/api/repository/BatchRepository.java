@@ -12,13 +12,8 @@ import java.util.Date;
 import java.util.List;
 
 public interface BatchRepository extends JpaRepository<Batch, Long> {
-    @Query("select new com.api.dto.batch.BatchListDTO(p.id, b.id, p.name, b.expirationDate ,CONCAT(b.quantity, ' ', b.unitMeasure) , i.image) " +
-            "from Batch b " +
-            "join Product p on b.productId = p.id " +
-            "join Image i on p.id = i.productId " +
-            "join Enterprise e on p.enterpriseId = e.id " +
-            "where e.id = :enterpriseId")
-    List<BatchListDTO> listOfBatches(@Param("enterpriseId") long enterpriseId);
+    @Query(value = "SELECT * FROM get_batches_by_enterprise(:enterpriseId)", nativeQuery = true)
+    List<BatchListDTO> listOfBatches(@Param("enterpriseId") Long enterpriseId);
 
     @Procedure(procedureName = "public.add_full_product")
     void batchInsert(@Param("p_name") String pName, @Param("p_description") String pDescription,

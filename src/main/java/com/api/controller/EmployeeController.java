@@ -1,5 +1,6 @@
 package com.api.controller;
 
+import com.api.Service.FirebaseAuthService;
 import com.api.exception.GlobalException;
 import com.api.openapi.EmployeeOpenApi;
 import com.api.service.EmployeeService;
@@ -22,7 +23,7 @@ public class EmployeeController implements EmployeeOpenApi {
     private GlobalException ge;
 
     @Autowired
-    public EmployeeController(EmployeeService employeeService) {
+    public EmployeeController(EmployeeService employeeService, FirebaseAuthService firebaseAuthService) {
         this.employeeService = employeeService;
     }
 

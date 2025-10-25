@@ -1,5 +1,6 @@
 package com.api.service;
 
+import com.api.Util.PasswordUtils;
 import com.api.model.Enterprise;
 import com.api.repository.EnterpriseRepository;
 import com.api.dto.enterprise.EnterpriseRequestDTO;
@@ -11,10 +12,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 @Service
 public class EnterpriseService {
@@ -53,6 +51,8 @@ public class EnterpriseService {
     public EnterpriseResponseDTO insertEnterprise(EnterpriseRequestDTO enterprise) {
         Enterprise enterpriseRequest = objectMapper.convertValue(enterprise, Enterprise.class);
         try {
+            String hashedPassword = PasswordUtils.hashPassword(enterpriseRequest.getPassword());
+            enterpriseRequest.setPassword(hashedPassword);
             Enterprise response = enterpriseRepository.save(enterpriseRequest);
             return objectMapper.convertValue(response, EnterpriseResponseDTO.class);
         }catch (DataIntegrityViolationException ex) {

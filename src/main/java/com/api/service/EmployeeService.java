@@ -1,5 +1,6 @@
 package com.api.service;
 
+import com.api.Service.FirebaseAuthService;
 import com.api.model.Employee;
 import com.api.repository.EmployeeRepository;
 import com.api.dto.employee.EmployeeRequestDTO;
@@ -7,6 +8,7 @@ import com.api.dto.employee.EmployeeResponseDTO;
 import com.api.validator.EmployeeValidator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,11 +20,13 @@ import java.util.NoSuchElementException;
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final ObjectMapper objectMapper;
+    private final FirebaseAuthService firebaseAuthService;
 
     @Autowired
-    public EmployeeService(EmployeeRepository employeeRepository, ObjectMapper objectMapper) {
+    public EmployeeService(EmployeeRepository employeeRepository, ObjectMapper objectMapper, FirebaseAuthService firebaseAuthService) {
         this.employeeRepository = employeeRepository;
         this.objectMapper = objectMapper;
+        this.firebaseAuthService = firebaseAuthService;
     }
 
 
@@ -45,7 +49,14 @@ public class EmployeeService {
 
     public void insertEmployee(EmployeeRequestDTO employee) {
         Employee employeeRequest = objectMapper.convertValue(employee, Employee.class);
-        employeeRepository.save(employeeRequest);
+        try {
+            employeeRepository.save(employeeRequest);
+            firebaseAuthService.createUser(employee.getEmail(), employee.getPassword());
+        }catch (DataIntegrityViolationException ex) {
+            throw new DataIntegrityViolationException("Violação da integridade dos dados: " + ex.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void deleteEmployee(Long id) {
