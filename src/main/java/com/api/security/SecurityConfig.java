@@ -39,8 +39,8 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of(
-                "http://localhost:3000",                 // Desenvolvimento
-                "https://meu-frontend.vercel.app"       // Produção
+                "http://localhost:5173",                 // Desenvolvimento
+                "https://react-save-it.vercel.app/"       // Produção
         ));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowCredentials(true);
