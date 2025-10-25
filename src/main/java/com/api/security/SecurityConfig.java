@@ -12,6 +12,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
 
 @Configuration
 public class SecurityConfig {
@@ -30,6 +35,21 @@ public class SecurityConfig {
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of(
+                "http://localhost:3000",                 // Desenvolvimento
+                "https://meu-frontend.vercel.app"       // Produção
+        ));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedHeaders(List.of("*"));
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
@@ -41,11 +61,9 @@ public class SecurityConfig {
 
         http
                 .csrf(csrf -> csrf.disable())
-
                 .authorizeHttpRequests(auth -> auth
-                        // 🔓 Endpoints públicos (sem login)
+
                         .requestMatchers("/login", "/error").permitAll()
-                        // 🔒 Swagger só acessível após login
                         .requestMatchers(
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
@@ -54,26 +72,21 @@ public class SecurityConfig {
                                 "/webjars/**"
                         ).authenticated()
 
-                        // 📘 Qualquer requisição GET é leitura (READ ou WRITE)
                         .requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole("READ", "WRITE")
 
-                        // ✏️ POST, PUT, PATCH e DELETE exigem WRITE
                         .requestMatchers(HttpMethod.POST, "/api/**").hasRole("WRITE")
                         .requestMatchers(HttpMethod.PUT, "/api/**").hasRole("WRITE")
                         .requestMatchers(HttpMethod.PATCH, "/api/**").hasRole("WRITE")
                         .requestMatchers(HttpMethod.DELETE, "/api/**").hasRole("WRITE")
 
-                        // 🔒 Todo o resto exige login
                         .anyRequest().authenticated()
                 )
 
-                // 🔐 Login form — redireciona pro Swagger após login
                 .formLogin(form -> form
                         .defaultSuccessUrl("/swagger-ui.html", true)
                         .permitAll()
                 )
 
-                // 🚪 Logout
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login?logout")
