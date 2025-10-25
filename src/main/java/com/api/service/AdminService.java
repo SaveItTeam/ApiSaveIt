@@ -7,6 +7,7 @@ import com.api.model.Employee;
 import com.api.repository.AdminRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,11 +19,12 @@ import java.util.NoSuchElementException;
 public class AdminService {
     private final AdminRepository adminRepository;
     private final ObjectMapper objectMapper;
-
+    private final PasswordEncoder passwordEncoder;
     @Autowired
-    public AdminService(AdminRepository adminRepository, ObjectMapper objectMapper) {
+    public AdminService(AdminRepository adminRepository, ObjectMapper objectMapper, PasswordEncoder passwordEncoder) {
         this.adminRepository = adminRepository;
         this.objectMapper = objectMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -35,10 +37,24 @@ public class AdminService {
         return adminResponseDTOS;
     }
 
-    public void insertAdmin(AdminRequestDTO admin) {
-        Admin adminRequest = objectMapper.convertValue(admin, Admin.class);
-        adminRepository.save(adminRequest);
+    public void insertAdmin(AdminRequestDTO adminDTO) {
+        // Verifica se a senha foi informada
+        if (adminDTO.getPassword() == null || adminDTO.getPassword().isBlank()) {
+            throw new IllegalArgumentException("Senha não pode ser nula ou vazia");
+        }
+
+        // Converte o DTO em entidade
+        Admin admin = objectMapper.convertValue(adminDTO, Admin.class);
+
+        // Criptografa a senha
+        String senhaCriptografada = passwordEncoder.encode(adminDTO.getPassword());
+        admin.setPassword(senhaCriptografada);
+
+        // Salva no banco
+        adminRepository.save(admin);
     }
+
+
 
     public void deleteAdmin(Long id) {
         adminRepository.deleteById(id);
@@ -69,8 +85,12 @@ public class AdminService {
         if (updates.containsKey("password")) {
             admin.setPassword((String) updates.get("password"));
         }
+        if (updates.containsKey("write")) {
+            admin.setWrite((Boolean) updates.get("write"));
+        }
 
         adminRepository.save(admin);
         return objectMapper.convertValue(admin, AdminResponseDTO.class);
     }
+
 }
