@@ -1,5 +1,7 @@
 package com.api.controller;
 
+import com.api.dto.stock.StockByProductSummary;
+import com.api.dto.stock.StockSummary;
 import com.api.exception.GlobalException;
 import com.api.openapi.StockOpenApi;
 import com.api.service.StockService;
@@ -36,6 +38,18 @@ public class StockController implements StockOpenApi {
     public ResponseEntity<List<StockResponseDTO>> listStock() {
         List<StockResponseDTO> stocks = stockService.listStock();
         return ResponseEntity.ok(stocks);
+    }
+
+    @GetMapping("/relatorioProduto/{enterpriseId}")
+    public ResponseEntity<List<StockSummary>> listSummary(@PathVariable Long enterpriseId) {
+        List<StockSummary> response = stockService.getStockSummary(enterpriseId);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/relatorioProdutoPorProduto/{enterpriseId}/{productId}")
+    public ResponseEntity<List<StockByProductSummary>> listSummaryByProductId(@PathVariable Long enterpriseId, @PathVariable Long productId) {
+        List<StockByProductSummary> response = stockService.getStockSummaryByProduct(enterpriseId, productId);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/inserir")

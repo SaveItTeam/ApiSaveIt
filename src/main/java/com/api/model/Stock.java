@@ -12,23 +12,44 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-@SqlResultSetMapping(
-        name = "StockSummaryMapping",
-        classes = @ConstructorResult(
-                targetClass = StockSummary.class,
-                columns = {
-                        @ColumnResult(name = "productId", type = Long.class),
-                        @ColumnResult(name = "totalQuantityInput", type = Integer.class),
-                        @ColumnResult(name = "totalQuantityOutput", type = Integer.class),
-                        @ColumnResult(name = "totalDiscardQuantity", type = Integer.class)
-                }
-        )
+@SqlResultSetMappings(
+        value = {
+                @SqlResultSetMapping(
+                        name = "StockSummaryMapping",
+                        classes = @ConstructorResult(
+                                targetClass = StockSummary.class,
+                                columns = {
+                                        @ColumnResult(name = "totalInput", type = Long.class),
+                                        @ColumnResult(name = "totalOutput", type = Long.class),
+                                        @ColumnResult(name = "totalDiscard", type = Long.class),
+                                        @ColumnResult(name = "monthOutput", type = Integer.class)
+                                }
+                        )
+                ),
+                @SqlResultSetMapping(
+                        name = "StockByProductSummaryMapping",
+                        classes = @ConstructorResult(
+                                targetClass = StockSummary.class,
+                                columns = {
+                                        @ColumnResult(name = "totalOutput", type = Long.class),
+                                        @ColumnResult(name = "mouthOutput", type = Integer.class)
+                                }
+                        )
+                )
+        }
 )
 @NamedNativeQuery(
         name = "Stock.getStockSummary",
         query = "SELECT * FROM moviments(:enterpriseId)",
         resultSetMapping = "StockSummaryMapping"
 )
+
+@NamedNativeQuery(
+        name = "Stock.getStockSummaryByProduct",
+        query = "SELECT * FROM moviments_by_product(:enterpriseId, :productId)",
+        resultSetMapping = "StockByProductSummaryMapping"
+)
+
 @NoArgsConstructor
 @AllArgsConstructor
 public class Stock {

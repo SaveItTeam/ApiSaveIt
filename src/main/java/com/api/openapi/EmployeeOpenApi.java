@@ -27,7 +27,7 @@ public interface EmployeeOpenApi {
             @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos"),
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
-    ResponseEntity<?> inserirFuncionario(@Valid EmployeeRequestDTO employee);
+    ResponseEntity<?> inserirFuncionario(@Valid EmployeeRequestDTO employee) throws Exception;
 
 
     @Operation(summary = "Excluir um funcionário")
