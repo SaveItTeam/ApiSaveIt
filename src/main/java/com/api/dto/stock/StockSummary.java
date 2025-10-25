@@ -4,8 +4,8 @@ import lombok.Value;
 
 @Value
 public class StockSummary {
-    int totalInput;
-    int totalOutput;
-    int totalDiscard;
-    int monthOutput;
+    Long totalInput;
+    Long totalOutput;
+    Long totalDiscard;
+    Integer monthOutput;
 }
