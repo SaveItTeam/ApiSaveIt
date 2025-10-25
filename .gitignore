@@ -32,5 +32,9 @@ build/
 ### VS Code ###
 .vscode/
 
+
+/src/main/resources/projetosaveit-firebase-adminsdk-fbsvc-5ac3eb0285.json
 #application.properties
 #/src/main/resources/application.properties
+
+
