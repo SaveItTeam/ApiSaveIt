@@ -14,5 +14,5 @@ public class EmployeeResponseDTO {
     @Schema(description = "ID da empresa do funcionário", example = "1")
     private long enterpriseId;
     @Schema(description = "É admin campo bool", example = "true")
-    private boolean isAdmin;
+    private Boolean isAdmin;
 }
