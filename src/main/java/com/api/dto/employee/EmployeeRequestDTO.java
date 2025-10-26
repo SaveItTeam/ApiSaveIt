@@ -23,5 +23,5 @@ public class EmployeeRequestDTO {
     @Schema(description = "ID da empresa do funcionário", example = "1")
     private long enterpriseId;
     @NotNull(message = "Is buyer vazio")
-    private boolean isAdmin = false;
+    private Boolean isAdmin = false;
 }

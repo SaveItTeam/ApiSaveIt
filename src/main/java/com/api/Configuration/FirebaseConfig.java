@@ -1,28 +1,42 @@
 package com.api.Configuration;
 
+import org.springframework.beans.factory.annotation.Value;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import jakarta.annotation.PostConstruct;
 import org.springframework.context.annotation.Configuration;
 
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.ByteArrayInputStream;
+import java.util.Base64;
 
 @Configuration
 public class FirebaseConfig {
 
+    @Value("${firebase.credentials.b64:}")
+    private String firebaseJsonB64;
+
     @PostConstruct
-    public void init() throws IOException {
-        FileInputStream serviceAccount =
-                new FileInputStream("src/main/resources/projetosaveit-firebase-adminsdk-fbsvc-5ac3eb0285.json");
+    public void init() {
+        try {
+            if (firebaseJsonB64 == null || firebaseJsonB64.isEmpty()) {
+                throw new RuntimeException("Variável FIREBASE_CREDENTIALS_B64 não encontrada!");
+            }
 
-        FirebaseOptions options = FirebaseOptions.builder()
-                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                .build();
+            byte[] decodedBytes = Base64.getDecoder().decode(firebaseJsonB64);
+            ByteArrayInputStream serviceAccount = new ByteArrayInputStream(decodedBytes);
 
-        if (FirebaseApp.getApps().isEmpty()) {
-            FirebaseApp.initializeApp(options);
+            FirebaseOptions options = FirebaseOptions.builder()
+                    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                    .build();
+
+            if (FirebaseApp.getApps().isEmpty()) {
+                FirebaseApp.initializeApp(options);
+                System.out.println("✅ Firebase inicializado com sucesso!");
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao inicializar Firebase: " + e.getMessage(), e);
         }
     }
 }

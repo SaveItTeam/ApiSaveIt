@@ -38,19 +38,15 @@ public class AdminService {
     }
 
     public void insertAdmin(AdminRequestDTO adminDTO) {
-        // Verifica se a senha foi informada
         if (adminDTO.getPassword() == null || adminDTO.getPassword().isBlank()) {
             throw new IllegalArgumentException("Senha não pode ser nula ou vazia");
         }
 
-        // Converte o DTO em entidade
         Admin admin = objectMapper.convertValue(adminDTO, Admin.class);
 
-        // Criptografa a senha
         String senhaCriptografada = passwordEncoder.encode(adminDTO.getPassword());
         admin.setPassword(senhaCriptografada);
 
-        // Salva no banco
         adminRepository.save(admin);
     }
 

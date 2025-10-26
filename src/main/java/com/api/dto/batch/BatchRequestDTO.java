@@ -34,5 +34,5 @@ public class BatchRequestDTO {
     @Column(length = 20)
     @NotNull(message = "Id do produto vazio")
     @Schema(description = "ID do produto associado ao lote", example = "1")
-    private long productId;
+    private Long productId;
 }

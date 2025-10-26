@@ -24,6 +24,7 @@ public class SecurityConfig {
 
     @Autowired
     private CustomAccessDeniedHandler accessDeniedHandler;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -36,12 +37,13 @@ public class SecurityConfig {
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of(
-                "http://localhost:5173",                 // Desenvolvimento
-                "https://react-save-it.vercel.app/"       // Produção
+                "http://localhost:5173",           // dev
+                "https://react-save-it.vercel.app" // produção
         ));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowCredentials(true);
@@ -61,10 +63,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/auth/login", "/api/auth/logout").permitAll()
 
                         .requestMatchers("/login", "/error").permitAll()
+
                         .requestMatchers(
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
@@ -74,28 +79,23 @@ public class SecurityConfig {
                         ).authenticated()
 
                         .requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole("READ", "WRITE")
-
                         .requestMatchers(HttpMethod.POST, "/api/**").hasRole("WRITE")
                         .requestMatchers(HttpMethod.PUT, "/api/**").hasRole("WRITE")
                         .requestMatchers(HttpMethod.PATCH, "/api/**").hasRole("WRITE")
                         .requestMatchers(HttpMethod.DELETE, "/api/**").hasRole("WRITE")
-
                         .anyRequest().authenticated()
                 )
-                .httpBasic(Customizer.withDefaults())
                 .formLogin(form -> form
                         .defaultSuccessUrl("/swagger-ui.html", true)
                         .permitAll()
                 )
-
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login?logout")
                         .permitAll()
                 )
-                .exceptionHandling(ex -> ex
-                        .accessDeniedHandler(accessDeniedHandler)
-                );
+                .exceptionHandling(ex -> ex.accessDeniedHandler(accessDeniedHandler));
+
         return http.build();
     }
 

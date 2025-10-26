@@ -19,6 +19,8 @@ public class Product {
     private String brand;
     private String description;
     private String category;
-    @Column(name = "enterprise_id")
-    private long enterpriseId;
+
+    @ManyToOne
+    @JoinColumn(name = "enterprise_id", nullable = false)
+    private Enterprise enterprise;
 }
