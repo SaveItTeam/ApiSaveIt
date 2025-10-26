@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 public interface PlanOpenApi {
-    @GetMapping("/selecionar")
     @Operation(summary = "Listar todos os planos")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Lista de planos retornada com sucesso"),
@@ -20,7 +19,6 @@ public interface PlanOpenApi {
     })
     ResponseEntity<List<PlanResponseDTO>> listPlan();
 
-    @PostMapping("/inserir")
     @Operation(summary = "Inserir um novo plano")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Plano inserido com sucesso"),
@@ -28,7 +26,7 @@ public interface PlanOpenApi {
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
     ResponseEntity<?> insertPlan(@RequestBody PlanRequestDTO plan);
-    @DeleteMapping("/excluir/{id}")
+
     @Operation(summary = "Excluir um plano")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Plano excluído com sucesso"),
@@ -36,7 +34,7 @@ public interface PlanOpenApi {
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
     ResponseEntity<?> deletePlan(@PathVariable Long id);
-    @PutMapping("/atualizar/{id}")
+
     @Operation(summary = "Atualizar um plano")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Plano atualizado com sucesso"),
