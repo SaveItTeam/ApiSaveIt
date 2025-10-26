@@ -63,10 +63,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-                .cors(Customizer.withDefaults())
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/auth/login", "/api/auth/logout").permitAll()
+
                         .requestMatchers("/login", "/error").permitAll()
+
                         .requestMatchers(
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
@@ -74,6 +77,7 @@ public class SecurityConfig {
                                 "/swagger-resources/**",
                                 "/webjars/**"
                         ).authenticated()
+
                         .requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole("READ", "WRITE")
                         .requestMatchers(HttpMethod.POST, "/api/**").hasRole("WRITE")
                         .requestMatchers(HttpMethod.PUT, "/api/**").hasRole("WRITE")
@@ -81,20 +85,18 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/api/**").hasRole("WRITE")
                         .anyRequest().authenticated()
                 )
-                .httpBasic(Customizer.withDefaults())
                 .formLogin(form -> form
                         .defaultSuccessUrl("/swagger-ui.html", true)
                         .permitAll()
                 )
-
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login?logout")
                         .permitAll()
                 )
-                .exceptionHandling(ex -> ex
-                        .accessDeniedHandler(accessDeniedHandler)
-                );
+                .exceptionHandling(ex -> ex.accessDeniedHandler(accessDeniedHandler));
+
         return http.build();
     }
+
 }
