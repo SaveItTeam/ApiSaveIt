@@ -25,7 +25,6 @@ public class ProductService {
         this.enterpriseRepository = enterpriseRepository;
     }
 
-    // Mapeamento manual Product -> ProductResponseDTO
     private ProductResponseDTO mapToDTO(Product product) {
         long enterpriseId = product.getEnterprise() != null ? product.getEnterprise().getId() : 0;
         return new ProductResponseDTO(

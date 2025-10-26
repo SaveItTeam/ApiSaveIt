@@ -38,11 +38,10 @@ public class  PlanService {
         planRepository.save(planRequest);
     }
 
-    // Deleção
     public void deletePlan(Long id) {
         planRepository.deleteById(id);
     }
-    // Atualização
+
     public Plan updatePlan(Long id, PlanRequestDTO planAtualizado) {
         Plan plan = planRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Plan com ID " + id + " não encontrado"));

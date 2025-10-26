@@ -30,7 +30,6 @@ public class PaymentsService {
         this.planRepository = planRepository;
     }
 
-    // 🔹 Mapeamento manual do DTO
     private PaymentResponseDTO mapToDTO(Payments payment) {
         long enterpriseId = payment.getEnterprise() != null ? payment.getEnterprise().getId() : 0;
         long planId = payment.getPlan() != null ? payment.getPlan().getId() : 0;
@@ -46,7 +45,6 @@ public class PaymentsService {
         );
     }
 
-    // 🔹 Listagem simples
     public List<PaymentResponseDTO> listPayments() {
         List<Payments> payments = paymentRepository.findAll();
         List<PaymentResponseDTO> responseList = new ArrayList<>();
@@ -56,19 +54,16 @@ public class PaymentsService {
         return responseList;
     }
 
-    // 🔹 Listagem detalhada (JOIN Enterprise + Plan)
     public List<PaymentStatusResponseDTO> listDetailedPayments() {
         return paymentRepository.findAllPaymentsWithEnterpriseAndPlan();
     }
 
-    // 🔹 Consulta por ID
     public PaymentResponseDTO getPaymentById(Long id) {
         Payments payment = paymentRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Pagamento com ID " + id + " não encontrado"));
         return mapToDTO(payment);
     }
 
-    // 🔹 Inserção
     public void insertPayment(PaymentRequestDTO dto) {
         Payments payment = new Payments();
 
@@ -87,7 +82,6 @@ public class PaymentsService {
         paymentRepository.save(payment);
     }
 
-    // 🔹 Exclusão
     public void deletePayment(Long id) {
         if (!paymentRepository.existsById(id)) {
             throw new NoSuchElementException("Pagamento com ID " + id + " não encontrado");
@@ -95,7 +89,6 @@ public class PaymentsService {
         paymentRepository.deleteById(id);
     }
 
-    // 🔹 Atualização total
     public PaymentResponseDTO updatePayment(Long id, PaymentRequestDTO dto) {
         Payments payment = paymentRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Pagamento com ID " + id + " não encontrado"));
@@ -116,7 +109,6 @@ public class PaymentsService {
         return mapToDTO(payment);
     }
 
-    // 🔹 Atualização parcial
     public PaymentResponseDTO updatePaymentPartial(Long id, Map<String, Object> updates) {
         Payments payment = paymentRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Pagamento com ID " + id + " não encontrado"));
@@ -136,7 +128,7 @@ public class PaymentsService {
         }
 
         if (updates.containsKey("paymentDate")) {
-            payment.setPaymentDate(new Date()); // ou converter de String se necessário
+            payment.setPaymentDate(new Date());
         }
 
         if (updates.containsKey("amount")) {

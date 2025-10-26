@@ -34,7 +34,6 @@ public class StockService {
         this.productRepository = productRepository;
     }
 
-    //    Métodos de busca
     public List<StockResponseDTO> listStock(){
         List<Stock> stocks = stockRepository.findAll();
         List<StockResponseDTO> stockResponseDTOS = new ArrayList<>();
