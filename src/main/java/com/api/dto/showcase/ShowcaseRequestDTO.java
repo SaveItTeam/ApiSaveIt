@@ -15,7 +15,7 @@ public class ShowcaseRequestDTO {
 
     @NotNull(message = "lote_id vazio")
     @Schema(description = "ID do lote associado à vitrine", example = "1")
-    private long batchId;
+    private Long batchId;
 
     @NotNull(message = "Quantidade na vitrine vazia")
     @Schema(description = "Quantidade do produto na vitrine", example = "50")
