@@ -9,24 +9,34 @@ import java.util.List;
 
 public interface ShowcaseRepository extends JpaRepository<Showcase, Long> {
 
-    @Query("SELECT new com.api.dto.showcase.ShowcaseListDTO(s.id, p.name, i.image) FROM Showcase s " +
-            "JOIN Batch b on b.id = s.batchId " +
-            "JOIN Product p on p.id = b.productId " +
-            "JOIN Image i on i.productId = p.id " +
-            "WHERE p.category = :category ")
+    @Query("""
+        SELECT new com.api.dto.showcase.ShowcaseListDTO(s.id, p.name, i.image)
+        FROM Showcase s
+        JOIN s.batch b
+        JOIN b.product p
+        JOIN Image i ON i.productId = p.id
+        WHERE p.category = :category
+    """)
     List<ShowcaseListDTO> findShowcaseWithProductByCategory(String category);
 
-    @Query("SELECT new com.api.dto.showcase.ShowcaseListDTO(s.id, p.name, i.image) FROM Showcase s " +
-            "JOIN Batch b on b.id = s.batchId " +
-            "JOIN Product p on p.id = b.productId " +
-            "JOIN Image i on i.productId = p.id ")
+    @Query("""
+        SELECT new com.api.dto.showcase.ShowcaseListDTO(s.id, p.name, i.image)
+        FROM Showcase s
+        JOIN s.batch b
+        JOIN b.product p
+        JOIN Image i ON i.productId = p.id
+    """)
     List<ShowcaseListDTO> findShowcaseWithProduct();
 
-    @Query("SELECT new com.api.dto.showcase.ShowcaseListDTO(s.id, p.name, i.image) FROM Showcase s " +
-            "JOIN Batch b on b.id = s.batchId " +
-            "JOIN Product p on p.id = b.productId " +
-            "JOIN Image i on i.productId = p.id " +
-            "JOIN Enterprise e on e.id = p.enterpriseId " +
-            "WHERE e.id = :enterpriseId ")
+    @Query("""
+        SELECT new com.api.dto.showcase.ShowcaseListDTO(s.id, p.name, i.image)
+        FROM Showcase s
+        JOIN s.batch b
+        JOIN b.product p
+        JOIN Image i ON i.productId = p.id
+        JOIN p.enterprise e
+        WHERE e.id = :enterpriseId
+    """)
     List<ShowcaseListDTO> findShowcaseWithProductByEnterpriseId(long enterpriseId);
+
 }
