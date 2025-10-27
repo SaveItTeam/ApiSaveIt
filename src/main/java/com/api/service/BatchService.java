@@ -5,6 +5,7 @@ import com.api.Exception.InvalidExpirationDateException;
 import com.api.Exception.InvalidUnitMeasureException;
 import com.api.model.Batch;
 import com.api.repository.BatchRepository;
+import com.api.model.Product;
 import com.api.dto.batch.BatchListDTO;
 import com.api.dto.batch.BatchRequestDTO;
 import com.api.dto.batch.BatchResponseDTO;
@@ -29,9 +30,12 @@ import java.util.NoSuchElementException;
 @Service
 public class BatchService {
 
+
     private final BatchRepository batchRepository;
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @Autowired
     public BatchService(BatchRepository batchRepository) {
