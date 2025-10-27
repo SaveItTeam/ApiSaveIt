@@ -9,8 +9,6 @@ public class ShowcaseImageResponseDTO {
     private Long productId;
     @Schema(description = "Descrição do produto", example = "Descrição detalhada do produto")
     private String description;
-    @Schema(description = "Preço do produto", example = "199.99")
-    private Double price;
     @Schema(description = "ID do lote associado ao produto", example = "1")
     private Long loteId;
     @Schema(description = "Nome do produto", example = "Nome do Produto")
