@@ -17,8 +17,10 @@ public class Showcase {
     @Column(unique = true)
     private long id;
     private String description;
-    @Column(name = "batch_id")
-    private long batchId;
+
+    @ManyToOne
+    @JoinColumn(name = "batch_id", nullable = false)
+    private Batch batch;
     @Column(name = "quantity_showcase")
     private Integer quantityShowcase;
     @Column(name = "entrance_date")

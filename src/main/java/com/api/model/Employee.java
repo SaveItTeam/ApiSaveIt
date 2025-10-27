@@ -23,5 +23,5 @@ public class Employee {
     @Column(name = "enterprise_id")
     private long enterpriseId;
     @Column(name = "is_admin")
-    private boolean isAdmin;
+    private Boolean isAdmin;
 }

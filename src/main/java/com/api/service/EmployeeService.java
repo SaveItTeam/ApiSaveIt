@@ -1,6 +1,5 @@
 package com.api.service;
 
-import com.api.Service.FirebaseAuthService;
 import com.api.model.Employee;
 import com.api.repository.EmployeeRepository;
 import com.api.dto.employee.EmployeeRequestDTO;
@@ -29,8 +28,7 @@ public class EmployeeService {
         this.firebaseAuthService = firebaseAuthService;
     }
 
-
-    public List<EmployeeResponseDTO> listEmployee(){
+    public List<EmployeeResponseDTO> listEmployee() {
         List<Employee> employees = employeeRepository.findAll();
         List<EmployeeResponseDTO> employeeResponseDTOs = new ArrayList<>();
         for (Employee employee : employees) {
@@ -46,7 +44,6 @@ public class EmployeeService {
         }
         return objectMapper.convertValue(employee, EmployeeResponseDTO.class);
     }
-
     public void insertEmployee(EmployeeRequestDTO employee) {
         Employee employeeRequest = objectMapper.convertValue(employee, Employee.class);
         try {
@@ -62,19 +59,20 @@ public class EmployeeService {
     public void deleteEmployee(Long id) {
         employeeRepository.deleteById(id);
     }
-    public EmployeeResponseDTO updateEmployee(Long id, EmployeeRequestDTO employeeAtualizado) {
+
+    public EmployeeResponseDTO updateEmployee(Long id, EmployeeRequestDTO employeeDTO) {
         Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Funcionario com ID " + id + " não encontrado"));
 
-        employee.setName(employeeAtualizado.getName());
-        employee.setEmail(employeeAtualizado.getEmail());
-        employee.setPassword(employeeAtualizado.getPassword());
-        employee.setEnterpriseId(employeeAtualizado.getEnterpriseId());
+        employee.setName(employeeDTO.getName());
+        employee.setEmail(employeeDTO.getEmail());
+        employee.setPassword(employeeDTO.getPassword());
+        employee.setEnterpriseId(employeeDTO.getEnterpriseId());
+        employee.setIsAdmin(employeeDTO.getIsAdmin() != null ? employeeDTO.getIsAdmin() : employee.getIsAdmin());
 
         employeeRepository.save(employee);
         return objectMapper.convertValue(employee, EmployeeResponseDTO.class);
     }
-
 
     public EmployeeResponseDTO updateEmployeePartial(Long id, Map<String, Object> updates) {
         EmployeeValidator validator = new EmployeeValidator();
@@ -93,10 +91,10 @@ public class EmployeeService {
             employee.setPassword((String) updates.get("password"));
         }
         if (updates.containsKey("enterpriseId")) {
-            employee.setEnterpriseId((long) updates.get("enterpriseId"));
+            employee.setEnterpriseId(Long.parseLong(updates.get("enterpriseId").toString()));
         }
         if (updates.containsKey("isAdmin")) {
-            employee.setAdmin((boolean) updates.get("isAdmin"));
+            employee.setIsAdmin(Boolean.parseBoolean(updates.get("isAdmin").toString()));
         }
 
         employeeRepository.save(employee);

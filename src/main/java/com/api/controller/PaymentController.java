@@ -1,5 +1,6 @@
 package com.api.controller;
 
+import com.api.dto.payments.PaymentStatusResponseDTO;
 import com.api.exception.GlobalException;
 import com.api.openapi.PaymentOpenApi;
 import com.api.service.PaymentsService;
@@ -68,5 +69,8 @@ public class PaymentController implements PaymentOpenApi {
         PaymentResponseDTO paymentResponseDTO = paymentsService.updatePaymentPartial(id, updates);
         return ResponseEntity.ok(paymentResponseDTO);
     }
-
+    @GetMapping("/detailed")
+    public List<PaymentStatusResponseDTO> getDetailedPayments() {
+        return paymentsService.listDetailedPayments();
+    }
 }

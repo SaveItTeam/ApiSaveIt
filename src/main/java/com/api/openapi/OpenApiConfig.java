@@ -17,7 +17,7 @@ public class OpenApiConfig {
         return new OpenAPI()
                 .info(new Info()
                         .title("API SaveIt")
-                        .description("Documentação da API com autenticação por token")
+                        .description("Documentação da API com autenticação por token ou login")
                         .version("1.0"))
                 .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
                 .components(new io.swagger.v3.oas.models.Components()

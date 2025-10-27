@@ -51,6 +51,8 @@ public class Batch {
     @Column(name = "expiration_date")
     private Date expirationDate;
     private Integer quantity;
-    @Column(name = "product_id")
-    private long productId;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id", nullable = false)
+    private Product product;
 }

@@ -11,6 +11,7 @@ import com.api.dto.batch.BatchResponseDTO;
 import com.api.dto.batch.BatchInsertRequestDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityNotFoundException;
+import com.api.repository.ProductRepository;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -27,32 +28,59 @@ import java.util.NoSuchElementException;
 
 @Service
 public class BatchService {
+
     private final BatchRepository batchRepository;
-    private final ObjectMapper objectMapper;
+    @Autowired
+    private ProductRepository productRepository;
 
     @Autowired
-    public BatchService(BatchRepository batchRepository, ObjectMapper objectMapper) {
+    public BatchService(BatchRepository batchRepository) {
         this.batchRepository = batchRepository;
-        this.objectMapper = objectMapper;
     }
 
+    private BatchResponseDTO mapToDTO(Batch batch) {
+        Long productId = batch.getProduct() != null ? batch.getProduct().getId() : null;
+        return new BatchResponseDTO(
+                batch.getId(),
+                batch.getUnitMeasure(),
+                batch.getEntryDate(),
+                batch.getBatchCode(),
+                batch.getExpirationDate(),
+                batch.getMaxQuantity(),
+                batch.getQuantity(),
+                productId
+        );
+    }
 
-    public List<BatchResponseDTO> listBatch(){
-        List<Batch> batchs = batchRepository.findAll();
+    public List<BatchResponseDTO> listBatch() {
+        List<Batch> batches = batchRepository.findAll();
         List<BatchResponseDTO> returnList = new ArrayList<>();
-        for(Batch batch: batchs){
-            returnList.add(objectMapper.convertValue(batch, BatchResponseDTO.class));
+        for (Batch batch : batches) {
+            returnList.add(mapToDTO(batch));
         }
         return returnList;
     }
 
-    public List<BatchListDTO> listProductBatch(long enterpriseId){
+    public List<BatchListDTO> listProductBatch(long enterpriseId) {
         return batchRepository.listOfBatches(enterpriseId);
     }
 
-    public void insertBatch(BatchRequestDTO batch) {
-        Batch response = objectMapper.convertValue(batch, Batch.class);
-        batchRepository.save(response);
+    public void insertBatch(BatchRequestDTO batchDTO) {
+        Batch batch = new Batch();
+        batch.setUnitMeasure(batchDTO.getUnitMeasure());
+        batch.setEntryDate(batchDTO.getEntryDate());
+        batch.setBatchCode(batchDTO.getBatchCode());
+        batch.setExpirationDate(batchDTO.getExpirationDate());
+        batch.setMaxQuantity(batchDTO.getMaxQuantity());
+        batch.setQuantity(batchDTO.getQuantity());
+
+        if (batchDTO.getProductId() != null) {
+            var product = productRepository.findById(batchDTO.getProductId())
+                    .orElseThrow(() -> new NoSuchElementException("Produto com ID " + batchDTO.getProductId() + " não encontrado"));
+            batch.setProduct(product);
+        }
+
+        batchRepository.save(batch);
     }
 
     public BatchResponseDTO findBySKU(String sku) {
@@ -73,19 +101,17 @@ public class BatchService {
         var image = batch.getImage();
         var lote = batch.getBatch();
 
-        if (!(lote.getUnitMeasure().equals("KG"))&&(lote.getUnitMeasure().equals("L"))){
+        if (!(lote.getUnitMeasure().equals("KG") || lote.getUnitMeasure().equals("L"))) {
             throw new InvalidUnitMeasureException("Unidade de medida inválida para o produto cadastrado");
         }
 
-        if (
-                !product.getCategory().equals("Laticínios") &&
-                        !product.getCategory().equals("Embutidos") &&
-                        !product.getCategory().equals("Outros")
-        ) {
+        if (!product.getCategory().equals("Laticínios") &&
+                !product.getCategory().equals("Embutidos") &&
+                !product.getCategory().equals("Outros")) {
             throw new InvalidCategoryException("Categoria inválida para o produto cadastrado");
         }
 
-        if (lote.getEntryDate().before(lote.getEntryDate())) {
+        if (lote.getEntryDate().after(lote.getExpirationDate())) {
             throw new InvalidExpirationDateException("Data de validade não pode ser menor ou igual a data de entrada");
         }
 
@@ -103,7 +129,7 @@ public class BatchService {
                     lote.getBatchCode(),
                     lote.getUnitMeasure()
             );
-        }catch (DataIntegrityViolationException ex) {
+        } catch (DataIntegrityViolationException ex) {
             throw new DataIntegrityViolationException("Erro de integridade ao inserir a empresa: " + ex.getMessage());
         } catch (DataAccessException ex) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao acessar o banco de dados: " + ex.getMessage());
@@ -113,7 +139,7 @@ public class BatchService {
     public BatchResponseDTO getBatchById(Long id) {
         Batch batch = batchRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Lote com ID " + id + " não encontrado"));
-        return objectMapper.convertValue(batch, BatchResponseDTO.class);
+        return mapToDTO(batch);
     }
 
     public void deleteBatch(Long id) {
@@ -129,39 +155,36 @@ public class BatchService {
         batch.setBatchCode(batchAtualizado.getBatchCode());
         batch.setExpirationDate(batchAtualizado.getExpirationDate());
         batch.setQuantity(batchAtualizado.getQuantity());
-        batch.setProductId(batchAtualizado.getProductId());
+        batch.setMaxQuantity(batchAtualizado.getMaxQuantity());
+
+        if (batchAtualizado.getProductId() != null) {
+            var product = productRepository.findById(batchAtualizado.getProductId())
+                    .orElseThrow(() -> new NoSuchElementException("Produto com ID " + batchAtualizado.getProductId() + " não encontrado"));
+            batch.setProduct(product);
+        }
 
         batchRepository.save(batch);
-        return objectMapper.convertValue(batch, BatchResponseDTO.class);
+        return mapToDTO(batch);
     }
 
     public BatchResponseDTO updateBatchPartial(Long id, Map<String, Object> updates) {
         Batch batch = batchRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Lote com ID " + id + " não encontrado"));
 
-        if (updates.containsKey("unitMeasure")) {
-            batch.setUnitMeasure((String) updates.get("unitMeasure"));
-        }
-        if (updates.containsKey("entryDate")) {
-            batch.setEntryDate((Date) updates.get("entryDate"));
-        }
-        if (updates.containsKey("batchCode")) {
-            batch.setBatchCode((String) updates.get("batchCode"));
-        }
-        if (updates.containsKey("expirationDate")) {
-            batch.setExpirationDate((Date) updates.get("expirationDate"));
-        }
-        if (updates.containsKey("quantity")) {
-            batch.setQuantity((Integer) updates.get("quantity"));
-        }
+        if (updates.containsKey("unitMeasure")) batch.setUnitMeasure((String) updates.get("unitMeasure"));
+        if (updates.containsKey("entryDate")) batch.setEntryDate((Date) updates.get("entryDate"));
+        if (updates.containsKey("batchCode")) batch.setBatchCode((String) updates.get("batchCode"));
+        if (updates.containsKey("expirationDate")) batch.setExpirationDate((Date) updates.get("expirationDate"));
+        if (updates.containsKey("quantity")) batch.setQuantity(((Number) updates.get("quantity")).intValue());
+        if (updates.containsKey("maxQuantity")) batch.setMaxQuantity(((Number) updates.get("maxQuantity")).intValue());
         if (updates.containsKey("productId")) {
-            batch.setProductId((long) updates.get("productId"));
-        }
-        if (updates.containsKey("maxQuantity")){
-            batch.setMaxQuantity((Integer) updates.get("maxQuantity"));
+            Long productId = ((Number) updates.get("productId")).longValue();
+            var product = productRepository.findById(productId)
+                    .orElseThrow(() -> new NoSuchElementException("Produto com ID " + productId + " não encontrado"));
+            batch.setProduct(product);
         }
 
         batchRepository.save(batch);
-        return objectMapper.convertValue(batch, BatchResponseDTO.class);
+        return mapToDTO(batch);
     }
 }

@@ -1,4 +1,4 @@
-package com.api.Controller;
+package com.api.controller;
 
 import com.api.exception.GlobalException;
 import com.api.openapi.BatchOpenApi;
@@ -68,11 +68,19 @@ public class BatchController implements BatchOpenApi {
     @GetMapping("/informacoesProduto/{id}")
     public ResponseEntity<ProductResponseInfoDTO> getProductInfo(@PathVariable Long id) {
         BatchResponseDTO batch = batchService.getBatchById(id);
+
+        if (batch.getProductId() == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(null);
+        }
+
         ProductResponseDTO product = productService.getProductById(batch.getProductId());
         ImageResponseDTO image = imageService.getImageByProductId(product.getId());
+
         ProductResponseInfoDTO productInfo = new ProductResponseInfoDTO(product, batch, image);
         return ResponseEntity.ok(productInfo);
     }
+
 
     @DeleteMapping("/excluir/{id}")
     public ResponseEntity<?> deleteBatch(@PathVariable Long id) {

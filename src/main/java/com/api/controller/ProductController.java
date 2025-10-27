@@ -1,5 +1,6 @@
 package com.api.controller;
 
+import com.api.dto.product.ProductShowcaseStatusDTO;
 import com.api.exception.GlobalException;
 
 import com.api.openapi.ProdutoOpenAPI;
@@ -62,12 +63,15 @@ public class ProductController implements ProdutoOpenAPI {
         return ResponseEntity.ok("Produto atualizado com sucesso!");
     }
 
-
-
-
     public ResponseEntity<?> updateProductPartial(@PathVariable Long id,  @Validated({OnPatch.class, Default.class})  @RequestBody Map<String, Object> updates) {
         ProductResponseDTO responseDTO = productService.updateProductPartial(id, updates);
-        return ResponseEntity.ok("Produto atualizado parcialmente com sucesso! " + responseDTO);
+        return ResponseEntity.ok("Produto atualizado parcialmente com sucesso! ");
+    }
+    @GetMapping("/with-showcase-status/{enterpriseId}")
+    public ResponseEntity<List<ProductShowcaseStatusDTO>> listProductsWithShowcaseStatusByEnterprise(
+            @PathVariable Long enterpriseId) {
+        List<ProductShowcaseStatusDTO> products = productService.listProductsWithShowcaseStatusByEnterprise(enterpriseId);
+        return ResponseEntity.ok(products);
     }
 
 

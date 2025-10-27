@@ -15,4 +15,6 @@ public class AdminRequestDTO {
     @Column(length = 255)
     @Schema(description = "Senha do administrador", example = "senhaSegura123")
     private String password;
+    @Schema(description = "Indica se ele pode ler ou executar os endpoints", example = "true")
+    private boolean write;
 }

@@ -1,6 +1,5 @@
 package com.api.exception;
 
-import com.api.Exception.*;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import com.api.Exception.InvalidCnpjException;
@@ -24,11 +23,26 @@ public class GlobalException {
 
 
     @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<String> handleRuntimeException
-            (RuntimeException ex) {
+    public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
+        String message = ex.getMessage();
+
+        if (message.contains("EMAIL_EXISTS")) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body("O e-mail informado já está cadastrado no Firebase.");
+        }
+        if (message.contains("INVALID_EMAIL")) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("O formato do e-mail é inválido.");
+        }
+        if (message.contains("WEAK_PASSWORD")) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("A senha deve conter pelo menos 6 caracteres.");
+        }
+
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body("Erro de execução: " + ex.getMessage());
+                .body("Erro de execução: " + message);
     }
+
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<Map<String, Object>> handleDataIntegrityViolation(DataIntegrityViolationException ex) {

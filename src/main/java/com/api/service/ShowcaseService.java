@@ -1,6 +1,7 @@
 package com.api.service;
 
 import com.api.model.Showcase;
+import com.api.repository.BatchRepository;
 import com.api.repository.ShowcaseRepository;
 import com.api.dto.showcase.ShowcaseListDTO;
 import com.api.dto.showcase.ShowcaseRequestDTO;
@@ -13,37 +14,65 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+
 @Service
 public class ShowcaseService {
+
     private final ShowcaseRepository showcaseRepository;
     private final ObjectMapper objectMapper;
+    @Autowired
+    private BatchRepository batchRepository;
 
     @Autowired
     public ShowcaseService(ShowcaseRepository showcaseRepository, ObjectMapper objectMapper) {
         this.showcaseRepository = showcaseRepository;
         this.objectMapper = objectMapper;
     }
-    public List<ShowcaseResponseDTO> listShowcase(){
+
+    private ShowcaseResponseDTO mapToDTO(Showcase showcase) {
+        long batchId = showcase.getBatch() != null ? showcase.getBatch().getId() : 0;
+
+        return new ShowcaseResponseDTO(
+                showcase.getId(),
+                showcase.getDescription(),
+                batchId,
+                showcase.getQuantityShowcase(),
+                showcase.getEntranceDate()
+        );
+    }
+    public List<ShowcaseResponseDTO> listShowcase() {
         List<Showcase> showcases = showcaseRepository.findAll();
-        List<ShowcaseResponseDTO> showcaseResponseDTOs = new ArrayList<>();
-        for (Showcase showcase : showcases) {
-            showcaseResponseDTOs.add(objectMapper.convertValue(showcase, ShowcaseResponseDTO.class));
+        List<ShowcaseResponseDTO> dtoList = new ArrayList<>();
+        for (Showcase s : showcases) {
+            dtoList.add(mapToDTO(s));
         }
-        return showcaseResponseDTOs;
+        return dtoList;
     }
 
-    public ShowcaseResponseDTO insertShowcase(ShowcaseRequestDTO showCase) {
-        Showcase showcase = showcaseRepository.save(objectMapper.convertValue(showCase, Showcase.class));
-        return objectMapper.convertValue(showcase, ShowcaseResponseDTO.class);
+    public ShowcaseResponseDTO insertShowcase(ShowcaseRequestDTO showcaseDTO) {
+        Showcase showcase = new Showcase();
+        showcase.setDescription(showcaseDTO.getDescription());
+        showcase.setQuantityShowcase(showcaseDTO.getQuantityShowcase());
+        showcase.setEntranceDate(showcaseDTO.getEntranceDate());
+
+        if (showcaseDTO.getBatchId() != null) {
+            var batch = batchRepository.findById(showcaseDTO.getBatchId())
+                    .orElseThrow(() -> new NoSuchElementException("Lote com ID " + showcaseDTO.getBatchId() + " não encontrado"));
+            showcase.setBatch(batch);
+        }
+
+        showcaseRepository.save(showcase);
+        return mapToDTO(showcase);
     }
 
     public List<ShowcaseListDTO> listShowcaseWithProduct(String category) {
-        List<ShowcaseListDTO> showcaseListDTOS = new ArrayList<>();
+        List<ShowcaseListDTO> showcaseListDTOS;
         if (category.equals("Todos")) {
             showcaseListDTOS = showcaseRepository.findShowcaseWithProduct();
-        }else {
+        } else {
             showcaseListDTOS = showcaseRepository.findShowcaseWithProductByCategory(category);
         }
+
         if (showcaseListDTOS.isEmpty()) {
             throw new NoSuchElementException("Nenhuma vitrine encontrada");
         }
@@ -61,40 +90,46 @@ public class ShowcaseService {
     public void deleteShowcase(Long id) {
         showcaseRepository.deleteById(id);
     }
+
     public ShowcaseResponseDTO updateShowcase(Long id, ShowcaseRequestDTO showcaseAtualizado) {
-        Showcase showCase = showcaseRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Vitrine com ID " + id + " não encontrado"));
+        Showcase showcase = showcaseRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Vitrine com ID " + id + " não encontrada"));
 
-        showCase.setDescription(showcaseAtualizado.getDescription());
-        showCase.setBatchId(showcaseAtualizado.getBatchId());
-        showCase.setQuantityShowcase(showcaseAtualizado.getQuantityShowcase());
-        showCase.setEntranceDate(showcaseAtualizado.getEntranceDate());
+        showcase.setDescription(showcaseAtualizado.getDescription());
+        showcase.setQuantityShowcase(showcaseAtualizado.getQuantityShowcase());
+        showcase.setEntranceDate(showcaseAtualizado.getEntranceDate());
 
-        showcaseRepository.save(showCase);
-        ShowcaseResponseDTO showcaseResponseDTO = objectMapper.convertValue(showcaseAtualizado, ShowcaseResponseDTO.class);
-        return showcaseResponseDTO;
+        if (showcaseAtualizado.getBatchId() != null) {
+            var batch = batchRepository.findById(showcaseAtualizado.getBatchId())
+                    .orElseThrow(() -> new NoSuchElementException("Lote com ID " + showcaseAtualizado.getBatchId() + " não encontrado"));
+            showcase.setBatch(batch);
+        }
+
+        showcaseRepository.save(showcase);
+        return mapToDTO(showcase);
     }
 
     public ShowcaseResponseDTO updateShowcasePartial(Long id, Map<String, Object> updates) {
-        Showcase showCase = showcaseRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Vitrine com ID " + id + " não encontrado"));
+        Showcase showcase = showcaseRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Vitrine com ID " + id + " não encontrada"));
 
         if (updates.containsKey("description")) {
-            showCase.setDescription((String) updates.get("description"));
+            showcase.setDescription((String) updates.get("description"));
         }
         if (updates.containsKey("batchId")) {
-            showCase.setBatchId((long) updates.get("batch_id"));
+            Long batchId = ((Number) updates.get("batchId")).longValue();
+            var batch = batchRepository.findById(batchId)
+                    .orElseThrow(() -> new NoSuchElementException("Lote com ID " + batchId + " não encontrado"));
+            showcase.setBatch(batch);
         }
-        if (updates.containsKey("quantity_showcase")) {
-            showCase.setQuantityShowcase((Integer) updates.get("quantity_showcase"));
+        if (updates.containsKey("quantityShowcase")) {
+            showcase.setQuantityShowcase((Integer) updates.get("quantityShowcase"));
         }
-
         if (updates.containsKey("entranceDate")) {
-            showCase.setEntranceDate((java.util.Date) updates.get("entranceDate"));
+            showcase.setEntranceDate((java.util.Date) updates.get("entranceDate"));
         }
 
-
-        showcaseRepository.save(showCase);
-        return objectMapper.convertValue(showCase.getClass(), ShowcaseResponseDTO.class);
+        showcaseRepository.save(showcase);
+        return mapToDTO(showcase);
     }
 }
