@@ -9,6 +9,8 @@ import com.api.dto.batch.BatchListDTO;
 import com.api.dto.batch.BatchRequestDTO;
 import com.api.dto.batch.BatchResponseDTO;
 import com.api.dto.batch.BatchInsertRequestDTO;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.persistence.EntityNotFoundException;
 import com.api.repository.ProductRepository;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,6 +81,15 @@ public class BatchService {
         }
 
         batchRepository.save(batch);
+    }
+
+    public BatchResponseDTO findBySKU(String sku) {
+        Batch batch = batchRepository.findByBatchCode(sku);
+        if (batch == null) {
+            throw new EntityNotFoundException("Não foi encontrado um produto com este SKU");
+        }
+        BatchResponseDTO batchResponseDTO = objectMapper.convertValue(batch, BatchResponseDTO.class);
+        return batchResponseDTO;
     }
 
     public void insertBatchEntity(BatchInsertRequestDTO batch) {

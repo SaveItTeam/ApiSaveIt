@@ -61,7 +61,7 @@ public class GlobalException {
             body.put("message", "A empresa com esse ID não existe.");
         }
         else {
-            body.put("message", "Erro de integridade ao salvar a empresa.");
+            body.put("message", "Erro de integridade ao salvar o dado. Detalhes" + message);
         }
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);

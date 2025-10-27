@@ -47,6 +47,12 @@ public class BatchController implements BatchOpenApi {
         return ResponseEntity.ok(batches);
     }
 
+    @GetMapping("/selecionarSku/{sku}")
+    public ResponseEntity<BatchResponseDTO> findBySKU(@PathVariable String sku) {
+        BatchResponseDTO batchResponseDTO = batchService.findBySKU(sku);
+        return ResponseEntity.ok(batchResponseDTO);
+    }
+
     @PostMapping("/inserir")
     public ResponseEntity<?> insertBatch(@Valid @RequestBody BatchInsertRequestDTO batch) {
         batchService.insertBatchEntity(batch);
