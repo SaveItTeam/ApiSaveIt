@@ -15,6 +15,8 @@ public interface BatchRepository extends JpaRepository<Batch, Long> {
     @Query(value = "SELECT * FROM get_batches_by_enterprise(:enterpriseId)", nativeQuery = true)
     List<BatchListDTO> listOfBatches(@Param("enterpriseId") Long enterpriseId);
 
+    Batch findByBatchCode(String batchCode);
+
     @Procedure(procedureName = "public.add_full_product")
     void batchInsert(@Param("p_name") String pName, @Param("p_description") String pDescription,
                      @Param("p_category") String pCategory, @Param("p_brand") String pBrand,
