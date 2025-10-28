@@ -26,7 +26,7 @@ jobs:
           cache: maven
 
       - name: Build com Maven
-        run: mvn clean package -DskipTests --no-transfer-progress
+        run: mvn clean package --no-transfer-progress
 
       - name: Rodar testes
         run: mvn test --no-transfer-progress
