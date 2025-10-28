@@ -6,11 +6,13 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import jakarta.annotation.PostConstruct;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import java.io.ByteArrayInputStream;
 import java.util.Base64;
 
 @Configuration
+@Profile("!test") // não carrega este bean se o profile for "test"
 public class FirebaseConfig {
 
     @Value("${firebase.credentials.b64:}")
