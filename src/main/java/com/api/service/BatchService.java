@@ -106,13 +106,18 @@ public class BatchService {
         var image = batch.getImage();
         var lote = batch.getBatch();
 
-        if (!(lote.getUnitMeasure().equals("KG") || lote.getUnitMeasure().equals("L"))) {
+
+        // Lista de unidades de medida válidas
+        List<String> validUnits = List.of("KG", "L");
+
+        if (!validUnits.contains(lote.getUnitMeasure())) {
             throw new InvalidUnitMeasureException("Unidade de medida inválida para o produto cadastrado");
         }
 
-        if (!product.getCategory().equals("Laticínios") &&
-                !product.getCategory().equals("Embutidos") &&
-                !product.getCategory().equals("Outros")) {
+
+        List<String> validCategories = List.of("Embutidos", "Laticínios", "Grãos", "Frutas", "Salgados", "Doces", "Bebidas", "Outros");
+
+        if (!validCategories.contains(product.getCategory())) {
             throw new InvalidCategoryException("Categoria inválida para o produto cadastrado");
         }
 
