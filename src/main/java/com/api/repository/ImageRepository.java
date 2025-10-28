@@ -15,7 +15,7 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
             "    b.id as loteId,\n" +
             "    p.name as name,\n" +
             "    b.unit_measure as tipoPeso,\n" +
-            "    b.quantity as quantidadeGeral,\n" +
+            "    s.quantity_showcase as quantidadeGeral,\n" +
             "    i.image as image,\n" +
             "    e.name as empresa,\n" +
             "    concat(a.city, ' - ', a.state) as localizacao,\n" +
