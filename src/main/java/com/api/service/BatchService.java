@@ -92,7 +92,8 @@ public class BatchService {
         if (batch == null) {
             throw new EntityNotFoundException("Não foi encontrado um produto com este SKU");
         }
-        BatchResponseDTO batchResponseDTO = objectMapper.convertValue(batch, BatchResponseDTO.class);
+
+        BatchResponseDTO  batchResponseDTO = mapToDTO(batch);
         return batchResponseDTO;
     }
 
