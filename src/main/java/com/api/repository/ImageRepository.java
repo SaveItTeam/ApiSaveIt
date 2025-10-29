@@ -18,6 +18,7 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
             "    s.quantity_showcase as quantidadeGeral,\n" +
             "    i.image as image,\n" +
             "    e.name as empresa,\n" +
+            "    e.id as enterpriseId, \n" +
             "    concat(a.city, ' - ', a.state) as localizacao,\n" +
             "    b.expiration_date as validade \n" +
             "from Showcase s\n" +

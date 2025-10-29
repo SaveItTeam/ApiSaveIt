@@ -9,5 +9,6 @@ public interface ProductShowcaseProjection {
     Double getQuantidadeGeral();
     String getImage();
     String getEmpresa();
+    Long getEnterpriseId();
     String getLocalizacao();
 }
