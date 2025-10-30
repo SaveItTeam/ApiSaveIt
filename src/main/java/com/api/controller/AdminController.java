@@ -51,7 +51,7 @@ public class AdminController implements AdminOpenApi {
         return ResponseEntity.ok("Admin atualizado com sucesso!");
     }
     @PatchMapping("/atualizarParcial/{id}")
-    public ResponseEntity<?> atualizarAdminParcial(@PathVariable Long id, @Valid @RequestBody Map<String, Object> updates) {
+    public ResponseEntity<?> atualizarAdminParcial(@PathVariable Long id,@RequestBody Map<String, Object> updates) {
         adminService.updateAdminPartial(id, updates);
         return ResponseEntity.ok("Admin atualizado parcialmente com sucesso!");
     }

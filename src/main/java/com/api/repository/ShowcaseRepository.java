@@ -1,10 +1,12 @@
 package com.api.repository;
 
+import com.api.model.Product;
 import com.api.model.Showcase;
 import com.api.dto.showcase.ShowcaseListDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ShowcaseRepository extends JpaRepository<Showcase, Long> {
@@ -38,5 +40,7 @@ public interface ShowcaseRepository extends JpaRepository<Showcase, Long> {
         WHERE e.id = :enterpriseId
     """)
     List<ShowcaseListDTO> findShowcaseWithProductByEnterpriseId(long enterpriseId);
+    List<Showcase> findAllByEntranceDateAfter(LocalDateTime entranceDate);
+
 
 }

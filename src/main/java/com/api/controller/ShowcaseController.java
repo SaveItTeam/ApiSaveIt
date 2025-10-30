@@ -1,7 +1,9 @@
 package com.api.controller;
 
+import com.api.dto.product.ProductResponseDTO;
 import com.api.exception.GlobalException;
 import com.api.openapi.ShowcaseOpenApi;
+import com.api.service.ProductService;
 import com.api.service.ShowcaseService;
 import com.api.dto.showcase.ShowcaseListDTO;
 import com.api.dto.showcase.ShowcaseRequestDTO;
@@ -12,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +24,8 @@ public class ShowcaseController implements ShowcaseOpenApi {
     private final ShowcaseService showCaseService;
     private GlobalException ge;
 
+    @Autowired
+    private ProductService productService;
     @Autowired
     public ShowcaseController(ShowcaseService showCaseService) {
         this.showCaseService = showCaseService;
@@ -75,5 +80,23 @@ public class ShowcaseController implements ShowcaseOpenApi {
         return ResponseEntity.ok("Vitrine atualizado parcialmente com sucesso!");
     }
 
+    @GetMapping("/novos")
+    public ResponseEntity<?> getProdutosNovos(@RequestParam(required = false) String ultimoCheck) {
+        try {
+            LocalDateTime checkTime;
 
+            if (ultimoCheck == null || ultimoCheck.isBlank()) {
+                checkTime = LocalDateTime.now().minusDays(1);
+            } else {
+                checkTime = LocalDateTime.parse(ultimoCheck);
+            }
+
+            List<ShowcaseResponseDTO> novasVitrines = showCaseService.listNewShowcases(checkTime);
+            return ResponseEntity.ok(novasVitrines);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Formato de data inválido. Use o formato: yyyy-MM-dd'T'HH:mm:ss");
+        }
+    }
 }

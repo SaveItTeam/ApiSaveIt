@@ -46,10 +46,11 @@ public interface AdminOpenApi {
     ResponseEntity<?> updateAdmin(Long id, AdminRequestDTO adminAtualizado);
     @Operation(summary = "Atualizar parcialmente um admin pelo ID")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Admin atualizado com sucesso"),
+            @ApiResponse(responseCode = "200", description = "Admin atualizado parcialmente com sucesso"),
             @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos"),
             @ApiResponse(responseCode = "404", description = "Admin não encontrado"),
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
-    ResponseEntity<?> atualizarAdminParcial(Long id, Map<String, Object> updates);
+    ResponseEntity<?> atualizarAdminParcial(Long id,Map<String, Object> updates);
+
 }

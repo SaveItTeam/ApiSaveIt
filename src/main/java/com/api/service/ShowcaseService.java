@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -132,4 +133,15 @@ public class ShowcaseService {
         showcaseRepository.save(showcase);
         return mapToDTO(showcase);
     }
+    public List<ShowcaseResponseDTO> listNewShowcases(LocalDateTime lastCheck) {
+        List<Showcase> novasVitrines = showcaseRepository.findAllByEntranceDateAfter(lastCheck);
+        List<ShowcaseResponseDTO> resposta = new ArrayList<>();
+
+        for (Showcase s : novasVitrines) {
+            resposta.add(mapToDTO(s));
+        }
+
+        return resposta;
+    }
+
 }
