@@ -134,6 +134,7 @@ public class BatchService {
                     product.getEnterpriseId(),
                     image.getImage(),
                     lote.getQuantity(),
+                    lote.getMaxQuantity(),
                     new java.sql.Date(lote.getEntryDate().getTime()),
                     new java.sql.Date(lote.getExpirationDate().getTime()),
                     lote.getBatchCode(),

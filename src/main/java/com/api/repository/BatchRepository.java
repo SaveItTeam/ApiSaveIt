@@ -21,7 +21,7 @@ public interface BatchRepository extends JpaRepository<Batch, Long> {
     void batchInsert(@Param("p_name") String pName, @Param("p_description") String pDescription,
                      @Param("p_category") String pCategory, @Param("p_brand") String pBrand,
                      @Param("p_enterprise_id") Long pEnterpriseId, @Param("p_image") String pImage,
-                     @Param("p_quantity") Integer pQuantity, @Param("p_entry_date") Date pEntryDate,
+                     @Param("p_quantity") Integer pQuantity,@Param("p_max_quantity") Integer pMaxQuantity, @Param("p_entry_date") Date pEntryDate,
                      @Param("p_expiration_date") Date pExpirationDate, @Param("p_batch_code") String pBatchCode,
                      @Param("p_unit_measure") String pUnitMeasure);
 }

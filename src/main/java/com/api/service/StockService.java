@@ -3,8 +3,7 @@ package com.api.service;
 import java.time.LocalDateTime;
 import java.util.*;
 
-import com.api.dto.stock.StockByProductSummary;
-import com.api.dto.stock.StockSummary;
+import com.api.dto.stock.*;
 import com.api.exception.InvalidQuantityException;
 import com.api.model.Batch;
 import jakarta.persistence.EntityNotFoundException;
@@ -13,8 +12,6 @@ import org.springframework.stereotype.Service;
 
 import com.api.model.Stock;
 import com.api.repository.StockRepository;
-import com.api.dto.stock.StockRequestDTO;
-import com.api.dto.stock.StockResponseDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 public class StockService {
@@ -69,6 +66,23 @@ public class StockService {
     public void deleteStock(Long id) {
         stockRepository.deleteById(id);
     }
+
+    public List<StockMoviments> getStockMoviments(Long enterpriseId) {
+        try {
+            return  stockRepository.getStockMovimentsByProduct(enterpriseId);
+        }catch(Exception e) {
+            throw new RuntimeException("Erro ao buscar resumo do estoque: " +e.getMessage(), e);
+        }
+    }
+
+    public List<StockQuantity> getStockQuantities(Long enterpriseId) {
+        try {
+            return stockRepository.getStockQuantities(enterpriseId);
+        }catch(Exception e) {
+            throw new RuntimeException("Erro ao buscar a quantidade de cada produto: "+e.getMessage(), e);
+        }
+    }
+
 
 
     public List<StockSummary> getStockSummary(Long enterpriseId) {

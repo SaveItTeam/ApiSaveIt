@@ -1,11 +1,9 @@
 package com.api.controller;
 
-import com.api.dto.stock.StockByProductSummary;
-import com.api.dto.stock.StockSummary;
+import com.api.dto.stock.*;
 import com.api.exception.GlobalException;
 import com.api.openapi.StockOpenApi;
 import com.api.service.StockService;
-import com.api.dto.stock.StockRequestDTO;
 
 import jakarta.validation.Valid;
 
@@ -16,9 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-
-import com.api.dto.stock.StockResponseDTO;
-
 
 
 @RestController
@@ -44,6 +39,18 @@ public class StockController implements StockOpenApi {
     public ResponseEntity<List<StockSummary>> listSummary(@PathVariable Long enterpriseId) {
         List<StockSummary> response = stockService.getStockSummary(enterpriseId);
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/listarMovimentacoesEstoque/{enterpriseId}")
+    public ResponseEntity<List<StockMoviments>> listStockMovimentsByProduct(@PathVariable Long enterpriseId) {
+        List<StockMoviments> response = stockService.getStockMoviments(enterpriseId);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/listarQuantidadesProduto/{enterpriseId}")
+    public ResponseEntity<List<StockQuantity>> listProductQuantities(@PathVariable Long enterpriseId) {
+        List<StockQuantity> stockQuantityList = stockService.getStockQuantities(enterpriseId);
+        return ResponseEntity.ok(stockQuantityList);
     }
 
     @GetMapping("/relatorioProdutoPorProduto/{enterpriseId}/{productId}")

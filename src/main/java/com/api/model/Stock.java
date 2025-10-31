@@ -1,5 +1,6 @@
 package com.api.model;
 
+import com.api.dto.stock.StockMoviments;
 import com.api.dto.stock.StockSummary;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -35,6 +36,16 @@ import java.time.LocalDateTime;
                                         @ColumnResult(name = "mouthOutput", type = Integer.class)
                                 }
                         )
+                ),
+                @SqlResultSetMapping(
+                        name = "StockMovimentsMapping",
+                        classes  = @ConstructorResult(
+                                targetClass = StockMoviments.class,
+                                columns = {
+                                        @ColumnResult(name = "productName", type = String.class),
+                                        @ColumnResult(name = "quantityOutput", type = String.class)
+                                }
+                        )
                 )
         }
 )
@@ -48,6 +59,12 @@ import java.time.LocalDateTime;
         name = "Stock.getStockSummaryByProduct",
         query = "SELECT * FROM moviments_by_product(:enterpriseId, :productId)",
         resultSetMapping = "StockByProductSummaryMapping"
+)
+
+@NamedNativeQuery(
+        name = "Stock.getStockMovimentsByProduct",
+        query = "SELECT * FROM resumeshop(:enterpriseId)",
+        resultSetMapping = "StockMovimentsMapping"
 )
 
 @NoArgsConstructor
