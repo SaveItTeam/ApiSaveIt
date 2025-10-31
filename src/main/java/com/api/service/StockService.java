@@ -6,61 +6,66 @@ import java.util.*;
 import com.api.dto.stock.*;
 import com.api.exception.InvalidQuantityException;
 import com.api.model.Batch;
+import com.api.repository.BatchRepository;
+import com.api.repository.EnterpriseRepository;
+import com.api.repository.ProductRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.api.model.Stock;
 import com.api.repository.StockRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.api.dto.stock.StockRequestDTO;
+import com.api.dto.stock.StockResponseDTO;
+
 @Service
 public class StockService {
 
     private final StockRepository stockRepository;
-    private final ObjectMapper objectMapper;
-    private final com.api.repository.BatchRepository batchRepository;
-    private final com.api.repository.EnterpriseRepository enterpriseRepository;
-    private final com.api.repository.ProductRepository productRepository;
+    private final BatchRepository batchRepository;
+    private final EnterpriseRepository enterpriseRepository;
+    private final ProductRepository productRepository;
 
     @Autowired
-    public StockService(StockRepository stockRepository, ObjectMapper objectMapper, com.api.repository.BatchRepository batchRepository, com.api.repository.EnterpriseRepository enterpriseRepository, com.api.repository.ProductRepository productRepository){
+    public StockService(StockRepository stockRepository, BatchRepository batchRepository, EnterpriseRepository enterpriseRepository, ProductRepository productRepository){
         this.stockRepository = stockRepository;
-        this.objectMapper = objectMapper;
         this.batchRepository = batchRepository;
         this.enterpriseRepository = enterpriseRepository;
         this.productRepository = productRepository;
     }
 
-    public List<StockResponseDTO> listStock(){
+    public List<StockResponseDTO> listStock() {
         List<Stock> stocks = stockRepository.findAll();
         List<StockResponseDTO> stockResponseDTOS = new ArrayList<>();
         for (Stock stock : stocks) {
-            stockResponseDTOS.add(objectMapper.convertValue(stock, StockResponseDTO.class));
+            stockResponseDTOS.add(toStockResponseDTO(stock));
         }
         return stockResponseDTOS;
     }
 
-    public void insertStock(StockRequestDTO stock) {
-        Optional<Batch> batch = batchRepository.findById(stock.getBatchId());
+    public void insertStock(StockRequestDTO stockDTO) {
+        Optional<Batch> batchOpt = batchRepository.findById(stockDTO.getBatchId());
+        if (batchOpt.isEmpty()) throw new EntityNotFoundException("Lote não encontrado.");
 
-        if (batch.get().getQuantity() < stock.getQuantityOutput()) {
+        Batch batch = batchOpt.get();
+
+        if (batch.getQuantity() < stockDTO.getQuantityOutput()) {
             throw new InvalidQuantityException(Map.of("quantityInput", "A quantidade de entrada não pode ser maior que a quantidade disponível no lote."));
-        }else {
-            batch.get().setQuantity( (batch.get().getQuantity() - stock.getQuantityOutput()) + stock.getQuantityInput() );
-            if (stock.getDiscardQuantity() > 0) {
-                if (batch.get().getQuantity() < stock.getDiscardQuantity()) {
-                    throw new InvalidQuantityException(Map.of("discardQuantity", "A quantidade de descarte não pode ser maior que a quantidade disponível no lote."));
-                } else {
-                    batch.get().setQuantity(batch.get().getQuantity() - stock.getDiscardQuantity());
-                    batchRepository.save(batch.get());
-                }
-            }else {
-                batchRepository.save(batch.get());
-            }
         }
 
-        Stock stockRequest = objectMapper.convertValue(stock, Stock.class);
-        stockRepository.save(stockRequest);
+        batch.setQuantity((batch.getQuantity() - stockDTO.getQuantityOutput()) + stockDTO.getQuantityInput());
+
+        if (stockDTO.getDiscardQuantity() != null && stockDTO.getDiscardQuantity() > 0) {
+            if (batch.getQuantity() < stockDTO.getDiscardQuantity()) {
+                throw new InvalidQuantityException(Map.of("discardQuantity", "A quantidade de descarte não pode ser maior que a quantidade disponível no lote."));
+            }
+            batch.setQuantity(batch.getQuantity() - stockDTO.getDiscardQuantity());
+        }
+
+        batchRepository.save(batch);
+
+        Stock stock = toStockEntity(stockDTO);
+        stockRepository.save(stock);
     }
 
     public void deleteStock(Long id) {
@@ -82,9 +87,6 @@ public class StockService {
             throw new RuntimeException("Erro ao buscar a quantidade de cada produto: "+e.getMessage(), e);
         }
     }
-
-
-
     public List<StockSummary> getStockSummary(Long enterpriseId) {
         try {
             return stockRepository.getStockSummary(enterpriseId);
@@ -97,7 +99,7 @@ public class StockService {
         if (enterpriseRepository.findById(enterpriseId).isEmpty()) {
             throw new EntityNotFoundException("Empresa não encontrada.");
         }
-        if(productRepository.findById(productId).isEmpty()) {
+        if (productRepository.findById(productId).isEmpty()) {
             throw new EntityNotFoundException("Produto não encontrado.");
         }
         try {
@@ -111,17 +113,9 @@ public class StockService {
         Stock stock = stockRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Estoque com ID " + id + " não encontrado"));
 
-        stock.setQuantityInput(stockAtualizado.getQuantityInput());
-        stock.setQuantityOutput(stockAtualizado.getQuantityOutput());
-        stock.setBatchId(stockAtualizado.getBatchId());
-        stock.setCreatedAt(stockAtualizado.getCreatedAt());
-        stock.setDiscardQuantity(stockAtualizado.getDiscardQuantity());
-        stock.setDiscardReason(stockAtualizado.getDiscardReason());
-        stock.setProductId(stockAtualizado.getProductId());
-
-
+        applyStockRequestDTO(stock, stockAtualizado);
         stockRepository.save(stock);
-        return objectMapper.convertValue(stock, StockResponseDTO.class);
+        return toStockResponseDTO(stock);
     }
 
     public StockResponseDTO updateStockPartial(Long id, Map<String, Object> updates) {
@@ -135,7 +129,7 @@ public class StockService {
             stock.setQuantityOutput((Integer) updates.get("quantityOutput"));
         }
         if (updates.containsKey("batchId")) {
-            stock.setBatchId(Long.valueOf(updates.get("batchId").toString()));
+            stock.setBatchId(Long.parseLong(updates.get("batchId").toString()));
         }
         if (updates.containsKey("createdAt")) {
             stock.setCreatedAt(LocalDateTime.parse(updates.get("createdAt").toString()));
@@ -147,27 +141,40 @@ public class StockService {
             stock.setDiscardReason(updates.get("discardReason").toString());
         }
         if (updates.containsKey("productId")) {
-            stock.setProductId(Long.valueOf(updates.get("productId").toString()));
+            stock.setProductId(Long.parseLong(updates.get("productId").toString()));
         }
 
         stockRepository.save(stock);
-        return objectMapper.convertValue(stock, StockResponseDTO.class);
+        return toStockResponseDTO(stock);
     }
 
-    private void validarQuantidade(StockRequestDTO stock) {
-        Map<String, String> erros = new HashMap<>();
+    private StockResponseDTO toStockResponseDTO(Stock stock) {
+        return new StockResponseDTO(
+                stock.getId(),
+                stock.getQuantityInput(),
+                stock.getQuantityOutput(),
+                stock.getBatchId(),
+                stock.getProductId(),
+                stock.getDiscardQuantity(),
+                stock.getDiscardReason(),
+                stock.getCreatedAt()
+        );
+    }
 
-        if (stock.getQuantityInput() <= 0) {
-            erros.put("quantity", "A quantidade deve ser maior que zero.");
-        }
+    private Stock toStockEntity(StockRequestDTO dto) {
+        Stock stock = new Stock();
+        applyStockRequestDTO(stock, dto);
+        return stock;
+    }
 
-        if (stock.getQuantityOutput() < 0) {
-            erros.put("quantity_output", "A quantidade de saída não pode ser negativa.");
-        }
-
-        if (!erros.isEmpty()) {
-            throw new InvalidQuantityException(erros);
-        }
+    private void applyStockRequestDTO(Stock stock, StockRequestDTO dto) {
+        stock.setQuantityInput(dto.getQuantityInput());
+        stock.setQuantityOutput(dto.getQuantityOutput());
+        stock.setBatchId(dto.getBatchId());
+        stock.setProductId(dto.getProductId());
+        stock.setDiscardQuantity(dto.getDiscardQuantity());
+        stock.setDiscardReason(dto.getDiscardReason());
+        stock.setCreatedAt(dto.getCreatedAt());
     }
 
 }

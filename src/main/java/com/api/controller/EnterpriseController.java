@@ -80,4 +80,17 @@ public class EnterpriseController implements EnterpriseOpenApi {
         return ResponseEntity.ok("Empresa atualizado parcialmente com sucesso!");
     }
 
+    @PostMapping("/registrarEntrada/{id}")
+    public ResponseEntity<?> registrarEntrada(@PathVariable Integer id) {
+        enterpriseService.registrarEntrada(id);
+        return ResponseEntity.ok("Entrada registrada com sucesso!");
+    }
+
+    @PostMapping("/registrarSaida/{id}")
+    public ResponseEntity<?> registrarSaida(@PathVariable Integer id) {
+        enterpriseService.registrarSaida(id);
+        return ResponseEntity.ok("Saída registrada com sucesso!");
+    }
+
+
 }

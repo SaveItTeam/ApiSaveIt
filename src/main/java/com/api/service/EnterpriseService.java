@@ -123,4 +123,20 @@ public class EnterpriseService {
         return enterpriseResponseDTO;
     }
 
+    public void registrarEntrada(Integer userId) {
+        try {
+            enterpriseRepository.entryRegister(userId);
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao registrar entrada: " + e.getMessage());
+        }
+    }
+
+    public void registrarSaida(Integer userId) {
+        try {
+            enterpriseRepository.registerExit(userId);
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao registrar saída: " + e.getMessage());
+        }
+    }
+
 }
