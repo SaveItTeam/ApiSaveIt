@@ -22,10 +22,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
         )
         FROM Product p
         JOIN p.enterprise e
-        JOIN Batch b ON b.product = p
+        LEFT JOIN Batch b ON b.product = p
         LEFT JOIN Showcase s ON s.batch = b
         WHERE e.id = :enterpriseId
         ORDER BY p.id
-        """)
+    """)
     List<ProductShowcaseStatusDTO> findProductsWithShowcaseStatusByEnterprise(@Param("enterpriseId") Long enterpriseId);
+
 }

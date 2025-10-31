@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-public interface ProdutoOpenAPI {
+public interface ProductOpenApi {
 
     @GetMapping("/selecionar")
     @Operation(summary = "Listar todos os produtos")

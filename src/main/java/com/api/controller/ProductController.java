@@ -3,7 +3,7 @@ package com.api.controller;
 import com.api.dto.product.ProductShowcaseStatusDTO;
 import com.api.exception.GlobalException;
 
-import com.api.openapi.ProdutoOpenAPI;
+import com.api.openapi.ProductOpenApi;
 import com.api.service.ProductService;
 import com.api.validator.OnCreate;
 import com.api.validator.OnPatch;
@@ -24,7 +24,7 @@ import com.api.dto.product.ProductResponseDTO;
 
 @RestController
 @RequestMapping("/api/product")
-public class ProductController implements ProdutoOpenAPI {
+public class ProductController implements ProductOpenApi {
     private final ProductService productService;
     private GlobalException ge;
 
