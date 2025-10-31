@@ -21,13 +21,13 @@ public class ShowcaseService {
 
     private final ShowcaseRepository showcaseRepository;
     private final ObjectMapper objectMapper;
-    @Autowired
     private BatchRepository batchRepository;
 
     @Autowired
-    public ShowcaseService(ShowcaseRepository showcaseRepository, ObjectMapper objectMapper) {
+    public ShowcaseService(ShowcaseRepository showcaseRepository, ObjectMapper objectMapper, BatchRepository batchRepository) {
         this.showcaseRepository = showcaseRepository;
         this.objectMapper = objectMapper;
+        this.batchRepository = batchRepository;
     }
 
     private ShowcaseResponseDTO mapToDTO(Showcase showcase) {
