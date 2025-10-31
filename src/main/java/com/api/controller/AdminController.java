@@ -23,11 +23,11 @@ import java.util.Map;
 public class AdminController implements AdminOpenApi {
     private final AdminService adminService;
     private GlobalException ge;
+    private final AdminRepository adminRepository;
     @Autowired
-    private AdminRepository adminRepository;
-    @Autowired
-    public AdminController(AdminService adminService) {
+    public AdminController(AdminService adminService, AdminRepository adminRepository) {
         this.adminService = adminService;
+        this.adminRepository = adminRepository;
     }
 
 
