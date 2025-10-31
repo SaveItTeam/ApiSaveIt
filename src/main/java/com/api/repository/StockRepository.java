@@ -1,6 +1,8 @@
 package com.api.repository;
 
 import com.api.dto.stock.StockByProductSummary;
+import com.api.dto.stock.StockMoviments;
+import com.api.dto.stock.StockQuantity;
 import com.api.dto.stock.StockSummary;
 import com.api.model.Stock;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,4 +17,9 @@ public interface StockRepository extends JpaRepository<Stock, Long> {
     List<StockSummary> getStockSummary(@Param("enterpriseId") Long enterpriseId);
     @Query(value = "SELECT * FROM moviments_by_product(:enterpriseId, :productId)", nativeQuery = true)
     List<StockByProductSummary> getStockSummaryByProduct(@Param("enterpriseId") Long enterpriseId, @Param("productId") Long productId);
+
+    @Query(value = "select * from resumeshop(:enterpriseId)", nativeQuery = true)
+    List<StockMoviments> getStockMovimentsByProduct(@Param("enterpriseId") Long enterpriseId);
+    @Query(value = "select * from resumeproducts(:enterpriseId)", nativeQuery = true)
+    List<StockQuantity> getStockQuantities(@Param("enterpriseId") Long enterpriseId);
 }
