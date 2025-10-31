@@ -6,6 +6,7 @@ import com.api.dto.employee.EmployeeRequestDTO;
 import com.api.dto.employee.EmployeeResponseDTO;
 import com.api.exception.GlobalException;
 import com.api.openapi.AdminOpenApi;
+import com.api.repository.AdminRepository;
 import com.api.service.AdminService;
 import com.api.service.EmployeeService;
 import jakarta.validation.Valid;
@@ -22,7 +23,8 @@ import java.util.Map;
 public class AdminController implements AdminOpenApi {
     private final AdminService adminService;
     private GlobalException ge;
-
+    @Autowired
+    private AdminRepository adminRepository;
     @Autowired
     public AdminController(AdminService adminService) {
         this.adminService = adminService;
@@ -54,6 +56,22 @@ public class AdminController implements AdminOpenApi {
     public ResponseEntity<?> atualizarAdminParcial(@PathVariable Long id,@RequestBody Map<String, Object> updates) {
         adminService.updateAdminPartial(id, updates);
         return ResponseEntity.ok("Admin atualizado parcialmente com sucesso!");
+    }
+    @GetMapping("/buscar-por-email")
+    public ResponseEntity<?> buscarPorEmail(@RequestParam String email) {
+        var adminOpt = adminRepository.findByEmail(email);
+
+        if (adminOpt.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("error", "Admin não encontrado"));
+        }
+
+        var admin = adminOpt.get();
+
+        return ResponseEntity.ok(Map.of(
+                "name", admin.getName(),
+                "email", admin.getEmail()
+        ));
     }
 
 }
