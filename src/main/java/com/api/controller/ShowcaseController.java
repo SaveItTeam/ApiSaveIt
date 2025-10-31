@@ -23,12 +23,11 @@ import java.util.Map;
 public class ShowcaseController implements ShowcaseOpenApi {
     private final ShowcaseService showCaseService;
     private GlobalException ge;
-
+    private final ProductService productService;
     @Autowired
-    private ProductService productService;
-    @Autowired
-    public ShowcaseController(ShowcaseService showCaseService) {
+    public ShowcaseController(ShowcaseService showCaseService, ProductService productService) {
         this.showCaseService = showCaseService;
+        this.productService = productService;
     }
 
 

@@ -22,9 +22,7 @@ public class PaymentsService {
     private final PlanRepository planRepository;
 
     @Autowired
-    public PaymentsService(PaymentRepository paymentRepository,
-                           EnterpriseRepository enterpriseRepository,
-                           PlanRepository planRepository) {
+    public PaymentsService(PaymentRepository paymentRepository, EnterpriseRepository enterpriseRepository, PlanRepository planRepository) {
         this.paymentRepository = paymentRepository;
         this.enterpriseRepository = enterpriseRepository;
         this.planRepository = planRepository;

@@ -32,14 +32,14 @@ public class BatchService {
 
 
     private final BatchRepository batchRepository;
-    @Autowired
-    private ProductRepository productRepository;
-    @Autowired
-    private ObjectMapper objectMapper;
+    private final ProductRepository productRepository;
+    private final ObjectMapper objectMapper;
 
     @Autowired
-    public BatchService(BatchRepository batchRepository) {
+    public BatchService(BatchRepository batchRepository, ProductRepository productRepository, ObjectMapper objectMapper) {
         this.batchRepository = batchRepository;
+        this.productRepository = productRepository;
+        this.objectMapper = objectMapper;
     }
 
     private BatchResponseDTO mapToDTO(Batch batch) {
