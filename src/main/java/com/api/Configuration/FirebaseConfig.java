@@ -12,7 +12,6 @@ import java.io.ByteArrayInputStream;
 import java.util.Base64;
 
 @Configuration
-@Profile("!test") // não carrega este bean se o profile for "test"
 public class FirebaseConfig {
 
     @Value("${firebase.credentials.b64:}")
