@@ -1,5 +1,7 @@
 package com.api.projection;
 
+import java.util.Date;
+
 public interface ProductShowcaseProjection {
     Long getProductId();
     String getDescription();
@@ -11,4 +13,5 @@ public interface ProductShowcaseProjection {
     String getEmpresa();
     Long getEnterpriseId();
     String getLocalizacao();
+    Date getValidade();
 }
