@@ -27,8 +27,22 @@ public class TokenFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
-        String header = request.getHeader("Authorization");
+        String path = request.getRequestURI();
 
+        // Ignora o Swagger, login, logout e endpoints públicos
+        if (path.startsWith("/swagger-ui")
+                || path.startsWith("/v3/api-docs")
+                || path.startsWith("/swagger-resources")
+                || path.startsWith("/webjars")
+                || path.startsWith("/login")
+                || path.startsWith("/logout")
+                || path.startsWith("/error")
+                || path.startsWith("/api/auth")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        String header = request.getHeader("Authorization");
         boolean validToken = false;
 
         if (header != null && (header.equals("Bearer " + apiToken) || header.equals(apiToken))) {
