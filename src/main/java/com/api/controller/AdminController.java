@@ -5,6 +5,7 @@ import com.api.dto.admin.AdminResponseDTO;
 import com.api.dto.employee.EmployeeRequestDTO;
 import com.api.dto.employee.EmployeeResponseDTO;
 import com.api.exception.GlobalException;
+import com.api.model.Admin;
 import com.api.openapi.AdminOpenApi;
 import com.api.repository.AdminRepository;
 import com.api.service.AdminService;
@@ -14,6 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.Optional;
+import java.util.UUID;
 
 import java.util.List;
 import java.util.Map;
@@ -70,8 +78,48 @@ public class AdminController implements AdminOpenApi {
 
         return ResponseEntity.ok(Map.of(
                 "name", admin.getName(),
-                "email", admin.getEmail()
+                "email", admin.getEmail(),
+                "imageUrl", admin.getImageAdmin()
         ));
     }
+    @PostMapping("/upload-imagem/{id}")
+    public ResponseEntity<?> uploadImagem(
+            @PathVariable Long id,
+            @RequestParam("file") MultipartFile file) {
+
+        try {
+            Optional<Admin> adminOpt = adminRepository.findById(id);
+            if (adminOpt.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(Map.of("error", "Administrador não encontrado."));
+            }
+
+            Admin admin = adminOpt.get();
+
+            // Detecta se está rodando no Render ou local
+            String uploadDir;
+            if (System.getenv("RENDER") != null) {
+                uploadDir = "/data/uploads/admins/"; // Render
+            } else {
+                uploadDir = "uploads/admins/"; // Local
+            }
+
+            Files.createDirectories(Paths.get(uploadDir));
+
+            String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+            Path filePath = Paths.get(uploadDir + fileName);
+
+            Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+            admin.setImageAdmin("/uploads/admins/" + fileName);
+            adminRepository.save(admin);
+
+            return ResponseEntity.ok(Map.of("imageUrl", admin.getImageAdmin()));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("error", "Erro ao enviar imagem: " + e.getMessage()));
+        }
+    }
+
 
 }
