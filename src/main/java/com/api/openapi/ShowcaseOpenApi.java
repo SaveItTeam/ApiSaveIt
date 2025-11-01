@@ -3,11 +3,17 @@ package com.api.openapi;
 import com.api.dto.showcase.ShowcaseListDTO;
 import com.api.dto.showcase.ShowcaseRequestDTO;
 import com.api.dto.showcase.ShowcaseResponseDTO;
+import com.api.dto.product.ProductShowcaseStatusDTO;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Map;
@@ -28,6 +34,18 @@ public interface ShowcaseOpenApi {
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
     ResponseEntity<List<ShowcaseListDTO>> listShowcaseByEnterpriseId(long enterpriseId);
+
+
+    @Operation(summary = "Listar novos produtos ou vitrines desde o último check")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Produtos retornados com sucesso",
+                    content = @Content(schema = @Schema(implementation = ShowcaseResponseDTO.class))),
+            @ApiResponse(responseCode = "400", description = "Formato de data inválido")
+    })
+    ResponseEntity<?> getProdutosNovos(
+            @Parameter(description = "Data do último check no formato yyyy-MM-dd'T'HH:mm:ss")
+            @RequestParam(required = false) String ultimoCheck
+    );
 
 
     @Operation(summary = "Inserir uma nova vitrine")

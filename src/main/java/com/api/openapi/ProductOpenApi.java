@@ -2,7 +2,11 @@ package com.api.openapi;
 
 import com.api.dto.product.ProductRequestDTO;
 import com.api.dto.product.ProductResponseDTO;
+import com.api.dto.product.ProductShowcaseStatusDTO;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +24,16 @@ public interface ProductOpenApi {
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
     ResponseEntity<List<ProductResponseDTO>> listProduct();
+
+    @Operation(summary = "Listar produtos com status de vitrine por empresa")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Produtos retornados com sucesso",
+                    content = @Content(schema = @Schema(implementation = ProductShowcaseStatusDTO.class))),
+            @ApiResponse(responseCode = "404", description = "Empresa não encontrada")
+    })
+    ResponseEntity<List<ProductShowcaseStatusDTO>> listProductsWithShowcaseStatusByEnterprise(
+            @Parameter(description = "ID da empresa", required = true) @PathVariable Long enterpriseId
+    );
 
     @PostMapping("/inserir")
     @Operation(summary = "Inserir um novo produto")

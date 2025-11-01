@@ -6,10 +6,14 @@ import com.api.dto.batch.BatchRequestDTO;
 import com.api.dto.batch.BatchResponseDTO;
 import com.api.dto.product.ProductResponseInfoDTO;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Map;
@@ -22,6 +26,16 @@ public interface BatchOpenApi {
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
     ResponseEntity<List<BatchResponseDTO>> listBatch();
+
+    @Operation(summary = "Buscar lote por SKU")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Lote retornado com sucesso",
+                    content = @Content(schema = @Schema(implementation = BatchResponseDTO.class))),
+            @ApiResponse(responseCode = "404", description = "Lote não encontrado")
+    })
+    ResponseEntity<BatchResponseDTO> findBySKU(
+            @Parameter(description = "SKU do produto", required = true) @PathVariable String sku
+    );
 
     @Operation(summary = "Inserir um novo lote")
     @ApiResponses(value = {
