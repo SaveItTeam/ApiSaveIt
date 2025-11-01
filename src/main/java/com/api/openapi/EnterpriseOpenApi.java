@@ -4,10 +4,12 @@ import com.api.model.Enterprise;
 import com.api.dto.enterprise.EnterpriseInsertDTO;
 import com.api.dto.enterprise.EnterpriseResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Map;
@@ -28,6 +30,25 @@ public interface EnterpriseOpenApi {
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
     ResponseEntity<?> insertEnterprise(@Valid EnterpriseInsertDTO enterpriseInsert);
+
+    @Operation(summary = "Registrar entrada de empresa")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Entrada registrada com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Empresa não encontrada")
+    })
+    ResponseEntity<?> registrarEntrada(
+            @Parameter(description = "ID da empresa", required = true) @PathVariable Integer id
+    );
+
+
+    @Operation(summary = "Registrar saída de empresa")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Saída registrada com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Empresa não encontrada")
+    })
+    ResponseEntity<?> registrarSaida(
+            @Parameter(description = "ID da empresa", required = true) @PathVariable Integer id
+    );
 
 
     @Operation(summary = "Listar empresa por ID")
