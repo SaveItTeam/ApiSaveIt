@@ -95,13 +95,3 @@ public class SecurityConfig {
         return http.build();
     }
 }
-// .exceptionHandling(ex -> ex
-//        .authenticationEntryPoint((req, res, authEx) -> {
-//        res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-//                            res.setContentType("application/json");
-//                            res.getWriter().write("{\"error\":\"Não autenticado\"}");
-//                        })
-//                                .accessDeniedHandler(accessDeniedHandler)
-//                );
-//
-//                        configuration.setExposedHeaders(List.of("Authorization", "Set-Cookie"));
