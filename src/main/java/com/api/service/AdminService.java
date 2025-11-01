@@ -84,9 +84,6 @@ public class AdminService {
         if (updates.containsKey("write")) {
             admin.setWrite((Boolean) updates.get("write"));
         }
-        if (updates.containsKey("imageAdmin")) {
-            admin.setImageAdmin((String) updates.get("imageAdmin"));
-        }
 
         adminRepository.save(admin);
         return objectMapper.convertValue(admin, AdminResponseDTO.class);

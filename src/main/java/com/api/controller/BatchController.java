@@ -91,12 +91,12 @@ public class BatchController implements BatchOpenApi {
     @PutMapping("/atualizar/{id}")
     public ResponseEntity<?> updateBatch(@PathVariable Long id, @Valid @RequestBody BatchRequestDTO batchAtualizado) {
         BatchResponseDTO batchResponseDTO = batchService.updateBatch(id, batchAtualizado);
-        return ResponseEntity.ok("Lote atualizado com sucesso!" + batchResponseDTO);
+        return ResponseEntity.ok("Lote atualizado com sucesso!");
     }
 
     @PatchMapping("/atualizarParcial/{id}")
     public ResponseEntity<?> updateBatchPartial(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
         BatchResponseDTO batchResponse = batchService.updateBatchPartial(id, updates);
-        return ResponseEntity.ok("Lote atualizado parcialmente com sucesso!" + batchResponse);
+        return ResponseEntity.ok("Lote atualizado parcialmente com sucesso!");
     }
 }

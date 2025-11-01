@@ -12,7 +12,7 @@ import java.util.Date;
 public class BatchRequestDTO {
     @Column(length = 255)
     @NotNull(message = "Unidade de medida vazio")
-    @Schema(description = "Unidade de medida do lote", example = "kg, g, l, ml, un")
+    @Schema(description = "Unidade de medida do lote", example = "KG, L")
     private String unitMeasure;
     @Schema(description = "Data de entrada do lote", example = "2023-10-10")
     @NotNull(message = "Data de entrada vazia vazio")

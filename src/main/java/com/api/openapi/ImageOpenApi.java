@@ -35,7 +35,7 @@ public interface ImageOpenApi {
             @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos"),
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
-    ResponseEntity<?> insertImage(@Valid ImageRequestDTO image);
+    ResponseEntity<?> insertImage(ImageRequestDTO image);
 
 
     @Operation(summary = "Obter uma imagem por ID")
@@ -72,7 +72,7 @@ public interface ImageOpenApi {
             @ApiResponse(responseCode = "404", description = "Imagem não encontrada"),
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
-    ResponseEntity<?> updateImage(Long id,@Valid ImageRequestDTO imageAtualizado);
+    ResponseEntity<?> updateImage(Long id, @Valid ImageRequestDTO imageAtualizado);
 
 
     @Operation(summary = "Atualizar parcialmente uma imagem")
@@ -82,7 +82,8 @@ public interface ImageOpenApi {
             @ApiResponse(responseCode = "404", description = "Imagem não encontrada"),
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
-    ResponseEntity<?> updateImagePartial(Long id,Map<String, Object> updates);
+    ResponseEntity<?> updateImagePartial(Long id, @Valid Map<String, Object> updates);
+
 }
 
 
