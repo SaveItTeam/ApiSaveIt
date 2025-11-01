@@ -5,10 +5,7 @@ import com.api.dto.admin.AdminResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Map;
@@ -53,4 +50,11 @@ public interface AdminOpenApi {
     })
     ResponseEntity<?> atualizarAdminParcial(Long id,Map<String, Object> updates);
 
+    @Operation(summary = "Buscar um admin pelo email")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Admin encontrado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Admin não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
+    ResponseEntity<?> buscarPorEmail(String email);
 }
