@@ -61,14 +61,14 @@ public class AddressController implements AdressOpenApi {
     @PutMapping("/atualizar/{id}")
     public ResponseEntity<?> updateAddress(@PathVariable Long id, @Valid @RequestBody AddressRequestDTO addressAtualizado) {
         AddressResponseDTO addressResponseDTO = addressService.updateAddress(id, addressAtualizado);
-        return ResponseEntity.ok(addressResponseDTO);
+        return ResponseEntity.ok("Endereço atualizado com sucesso");
     }
 
 
     @PatchMapping("/atualizarParcial/{id}")
     public ResponseEntity<?> updateAddressPartial(@PathVariable Long id, @RequestParam Map<String, Object> updates) {
         AddressResponseDTO addressResponseDTO = addressService.updateAddressPartial(id, updates);
-        return ResponseEntity.ok(addressResponseDTO);
+        return ResponseEntity.ok("Endereço atualizado com sucesso");
     }
 
 
