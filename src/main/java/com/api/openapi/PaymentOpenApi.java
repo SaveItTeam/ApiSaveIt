@@ -2,6 +2,7 @@ package com.api.openapi;
 
 import com.api.dto.payments.PaymentRequestDTO;
 import com.api.dto.payments.PaymentResponseDTO;
+import com.api.dto.payments.PaymentStatusResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -65,4 +66,11 @@ public interface PaymentOpenApi {
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
     ResponseEntity<?> updatePaymentPartial(Long id, Map<String, Object> updates);
+
+    @Operation(summary = "Obter detalhes dos pagamentos com status")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Detalhes dos pagamentos retornados com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
+    List<PaymentStatusResponseDTO> getDetailedPayments();
 }
