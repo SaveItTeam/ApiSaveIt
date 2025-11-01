@@ -3,6 +3,7 @@ package com.api.openapi;
 import com.api.dto.plan.PlanRequestDTO;
 import com.api.dto.plan.PlanResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PlanOpenApi {
     @Operation(summary = "Listar todos os planos")
@@ -18,6 +20,17 @@ public interface PlanOpenApi {
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
     ResponseEntity<List<PlanResponseDTO>> listPlan();
+
+    @Operation(summary = "Atualizar parcialmente um plano")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Plano atualizado parcialmente com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos"),
+            @ApiResponse(responseCode = "404", description = "Plano não encontrado")
+    })
+    ResponseEntity<?> updatePlanPartial(
+            @Parameter(description = "ID do plano", required = true) @PathVariable Long id,
+            @Parameter(description = "Campos a atualizar") @Valid @RequestBody Map<String, Object> updates
+    );
 
     @Operation(summary = "Inserir um novo plano")
     @ApiResponses(value = {
