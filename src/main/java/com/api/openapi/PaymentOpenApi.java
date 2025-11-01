@@ -2,7 +2,10 @@ package com.api.openapi;
 
 import com.api.dto.payments.PaymentRequestDTO;
 import com.api.dto.payments.PaymentResponseDTO;
+import com.api.dto.payments.PaymentStatusResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +22,13 @@ public interface PaymentOpenApi {
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
     ResponseEntity<List<PaymentResponseDTO>> listPayments();
+
+    @Operation(summary = "Listar pagamentos detalhados")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Pagamentos retornados com sucesso",
+                    content = @Content(schema = @Schema(implementation = PaymentStatusResponseDTO.class)))
+    })
+    List<PaymentStatusResponseDTO> getDetailedPayments();
 
 
     @Operation(summary = "Buscar um pagamento pelo ID")
