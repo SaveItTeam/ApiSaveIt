@@ -7,7 +7,7 @@ import lombok.Value;
 public class ImageResponseDTO {
     @Schema(description = "ID da imagem", example = "1")
     private long id;
-    @Schema(description = "Codigo binario da imagem", example = "menor ideia")
+    @Schema(description = "Codigo binario da imagem", example = "https://....")
     private String image;
     @Schema(description = "ID do produto associado à imagem", example = "1")
     private long productId;

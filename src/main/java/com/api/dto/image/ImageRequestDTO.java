@@ -7,9 +7,6 @@ import lombok.Data;
 
 @Data
 public class ImageRequestDTO {
-    @Column(unique = true)
-    @Schema(description = "ID da imagem", example = "1")
-    private long id;
     @NotNull(message = "Codigo binario vazia")
     @Schema(description = "Codigo binario da imagem", example = "menor ideia")
     private String image;
