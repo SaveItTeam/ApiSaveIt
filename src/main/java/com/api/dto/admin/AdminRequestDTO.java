@@ -17,6 +17,6 @@ public class AdminRequestDTO {
     private String password;
     @Schema(description = "Indica se ele pode ler ou executar os endpoints", example = "true")
     private boolean write;
-    @Schema(description = "URL da imagem do administrador", example = "https://example.com/imagem.jpg")
-    private String imageAdmin;
+
+
 }

@@ -69,7 +69,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authenticationProvider(authenticationProvider())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/login", "/api/auth/logout").permitAll()
+                        .requestMatchers("/api/auth/login", "/api/auth/logout", "/api/admin/inserir").permitAll()
                         .requestMatchers("/login", "/error").permitAll()
                         .requestMatchers(
                                 "/swagger-ui/**",
@@ -77,7 +77,7 @@ public class SecurityConfig {
                                 "/v3/api-docs/**",
                                 "/swagger-resources/**",
                                 "/webjars/**"
-                        ).authenticated()
+                        ).permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole("READ", "WRITE")
                         .requestMatchers(HttpMethod.POST, "/api/**").hasRole("WRITE")
                         .requestMatchers(HttpMethod.PUT, "/api/**").hasRole("WRITE")

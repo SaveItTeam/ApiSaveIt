@@ -5,7 +5,6 @@ import com.api.dto.admin.AdminResponseDTO;
 import com.api.dto.employee.EmployeeRequestDTO;
 import com.api.dto.employee.EmployeeResponseDTO;
 import com.api.exception.GlobalException;
-import com.api.model.Admin;
 import com.api.openapi.AdminOpenApi;
 import com.api.repository.AdminRepository;
 import com.api.service.AdminService;
@@ -78,48 +77,8 @@ public class AdminController implements AdminOpenApi {
 
         return ResponseEntity.ok(Map.of(
                 "name", admin.getName(),
-                "email", admin.getEmail(),
-                "imageUrl", admin.getImageAdmin() != null ? admin.getImageAdmin() : "" // devolve vazio se nulo
+                "email", admin.getEmail()
         ));
     }
-    @PostMapping("/upload-imagem/{id}")
-    public ResponseEntity<?> uploadImagem(
-            @PathVariable Long id,
-            @RequestParam("file") MultipartFile file) {
-
-        try {
-            Optional<Admin> adminOpt = adminRepository.findById(id);
-            if (adminOpt.isEmpty()) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                        .body(Map.of("error", "Administrador não encontrado."));
-            }
-
-            Admin admin = adminOpt.get();
-
-            // Detecta se está rodando no Render ou local
-            String uploadDir;
-            if (System.getenv("RENDER") != null) {
-                uploadDir = "/data/uploads/admins/"; // Render
-            } else {
-                uploadDir = "uploads/admins/"; // Local
-            }
-
-            Files.createDirectories(Paths.get(uploadDir));
-
-            String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
-            Path filePath = Paths.get(uploadDir + fileName);
-
-            Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-
-            admin.setImageAdmin("/uploads/admins/" + fileName);
-            adminRepository.save(admin);
-
-            return ResponseEntity.ok(Map.of("imageUrl", admin.getImageAdmin()));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(Map.of("error", "Erro ao enviar imagem: " + e.getMessage()));
-        }
-    }
-
 
 }

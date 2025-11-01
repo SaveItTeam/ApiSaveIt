@@ -21,6 +21,4 @@ public class Admin {
     private String email;
     private String password;
     private boolean write;
-    @Column(name = "image_admin")
-    private String imageAdmin;
 }
