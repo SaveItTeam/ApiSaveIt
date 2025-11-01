@@ -9,11 +9,17 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        // Local
-        registry.addResourceHandler("/uploads/**")
-                .addResourceLocations("file:uploads/");
-        // Render
-        registry.addResourceHandler("/uploads/**")
-                .addResourceLocations("file:/data/uploads/");
+
+        String renderEnv = System.getenv("RENDER");
+
+        if (renderEnv != null) {
+            // Caminho persistente
+            registry.addResourceHandler("/uploads/**")
+                    .addResourceLocations("file:/data/uploads/");
+        } else {
+            // Caminho local
+            registry.addResourceHandler("/uploads/**")
+                    .addResourceLocations("file:uploads/");
+        }
     }
 }
