@@ -2,6 +2,7 @@ package com.api.controller;
 
 import com.api.service.FirebaseAuthService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,7 +46,9 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Map<String, String> body, HttpServletRequest request) {
+    public ResponseEntity<?> login(@RequestBody Map<String, String> body,
+                                   HttpServletRequest request,
+                                   HttpServletResponse response) {
         try {
             String username = body.get("username");
             String password = body.get("password");
@@ -60,6 +63,11 @@ public class AuthController {
 
             HttpSession session = request.getSession(true);
             session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, context);
+
+            // Corrige o cookie da sessão para funcionar entre domínios
+            String sessionId = session.getId();
+            response.addHeader("Set-Cookie", "JSESSIONID=" + sessionId
+                    + "; Path=/; HttpOnly; Secure; SameSite=None");
 
             return ResponseEntity.ok(Map.of(
                     "message", "Login bem-sucedido",
