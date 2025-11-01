@@ -61,13 +61,13 @@ public class PaymentController implements PaymentOpenApi {
     @PutMapping("/atualizar/{id}")
     public ResponseEntity<?> updatePayment(@PathVariable Long id, @Valid @RequestBody PaymentRequestDTO paymentAtualizado) {
         PaymentResponseDTO paymentResponseDTO = paymentsService.updatePayment(id, paymentAtualizado);
-        return ResponseEntity.ok(paymentResponseDTO);
+        return ResponseEntity.ok("Atualizado com sucesso");
     }
 
     @PatchMapping("/atualizarParcial/{id}")
     public ResponseEntity<?> updatePaymentPartial(@PathVariable Long id, @RequestParam Map<String, Object> updates) {
         PaymentResponseDTO paymentResponseDTO = paymentsService.updatePaymentPartial(id, updates);
-        return ResponseEntity.ok(paymentResponseDTO);
+        return ResponseEntity.ok("Atualizado com sucesso");
     }
     @GetMapping("/detailed")
     public List<PaymentStatusResponseDTO> getDetailedPayments() {

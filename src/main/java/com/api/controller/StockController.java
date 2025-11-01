@@ -73,15 +73,11 @@ public class StockController implements StockOpenApi {
         return ResponseEntity.ok("Estoque excluído com sucesso!");
     }
 
-
-
     @PutMapping("/atualizar/{id}")
     public ResponseEntity<?> updateStock(@PathVariable Long id, @Valid @RequestBody StockRequestDTO stockAtualizado) {
         stockService.updateStock(id, stockAtualizado);
         return ResponseEntity.ok("Estoque atualizado com sucesso!");
     }
-
-
 
     @PatchMapping("/atualizarParcial/{id}")
     public ResponseEntity<?> updateStockPartial(@PathVariable Long id, @Valid @RequestBody Map<String, Object> updates) {

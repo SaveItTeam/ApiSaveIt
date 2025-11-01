@@ -39,24 +39,16 @@ public class ProductController implements ProductOpenApi {
         return ResponseEntity.ok(products);
     }
 
-
-
     public ResponseEntity<?> insertProduct(@RequestBody @Validated({OnCreate.class, Default.class}) ProductRequestDTO product) {
         productService.insertProduct(product);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Produto inserido com sucesso!");
     }
 
-
-
-
-
     public ResponseEntity<?> deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
         return ResponseEntity.ok("Produto excluído com sucesso!");
     }
-
-
 
     public ResponseEntity<?> updateProduct(@PathVariable Long id, @Validated({OnCreate.class, Default.class})  @RequestBody ProductRequestDTO productAtualizado) {
         productService.updateProduct(id, productAtualizado);
