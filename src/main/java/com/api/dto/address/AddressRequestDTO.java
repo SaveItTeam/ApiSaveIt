@@ -17,13 +17,13 @@ public class AddressRequestDTO {
     @Schema(description = "Logradouro do endereço", example = "Rua das Flores")
     @Column(length = 100)
     private String publicPlace;
-    @Schema(description = "CEP do endereço", example = "12345-678")
+    @Schema(description = "CEP do endereço", example = "12345678")
     @Column(length = 20)
     private String cep;
     @Schema(description = "Bairro do endereço", example = "Jardim das Acácias")
     @Column(length = 100)
     private String neighbourhood;
-    @Schema(description = "Número da casa", example = "100A")
+    @Schema(description = "Número da casa", example = "100")
     @Column(length = 10)
     @NotNull(message = "Número da casa não pode ser nulo")
     private Integer houseNumber;
