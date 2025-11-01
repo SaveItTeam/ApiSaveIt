@@ -79,7 +79,7 @@ public class AdminController implements AdminOpenApi {
         return ResponseEntity.ok(Map.of(
                 "name", admin.getName(),
                 "email", admin.getEmail(),
-                "imageUrl", admin.getImageAdmin()
+                "imageUrl", admin.getImageAdmin() != null ? admin.getImageAdmin() : "" // devolve vazio se nulo
         ));
     }
     @PostMapping("/upload-imagem/{id}")
