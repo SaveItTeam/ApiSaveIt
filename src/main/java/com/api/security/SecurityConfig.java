@@ -90,8 +90,6 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
 
-                .formLogin(Customizer.withDefaults())
-                .logout(Customizer.withDefaults())
 
                 .addFilterBefore(tokenFilter, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(ex -> ex.accessDeniedHandler(accessDeniedHandler));
