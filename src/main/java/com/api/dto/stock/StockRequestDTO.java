@@ -8,9 +8,6 @@ import java.time.LocalDateTime;
 
 @Data
 public class StockRequestDTO {
-    @NotNull(message = "Campo vazio")
-    @Column(unique = true)
-    private long id;
     @NotNull(message = "Quantidade de entrada estoque vazio")
     private Integer quantityInput;
     @NotNull(message = "Quantidade da saída esta vazia")
