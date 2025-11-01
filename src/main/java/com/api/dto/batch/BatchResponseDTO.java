@@ -14,7 +14,7 @@ public class BatchResponseDTO {
     @Schema(description = "ID do lote", example = "1")
     private long id;
 
-    @Schema(description = "Unidade de medida do lote", example = "kg, g, l, ml, un")
+    @Schema(description = "Unidade de medida do lote", example = "KG, L")
     private String unitMeasure;
 
     @Schema(description = "Data de entrada do lote", example = "2023-10-10")
