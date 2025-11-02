@@ -63,11 +63,4 @@ public interface AdminOpenApi {
     })
     ResponseEntity<?> atualizarAdminParcial(Long id,Map<String, Object> updates);
 
-    @Operation(summary = "Buscar um admin pelo email")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Admin encontrado com sucesso"),
-            @ApiResponse(responseCode = "404", description = "Admin não encontrado"),
-            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
-    })
-    ResponseEntity<?> buscarPorEmail(String email);
 }
